@@ -1,0 +1,61 @@
+﻿<Window x:Class="PrismWarrantyService.UI.Views.OrderListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrismWarrantyService.UI.Views"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="Заказы"
+        Height="350"
+        Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="130"/>
+        </Grid.ColumnDefinitions>
+        <ListView Name="orderList"               
+                  ItemsSource="{Binding Orders}"
+                  SelectedItem="{Binding SelectedOrder}"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  Grid.ColumnSpan="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderID}"
+                                    Header="ID"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Client.Department}"
+                                    Header="Клиент" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Client.Company}"
+                                    Header="Компания" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Accepted}"
+                                    Header="Принят" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Finished}"
+                                    Header="Завершен" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderType.Name}"
+                                    Header="Тип" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderState.Name}"
+                                    Header="Статус" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.RowSpan="5">
+            <Button Content="Добавить заказ" />
+            <Button Content="Изменить заказ" />
+            <Button Content="Удалить заказ" />
+            <Button Content="Еще кнопка" />
+            <Button Command="{Binding LogoutCommand, Mode=OneTime}"
+                Content="Выйти из системы"/>
+        </StackPanel>
+    </Grid>
+</Window>

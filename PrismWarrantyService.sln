@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWarrantyService.UI", "PrismWarrantyService.UI\PrismWarrantyService.UI.csproj", "{72463AA6-7612-4564-B106-41399D6785F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWarrantyService.Tests", "PrismWarrantyService.Tests\PrismWarrantyService.Tests.csproj", "{AC465668-8157-40D2-B058-02C2D84A70A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismWarrantyService.Domain", "PrismWarrantyService.Domain\PrismWarrantyService.Domain.csproj", "{FDCD30D8-C684-4C96-A626-5BBAB5DD4B7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72463AA6-7612-4564-B106-41399D6785F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72463AA6-7612-4564-B106-41399D6785F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72463AA6-7612-4564-B106-41399D6785F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72463AA6-7612-4564-B106-41399D6785F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC465668-8157-40D2-B058-02C2D84A70A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC465668-8157-40D2-B058-02C2D84A70A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC465668-8157-40D2-B058-02C2D84A70A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC465668-8157-40D2-B058-02C2D84A70A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDCD30D8-C684-4C96-A626-5BBAB5DD4B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDCD30D8-C684-4C96-A626-5BBAB5DD4B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDCD30D8-C684-4C96-A626-5BBAB5DD4B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDCD30D8-C684-4C96-A626-5BBAB5DD4B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
