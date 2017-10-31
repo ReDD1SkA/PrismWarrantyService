@@ -20,14 +20,14 @@ namespace PrismWarrantyService.UI.ViewModels
         private IAuthenticationService authenticationService;
         private string employeeName;
         private string status;
-        private DelegateCommand loginCommand;
+        private DelegateCommand<object> loginCommand;
         #endregion
 
         #region Constructors and finalizers
         public ShellViewModel(IAuthenticationService service)
         {
             authenticationService = service;
-            loginCommand = new DelegateCommand(Login);
+            loginCommand = new DelegateCommand<object>(Login);
         }
         #endregion
 
@@ -54,7 +54,7 @@ namespace PrismWarrantyService.UI.ViewModels
         #endregion
 
         #region Commands
-        public DelegateCommand LoginCommand { get { return loginCommand; } }
+        public DelegateCommand<object> LoginCommand { get { return loginCommand; } }
         #endregion
 
         #region Methods
