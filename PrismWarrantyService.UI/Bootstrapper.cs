@@ -16,7 +16,7 @@ namespace PrismWarrantyService.UI
         #region Methods
         protected override DependencyObject CreateShell()
         {
-            return Kernel.Get<OrderListView>();
+            return Kernel.Get<ShellView>();
         }
 
         protected override void ConfigureKernel()
@@ -32,7 +32,7 @@ namespace PrismWarrantyService.UI
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            Application.Current.MainWindow = (OrderListView)Shell;
+            Application.Current.MainWindow = (ShellView)Shell;
             Application.Current.MainWindow.Show();
         }
         #endregion
