@@ -1,5 +1,4 @@
-﻿using Ninject;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Security;
@@ -11,6 +10,7 @@ using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.Views;
+using System.Threading.Tasks;
 
 namespace PrismWarrantyService.UI.ViewModels
 {
@@ -58,19 +58,23 @@ namespace PrismWarrantyService.UI.ViewModels
         #endregion
 
         #region Methods
-        private void Login(object parameter)
+        private async void Login(object parameter)
         {
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
             try
             {
-                Employee emp = authenticationService.AuthenticateEmployee(EmployeeName, clearTextPassword);
+                Employee emp = null;
+                await Task.Factory.StartNew(() => {
+                    Employee answer  = authenticationService.AuthenticateEmployee(EmployeeName, clearTextPassword);
+                    emp = answer;
+                    });
 
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
                 if (customPrincipal == null)
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
-                customPrincipal.Identity = new CustomIdentity(emp.Name, emp.Role);
+                customPrincipal.Identity = new CustomIdentity(emp.Login, emp.Role);
 
                 loginCommand.RaiseCanExecuteChanged();
 
