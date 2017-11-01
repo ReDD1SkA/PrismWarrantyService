@@ -9,14 +9,7 @@ namespace PrismWarrantyService.UI
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            CreateCustomPrincipal();
             RunBootstrapper();
-        }
-
-        private void CreateCustomPrincipal()
-        {
-            CustomPrincipal customPrincipal = new CustomPrincipal();
-            AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
         }
 
         private void RunBootstrapper()

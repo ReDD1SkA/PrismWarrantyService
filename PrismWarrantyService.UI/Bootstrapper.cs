@@ -8,6 +8,7 @@ using PrismWarrantyService.UI.Views;
 using PrismWarrantyService.UI.ViewModels;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
+using System;
 
 namespace PrismWarrantyService.UI
 {
@@ -22,17 +23,23 @@ namespace PrismWarrantyService.UI
         protected override void ConfigureKernel()
         {
             base.ConfigureKernel();
+
             Kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
+            Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
-            Kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
             Kernel.Bind<ShellViewModel>().ToSelf();
             Kernel.Bind<OrderListViewModel>().ToSelf();
         }
 
+        protected override void InitializeModules()
+        {
+            CustomPrincipal customPrincipal = new CustomPrincipal();
+            AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
+        }
+
         protected override void InitializeShell()
         {
-            base.InitializeShell();
-            Application.Current.MainWindow = (ShellView)Shell;
+            Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
         #endregion
