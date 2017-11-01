@@ -100,11 +100,14 @@
     <Compile Include="Services\Authentication\Concrete\AuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomIdentity.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomPrincipal.cs" />
-    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\OrderListViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\AuthenticationView.xaml.cs">
+      <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderListView.xaml.cs">
       <DependentUpon>OrderListView.xaml</DependentUpon>
@@ -115,6 +118,10 @@
     <Page Include="Resources\BaseTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AuthenticationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OrderListView.xaml">
       <SubType>Designer</SubType>

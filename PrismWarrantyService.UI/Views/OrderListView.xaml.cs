@@ -1,10 +1,8 @@
-﻿using System.Security.Permissions;
-using System.Windows;
+﻿using System.Windows.Controls;
 
 namespace PrismWarrantyService.UI.Views
 {
-    //[PrincipalPermission(SecurityAction.Demand)]
-    public partial class OrderListView : Window
+    public partial class OrderListView : UserControl
     {
         public OrderListView()
         {

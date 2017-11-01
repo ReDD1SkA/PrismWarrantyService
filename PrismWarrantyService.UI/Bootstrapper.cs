@@ -17,7 +17,7 @@ namespace PrismWarrantyService.UI
         #region Methods
         protected override DependencyObject CreateShell()
         {
-            return Kernel.Get<ShellView>();
+            return Kernel.Get<AuthenticationView>();
         }
 
         protected override void ConfigureKernel()
@@ -27,7 +27,7 @@ namespace PrismWarrantyService.UI
             Kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
-            Kernel.Bind<ShellViewModel>().ToSelf();
+            Kernel.Bind<AuthenticationViewModel>().ToSelf();
             Kernel.Bind<OrderListViewModel>().ToSelf();
         }
 
