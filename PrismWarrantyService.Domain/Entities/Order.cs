@@ -20,31 +20,19 @@ namespace PrismWarrantyService.Domain.Entities
         public string Summary
         {
             get { return summary; }
-            set
-            {
-                summary = value;
-                RaisePropertyChanged("Summary");
-            }
+            set { SetProperty(ref summary, value); }
         }
 
         public DateTime Accepted
         {
             get { return accepted; }
-            set
-            {
-                accepted = value;
-                RaisePropertyChanged("Accepted");
-            }
+            set { SetProperty(ref accepted, value); }
         }
 
         public DateTime Finished
         {
             get { return finished; }
-            set
-            {
-                finished = value;
-                RaisePropertyChanged("Finished");
-            }
+            set { SetProperty(ref finished, value); }
         }
 
         public int ClientID { get; set; }
@@ -52,11 +40,7 @@ namespace PrismWarrantyService.Domain.Entities
         public Client Client
         {
             get { return client; }
-            set
-            {
-                client = value;
-                RaisePropertyChanged("Client");
-            }
+            set { SetProperty(ref client, value); }
         }
 
         public int OrderStateID { get; set; }
@@ -64,11 +48,7 @@ namespace PrismWarrantyService.Domain.Entities
         public OrderState OrderState
         {
             get { return orderState; }
-            set
-            {
-                orderState = value;
-                RaisePropertyChanged("OrderState");
-            }
+            set { SetProperty(ref orderState, value); }
         }
 
         public int OrderTypeID { get; set; }
@@ -76,11 +56,7 @@ namespace PrismWarrantyService.Domain.Entities
         public OrderType OrderType
         {
             get { return orderType; }
-            set
-            {
-                orderType = value;
-                RaisePropertyChanged("OrderType");
-            }
+            set { SetProperty(ref orderType, value); }
         }
         #endregion
     }

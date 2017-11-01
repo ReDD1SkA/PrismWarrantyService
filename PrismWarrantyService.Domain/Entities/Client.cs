@@ -17,42 +17,26 @@ namespace PrismWarrantyService.Domain.Entities
         public string Department
         {
             get { return department; }
-            set
-            {
-                department = value;
-                RaisePropertyChanged("Department");
-            }
+            set { SetProperty(ref department, value);  }
         }
 
         public string Company
         {
             get { return company; }
-            set
-            {
-                company = value;
-                RaisePropertyChanged("Company");
-            }
+            set { SetProperty(ref company, value); }
         }
 
         public string Email
         {
             get { return email; }
-            set
-            {
-                email = value;
-                RaisePropertyChanged("Email");
-            }
+            set { SetProperty(ref email, value); }
         }
 
 
         public string PhoneNumber
         {
             get { return phoneNumber; }
-            set
-            {
-                phoneNumber = value;
-                RaisePropertyChanged("PhoneNumber");
-            }
+            set { SetProperty(ref phoneNumber, value); }
         }
         #endregion
     }

@@ -20,11 +20,7 @@ namespace PrismWarrantyService.Domain.Entities
         public Order Order
         {
             get { return order; }
-            set
-            {
-                order = value;
-                RaisePropertyChanged("Order");
-            }
+            set { SetProperty(ref order, value); }
         }
 
         public int EmployeeID { get; set; }
@@ -32,31 +28,19 @@ namespace PrismWarrantyService.Domain.Entities
         public Employee Employee
         {
             get { return employee; }
-            set
-            {
-                employee = value;
-                RaisePropertyChanged("Employee");
-            }
+            set { SetProperty(ref employee, value); }
         }
 
         public DateTime DateTime
         {
             get { return dateTime; }
-            set
-            {
-                dateTime = value;
-                RaisePropertyChanged("DateTime");
-            }
+            set { SetProperty(ref dateTime, value); }
         }
 
         public string Text
         {
             get { return text; }
-            set
-            {
-                text = value;
-                RaisePropertyChanged("Text");
-            }
+            set { SetProperty(ref text, value); }
         }
         #endregion
     }

@@ -14,11 +14,7 @@ namespace PrismWarrantyService.Domain.Entities
         public string Name
         {
             get { return name; }
-            set
-            {
-                name = value;
-                RaisePropertyChanged("Name");
-            }
+            set { SetProperty(ref name, value); }
         }
         #endregion
     }

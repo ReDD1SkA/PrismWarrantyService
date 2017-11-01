@@ -20,51 +20,31 @@ namespace PrismWarrantyService.Domain.Entities
         public string Login
         {
             get { return login; }
-            set
-            {
-                login = value;
-                RaisePropertyChanged("Login");
-            }
+            set { SetProperty(ref login, value); }
         }
 
         public string HashedPassword
         {
             get { return hashedPassword; }
-            set
-            {
-                hashedPassword = value;
-                RaisePropertyChanged("HashedPassword");
-            }
+            set { SetProperty(ref hashedPassword, value); }
         }
 
         public string Name
         {
             get { return name; }
-            set
-            {
-                name = value;
-                RaisePropertyChanged("Name");
-            }
+            set { SetProperty(ref name, value); }
         }
 
         public string Surname
         {
             get { return surname; }
-            set
-            {
-                surname = value;
-                RaisePropertyChanged("Surname");
-            }
+            set { SetProperty(ref surname, value); }
         }
 
         public string Position
         {
             get { return position; }
-            set
-            {
-                position = value;
-                RaisePropertyChanged("Position");
-            }
+            set { SetProperty(ref position, value); }
         }
 
         public int RoleID { get; set; }
@@ -72,11 +52,7 @@ namespace PrismWarrantyService.Domain.Entities
         public Role Role
         {
             get { return role; }
-            set
-            {
-                role = value;
-                RaisePropertyChanged("Role");
-            }
+            set { SetProperty(ref role, value); }
         }
 
         public int DepartmentID { get; set; }
@@ -84,11 +60,7 @@ namespace PrismWarrantyService.Domain.Entities
         public Department Department
         {
             get { return department; }
-            set
-            {
-                department = value;
-                RaisePropertyChanged("Department");
-            }
+            set { SetProperty(ref department, value); }
         }
         #endregion
     }
