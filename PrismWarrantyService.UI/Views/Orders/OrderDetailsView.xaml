@@ -27,10 +27,11 @@
         <Label Content="Описание:"
                    Grid.Row="0"
                    Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Summary}"
+        <TextBox Text="{Binding Path=Description}"
                  Grid.Column="0"
                  Grid.Row="2"
                  Grid.RowSpan="9"
+                 TextWrapping="Wrap"
                  VerticalContentAlignment="Top"/>
         <Label Content="Клиент:"
                    Grid.Row="0"

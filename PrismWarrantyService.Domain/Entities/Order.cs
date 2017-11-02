@@ -7,6 +7,7 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
         private string summary;
+        private string description;
         private DateTime accepted;
         private DateTime finished;
         private Client client;
@@ -21,6 +22,12 @@ namespace PrismWarrantyService.Domain.Entities
         {
             get { return summary; }
             set { SetProperty(ref summary, value); }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { SetProperty(ref description, value); }
         }
 
         public DateTime Accepted

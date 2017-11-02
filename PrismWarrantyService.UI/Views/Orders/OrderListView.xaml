@@ -13,6 +13,8 @@
             <GridView>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=OrderID}"
                                 Header="ID"/>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Summary}"
+                                Header="Заказ"/>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Accepted}"
                                 Header="Принят" />
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Finished}"
