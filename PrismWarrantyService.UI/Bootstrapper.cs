@@ -1,14 +1,16 @@
-﻿using Ninject;
+﻿using System;
+using Ninject;
 using Prism.Events;
 using Prism.Ninject;
 using System.Windows;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Concrete;
-using PrismWarrantyService.UI.Views;
-using PrismWarrantyService.UI.ViewModels;
+using PrismWarrantyService.UI.ViewModels.Authentication;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
-using System;
+using PrismWarrantyService.UI.ViewModels.Orders;
+using PrismWarrantyService.UI.Views.Authentication;
+using PrismWarrantyService.UI.Views;
 
 namespace PrismWarrantyService.UI
 {
@@ -17,7 +19,7 @@ namespace PrismWarrantyService.UI
         #region Methods
         protected override DependencyObject CreateShell()
         {
-            return Kernel.Get<AuthenticationView>();
+            return Kernel.Get<ShellView>();
         }
 
         protected override void ConfigureKernel()
@@ -28,7 +30,7 @@ namespace PrismWarrantyService.UI
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
             Kernel.Bind<AuthenticationViewModel>().ToSelf();
-            Kernel.Bind<OrderListViewModel>().ToSelf();
+            Kernel.Bind<OrdersViewModel>().ToSelf();
         }
 
         protected override void InitializeModules()

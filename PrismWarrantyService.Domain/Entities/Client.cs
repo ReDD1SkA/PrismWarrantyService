@@ -32,7 +32,6 @@ namespace PrismWarrantyService.Domain.Entities
             set { SetProperty(ref email, value); }
         }
 
-
         public string PhoneNumber
         {
             get { return phoneNumber; }

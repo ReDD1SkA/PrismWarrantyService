@@ -3,61 +3,49 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:PrismWarrantyService.UI.Views"
+        xmlns:orderViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"
         xmlns:prism="http://prismlibrary.com/"
-        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Warranty service" Height="700" Width="1000">
+        Title="Warranty service" Height="500" Width="1000">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="3"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3"/>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="3"/>
         </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="0.7*"/>
-            </Grid.RowDefinitions>
-            <Button Content="Placeholder: Signed as"
-                    Grid.Row="0"
-                    Width="Auto"
-                    Height="Auto"/>
-            <Button Content="Placeholder: Navigation"
+        <Button Content="Placeholder: Signed as"
                     Grid.Row="1"
+                    Grid.Column="1"
                     Width="Auto"
                     Height="Auto"/>
-        </Grid>
-        <GridSplitter Grid.Column="1"
+        <Button Content="Placeholder: Navigation"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Height="Auto"/>
+        <GridSplitter Grid.Row="1"
+                      Grid.Column="2"
+                      Grid.RowSpan="3"
                       ShowsPreview="False"
-                      Width="3"
+                      Width="5"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"/>
-        <TabControl Grid.Column="2">
+        <TabControl Grid.Row="1"
+                    Grid.Column="3"
+                    Grid.RowSpan="3">
             <TabItem Name="orders"
                      Header="Заказы">
                 <TabItem.Content>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.1*"/>
-                            <RowDefinition Height="0.7*"/>
-                            <RowDefinition Height="0.1*"/>
-                            <RowDefinition Height="0.1*"/>
-                        </Grid.RowDefinitions>
-                        <Button Content="Placeholder: Search + filters"
-                                Grid.Row="0"
-                                Width="Auto"
-                                Height="Auto"/>
-                        <views:OrderListView Grid.Row="1"/>
-                        <Button Content="Placeholder: Details"
-                                Grid.Row="2"
-                                Width="Auto"
-                                Height="Auto"/>
-                        <Button Content="Placeholder: CRUD"
-                                Grid.Row="3"
-                                Width="Auto"
-                                Height="Auto"/>
-                    </Grid>
+                    <orderViews:OrdersView />
                 </TabItem.Content>
             </TabItem>
             <TabItem Name="clients"

@@ -100,17 +100,23 @@
     <Compile Include="Services\Authentication\Concrete\AuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomIdentity.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomPrincipal.cs" />
-    <Compile Include="ViewModels\AuthenticationViewModel.cs" />
-    <Compile Include="ViewModels\OrderListViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\AuthenticationView.xaml.cs">
+    <Compile Include="Views\Authentication\AuthenticationView.xaml.cs">
       <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrderListView.xaml.cs">
+    <Compile Include="Views\Orders\OrderDetailsView.xaml.cs">
+      <DependentUpon>OrderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\OrderListView.xaml.cs">
       <DependentUpon>OrderListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -119,11 +125,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AuthenticationView.xaml">
+    <Page Include="Views\Authentication\AuthenticationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrderListView.xaml">
+    <Page Include="Views\Orders\OrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\OrderListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\OrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,5 +200,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
