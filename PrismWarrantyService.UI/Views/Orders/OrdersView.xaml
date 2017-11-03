@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:orderViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"            
+             xmlns:ordersViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"            
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
@@ -29,9 +29,9 @@
                 Grid.Column="1"
                 Width="Auto"
                 Height="Auto"/>
-        <orderViews:OrderListView Grid.Row="3"
+        <ordersViews:OrderListView Grid.Row="3"
                                   Grid.Column="1"/>
-        <orderViews:OrderDetailsView DataContext="{Binding SelectedOrder}" 
+        <ordersViews:OrderDetailsView DataContext="{Binding SelectedOrder}" 
                                      Grid.Row="5"
                                      Grid.Column="1"/>
         <Button Content="Placeholder: CRUD"
