@@ -27,20 +27,19 @@
                 <ColumnDefinition Width="3"/>
             </Grid.ColumnDefinitions>
             <Button Content="Placeholder: Search + filters"
-                Grid.Row="1"
-                Grid.Column="1"
-                Width="Auto"
-                Height="Auto"/>
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Height="Auto"/>
             <clientsViews:ClientListView Grid.Row="3"
                                          Grid.Column="1"/>
-            <ordersViews:OrderListView DataContext="{Binding SelectedClientOrders}"
-                                       Grid.Row="5"
+            <ordersViews:OrderListView Grid.Row="5"
                                        Grid.Column="1"/>
             <Button Content="Placeholder: CRUD"
-                Grid.Row="7"
-                Grid.Column="1"
-                Width="Auto"
-                Height="Auto"/>
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Width="Auto"
+                    Height="Auto"/>
         </Grid>
     </Grid>
 </UserControl>
