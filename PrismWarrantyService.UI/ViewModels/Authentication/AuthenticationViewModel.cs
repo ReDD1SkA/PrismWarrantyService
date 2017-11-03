@@ -19,7 +19,6 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         #region Fields
         private IAuthenticationService authenticationService;
         private string employeeName;
-        private string status;
         private DelegateCommand<object> loginCommand;
         #endregion
 
@@ -39,16 +38,6 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
             {
                 employeeName = value;
                 RaisePropertyChanged("EmployeeName");
-            }
-        }
-
-        public string Status
-        {
-            get { return status; }
-            set
-            {
-                status = value;
-                RaisePropertyChanged("Status");
             }
         }
         #endregion
@@ -87,15 +76,15 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
             }
             catch (SecurityException)
             {
-                Status = "Вы не авторизованы";
+                MessageBox.Show("Вы не авторизованы!");
             }
             catch (UnauthorizedAccessException)
             {
-                Status = "Вход не выполнен! Предоставьте валидные данные!";
+                MessageBox.Show("Вход не выполнен! Предоставьте валидные данные!");
             }
             catch (Exception ex)
             {
-                Status = string.Format("ERROR: {0}", ex.Message);
+                MessageBox.Show(string.Format("ERROR: {0}", ex.Message));
             }
         }
         #endregion
