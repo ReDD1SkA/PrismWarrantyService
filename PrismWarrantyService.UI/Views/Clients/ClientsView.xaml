@@ -6,6 +6,7 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:clientsViews="clr-namespace:PrismWarrantyService.UI.Views.Clients"
+             xmlns:ordersViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"
              mc:Ignorable="d">
     <Grid>
         <Grid>
@@ -30,16 +31,11 @@
                 Grid.Column="1"
                 Width="Auto"
                 Height="Auto"/>
-            <Button Content="Placeholder: Client list"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Width="Auto"
-                    Height="Auto"/>
-            <Button Content="Placeholder: Order list for client" 
-                    Grid.Row="5"
-                    Grid.Column="1"
-                    Width="Auto"
-                    Height="Auto"/>
+            <clientsViews:ClientListView Grid.Row="3"
+                                         Grid.Column="1"/>
+            <ordersViews:OrderListView DataContext="{Binding SelectedClientOrders}"
+                                       Grid.Row="5"
+                                       Grid.Column="1"/>
             <Button Content="Placeholder: CRUD"
                 Grid.Row="7"
                 Grid.Column="1"

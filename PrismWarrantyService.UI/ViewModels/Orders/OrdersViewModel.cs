@@ -33,11 +33,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         public Order SelectedOrder
         {
             get { return selectedOrder; }
-            set
-            {
-                selectedOrder = value;
-                RaisePropertyChanged("SelectedOrder");
-            }
+            set { SetProperty(ref selectedOrder, value); }
         }
         #endregion
 

@@ -6,8 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <ListView ItemsSource="{Binding Orders}"
-              SelectedItem="{Binding SelectedOrder}"
-              Grid.Row="1">
+              SelectedItem="{Binding SelectedOrder}">
         <ListView.View>
             <GridView>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=OrderID}"
