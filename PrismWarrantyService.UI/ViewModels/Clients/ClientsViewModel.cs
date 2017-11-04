@@ -37,6 +37,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
             {
                 SetProperty(ref selectedClient, value);
                 RefreshClientOrders();
+                
             }
         }
         #endregion
@@ -47,15 +48,11 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
         #region Methods
         private void RefreshClientOrders()
         {
-            // эта штука не хочет работать
-            //Orders = (ObservableCollection<Order>)repository
-            //    .Orders
-            //    .Where(x => x.Client == SelectedClient);
-
             Orders.Clear();
-            Orders.Add(new Order() { Summary = "Этот список имитирует" });
-            Orders.Add(new Order() { Summary = "список заказов клиента" });
-            Orders.Add(new Order() { Summary = SelectedClient.Department + " " + SelectedClient.Company });
+            Orders.AddRange(repository
+                .Orders
+                .Where(x => x.ClientID == SelectedClient.ClientID)
+                .ToList());
         }
         #endregion
     }

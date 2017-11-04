@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using PrismWarrantyService.Domain.Entities;
+using System.Collections.Generic;
 
 namespace PrismWarrantyService.Domain.Abstract
 {
@@ -14,6 +15,9 @@ namespace PrismWarrantyService.Domain.Abstract
         IQueryable<OrderType> OrderTypes { get; }
         IQueryable<Remark> Remarks { get; }
         IQueryable<Role> Roles { get; }
+        #endregion
+
+        #region Methods
         #endregion
     }
 }

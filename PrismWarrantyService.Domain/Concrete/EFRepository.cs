@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace PrismWarrantyService.Domain.Concrete
 {
@@ -80,6 +82,9 @@ namespace PrismWarrantyService.Domain.Concrete
                 return context.Roles;
             }
         }
+        #endregion
+
+        #region Methods
         #endregion
     }
 }
