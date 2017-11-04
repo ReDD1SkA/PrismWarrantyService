@@ -10,7 +10,7 @@
             <GridView>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=ClientID}"
                                 Header="ID"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Department}"
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"
                                 Header="Клиент"/>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Company}"
                                 Header="Компания" />

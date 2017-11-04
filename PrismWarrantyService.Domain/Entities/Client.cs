@@ -14,7 +14,7 @@ namespace PrismWarrantyService.Domain.Entities
         #region Properties
         public int ClientID { get; set; }
 
-        public string Department
+        public string Name
         {
             get { return department; }
             set { SetProperty(ref department, value);  }

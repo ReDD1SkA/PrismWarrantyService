@@ -6,6 +6,7 @@ using Prism.Commands;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
+using System.Linq;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -22,6 +23,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         {
             repository = repo;
             Orders = new ObservableCollection<Order>(repository.Orders);
+            OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
+            OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
 
             logoutCommand = new DelegateCommand(Logout);
         }
@@ -29,6 +32,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Properties
         public ObservableCollection<Order> Orders { get; set; }
+        public ObservableCollection<OrderState> OrderStates { get; set; }
+        public ObservableCollection<OrderType> OrderTypes { get; set; }
 
         public Order SelectedOrder
         {

@@ -14,7 +14,7 @@
                                 Header="Заказ"/>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Accepted}"
                                 Header="Принят" />
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Finished}"
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Finished, TargetNullValue='Не завершен'}"
                                 Header="Завершен" />
                 <GridViewColumn DisplayMemberBinding="{Binding Path=OrderType.Name}"
                                 Header="Тип" />

@@ -9,7 +9,7 @@ namespace PrismWarrantyService.Domain.Entities
         private string summary;
         private string description;
         private DateTime accepted;
-        private DateTime finished;
+        private DateTime? finished;
         private Client client;
         private OrderState orderState;
         private OrderType orderType;
@@ -36,7 +36,7 @@ namespace PrismWarrantyService.Domain.Entities
             set { SetProperty(ref accepted, value); }
         }
 
-        public DateTime Finished
+        public DateTime? Finished
         {
             get { return finished; }
             set { SetProperty(ref finished, value); }

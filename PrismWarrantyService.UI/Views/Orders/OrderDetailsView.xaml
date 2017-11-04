@@ -17,44 +17,76 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="3"/>
             <RowDefinition Height="25"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="3"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="3"/>
             <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="0.4*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Описание:"
-                   Grid.Row="0"
-                   Grid.Column="0"/>
-        <TextBox Text="{Binding Path=Description}"
-                 Grid.Column="0"
+        <Label Content="Заказ:"
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"/>
+        <TextBox Text="{Binding SelectedOrder.Summary}"
                  Grid.Row="2"
-                 Grid.RowSpan="9"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"/>
+        <Label Content="Тип:"
+               Grid.Row="4"
+               Grid.Column="0"/>
+        <ComboBox Name="orderTypes"
+                  ItemsSource="{Binding OrderTypes}"
+                  SelectedItem="{Binding SelectedOrder.OrderType}"
+                  Grid.Row="6"
+                  Grid.Column="0"/>
+        <Label Content="Статус:"
+               Grid.Row="4"
+               Grid.Column="2"/>
+        <ComboBox Name="orderStates"
+                  ItemsSource="{Binding OrderStates}"
+                  SelectedItem="{Binding SelectedOrder.OrderState}"
+                  Grid.Row="6"
+                  Grid.Column="2"/>
+        <Label Content="Описание:"
+               Grid.Row="8"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"/>
+        <TextBox Text="{Binding SelectedOrder.Description}"
+                 Grid.Row="10"
+                 Grid.Column="0"
+                 Grid.RowSpan="5"
+                 Grid.ColumnSpan="3"
                  TextWrapping="Wrap"
                  VerticalContentAlignment="Top"/>
         <Label Content="Клиент:"
-                   Grid.Row="0"
-                   Grid.Column="2"/>
-        <TextBox Grid.Row="2"
-                 Grid.Column="2">
-            <TextBox.Text>
-                <MultiBinding StringFormat="{}{0} ({1})">
-                    <Binding Path="Client.Department"/>
-                    <Binding Path="Client.Company"/>
-                </MultiBinding>
-            </TextBox.Text>
-        </TextBox>
+               Grid.Row="0"
+               Grid.Column="4"/>
+        <TextBox Text="{Binding SelectedOrder.Client.Name}"
+                 Grid.Row="2"
+                 Grid.Column="4"/>
+        <Label Content="Компания:"
+               Grid.Row="4"
+               Grid.Column="4"/>
+        <TextBox Text="{Binding SelectedOrder.Client.Company}"
+                 Grid.Row="6"
+                 Grid.Column="4"/>
         <Label Content="E-mail:"
-                   Grid.Row="4"
-                   Grid.Column="2"/>
-        <TextBox Text="{Binding Path=Client.Email}"
-                       Grid.Row="6"
-                       Grid.Column="2"/>
+               Grid.Row="8"
+               Grid.Column="4"/>
+        <TextBox Text="{Binding SelectedOrder.Client.Email}"
+                 Grid.Row="10"
+                 Grid.Column="4"/>
         <Label Content="Номер телефона:"
-                   Grid.Row="8"
-                   Grid.Column="2"/>
-        <TextBox Text="{Binding Path=Client.PhoneNumber}"
-                       Grid.Row="10"
-                       Grid.Column="2"/>
+               Grid.Row="12"
+               Grid.Column="4"/>
+        <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber}"
+                 Grid.Row="14"
+                 Grid.Column="4"/>
     </Grid>
 </UserControl>

@@ -17,5 +17,12 @@ namespace PrismWarrantyService.Domain.Entities
             set { SetProperty(ref name, value); }
         }
         #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return Name;
+        }
+        #endregion
     }
 }

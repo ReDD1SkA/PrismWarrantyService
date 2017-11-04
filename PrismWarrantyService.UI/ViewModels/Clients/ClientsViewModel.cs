@@ -2,10 +2,7 @@
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using System.Collections.ObjectModel;
-using System;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients
 {

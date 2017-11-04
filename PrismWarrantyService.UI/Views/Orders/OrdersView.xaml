@@ -31,9 +31,8 @@
                 Height="Auto"/>
         <ordersViews:OrderListView Grid.Row="3"
                                   Grid.Column="1"/>
-        <ordersViews:OrderDetailsView DataContext="{Binding SelectedOrder}" 
-                                     Grid.Row="5"
-                                     Grid.Column="1"/>
+        <ordersViews:OrderDetailsView Grid.Row="5"
+                                      Grid.Column="1"/>
         <Button Content="Placeholder: CRUD"
                 Grid.Row="7"
                 Grid.Column="1"
