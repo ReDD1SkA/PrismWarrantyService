@@ -7,6 +7,9 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using System.Linq;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -33,8 +36,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             SelectedOrder = Orders.FirstOrDefault();
 
             logoutCommand = new DelegateCommand(Logout);
-            editOrderCommand = new DelegateCommand<Order>(repository.EditOrder);
-            deleteOrderCommand = new DelegateCommand<Order>(repository.DeleteOrder);
+            editOrderCommand = new DelegateCommand<Order>(EditOrder);
+            deleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
         }
         #endregion
 
@@ -66,6 +69,25 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
                 
                 // ERROR
             }
+        }
+
+        private async void AddOrder()
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void EditOrder(Order parameter)
+        {
+            await Task.Factory.StartNew(() => repository.EditOrder(parameter));
+            MessageBox.Show("Заказ №" + parameter.OrderID + " изменен!");
+        }
+
+        private async void DeleteOrder(Order parameter)
+        {
+            await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
+            Orders.Remove(parameter);
+            SelectedOrder = Orders.FirstOrDefault();
+            MessageBox.Show("Заказ №" + parameter.OrderID + " удален!");
         }
         #endregion
     }

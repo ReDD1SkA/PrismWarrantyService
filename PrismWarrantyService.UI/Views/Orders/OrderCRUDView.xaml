@@ -17,11 +17,11 @@
                 Content="Добавить заказ"
                 Grid.Column="0"/>
         <Button Command="{Binding EditOrderCommand}"
-                CommandParameter ="{Binding ElementName=orderList, Path=SelectedItem}"
+                CommandParameter ="{Binding SelectedOrder}"
                 Content="Изменить заказ"
                 Grid.Column="2"/>
         <Button Command="{Binding DeleteOrderCommand}"
-                CommandParameter ="{Binding ElementName=orderList, Path=SelectedItem}"
+                CommandParameter ="{Binding SelectedOrder}"
                 Content="Удалить заказ"
                 Grid.Column="4"/>
     </Grid>
