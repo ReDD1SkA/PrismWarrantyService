@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="0.4*"/>
@@ -69,24 +69,28 @@
                Grid.Column="4"/>
         <TextBox Text="{Binding SelectedOrder.Client.Name}"
                  Grid.Row="2"
-                 Grid.Column="4"/>
+                 Grid.Column="4"
+                 IsReadOnly="True"/>
         <Label Content="Компания:"
                Grid.Row="4"
                Grid.Column="4"/>
         <TextBox Text="{Binding SelectedOrder.Client.Company}"
                  Grid.Row="6"
-                 Grid.Column="4"/>
+                 Grid.Column="4"
+                 IsReadOnly="True"/>
         <Label Content="E-mail:"
                Grid.Row="8"
                Grid.Column="4"/>
         <TextBox Text="{Binding SelectedOrder.Client.Email}"
                  Grid.Row="10"
-                 Grid.Column="4"/>
+                 Grid.Column="4"
+                 IsReadOnly="True"/>
         <Label Content="Номер телефона:"
                Grid.Row="12"
                Grid.Column="4"/>
         <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber}"
                  Grid.Row="14"
-                 Grid.Column="4"/>
+                 Grid.Column="4"
+                 IsReadOnly="True"/>
     </Grid>
 </UserControl>

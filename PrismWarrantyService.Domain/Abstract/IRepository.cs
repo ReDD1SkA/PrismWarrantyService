@@ -18,6 +18,9 @@ namespace PrismWarrantyService.Domain.Abstract
         #endregion
 
         #region Methods
+        void AddOrder(Order order);
+        void DeleteOrder(Order order);
+        void EditOrder(Order order);
         #endregion
     }
 }

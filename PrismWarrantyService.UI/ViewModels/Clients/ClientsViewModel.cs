@@ -19,6 +19,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
             repository = repo;
             Clients = new ObservableCollection<Client>(repository.Clients);
             Orders = new ObservableCollection<Order>();
+            SelectedClient = Clients.FirstOrDefault();
         }
         #endregion
 

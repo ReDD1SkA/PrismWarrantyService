@@ -85,6 +85,26 @@ namespace PrismWarrantyService.Domain.Concrete
         #endregion
 
         #region Methods
+        public void AddOrder(Order order)
+        {
+            // добавить дату
+            // проверить клиента на наличие
+
+            context.Entry(order).State = EntityState.Added;
+            context.SaveChanges();
+        }
+
+        public void DeleteOrder(Order order)
+        {
+            context.Entry(order).State = EntityState.Deleted;
+            context.SaveChanges();
+        }
+
+        public void EditOrder(Order order)
+        {
+            context.Entry(order).State = EntityState.Modified;
+            context.SaveChanges();
+        }
         #endregion
     }
 }

@@ -16,17 +16,25 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private IRepository repository;
         private Order selectedOrder;
         private DelegateCommand logoutCommand;
+        private DelegateCommand addOrderCommand;
+        private DelegateCommand<Order> editOrderCommand;
+        private DelegateCommand<Order> deleteOrderCommand;
         #endregion
 
         #region Constructors and finalizers
         public OrdersViewModel(IRepository repo)
         {
             repository = repo;
+
             Orders = new ObservableCollection<Order>(repository.Orders);
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
 
+            SelectedOrder = Orders.FirstOrDefault();
+
             logoutCommand = new DelegateCommand(Logout);
+            editOrderCommand = new DelegateCommand<Order>(repository.EditOrder);
+            deleteOrderCommand = new DelegateCommand<Order>(repository.DeleteOrder);
         }
         #endregion
 
@@ -44,6 +52,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Commands
         public DelegateCommand LogoutCommand { get { return logoutCommand; } }
+        public DelegateCommand AddOrderCommand { get { return addOrderCommand; } }
+        public DelegateCommand<Order> EditOrderCommand { get { return editOrderCommand; } }
+        public DelegateCommand<Order> DeleteOrderCommand { get { return deleteOrderCommand; } }
         #endregion
 
         #region Methods

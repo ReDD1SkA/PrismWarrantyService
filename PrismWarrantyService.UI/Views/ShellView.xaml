@@ -7,21 +7,21 @@
         xmlns:clientsViews="clr-namespace:PrismWarrantyService.UI.Views.Clients"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="Warranty service" Height="500" Width="1000">
+        Title="Warranty service" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="3"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="3"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="0.7*"/>
-            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="0.85*"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Button Content="Placeholder: Signed as"
                     Grid.Row="1"
@@ -37,7 +37,7 @@
                       Grid.Column="2"
                       Grid.RowSpan="3"
                       ShowsPreview="False"
-                      Width="5"
+                      Width="10"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"/>
         <TabControl Grid.Row="1"

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="PrismWarrantyService.UI.Views.Orders.OrderCRUDView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Command="{Binding AddOrderCommand}"
+                Content="Добавить заказ"
+                Grid.Column="0"/>
+        <Button Command="{Binding EditOrderCommand}"
+                CommandParameter ="{Binding ElementName=orderList, Path=SelectedItem}"
+                Content="Изменить заказ"
+                Grid.Column="2"/>
+        <Button Command="{Binding DeleteOrderCommand}"
+                CommandParameter ="{Binding ElementName=orderList, Path=SelectedItem}"
+                Content="Удалить заказ"
+                Grid.Column="4"/>
+    </Grid>
+</UserControl>
