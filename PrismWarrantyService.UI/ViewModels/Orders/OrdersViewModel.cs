@@ -2,7 +2,6 @@
 using System.Threading;
 using Prism.Mvvm;
 using Prism.Commands;
-
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
@@ -10,6 +9,7 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using PrismWarrantyService.UI.Views.Orders;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -36,6 +36,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             SelectedOrder = Orders.FirstOrDefault();
 
             logoutCommand = new DelegateCommand(Logout);
+            addOrderCommand = new DelegateCommand(AddOrder);
             editOrderCommand = new DelegateCommand<Order>(EditOrder);
             deleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
         }
@@ -71,9 +72,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             }
         }
 
-        private async void AddOrder()
+        private void AddOrder()
         {
-            throw new NotImplementedException();
+            var addOrderView = new AddOrderView();
+            addOrderView.ShowDialog();
         }
 
         private async void EditOrder(Order parameter)

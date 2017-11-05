@@ -102,8 +102,10 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public void EditOrder(Order order)
         {
-            if(order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
+            if (order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
+            else
+                order.Finished = null;
 
             context.Entry(order).State = EntityState.Modified;
             context.SaveChanges();
