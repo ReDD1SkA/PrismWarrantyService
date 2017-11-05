@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace PrismWarrantyService.UI.Views.Orders
 {
-    /// <summary>
-    /// Логика взаимодействия для AddOrderView.xaml
-    /// </summary>
     public partial class AddOrderView : Window
     {
         public AddOrderView()
         {
             InitializeComponent();
+        }
+
+        private void NeedNewClient_Checked(object sender, RoutedEventArgs e)
+        {
+            nameTextBox.IsReadOnly = false;
+            companyTextBox.IsReadOnly = false;
+            emailTextBox.IsReadOnly = false;
+            phoneNumberTextBox.IsReadOnly = false;   
+        }
+
+        private void NeedNewClient_Unchecked(object sender, RoutedEventArgs e)
+        {
+            nameTextBox.IsReadOnly = true;
+            companyTextBox.IsReadOnly = true;
+            emailTextBox.IsReadOnly = true;
+            phoneNumberTextBox.IsReadOnly = true;
+
+            nameTextBox.Clear();
+            companyTextBox.Clear();
+            emailTextBox.Clear();
+            phoneNumberTextBox.Clear();
         }
     }
 }

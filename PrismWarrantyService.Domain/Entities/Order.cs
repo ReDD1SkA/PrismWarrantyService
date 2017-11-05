@@ -50,7 +50,7 @@ namespace PrismWarrantyService.Domain.Entities
             set { SetProperty(ref client, value); }
         }
 
-        public int OrderStateID { get; set; }
+        public int? OrderStateID { get; set; }
 
         public OrderState OrderState
         {
@@ -58,7 +58,7 @@ namespace PrismWarrantyService.Domain.Entities
             set { SetProperty(ref orderState, value); }
         }
 
-        public int OrderTypeID { get; set; }
+        public int? OrderTypeID { get; set; }
 
         public OrderType OrderType
         {

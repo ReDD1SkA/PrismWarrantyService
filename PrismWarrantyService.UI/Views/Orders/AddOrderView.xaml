@@ -8,9 +8,9 @@
         xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders"
         mc:Ignorable="d"
         Title="Добавление нового заказа"
-        Height="340"
+        Height="370"
         Width="600"
-        MinHeight="340">
+        MinHeight="370">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -34,14 +34,16 @@
             <RowDefinition Height="3"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="10"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="0.2*"/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <Label Content="Заказ:"
@@ -62,7 +64,8 @@
         <Label Content="Клиент:"
                Grid.Row="5"
                Grid.Column="3"/>
-        <ComboBox ItemsSource="{Binding Clients}"
+        <ComboBox Name="clientsComboBox"
+                  ItemsSource="{Binding Clients}"
                   SelectedItem="{Binding NewOrder.Client}"
                   Grid.Row="7"
                   Grid.Column="3"/>
@@ -77,38 +80,54 @@
                  Grid.ColumnSpan="3"
                  TextWrapping="Wrap"
                  VerticalContentAlignment="Top"/>
-        <CheckBox Name="isClientNew"
-                  Content="Клиент из базы"
+        <CheckBox Name="needNewClient"
+                  IsChecked="{Binding NeedNewClient}"
+                  Content="Новый клиент"
                   Grid.Row="3"
                   Grid.Column="5"
-                  IsChecked="True"/>
+                  Checked="NeedNewClient_Checked"
+                  Unchecked="NeedNewClient_Unchecked"/>
         <Label Content="Клиент:"
                Grid.Row="5"
                Grid.Column="5"/>
-        <TextBox Text="{Binding NewClient.Name}"
-                 IsReadOnly="{Binding ElementName=isClientNew, Path=IsChecked}"
+        <TextBox Name="nameTextBox"
+                 Text="{Binding NewClient.Name}"
+                 IsReadOnly="True"
                  Grid.Row="7"
                  Grid.Column="5"/>
         <Label Content="Компания:"
                Grid.Row="9"
                Grid.Column="5"/>
-        <TextBox Text="{Binding NewClient.Company}"
-                 IsReadOnly="{Binding ElementName=isClientNew, Path=IsChecked}"
+        <TextBox Name="companyTextBox"
+                 Text="{Binding NewClient.Company}"
+                 IsReadOnly="True"
                  Grid.Row="11"
                  Grid.Column="5"/>
         <Label Content="E-mail:"
                Grid.Row="13"
                Grid.Column="5"/>
-        <TextBox Text="{Binding NewClient.Email}"
-                 IsReadOnly="{Binding ElementName=isClientNew, Path=IsChecked}"
+        <TextBox Name="emailTextBox"
+                 Text="{Binding NewClient.Email}"
+                 IsReadOnly="True"
                  Grid.Row="15"
                  Grid.Column="5"/>
         <Label Content="Номер телефона:"
                Grid.Row="17"
                Grid.Column="5"/>
-        <TextBox Text="{Binding NewClient.PhoneNumber}"
-                 IsReadOnly="{Binding ElementName=isClientNew, Path=IsChecked}"
+        <TextBox Name="phoneNumberTextBox"
+                 Text="{Binding NewClient.PhoneNumber}"
+                 IsReadOnly="True"
                  Grid.Row="19"
                  Grid.Column="5"/>
+        <Button IsDefault="True"
+                Content="Добавить"
+                Grid.Row="21"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Command="{Binding AddOrderCommand}"/>
+        <Button IsCancel="True"
+                Content="Отмена"
+                Grid.Row="21"
+                Grid.Column="5"/>
     </Grid>
 </Window>

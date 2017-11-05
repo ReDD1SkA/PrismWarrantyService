@@ -3,7 +3,6 @@ using System.Data.Entity;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace PrismWarrantyService.Domain.Concrete
 {
@@ -87,9 +86,6 @@ namespace PrismWarrantyService.Domain.Concrete
         #region Methods
         public void AddOrder(Order order)
         {
-            // добавить дату
-            // проверить клиента на наличие
-
             context.Entry(order).State = EntityState.Added;
             context.SaveChanges();
         }
