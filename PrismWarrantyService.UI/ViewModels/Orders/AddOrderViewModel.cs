@@ -27,9 +27,15 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             Clients = new ObservableCollection<Client>(repository.Clients);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
-            
-            NewOrder = new Order() { OrderType = OrderTypes.FirstOrDefault(), Client = Clients.FirstOrDefault()};
+            OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
+
             NewClient = new Client();
+            NewOrder = new Order()
+            {
+                Client = Clients.FirstOrDefault(),
+                OrderType = OrderTypes.FirstOrDefault(),
+                OrderState = OrderStates.FirstOrDefault()
+            };        
 
             addOrderCommand = new DelegateCommand(AddOrder);
         }
@@ -38,6 +44,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         #region Properties
         public ObservableCollection<Client> Clients { get; set; }
         public ObservableCollection<OrderType> OrderTypes { get; set; }
+        public ObservableCollection<OrderState> OrderStates { get; set; }
 
         public bool NeedNewClient
         {
@@ -80,13 +87,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
                 NewOrder.Client = NewClient;
             }
-
-            // этому стоит быть в методе репозитория?
-            // вообще все проверки вынести в методы репозитория?
-            // и пусть кидается исключениями, которые я буду обрабатывать в модели представления?
-            // и почему БД не хочет ставить дефолтное значение, если получает пустую ссылку?
-            NewOrder.Accepted = DateTime.Now;
-            NewOrder.OrderStateID = 1;
 
             await Task.Factory.StartNew(() => repository.AddOrder(NewOrder));
         }

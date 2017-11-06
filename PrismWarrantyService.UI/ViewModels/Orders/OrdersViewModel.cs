@@ -75,7 +75,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private void AddOrder()
         {
             var addOrderView = new AddOrderView();
-            addOrderView.ShowDialog();
+            if (addOrderView.ShowDialog() == true)
+            {
+                // TODO:
+                // обновить коллекцию заказов
+                // коллекцию клиентов тоже
+            }
         }
 
         private async void EditOrder(Order parameter)

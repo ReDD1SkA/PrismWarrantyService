@@ -86,6 +86,11 @@ namespace PrismWarrantyService.Domain.Concrete
         #region Methods
         public void AddOrder(Order order)
         {
+            order.Accepted = DateTime.Now;
+
+            if (order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
+                order.Finished = DateTime.Now;
+
             context.Entry(order).State = EntityState.Added;
             context.SaveChanges();
         }
