@@ -20,7 +20,6 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
         #region Methods
         public Employee AuthenticateEmployee(string login, string clearTextPassword)
         {
-
             Employee employee = repository.Employees
                 .Where(x => x.Login == login)
                 .FirstOrDefault();

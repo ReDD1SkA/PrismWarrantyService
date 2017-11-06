@@ -85,13 +85,19 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private async void EditOrder(Order parameter)
         {
+            // изменяем заказ
             await Task.Factory.StartNew(() => repository.EditOrder(parameter));
+
+            // // обновляем UI и сообщаем пользователю о результатах
             MessageBox.Show("Заказ №" + parameter.OrderID + " изменен!");
         }
 
         private async void DeleteOrder(Order parameter)
         {
+            // удаляем заказ
             await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
+
+            // обновляем UI и сообщаем пользователю о результатах
             Orders.Remove(parameter);
             SelectedOrder = Orders.FirstOrDefault();
             MessageBox.Show("Заказ №" + parameter.OrderID + " удален!");
