@@ -132,6 +132,7 @@
                 Grid.Row="21"
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
+                Click="Accept_Click"
                 Command="{Binding AddOrderCommand}"/>
         <Button IsCancel="True"
                 Content="Отмена"

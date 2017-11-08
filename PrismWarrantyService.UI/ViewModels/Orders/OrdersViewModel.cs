@@ -6,7 +6,7 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using System.Linq;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using PrismWarrantyService.UI.Views.Orders;
@@ -79,6 +79,13 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             {
                 // TODO:
                 // обновить коллекцию заказов
+                var addedOrder = repository
+                    .Orders
+                    .OrderByDescending(x => x.Accepted)
+                    .First();
+
+                Orders.Add(addedOrder);
+
                 // коллекцию клиентов тоже
             }
         }
@@ -88,7 +95,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             // изменяем заказ
             await Task.Factory.StartNew(() => repository.EditOrder(parameter));
 
-            // // обновляем UI и сообщаем пользователю о результатах
+            // обновляем UI и сообщаем пользователю о результатах
             MessageBox.Show("Заказ №" + parameter.OrderID + " изменен!");
         }
 

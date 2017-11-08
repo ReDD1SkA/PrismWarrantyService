@@ -70,7 +70,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         #endregion
 
         #region Methods
-        private async void AddOrder()
+        private void AddOrder()
         {
             // если создается новый клиент
             if (NeedNewClient)
@@ -92,7 +92,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
                 NewOrder.Client = NewClient;
             }
 
-            await Task.Factory.StartNew(() => repository.AddOrder(NewOrder));
+            repository.AddOrder(NewOrder);
         }
         #endregion
     }

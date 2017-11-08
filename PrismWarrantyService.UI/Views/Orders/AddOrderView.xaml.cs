@@ -29,5 +29,12 @@ namespace PrismWarrantyService.UI.Views.Orders
             emailTextBox.Clear();
             phoneNumberTextBox.Clear();
         }
+
+        // наверное такое делать плохо
+        // а если окно с VM закроется до того, как отработает команда?
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }
