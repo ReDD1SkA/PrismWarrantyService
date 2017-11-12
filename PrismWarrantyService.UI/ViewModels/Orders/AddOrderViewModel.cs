@@ -30,12 +30,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
 
             NewClient = new Client();
-            NewOrder = new Order()
-            {
-                Client = Clients.FirstOrDefault(),
-                OrderType = OrderTypes.FirstOrDefault(),
-                OrderState = OrderStates.FirstOrDefault()
-            };        
+            NewOrder = new Order();     
 
             addOrderCommand = new DelegateCommand(AddOrder);
         }

@@ -59,6 +59,7 @@
                Grid.Column="1"/>
         <ComboBox ItemsSource="{Binding OrderTypes}"
                   SelectedItem="{Binding NewOrder.OrderType}"
+                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="7"
                   Grid.Column="1"/>
         <Label Content="Статус:"
@@ -66,6 +67,7 @@
                Grid.Column="3"/>
         <ComboBox ItemsSource="{Binding OrderStates}"
                   SelectedItem="{Binding NewOrder.OrderState}"
+                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="7"
                   Grid.Column="3"/>
         <Label Content="Клиент:"
@@ -74,6 +76,7 @@
                Grid.ColumnSpan="3"/>
         <ComboBox ItemsSource="{Binding Clients}"
                   SelectedItem="{Binding NewOrder.Client}"
+                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="11"
                   Grid.Column="1"
                   Grid.ColumnSpan="3"/>

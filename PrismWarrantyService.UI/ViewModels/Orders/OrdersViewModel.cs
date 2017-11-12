@@ -74,11 +74,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private void AddOrder()
         {
-            var addOrderView = new AddOrderView();
-            if (addOrderView.ShowDialog() == true)
-            {
-                // TODO:
-                // обновить коллекцию заказов
+            if (new AddOrderView().ShowDialog() == true)
+            {              
                 var addedOrder = repository
                     .Orders
                     .OrderByDescending(x => x.Accepted)
@@ -86,28 +83,22 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
                 Orders.Add(addedOrder);
 
-                // коллекцию клиентов тоже
+                // TODO:
+                // обновить коллекцию клиентов
             }
         }
 
         private async void EditOrder(Order parameter)
         {
-            // изменяем заказ
             await Task.Factory.StartNew(() => repository.EditOrder(parameter));
-
-            // обновляем UI и сообщаем пользователю о результатах
-            MessageBox.Show("Заказ №" + parameter.OrderID + " изменен!");
         }
 
         private async void DeleteOrder(Order parameter)
         {
-            // удаляем заказ
             await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
-
-            // обновляем UI и сообщаем пользователю о результатах
+            
             Orders.Remove(parameter);
             SelectedOrder = Orders.FirstOrDefault();
-            MessageBox.Show("Заказ №" + parameter.OrderID + " удален!");
         }
         #endregion
     }
