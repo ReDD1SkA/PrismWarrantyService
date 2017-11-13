@@ -210,12 +210,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_AppData\WarrantyServiceDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="App_Data\WarrantyServiceDB.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="_AppData\WarrantyServiceDB_log.ldf">
+    <Content Include="App_Data\WarrantyServiceDB_log.ldf">
       <DependentUpon>WarrantyServiceDB.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
