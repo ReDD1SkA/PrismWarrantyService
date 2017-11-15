@@ -7,6 +7,8 @@ using System.Linq;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using Prism.Events;
+using PrismWarrantyService.UI.Events;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -14,6 +16,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
     {
         #region Fields
         private IRepository repository;
+        private IEventAggregator eventAggregator;
         private Order newOrder;
         private Client newClient;
         private bool needNewClient;
@@ -21,16 +24,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         #endregion
 
         #region Constructors and finalizers
-        public AddOrderViewModel(IRepository repo)
+        public AddOrderViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
-            repository = repo;
+            this.repository = repository;
+            this.eventAggregator = eventAggregator;
 
             Clients = new ObservableCollection<Client>(repository.Clients);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
 
             NewClient = new Client();
-            NewOrder = new Order();     
+            NewOrder = new Order();
 
             addOrderCommand = new DelegateCommand(AddOrder);
         }
@@ -85,9 +89,11 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
                 // иначе связываем нового клиента с заказом
                 NewOrder.Client = NewClient;
+                eventAggregator.GetEvent<ClientAddedEvent>().Publish(NewClient);
             }
 
             repository.AddOrder(NewOrder);
+            eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
         }
         #endregion
     }

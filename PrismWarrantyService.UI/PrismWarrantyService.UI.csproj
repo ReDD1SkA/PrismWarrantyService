@@ -95,6 +95,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Events\ClientAddedEvent.cs" />
+    <Compile Include="Events\OrderAddedEvent.cs" />
     <Compile Include="Services\Authentication\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\AnonymousIdentity.cs" />
     <Compile Include="Services\Authentication\Concrete\AuthenticationService.cs" />

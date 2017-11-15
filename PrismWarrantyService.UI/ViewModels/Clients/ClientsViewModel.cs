@@ -1,6 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Events;
+using Prism.Mvvm;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Events;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -10,16 +12,21 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
     {
         #region Fields
         private IRepository repository;
+        private IEventAggregator eventAggregator;
         private Client selectedClient;
         #endregion
 
         #region Constructors and finalizers
-        public ClientsViewModel(IRepository repo)
+        public ClientsViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
-            repository = repo;
+            this.repository = repository;
+            this.eventAggregator = eventAggregator;
+
             Clients = new ObservableCollection<Client>(repository.Clients);
             Orders = new ObservableCollection<Order>();
             SelectedClient = Clients.FirstOrDefault();
+
+            eventAggregator.GetEvent<ClientAddedEvent>().Subscribe(ClientAddedHandler);
         }
         #endregion
 
@@ -51,6 +58,11 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
                 .Orders
                 .Where(x => x.ClientID == SelectedClient.ClientID)
                 .ToList());
+        }
+
+        private void ClientAddedHandler(Client newClient)
+        {
+            Clients.Add(newClient);
         }
         #endregion
     }

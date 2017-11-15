@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using PrismWarrantyService.UI.Views.Orders;
+using Prism.Events;
+using PrismWarrantyService.UI.Events;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -17,6 +19,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
     {
         #region Fields
         private IRepository repository;
+        private IEventAggregator eventAggregator;
         private Order selectedOrder;
         private DelegateCommand logoutCommand;
         private DelegateCommand addOrderCommand;
@@ -25,9 +28,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         #endregion
 
         #region Constructors and finalizers
-        public OrdersViewModel(IRepository repo)
+        public OrdersViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
-            repository = repo;
+            this.repository = repository;
+            this.eventAggregator = eventAggregator;
 
             Orders = new ObservableCollection<Order>(repository.Orders);
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
@@ -39,6 +43,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             addOrderCommand = new DelegateCommand(AddOrder);
             editOrderCommand = new DelegateCommand<Order>(EditOrder);
             deleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
+
+            eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedHandler);
         }
         #endregion
 
@@ -72,20 +78,14 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             }
         }
 
+        private void OrderAddedHandler(Order newOrder)
+        {
+            Orders.Add(newOrder);
+        }
+
         private void AddOrder()
         {
-            if (new AddOrderView().ShowDialog() == true)
-            {              
-                var addedOrder = repository
-                    .Orders
-                    .OrderByDescending(x => x.Accepted)
-                    .First();
-
-                Orders.Add(addedOrder);
-
-                // TODO:
-                // обновить коллекцию клиентов
-            }
+            var dialog = new AddOrderView().ShowDialog();
         }
 
         private async void EditOrder(Order parameter)

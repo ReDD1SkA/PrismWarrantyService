@@ -14,7 +14,7 @@ namespace PrismWarrantyService.UI.Views.Orders
             nameTextBox.IsReadOnly = false;
             companyTextBox.IsReadOnly = false;
             emailTextBox.IsReadOnly = false;
-            phoneNumberTextBox.IsReadOnly = false;   
+            phoneNumberTextBox.IsReadOnly = false;
         }
 
         private void NeedNewClient_Unchecked(object sender, RoutedEventArgs e)
