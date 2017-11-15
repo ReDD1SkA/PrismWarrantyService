@@ -10,9 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
-            <RowDefinition Height="0.15*"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition />
+            <RowDefinition/>
             <RowDefinition Height="10"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
@@ -24,16 +22,17 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Placeholder: Search + filters"
-                Grid.Row="1"
-                Grid.Column="1"
-                Width="Auto"
-                Height="Auto"/>
-        <ordersViews:OrderListView Grid.Row="3"
+        <ordersViews:OrderListView Grid.Row="1"
                                   Grid.Column="1"/>
-        <ordersViews:OrderDetailsView Grid.Row="5"
-                                      Grid.Column="1"/>
-        <ordersViews:OrderCRUDView Grid.Row="7"
-                                      Grid.Column="1"/>
+        <Expander Header="Детали заказа"
+                  Grid.Row="3"
+                  Grid.Column="1">
+            <ordersViews:OrderDetailsView />
+        </Expander>
+        <Expander Header="Управление заказами"
+                  Grid.Row="5"
+                  Grid.Column="1">
+            <ordersViews:OrderCRUDView />
+        </Expander>
     </Grid>
 </UserControl>

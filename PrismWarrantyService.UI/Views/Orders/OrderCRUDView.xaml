@@ -6,23 +6,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition />
+            <ColumnDefinition/>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition />
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Command="{Binding AddOrderCommand}"
                 Content="Добавить заказ"
+                Grid.Row="1"
                 Grid.Column="0"/>
         <Button Command="{Binding EditOrderCommand}"
                 CommandParameter ="{Binding SelectedOrder}"
                 Content="Изменить заказ"
+                Grid.Row="1"
                 Grid.Column="2"/>
         <Button Command="{Binding DeleteOrderCommand}"
                 CommandParameter ="{Binding SelectedOrder}"
                 Content="Удалить заказ"
+                Grid.Row="1"
                 Grid.Column="4"/>
     </Grid>
 </UserControl>

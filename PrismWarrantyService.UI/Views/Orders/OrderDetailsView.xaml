@@ -23,11 +23,11 @@
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition />
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition />
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Label Content="Заказ:"
                Grid.Row="0"
