@@ -43,6 +43,7 @@ namespace PrismWarrantyService.Domain.Concrete
             {
                 return context.Orders
                     .Include(x => x.Client)
+                    .Include(x => x.Employee)
                     .Include(x => x.OrderState)
                     .Include(x => x.OrderType);
             }
@@ -88,6 +89,10 @@ namespace PrismWarrantyService.Domain.Concrete
         {
             order.Accepted = DateTime.Now;
 
+            // TODO:
+            // поставить заказ в очередь с учетом срочности
+            // если он не является выполненным/отмененным
+
             if (order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
 
@@ -97,12 +102,18 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public void DeleteOrder(Order order)
         {
+            // TODO:
+            // удалить заказ из очереди
+
             context.Entry(order).State = EntityState.Deleted;
             context.SaveChanges();
         }
 
         public void EditOrder(Order order)
         {
+            // TODO:
+            // изменить позицию заказа в зависимости от его типа и статуса
+
             if (order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
             else

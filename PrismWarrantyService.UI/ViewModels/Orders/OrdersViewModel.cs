@@ -68,21 +68,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         #endregion
 
         #region Methods
-        private void Logout()
-        {
-            if (Thread.CurrentPrincipal is CustomPrincipal customPrincipal)
-            {
-                customPrincipal.Identity = new AnonymousIdentity();
-                
-                // ERROR
-            }
-        }
-
-        private void OrderAddedHandler(Order newOrder)
-        {
-            Orders.Add(newOrder);
-        }
-
         private void AddOrder()
         {
             var dialog = new AddOrderView().ShowDialog();
@@ -99,6 +84,21 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             
             Orders.Remove(parameter);
             SelectedOrder = Orders.FirstOrDefault();
+        }
+
+        private void OrderAddedHandler(Order newOrder)
+        {
+            Orders.Add(newOrder);
+        }
+
+        private void Logout()
+        {
+            if (Thread.CurrentPrincipal is CustomPrincipal customPrincipal)
+            {
+                customPrincipal.Identity = new AnonymousIdentity();
+
+                // ERROR
+            }
         }
         #endregion
     }

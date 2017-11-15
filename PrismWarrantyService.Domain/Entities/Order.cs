@@ -8,9 +8,11 @@ namespace PrismWarrantyService.Domain.Entities
         #region Fields
         private string summary;
         private string description;
+        private int? placeInLine;
         private DateTime accepted;
         private DateTime? finished;
         private Client client;
+        private Employee employee;
         private OrderState orderState;
         private OrderType orderType;
         #endregion
@@ -28,6 +30,12 @@ namespace PrismWarrantyService.Domain.Entities
         {
             get { return description; }
             set { SetProperty(ref description, value); }
+        }
+
+        public int? PlaceInLine
+        {
+            get { return placeInLine; }
+            set { SetProperty(ref placeInLine, value); }
         }
 
         public DateTime Accepted
@@ -48,6 +56,14 @@ namespace PrismWarrantyService.Domain.Entities
         {
             get { return client; }
             set { SetProperty(ref client, value); }
+        }
+
+        public int? EmployeeID { get; set; }
+
+        public Employee Employee
+        {
+            get { return employee; }
+            set { SetProperty(ref employee, value); }
         }
 
         public int? OrderStateID { get; set; }
