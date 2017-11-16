@@ -9,6 +9,7 @@ using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.ViewModels.Orders;
 using PrismWarrantyService.UI.Views;
+using PrismWarrantyService.UI.Views.Authentication;
 
 namespace PrismWarrantyService.UI
 {
@@ -17,6 +18,7 @@ namespace PrismWarrantyService.UI
         #region Methods
         protected override DependencyObject CreateShell()
         {
+            //return Kernel.Get<AuthenticationView>();
             return Kernel.Get<ShellView>();
         }
 

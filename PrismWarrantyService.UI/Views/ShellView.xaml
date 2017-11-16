@@ -3,58 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:ordersViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"
         xmlns:clientsViews="clr-namespace:PrismWarrantyService.UI.Views.Clients"
-        xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="Warranty service" Height="600" Width="1000">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Warranty service">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="0.85*"/>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Placeholder: Signed as"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Width="Auto"
-                    Height="Auto"/>
-        <Button Content="Placeholder: Navigation"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Width="Auto"
-                    Height="Auto"/>
+        <materialDesign:Card Padding="32"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch">
+            <TextBlock Text="Signed as"/>
+        </materialDesign:Card>
+        <materialDesign:Card Padding="32"
+                             Grid.Row="3"
+                             Grid.Column="1"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch">
+            <TextBlock Text="Navigation"/>
+        </materialDesign:Card>
         <GridSplitter Grid.Row="1"
                       Grid.Column="2"
                       Grid.RowSpan="3"
                       ShowsPreview="False"
-                      Width="10"
+                      Width="20"
+                      Background="{DynamicResource MaterialDesignPaper}"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"/>
-        <TabControl Grid.Row="1"
-                    Grid.Column="3"
-                    Grid.RowSpan="3">
-            <TabItem Name="orders"
-                     Header="Заказы">
-                <TabItem.Content>
-                    <ordersViews:OrdersView />
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Name="clients"
-                     Header="Клиенты">
-                <TabItem.Content>
-                    <clientsViews:ClientsView />
-                </TabItem.Content>
-            </TabItem>
-        </TabControl>
+        <materialDesign:Card Padding="32"
+                             Grid.Row="1"
+                             Grid.Column="3"
+                             Grid.RowSpan="3"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch">
+            <ordersViews:OrdersView />
+        </materialDesign:Card>
     </Grid>
 </Window>

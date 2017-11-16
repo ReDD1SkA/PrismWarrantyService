@@ -3,53 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Authentication"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Вход в систему"
-        Height="250"
         Width="300"
-        MinHeight="250"
-        MinWidth="300">
-    <Window.Resources>
-    </Window.Resources>
-    <Grid>
+        SizeToContent="Height">
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="3"/>
             <RowDefinition />
-            <RowDefinition Height="3"/>
             <RowDefinition />
-            <RowDefinition Height="3"/>
             <RowDefinition />
-            <RowDefinition Height="3"/>
             <RowDefinition />
-            <RowDefinition Height="3"/>
+            <RowDefinition Height="10"/>
             <RowDefinition />
-            <RowDefinition Height="3"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3"/>
-        </Grid.ColumnDefinitions>
         <Label Content="Логин:"
-               Grid.Row="1"
-               Grid.Column="1"/>
+               Grid.Row="0"/>
         <TextBox Text="{Binding EmployeeName}"
-                 Grid.Row="3"
-                 Grid.Column="1"
+                 Grid.Row="1"
                  HorizontalContentAlignment="Center"/>
         <Label Content="Пароль:"
-               Grid.Row="5"
-               Grid.Column="1"/>
+               Grid.Row="2"/>
         <PasswordBox Name="passwordBox"
-                     Grid.Row="7"
-                     Grid.Column="1"/>
+                     Grid.Row="3"
+                     HorizontalContentAlignment="Center"/>
         <Button Command="{Binding LoginCommand, Mode=OneTime}"
                 CommandParameter="{Binding ElementName=passwordBox}"
                 Content="Войти"
-                Grid.Row="9"
-                Grid.Column="1"/>
+                Grid.Row="5"/>
     </Grid>
 </Window>
