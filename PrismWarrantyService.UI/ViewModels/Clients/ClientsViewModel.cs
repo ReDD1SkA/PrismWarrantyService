@@ -11,12 +11,15 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
     public class ClientsViewModel : BindableBase
     {
         #region Fields
+
         private IRepository repository;
         private IEventAggregator eventAggregator;
         private Client selectedClient;
+
         #endregion
 
         #region Constructors and finalizers
+
         public ClientsViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
@@ -28,12 +31,14 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
 
             eventAggregator.GetEvent<ClientAddedEvent>().Subscribe(ClientAddedHandler);
         }
+
         #endregion
 
         #region Properties
-        public ObservableCollection<Client> Clients { get; set; }
 
-        public ObservableCollection<Order> Orders { get; set; }
+        public ObservableCollection<Client> Clients { get; private set; }
+
+        public ObservableCollection<Order> Orders { get; private set; }
 
         public Client SelectedClient
         {
@@ -41,16 +46,17 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
             set
             {
                 SetProperty(ref selectedClient, value);
-                RefreshClientOrders();
-                
+                RefreshClientOrders(); 
             }
         }
+
         #endregion
 
         #region Commands
         #endregion
 
         #region Methods
+
         private void RefreshClientOrders()
         {
             Orders.Clear();
@@ -64,6 +70,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
         {
             Clients.Add(newClient);
         }
+
         #endregion
     }
 }

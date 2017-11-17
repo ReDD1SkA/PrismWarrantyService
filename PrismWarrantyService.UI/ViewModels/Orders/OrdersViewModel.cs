@@ -19,16 +19,15 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
     public class OrdersViewModel : BindableBase
     {
         #region Fields
+
         private IRepository repository;
         private IEventAggregator eventAggregator;
         private Order selectedOrder;
-        private DelegateCommand logoutCommand;
-        private DelegateCommand addOrderCommand;
-        private DelegateCommand<Order> editOrderCommand;
-        private DelegateCommand<Order> deleteOrderCommand;
+
         #endregion
 
         #region Constructors and finalizers
+
         public OrdersViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
@@ -40,16 +39,18 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             SelectedOrder = Orders.FirstOrDefault();
 
-            logoutCommand = new DelegateCommand(Logout);
-            addOrderCommand = new DelegateCommand(AddOrder);
-            editOrderCommand = new DelegateCommand<Order>(EditOrder);
-            deleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
+            LogoutCommand = new DelegateCommand(Logout);
+            AddOrderCommand = new DelegateCommand(AddOrder);
+            EditOrderCommand = new DelegateCommand<Order>(EditOrder);
+            DeleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
 
             eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedHandler);
         }
+
         #endregion
 
         #region Properties
+
         public ObservableCollection<Order> Orders { get; set; }
         public ObservableCollection<OrderState> OrderStates { get; set; }
         public ObservableCollection<OrderType> OrderTypes { get; set; }
@@ -59,16 +60,20 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             get { return selectedOrder; }
             set { SetProperty(ref selectedOrder, value); }
         }
+
         #endregion
 
         #region Commands
-        public DelegateCommand LogoutCommand { get { return logoutCommand; } }
-        public DelegateCommand AddOrderCommand { get { return addOrderCommand; } }
-        public DelegateCommand<Order> EditOrderCommand { get { return editOrderCommand; } }
-        public DelegateCommand<Order> DeleteOrderCommand { get { return deleteOrderCommand; } }
+
+        public DelegateCommand LogoutCommand { get; private set; }
+        public DelegateCommand AddOrderCommand { get; private set; }
+        public DelegateCommand<Order> EditOrderCommand { get; private set; }
+        public DelegateCommand<Order> DeleteOrderCommand { get; private set; }
+
         #endregion
 
         #region Methods
+
         private void AddOrder()
         {
             var dialog = new AddOrderView().ShowDialog();
@@ -101,6 +106,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
                 // ERROR
             }
         }
+
         #endregion
     }
 }

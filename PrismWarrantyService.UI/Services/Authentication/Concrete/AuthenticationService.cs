@@ -10,14 +10,23 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 {
     public class AuthenticationService : IAuthenticationService
     {
+        #region Fields
+
         private IRepository repository;
+
+        #endregion
+
+        #region Constructors and finalizers
 
         public AuthenticationService(IRepository repo)
         {
             repository = repo;
         }
 
+        #endregion
+
         #region Methods
+
         public Employee AuthenticateEmployee(string login, string clearTextPassword)
         {
             Employee employee = repository.Employees
@@ -39,6 +48,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
             byte[] hash = algorithm.ComputeHash(saltedHashBytes);
             return Convert.ToBase64String(hash);
         }
+
         #endregion
     }
 }

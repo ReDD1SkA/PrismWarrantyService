@@ -18,6 +18,7 @@ namespace PrismWarrantyService.UI
     public class Bootstrapper : NinjectBootstrapper
     {
         #region Methods
+
         protected override DependencyObject CreateShell()
         {
             //return Kernel.Get<AuthenticationView>();
@@ -46,6 +47,7 @@ namespace PrismWarrantyService.UI
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
+
         #endregion
     }
 }

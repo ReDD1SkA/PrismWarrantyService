@@ -5,7 +5,13 @@ namespace PrismWarrantyService.UI.ViewModels
 {
     public class ShellViewModel
     {
+        #region Fields
+
         private IRegionManager regionManager;
+
+        #endregion
+
+        #region Constructors and finalizers
 
         public ShellViewModel(IRegionManager regionManager)
         {
@@ -13,9 +19,15 @@ namespace PrismWarrantyService.UI.ViewModels
             RegisterRegions();
         }
 
+        #endregion
+
+        #region Methods
+
         private void RegisterRegions()
         {
             regionManager.RegisterViewWithRegion("MainRegion", typeof(OrdersView));
         }
+
+        #endregion
     }
 }

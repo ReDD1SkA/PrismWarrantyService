@@ -15,15 +15,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
     public class AddOrderViewModel : BindableBase
     {
         #region Fields
+
         private IRepository repository;
         private IEventAggregator eventAggregator;
         private Order newOrder;
         private Client newClient;
         private bool needNewClient;
-        private DelegateCommand addOrderCommand;
+
         #endregion
 
         #region Constructors and finalizers
+
         public AddOrderViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
@@ -36,11 +38,13 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             NewClient = new Client();
             NewOrder = new Order();
 
-            addOrderCommand = new DelegateCommand(AddOrder);
+            AddOrderCommand = new DelegateCommand(AddOrder);
         }
+
         #endregion
 
         #region Properties
+
         public ObservableCollection<Client> Clients { get; set; }
         public ObservableCollection<OrderType> OrderTypes { get; set; }
         public ObservableCollection<OrderState> OrderStates { get; set; }
@@ -62,13 +66,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             get { return newClient; }
             set { SetProperty(ref newClient, value); }
         }
+
         #endregion
 
         #region Commands
-        public DelegateCommand AddOrderCommand { get { return addOrderCommand; } }
+
+        public DelegateCommand AddOrderCommand { get; private set; }
+
         #endregion
 
         #region Methods
+
         private void AddOrder()
         {
             // если создается новый клиент
@@ -95,6 +103,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             repository.AddOrder(NewOrder);
             eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
         }
+
         #endregion
     }
 }

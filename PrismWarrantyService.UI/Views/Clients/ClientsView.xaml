@@ -11,35 +11,12 @@
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="10"/>
-                <RowDefinition Height="0.15*"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="0.4*"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="0.15*"/>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="10"/>
-            </Grid.ColumnDefinitions>
-            <Button Content="Placeholder: Search + filters"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Width="Auto"
-                    Height="Auto"/>
-            <clientsViews:ClientListView Grid.Row="3"
-                                         Grid.Column="1"/>
-            <ordersViews:OrderListView Grid.Row="5"
-                                       Grid.Column="1"/>
-            <Button Content="Placeholder: CRUD"
-                    Grid.Row="7"
-                    Grid.Column="1"
-                    Width="Auto"
-                    Height="Auto"/>
+            <clientsViews:ClientListView Grid.Row="0"/>
+            <ordersViews:OrderListView Grid.Row="2"/>
         </Grid>
     </Grid>
 </UserControl>

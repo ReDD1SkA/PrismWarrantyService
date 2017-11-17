@@ -5,9 +5,14 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 {
     public class CustomPrincipal : IPrincipal
     {
+        #region Fields
+
         private CustomIdentity identity;
 
+        #endregion
+
         #region Properties
+
         public CustomIdentity Identity
         {
             get { return identity ?? new AnonymousIdentity(); }
@@ -18,13 +23,16 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
         {
             get { return Identity; }
         }
+
         #endregion
 
         #region Methods
+
         public bool IsInRole(string role)
         {
             return identity.Role.Name.Equals(role);
         }
+
         #endregion
     }
 }

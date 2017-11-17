@@ -17,36 +17,40 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
     public class AuthenticationViewModel : BindableBase
     {
         #region Fields
+
         private IAuthenticationService authenticationService;
         private string employeeName;
-        private DelegateCommand<object> loginCommand;
+
         #endregion
 
         #region Constructors and finalizers
-        public AuthenticationViewModel(IAuthenticationService service)
+
+        public AuthenticationViewModel(IAuthenticationService authenticationService)
         {
-            authenticationService = service;
-            loginCommand = new DelegateCommand<object>(Login);
+            this.authenticationService = authenticationService;
+            LoginCommand = new DelegateCommand<object>(Login);
         }
+
         #endregion
 
         #region Properties
+
         public string EmployeeName
         {
             get { return employeeName; }
-            set
-            {
-                employeeName = value;
-                RaisePropertyChanged("EmployeeName");
-            }
+            set { SetProperty(ref employeeName, value); }
         }
+
         #endregion
 
         #region Commands
-        public DelegateCommand<object> LoginCommand { get { return loginCommand; } }
+
+        public DelegateCommand<object> LoginCommand { get; private set; }
+
         #endregion
 
         #region Methods
+
         private async void Login(object parameter)
         {
             PasswordBox passwordBox = parameter as PasswordBox;
@@ -65,7 +69,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
                 customPrincipal.Identity = new CustomIdentity(emp.Login, emp.Role);
 
-                loginCommand.RaiseCanExecuteChanged();
+                LoginCommand.RaiseCanExecuteChanged();
 
                 EmployeeName = string.Empty;
                 passwordBox.Password = string.Empty;
@@ -87,6 +91,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                 MessageBox.Show(string.Format("ERROR: {0}", ex.Message));
             }
         }
+
         #endregion
     }
 }

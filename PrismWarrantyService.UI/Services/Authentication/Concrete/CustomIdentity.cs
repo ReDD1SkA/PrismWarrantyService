@@ -5,13 +5,18 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 {
     public class CustomIdentity : IIdentity
     {
+        #region Constructors and finalizers
+
         public CustomIdentity(string name, Role role)
         {
             Name = name;
             Role = role;
         }
 
+        #endregion
+
         #region Properties
+
         public string Name { get; private set; }
         public Role Role { get; private set; }
 
@@ -24,6 +29,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
         {
             get { return Role != null ? true : false; }
         }
+
         #endregion
     }
 }
