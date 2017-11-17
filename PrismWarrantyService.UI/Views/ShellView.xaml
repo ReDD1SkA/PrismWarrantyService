@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:ordersViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"
         xmlns:clientsViews="clr-namespace:PrismWarrantyService.UI.Views.Clients"
+        xmlns:navigationViews="clr-namespace:PrismWarrantyService.UI.Views.Navigation"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -30,19 +33,19 @@
             <ColumnDefinition Width="0.85*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:Card Padding="32"
+        <materialDesign:Card Padding="24"
                              Grid.Row="1"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
             <TextBlock Text="Signed as"/>
         </materialDesign:Card>
-        <materialDesign:Card Padding="32"
+        <materialDesign:Card Padding="24"
                              Grid.Row="3"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
-            <TextBlock Text="Navigation"/>
+            <navigationViews:NavigationView />
         </materialDesign:Card>
         <GridSplitter Grid.Row="1"
                       Grid.Column="2"
@@ -52,13 +55,13 @@
                       Background="{DynamicResource MaterialDesignPaper}"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"/>
-        <materialDesign:Card Padding="32"
+        <materialDesign:Card Padding="24"
                              Grid.Row="1"
                              Grid.Column="3"
                              Grid.RowSpan="3"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
-            <ordersViews:OrdersView />
+            <UserControl prism:RegionManager.RegionName="MainRegion"/>
         </materialDesign:Card>
     </Grid>
 </Window>

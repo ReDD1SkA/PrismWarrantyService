@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Windows;
 using Ninject;
 using Prism.Ninject;
-using System.Windows;
+using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Concrete;
 using PrismWarrantyService.UI.ViewModels.Authentication;
@@ -9,7 +10,8 @@ using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.ViewModels.Orders;
 using PrismWarrantyService.UI.Views;
-using PrismWarrantyService.UI.Views.Authentication;
+using PrismWarrantyService.UI.Views.Orders;
+using PrismWarrantyService.UI.Views.Clients;
 
 namespace PrismWarrantyService.UI
 {
@@ -28,8 +30,9 @@ namespace PrismWarrantyService.UI
 
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
-            Kernel.Bind<AuthenticationViewModel>().ToSelf();
-            Kernel.Bind<OrdersViewModel>().ToSelf();
+
+            Kernel.RegisterTypeForNavigation<OrdersView>();
+            Kernel.RegisterTypeForNavigation<ClientsView>();
         }
 
         protected override void InitializeModules()

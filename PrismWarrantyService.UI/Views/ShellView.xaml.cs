@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace PrismWarrantyService.UI.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для ShellView.xaml
-    /// </summary>
     public partial class ShellView : Window
     {
         public ShellView()

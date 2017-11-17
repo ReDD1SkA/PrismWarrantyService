@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PrismWarrantyService.UI.Views.Orders
+namespace PrismWarrantyService.UI.Views.Navigation
 {
     /// <summary>
-    /// Логика взаимодействия для OrdersView.xaml
+    /// Логика взаимодействия для NavigationView.xaml
     /// </summary>
-    public partial class OrdersView : UserControl
+    public partial class NavigationView : UserControl
     {
-        public OrdersView()
+        public NavigationView()
         {
             InitializeComponent();
         }

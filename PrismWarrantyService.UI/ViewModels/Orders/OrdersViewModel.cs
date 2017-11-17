@@ -12,6 +12,7 @@ using System.Windows;
 using PrismWarrantyService.UI.Views.Orders;
 using Prism.Events;
 using PrismWarrantyService.UI.Events;
+using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -81,7 +82,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private async void DeleteOrder(Order parameter)
         {
             await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
-            
+
             Orders.Remove(parameter);
             SelectedOrder = Orders.FirstOrDefault();
         }
