@@ -6,13 +6,10 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
 using PrismWarrantyService.UI.Views.Orders;
 using Prism.Events;
 using PrismWarrantyService.UI.Events;
-using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {

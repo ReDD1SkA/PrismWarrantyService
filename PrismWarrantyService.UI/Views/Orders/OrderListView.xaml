@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
-    <ListView Name="orderList"
+    <!--<ListView Name="orderList"
               ItemsSource="{Binding Orders}"
               SelectedItem="{Binding SelectedOrder}">
         <ListView.View>
@@ -23,5 +24,62 @@
                                 Header="Завершен" />
             </GridView>
         </ListView.View>
+    </ListView>-->
+    <ListView Name="orderList"
+              ItemsSource="{Binding Orders}"
+              SelectedItem="{Binding SelectedOrder}"
+              HorizontalContentAlignment="Stretch">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}#{0} - {1} - {2}">
+                                <Binding Path="OrderID"/>
+                                <Binding Path="OrderType.Name"/>
+                                <Binding Path="OrderState.Name"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="1"
+                               TextAlignment="Right">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} / {1}">
+                                <Binding Path="Accepted"/>
+                                <Binding Path="Finished" TargetNullValue="Не завершен"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock Text="{Binding Summary}"
+                               FontSize="18"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"/>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               TextAlignment="Right"
+                               FontSize="14">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1})">
+                                <Binding Path="Client.Name"/>
+                                <Binding Path="Client.Company"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
     </ListView>
 </UserControl>
