@@ -15,13 +15,13 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         public CustomIdentity Identity
         {
-            get { return identity ?? new AnonymousIdentity(); }
-            set { identity = value; }
+            get => identity ?? new AnonymousIdentity();
+            set => identity = value;
         }
 
         IIdentity IPrincipal.Identity
         {
-            get { return Identity; }
+            get => Identity;
         }
 
         #endregion

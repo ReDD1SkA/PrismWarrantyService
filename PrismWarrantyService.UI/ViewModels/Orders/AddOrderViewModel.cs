@@ -51,20 +51,20 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         public bool NeedNewClient
         {
-            get { return needNewClient; }
-            set { SetProperty(ref needNewClient, value); }
+            get => needNewClient;
+            set => SetProperty(ref needNewClient, value);
         }
 
         public Order NewOrder
         {
-            get { return newOrder; }
-            set { SetProperty(ref newOrder, value);  }
+            get => newOrder;
+            set => SetProperty(ref newOrder, value);
         }
 
         public Client NewClient
         {
-            get { return newClient; }
-            set { SetProperty(ref newClient, value); }
+            get => newClient;
+            set => SetProperty(ref newClient, value);
         }
 
         #endregion

@@ -22,12 +22,12 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         public string AuthenticationType
         {
-            get { return "Custom authentication"; }
+            get => "Custom authentication";
         }
 
         public bool IsAuthenticated
         {
-            get { return Role != null ? true : false; }
+            get => Role != null ? true : false;
         }
 
         #endregion

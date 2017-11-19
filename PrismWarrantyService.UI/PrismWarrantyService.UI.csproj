@@ -108,6 +108,7 @@
     <Compile Include="Services\Authentication\Concrete\AuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomIdentity.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomPrincipal.cs" />
+    <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Clients\ClientsViewModel.cs" />
     <Compile Include="ViewModels\Navigation\NavigationViewModel.cs" />

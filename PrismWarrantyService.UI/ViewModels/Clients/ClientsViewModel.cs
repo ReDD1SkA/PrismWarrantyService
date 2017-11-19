@@ -46,7 +46,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
             set
             {
                 SetProperty(ref selectedClient, value);
-                RefreshClientOrders(); 
+                RefreshClientOrders();
             }
         }
 

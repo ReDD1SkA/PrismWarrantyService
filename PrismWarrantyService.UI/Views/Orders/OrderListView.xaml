@@ -5,28 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
-    <!--<ListView Name="orderList"
-              ItemsSource="{Binding Orders}"
-              SelectedItem="{Binding SelectedOrder}">
-        <ListView.View>
-            <GridView>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=OrderID}"
-                                Header="ID"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Summary}"
-                                Header="Заказ"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=OrderType.Name}"
-                                Header="Тип" />
-                <GridViewColumn DisplayMemberBinding="{Binding Path=OrderState.Name}"
-                                Header="Статус" />
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Accepted}"
-                                Header="Принят" />
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Finished, TargetNullValue='Не завершен'}"
-                                Header="Завершен" />
-            </GridView>
-        </ListView.View>
-    </ListView>-->
-    <ListView Name="orderList"
-              ItemsSource="{Binding Orders}"
+    <ListView ItemsSource="{Binding Orders}"
               SelectedItem="{Binding SelectedOrder}"
               HorizontalContentAlignment="Stretch">
         <ListView.ItemTemplate>
@@ -34,15 +13,16 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="0.7*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0"
-                               Grid.Column="0">
+                               Grid.Column="1">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}#{0} - {1} - {2}">
                                 <Binding Path="OrderID"/>
@@ -52,7 +32,7 @@
                         </TextBlock.Text>
                     </TextBlock>
                     <TextBlock Grid.Row="0"
-                               Grid.Column="1"
+                               Grid.Column="2"
                                TextAlignment="Right">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} / {1}">
@@ -62,15 +42,15 @@
                         </TextBlock.Text>
                     </TextBlock>
                     <TextBlock Text="{Binding Summary}"
-                               FontSize="18"
-                               Grid.Row="1"
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"/>
+                               FontSize="20"
+                               VerticalAlignment="Bottom"
+                               Grid.Row="2"
+                               Grid.Column="1"/>
                     <TextBlock Grid.Row="2"
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"
+                               Grid.Column="2"
                                TextAlignment="Right"
-                               FontSize="14">
+                               VerticalAlignment="Bottom"
+                               FontSize="16">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} ({1})">
                                 <Binding Path="Client.Name"/>
@@ -78,6 +58,11 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
+                    <Border Background="#3F51B5"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.RowSpan="3"
+                            Width="4"/>
                 </Grid>
             </DataTemplate>
         </ListView.ItemTemplate>

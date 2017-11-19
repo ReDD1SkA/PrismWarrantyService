@@ -37,8 +37,8 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
         public string EmployeeName
         {
-            get { return employeeName; }
-            set { SetProperty(ref employeeName, value); }
+            get => employeeName;
+            set => SetProperty(ref employeeName, value);
         }
 
         #endregion
