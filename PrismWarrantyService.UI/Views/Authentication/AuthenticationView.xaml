@@ -26,11 +26,25 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox Text="{Binding EmployeeName}"
-                 materialDesign:HintAssist.Hint="Имя пользователя"
-                 Grid.Row="0"/>
-        <PasswordBox Name="passwordBox"
-                     materialDesign:HintAssist.Hint="Пароль"
-                     Grid.Row="2"/>
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Grid.Row="0">
+            <materialDesign:HintAssist.Hint >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Account" />
+                    <TextBlock>Имя пользователя</TextBlock>
+                </StackPanel>
+            </materialDesign:HintAssist.Hint>
+        </TextBox>
+        <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                     Name="passwordBox"
+                     Grid.Row="2">
+            <materialDesign:HintAssist.Hint >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Key" />
+                    <TextBlock>Пароль</TextBlock>
+                </StackPanel>
+            </materialDesign:HintAssist.Hint>
+        </PasswordBox>
         <Button Command="{Binding LoginCommand, Mode=OneTime}"
                 CommandParameter="{Binding ElementName=passwordBox}"
                 Content="Войти"
