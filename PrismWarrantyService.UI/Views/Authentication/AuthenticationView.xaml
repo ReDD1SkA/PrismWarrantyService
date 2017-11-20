@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
@@ -14,30 +15,25 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Вход в систему"
-        Width="300"
+        Width="250"
         SizeToContent="Height">
     <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="10"/>
             <RowDefinition />
             <RowDefinition Height="10"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Content="Логин:"
-               Grid.Row="0"/>
         <TextBox Text="{Binding EmployeeName}"
-                 Grid.Row="1"
-                 HorizontalContentAlignment="Center"/>
-        <Label Content="Пароль:"
-               Grid.Row="2"/>
+                 materialDesign:HintAssist.Hint="Имя пользователя"
+                 Grid.Row="0"/>
         <PasswordBox Name="passwordBox"
-                     Grid.Row="3"
-                     HorizontalContentAlignment="Center"/>
+                     materialDesign:HintAssist.Hint="Пароль"
+                     Grid.Row="2"/>
         <Button Command="{Binding LoginCommand, Mode=OneTime}"
                 CommandParameter="{Binding ElementName=passwordBox}"
                 Content="Войти"
-                Grid.Row="5"/>
+                Grid.Row="4"/>
     </Grid>
 </Window>

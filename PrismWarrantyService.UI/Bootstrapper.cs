@@ -12,6 +12,7 @@ using PrismWarrantyService.UI.ViewModels.Orders;
 using PrismWarrantyService.UI.Views;
 using PrismWarrantyService.UI.Views.Orders;
 using PrismWarrantyService.UI.Views.Clients;
+using PrismWarrantyService.UI.Views.Authentication;
 
 namespace PrismWarrantyService.UI
 {
@@ -32,8 +33,9 @@ namespace PrismWarrantyService.UI
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
 
-            Kernel.RegisterTypeForNavigation<OrdersView>();
+            Kernel.RegisterTypeForNavigation<OrderListView>();
             Kernel.RegisterTypeForNavigation<ClientsView>();
+            Kernel.RegisterTypeForNavigation<OrderDetailsView>();
         }
 
         protected override void InitializeModules()

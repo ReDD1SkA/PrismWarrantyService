@@ -26,7 +26,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
             NavigationItems = new ObservableCollection<NavigationItem>
             {
-                new NavigationItem() { Name = "Заказы", View = "OrdersView"},
+                new NavigationItem() { Name = "Заказы", View = "OrderListView"},
                 new NavigationItem() { Name = "Клиенты", View = "ClientsView"}
             };
 

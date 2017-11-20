@@ -25,7 +25,8 @@ namespace PrismWarrantyService.UI.ViewModels
 
         private void RegisterRegions()
         {
-            regionManager.RegisterViewWithRegion("MainRegion", typeof(OrdersView));
+            regionManager.RegisterViewWithRegion("MainRegion", typeof(OrderListView));
+            regionManager.RegisterViewWithRegion("DetailRegion", typeof(OrderDetailsView));
         }
 
         #endregion

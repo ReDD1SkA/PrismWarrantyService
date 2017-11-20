@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using PrismWarrantyService.UI.Views.Orders;
 using Prism.Events;
 using PrismWarrantyService.UI.Events;
+using System;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
-    public class OrdersViewModel : BindableBase
+    public class OrderListViewModel : BindableBase
     {
         #region Fields
 
@@ -25,14 +26,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Constructors and finalizers
 
-        public OrdersViewModel(IRepository repository, IEventAggregator eventAggregator)
+        public OrderListViewModel(IRepository repository, IEventAggregator eventAggregator)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
 
             Orders = new ObservableCollection<Order>(repository.Orders);
-            OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
-            OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
 
             SelectedOrder = Orders.FirstOrDefault();
 
@@ -40,7 +39,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             AddOrderCommand = new DelegateCommand(AddOrder);
             EditOrderCommand = new DelegateCommand<Order>(EditOrder);
             DeleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
+            OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
             eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedHandler);
         }
 
@@ -49,8 +50,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         #region Properties
 
         public ObservableCollection<Order> Orders { get; set; }
-        public ObservableCollection<OrderState> OrderStates { get; set; }
-        public ObservableCollection<OrderType> OrderTypes { get; set; }
 
         public Order SelectedOrder
         {
@@ -66,6 +65,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         public DelegateCommand AddOrderCommand { get; private set; }
         public DelegateCommand<Order> EditOrderCommand { get; private set; }
         public DelegateCommand<Order> DeleteOrderCommand { get; private set; }
+        public DelegateCommand OrderSelectionChangedCommand { get; private set; }
 
         #endregion
 
@@ -89,9 +89,14 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             SelectedOrder = Orders.FirstOrDefault();
         }
 
-        private void OrderAddedHandler(Order newOrder)
+        private void OrderAddedHandler(Order parameter)
         {
-            Orders.Add(newOrder);
+            Orders.Add(parameter);
+        }
+
+        private void OrderSelectionChanged()
+        {
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
         }
 
         private void Logout()

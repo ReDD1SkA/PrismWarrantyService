@@ -17,51 +17,60 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        SizeToContent="Width"
         Title="Warranty service">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="0.7*"/>
+            <RowDefinition/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="0.15*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="0.85*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:Card Padding="24"
-                             Grid.Row="1"
+        <materialDesign:Card Grid.Row="1"
                              Grid.Column="1"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
-            <TextBlock Text="Signed as"/>
+            <Expander ExpandDirection="Right">
+                <Expander.Header>
+                    <TextBlock Text="Меню">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="270" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </Expander.Header>
+                <navigationViews:NavigationView Padding="0,24,24,24"/>
+            </Expander>
         </materialDesign:Card>
-        <materialDesign:Card Padding="24"
-                             Grid.Row="3"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <navigationViews:NavigationView />
-        </materialDesign:Card>
-        <GridSplitter Grid.Row="1"
-                      Grid.Column="2"
-                      Grid.RowSpan="3"
-                      ShowsPreview="False"
-                      Width="20"
-                      Background="{DynamicResource MaterialDesignPaper}"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch"/>
-        <materialDesign:Card Padding="24"
+        <materialDesign:Card Padding="24,24,24,44"
                              Grid.Row="1"
                              Grid.Column="3"
-                             Grid.RowSpan="3"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
             <UserControl prism:RegionManager.RegionName="MainRegion"/>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="1"
+                             Grid.Column="5"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch">
+            <Expander ExpandDirection="Left">
+                <Expander.Header>
+                    <TextBlock Text="Детали">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="90" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </Expander.Header>
+                    <UserControl prism:RegionManager.RegionName="DetailRegion"
+                                 Padding="24,24,0,24"/>
+            </Expander>
         </materialDesign:Card>
     </Grid>
 </Window>

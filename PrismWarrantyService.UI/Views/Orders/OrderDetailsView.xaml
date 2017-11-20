@@ -3,87 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <Grid>
+    <Grid Width="200">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="10"/>
             <ColumnDefinition />
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label Content="Заказ:"
-               Grid.Row="0"
-               Grid.Column="0"
-               Grid.ColumnSpan="3"/>
-        <TextBox Text="{Binding SelectedOrder.Summary}"
-                 Grid.Row="1"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"/>
-        <Label Content="Тип:"
-               Grid.Row="2"
-               Grid.Column="0"/>
         <ComboBox Name="orderTypes"
                   ItemsSource="{Binding OrderTypes}"
                   SelectedItem="{Binding SelectedOrder.OrderType}"
-                  Grid.Row="3"
+                  Grid.Row="0"
                   Grid.Column="0"/>
-        <Label Content="Статус:"
-               Grid.Row="2"
-               Grid.Column="2"/>
         <ComboBox Name="orderStates"
                   ItemsSource="{Binding OrderStates}"
                   SelectedItem="{Binding SelectedOrder.OrderState}"
-                  Grid.Row="3"
+                  Grid.Row="0"
                   Grid.Column="2"/>
-        <Label Content="Описание:"
-               Grid.Row="4"
-               Grid.Column="0"
-               Grid.ColumnSpan="3"/>
-        <TextBox Text="{Binding SelectedOrder.Description}"
-                 Grid.Row="5"
+        <TextBox Grid.Row="1"
                  Grid.Column="0"
-                 Grid.RowSpan="3"
                  Grid.ColumnSpan="3"
-                 TextWrapping="Wrap"
-                 VerticalContentAlignment="Top"/>
-        <Label Content="Клиент:"
-               Grid.Row="0"
-               Grid.Column="4"/>
-        <TextBox Text="{Binding SelectedOrder.Client.Name}"
-                 Grid.Row="1"
-                 Grid.Column="4"
-                 IsReadOnly="True"/>
-        <Label Content="Компания:"
-               Grid.Row="2"
-               Grid.Column="4"/>
-        <TextBox Text="{Binding SelectedOrder.Client.Company}"
-                 Grid.Row="3"
-                 Grid.Column="4"
-                 IsReadOnly="True"/>
-        <Label Content="E-mail:"
-               Grid.Row="4"
-               Grid.Column="4"/>
+                 IsReadOnly="True">
+            <TextBox.Text>
+                <MultiBinding StringFormat="{}{0} ({1})">
+                    <Binding Path="SelectedOrder.Client.Name"/>
+                    <Binding Path="SelectedOrder.Client.Company"/>
+                </MultiBinding>
+            </TextBox.Text>
+        </TextBox>
         <TextBox Text="{Binding SelectedOrder.Client.Email}"
-                 Grid.Row="5"
-                 Grid.Column="4"
+                 Grid.Row="2"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"
                  IsReadOnly="True"/>
-        <Label Content="Номер телефона:"
-               Grid.Row="6"
-               Grid.Column="4"/>
-        <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber}"
-                 Grid.Row="7"
-                 Grid.Column="4"
-                 IsReadOnly="True"/>
+        <TextBox Grid.Row="3"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"
+                 IsReadOnly="True">
+            <TextBox.Text>
+                <MultiBinding StringFormat="{}+{0}">
+                    <Binding Path="SelectedOrder.Client.PhoneNumber"/>
+                </MultiBinding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Text="{Binding SelectedOrder.Description}"
+                 Grid.Row="4"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"
+                 VerticalAlignment="Stretch"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+	             VerticalScrollBarVisibility="Auto"
+                 materialDesign:HintAssist.Hint="Multiline text"/>
     </Grid>
 </UserControl>
