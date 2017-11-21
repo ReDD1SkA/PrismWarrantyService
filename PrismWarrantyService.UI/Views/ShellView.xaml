@@ -68,7 +68,7 @@
                         </TextBlock.LayoutTransform>
                     </TextBlock>
                 </Expander.Header>
-                    <UserControl prism:RegionManager.RegionName="DetailRegion"
+                    <UserControl prism:RegionManager.RegionName="DetailsRegion"
                                  Padding="24,24,0,24"/>
             </Expander>
         </materialDesign:Card>

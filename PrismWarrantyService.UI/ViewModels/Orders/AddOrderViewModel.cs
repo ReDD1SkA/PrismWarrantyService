@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Prism.Events;
 using PrismWarrantyService.UI.Events;
+using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -18,6 +19,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private IRepository repository;
         private IEventAggregator eventAggregator;
+        private IRegionManager regionManager;
         private Order newOrder;
         private Client newClient;
         private bool needNewClient;
@@ -26,10 +28,11 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Constructors and finalizers
 
-        public AddOrderViewModel(IRepository repository, IEventAggregator eventAggregator)
+        public AddOrderViewModel(IRepository repository, IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
+            this.regionManager = regionManager;
 
             Clients = new ObservableCollection<Client>(repository.Clients);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
@@ -38,7 +41,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             NewClient = new Client();
             NewOrder = new Order();
 
-            AddOrderCommand = new DelegateCommand(AddOrder);
+            SaveCommand = new DelegateCommand(SaveOrder);
+            CancelCommand = new DelegateCommand(Cancel);
         }
 
         #endregion
@@ -71,13 +75,14 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Commands
 
-        public DelegateCommand AddOrderCommand { get; private set; }
+        public DelegateCommand SaveCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; private set; }
 
         #endregion
 
         #region Methods
 
-        private void AddOrder()
+        private void SaveOrder()
         {
             // если создается новый клиент
             if (NeedNewClient)
@@ -102,6 +107,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             repository.AddOrder(NewOrder);
             eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
+            regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
+        }
+
+        private void Cancel()
+        {
+            regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
         }
 
         #endregion

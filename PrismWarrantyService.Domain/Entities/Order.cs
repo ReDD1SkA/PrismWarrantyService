@@ -9,7 +9,6 @@ namespace PrismWarrantyService.Domain.Entities
 
         private string summary;
         private string description;
-        private int? placeInLine;
         private DateTime accepted;
         private DateTime? finished;
         private Client client;
@@ -33,12 +32,6 @@ namespace PrismWarrantyService.Domain.Entities
         {
             get => description;
             set => SetProperty(ref description, value);
-        }
-
-        public int? PlaceInLine
-        {
-            get => placeInLine;
-            set => SetProperty(ref placeInLine, value);
         }
 
         public DateTime Accepted

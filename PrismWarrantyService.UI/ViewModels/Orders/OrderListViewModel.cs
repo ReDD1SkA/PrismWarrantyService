@@ -11,6 +11,7 @@ using PrismWarrantyService.UI.Views.Orders;
 using Prism.Events;
 using PrismWarrantyService.UI.Events;
 using System;
+using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
@@ -20,16 +21,18 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private IRepository repository;
         private IEventAggregator eventAggregator;
+        private IRegionManager regionManager;
         private Order selectedOrder;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public OrderListViewModel(IRepository repository, IEventAggregator eventAggregator)
+        public OrderListViewModel(IRepository repository, IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             this.repository = repository;
             this.eventAggregator = eventAggregator;
+            this.regionManager = regionManager;
 
             Orders = new ObservableCollection<Order>(repository.Orders);
 
@@ -73,7 +76,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private void AddOrder()
         {
-            var dialog = new AddOrderView().ShowDialog();
+            regionManager.RequestNavigate("DetailsRegion", "AddOrderView");
         }
 
         private async void EditOrder(Order parameter)
@@ -92,6 +95,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private void OrderAddedHandler(Order parameter)
         {
             Orders.Add(parameter);
+            SelectedOrder = Orders.LastOrDefault();
         }
 
         private void OrderSelectionChanged()

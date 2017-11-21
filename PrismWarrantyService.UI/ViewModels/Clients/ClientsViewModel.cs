@@ -26,7 +26,6 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
             this.eventAggregator = eventAggregator;
 
             Clients = new ObservableCollection<Client>(repository.Clients);
-            Orders = new ObservableCollection<Order>();
             SelectedClient = Clients.FirstOrDefault();
 
             eventAggregator.GetEvent<ClientAddedEvent>().Subscribe(ClientAddedHandler);
@@ -38,15 +37,13 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
 
         public ObservableCollection<Client> Clients { get; private set; }
 
-        public ObservableCollection<Order> Orders { get; private set; }
-
         public Client SelectedClient
         {
             get { return selectedClient; }
             set
             {
                 SetProperty(ref selectedClient, value);
-                RefreshClientOrders();
+                //RefreshClientOrders();
             }
         }
 
@@ -57,14 +54,14 @@ namespace PrismWarrantyService.UI.ViewModels.Clients
 
         #region Methods
 
-        private void RefreshClientOrders()
-        {
-            Orders.Clear();
-            Orders.AddRange(repository
-                .Orders
-                .Where(x => x.ClientID == SelectedClient.ClientID)
-                .ToList());
-        }
+        //private void RefreshClientOrders()
+        //{
+        //    Orders.Clear();
+        //    Orders.AddRange(repository
+        //        .Orders
+        //        .Where(x => x.ClientID == SelectedClient.ClientID)
+        //        .ToList());
+        //}
 
         private void ClientAddedHandler(Client newClient)
         {

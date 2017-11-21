@@ -7,8 +7,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <Grid Width="250">
+    <Grid Width="300">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="Auto"/>
@@ -24,21 +26,27 @@
             <ColumnDefinition Width="10"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding SelectedOrder.Summary}"
+	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:HintAssist.Hint="Заказ"
+                 Grid.Row="0"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"/>
         <ComboBox ItemsSource="{Binding OrderTypes}"
                   SelectedItem="{Binding SelectedOrder.OrderType}"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   materialDesign:HintAssist.Hint="Тип"
-                  Grid.Row="0"
+                  Grid.Row="2"
                   Grid.Column="0"/>
         <ComboBox ItemsSource="{Binding OrderStates}"
                   SelectedItem="{Binding SelectedOrder.OrderState}"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   materialDesign:HintAssist.Hint="Статус"
-                  Grid.Row="0"
+                  Grid.Row="2"
                   Grid.Column="2"/>
         <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  materialDesign:HintAssist.Hint="Клиент"
-                 Grid.Row="2"
+                 Grid.Row="4"
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  IsReadOnly="True">
@@ -52,21 +60,21 @@
         <TextBox Text="{Binding SelectedOrder.Client.Email}"
 	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  materialDesign:HintAssist.Hint="E-mail"
-                 Grid.Row="4"
+                 Grid.Row="6"
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  IsReadOnly="True"/>
         <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber, StringFormat={}+{0}}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  materialDesign:HintAssist.Hint="Номер телефона"
-                 Grid.Row="6"
+                 Grid.Row="8"
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  IsReadOnly="True"/>
         <TextBox Text="{Binding SelectedOrder.Description}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  materialDesign:HintAssist.Hint="Описание"
-                 Grid.Row="8"
+                 Grid.Row="10"
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  VerticalAlignment="Stretch"

@@ -36,6 +36,7 @@ namespace PrismWarrantyService.UI
             Kernel.RegisterTypeForNavigation<OrderListView>();
             Kernel.RegisterTypeForNavigation<ClientsView>();
             Kernel.RegisterTypeForNavigation<OrderDetailsView>();
+            Kernel.RegisterTypeForNavigation<AddOrderView>();
         }
 
         protected override void InitializeModules()
