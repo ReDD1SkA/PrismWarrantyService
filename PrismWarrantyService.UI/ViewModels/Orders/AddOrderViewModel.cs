@@ -40,7 +40,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             NewClient = new Client();
             NewOrder = new Order();
-            NeedNewClient = false;
 
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);

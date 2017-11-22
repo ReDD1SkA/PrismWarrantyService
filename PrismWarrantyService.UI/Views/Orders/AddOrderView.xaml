@@ -65,7 +65,7 @@
                  TextWrapping="Wrap"
 	             VerticalScrollBarVisibility="Auto"/>
         <materialDesign:Flipper HorizontalAlignment="Stretch"
-                                IsFlipped="{Binding NeedNewClient}"
+                                IsFlipped="{Binding NeedNewClient, Mode=TwoWay}"
                                 Grid.Row="6"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="3">
