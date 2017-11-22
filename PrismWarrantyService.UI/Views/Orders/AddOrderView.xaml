@@ -7,7 +7,14 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto">
     <Grid Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,8 +22,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="8"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="8"/>
@@ -39,12 +44,14 @@
                   SelectedItem="{Binding NewOrder.OrderType}"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   materialDesign:HintAssist.Hint="Тип"
+                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="2"
                   Grid.Column="0"/>
         <ComboBox ItemsSource="{Binding OrderStates}"
                   SelectedItem="{Binding NewOrder.OrderState}"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   materialDesign:HintAssist.Hint="Статус"
+                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="2"
                   Grid.Column="2"/>
         <TextBox Text="{Binding NewOrder.Description}"
@@ -57,13 +64,71 @@
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
 	             VerticalScrollBarVisibility="Auto"/>
-        <ComboBox ItemsSource="{Binding Clients}"
-                  SelectedItem="{Binding NewOrder.Client}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Клиент"
-                  Grid.Row="6"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="3"/>
+        <materialDesign:Flipper HorizontalAlignment="Stretch"
+                                IsFlipped="{Binding NeedNewClient}"
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3">
+            <materialDesign:Flipper.FrontContent>
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
+                          Header="Клиент: выбрать из списка"
+                          Height="260">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListView ItemsSource="{Binding Clients}"
+                                  SelectedItem="{Binding NewOrder.Client}"
+                                  Grid.Row="0"/>
+                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="Добавить нового клиента"
+                                Grid.Row="2"/>
+                    </Grid>
+                </GroupBox>
+            </materialDesign:Flipper.FrontContent>
+            <materialDesign:Flipper.BackContent>
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
+                          Header="Клиент: новый"
+                          Height="260">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Text="{Binding NewClient.Name}"
+	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Имя"
+                                 Grid.Row="0"/>
+                        <TextBox Text="{Binding NewClient.Company}"
+	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Компания"
+                                 Grid.Row="2"/>
+                        <TextBox Text="{Binding NewClient.Email}"
+	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="E-mail"
+                                 Grid.Row="4"/>
+                        <TextBox Text="{Binding NewClient.PhoneNumber}"
+	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Номер телефона"
+                                 Grid.Row="6"/>
+                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="Вернуться к списку"
+                                Grid.Row="8"/>
+                    </Grid>
+                </GroupBox>
+            </materialDesign:Flipper.BackContent>
+        </materialDesign:Flipper>
         <Button Command="{Binding SaveCommand}"
                 Content="Сохранить"
                 Grid.Row="8"
