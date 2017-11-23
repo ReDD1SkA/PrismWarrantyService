@@ -18,20 +18,18 @@
     <Grid Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="16"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBox Text="{Binding NewOrder.Summary}"
@@ -65,18 +63,18 @@
                  TextWrapping="Wrap"
 	             VerticalScrollBarVisibility="Auto"/>
         <materialDesign:Flipper HorizontalAlignment="Stretch"
-                                IsFlipped="{Binding NeedNewClient, Mode=TwoWay}"
+                                IsFlipped="{Binding NeedNewClient, Mode=OneWayToSource}"
                                 Grid.Row="6"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="3">
             <materialDesign:Flipper.FrontContent>
                 <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                           Header="Клиент: выбрать из списка"
-                          Height="260">
+                          Height="295">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="16"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <ListView ItemsSource="{Binding Clients}"
@@ -92,24 +90,25 @@
             <materialDesign:Flipper.BackContent>
                 <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                           Header="Клиент: новый"
-                          Height="260">
+                          Height="295">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="16"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="16"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="16"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="8"/>
+                            <RowDefinition Height="16"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBox Text="{Binding NewClient.Name}"
 	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="Имя"
-                                 Grid.Row="0"/>
-                        <TextBox Text="{Binding NewClient.Company}"
+                                 materialDesign:HintAssist.Hint="Клиент"
+                                 Grid.Row="0">
+                        </TextBox>
+                        <TextBox Text="{Binding NewClient.Company, ValidatesOnNotifyDataErrors=True}"
 	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  materialDesign:HintAssist.Hint="Компания"
                                  Grid.Row="2"/>

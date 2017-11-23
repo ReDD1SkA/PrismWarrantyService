@@ -1,9 +1,10 @@
-﻿using Prism.Mvvm;
+﻿using PrismWarrantyService.Domain.Concrete;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Order : BindableBase
+    public class Order : ModelBase
     {
         #region Fields
 
@@ -22,16 +23,20 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int OrderID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(100, ErrorMessage = "Максимальная длина - 100 символов")]
         public string Summary
         {
-            get => summary;
-            set => SetProperty(ref summary, value);
+            get { return summary; }
+            set { ValidateProperty(value); SetProperty(ref summary, value); }
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(1000, ErrorMessage = "Максимальная длина - 1000 символов")]
         public string Description
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            get { return description; }
+            set { ValidateProperty(value); SetProperty(ref description, value); }
         }
 
         public DateTime Accepted

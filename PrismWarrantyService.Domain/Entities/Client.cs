@@ -1,8 +1,10 @@
 ﻿using Prism.Mvvm;
+using PrismWarrantyService.Domain.Concrete;
+using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Client : BindableBase
+    public class Client : ModelBase
     {
         #region Fields
 
@@ -17,28 +19,38 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int ClientID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Name
         {
-            get =>  name;
-            set => SetProperty(ref name, value);
+            get { return name; }
+            set { ValidateProperty(value); SetProperty(ref name, value); }
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Company
         {
-            get => company;
-            set => SetProperty(ref company, value);
+            get { return company; }
+            set { ValidateProperty(value); SetProperty(ref company, value); }
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [EmailAddress]
+        [StringLength(30, ErrorMessage = "Максимальная длина - 30 символов")]
         public string Email
         {
-            get => email; 
-            set => SetProperty(ref email, value); 
+            get { return email; }
+            set { ValidateProperty(value); SetProperty(ref email, value); }
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(16, ErrorMessage = "Максимальная длина - 16 символов")]
+        [RegularExpression(@"^\d{3}-\d{2}-\d{3}-\d{2}-\d{2}$", ErrorMessage = "Неверный формат номера")]
         public string PhoneNumber
         {
-            get => phoneNumber; 
-            set => SetProperty(ref phoneNumber, value);
+            get { return phoneNumber; }
+            set { ValidateProperty(value); SetProperty(ref phoneNumber, value); }
         }
 
         #endregion

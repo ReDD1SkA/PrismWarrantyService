@@ -1,8 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using PrismWarrantyService.Domain.Concrete;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Employee : BindableBase
+    public class Employee : ModelBase
     {
         #region Fields
 

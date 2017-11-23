@@ -17,7 +17,7 @@
     <Grid Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="Auto"/>
@@ -71,7 +71,7 @@
                  Grid.Column="0"
                  Grid.ColumnSpan="3"
                  IsReadOnly="True"/>
-        <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber, StringFormat={}+{0}}"
+        <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  materialDesign:HintAssist.Hint="Номер телефона"
                  Grid.Row="8"

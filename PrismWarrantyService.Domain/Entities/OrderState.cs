@@ -1,8 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using PrismWarrantyService.Domain.Concrete;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class OrderState : BindableBase
+    public class OrderState : ModelBase
     {
         #region Fields
 

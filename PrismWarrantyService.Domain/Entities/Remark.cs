@@ -1,9 +1,9 @@
-﻿using Prism.Mvvm;
+﻿using PrismWarrantyService.Domain.Concrete;
 using System;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Remark : BindableBase
+    public class Remark : ModelBase
     {
         #region Fields
 

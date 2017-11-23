@@ -39,7 +39,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
 
             NewClient = new Client();
-            NewOrder = new Order();
+            NewOrder = new Order() { Client = Clients.FirstOrDefault() };
 
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);
@@ -84,30 +84,38 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private void SaveOrder()
         {
-            // если создается новый клиент
-            if (NeedNewClient)
+            NewOrder.Validate();
+            if (NewOrder.IsValid)
             {
-                // проверяем, действительно ли новый
-                var existCheck = repository
-                    .Clients
-                    .Where(x => x.Name == NewClient.Name && x.Company == NewClient.Company)
-                    .FirstOrDefault();
-
-                // нашелся такой клиент - сообщаем пользователю и выходим
-                if (existCheck != null)
+                // если создается новый клиент
+                if (NeedNewClient)
                 {
-                    MessageBox.Show(string.Format("Клиент {0} ({1}) уже существует!", NewClient.Name, NewClient.Company));
-                    return;
+                    // проверка на валидность
+                    NewClient.Validate();
+                    if (NewClient.HasErrors)
+                        return;
+
+                    // проверка на новизну
+                    var existCheck = repository
+                        .Clients
+                        .Where(x => x.Name == NewClient.Name && x.Company == NewClient.Company)
+                        .FirstOrDefault();
+
+                    if (existCheck != null)
+                    {
+                        MessageBox.Show(string.Format("Клиент {0} ({1}) уже существует!", NewClient.Name, NewClient.Company));
+                        return;
+                    }
+
+                    // иначе связываем нового клиента с заказом
+                    NewOrder.Client = NewClient;
+                    eventAggregator.GetEvent<ClientAddedEvent>().Publish(NewClient);
                 }
 
-                // иначе связываем нового клиента с заказом
-                NewOrder.Client = NewClient;
-                eventAggregator.GetEvent<ClientAddedEvent>().Publish(NewClient);
+                repository.AddOrder(NewOrder);
+                eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
+                regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
             }
-
-            repository.AddOrder(NewOrder);
-            eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
-            regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
         }
 
         private void Cancel()
