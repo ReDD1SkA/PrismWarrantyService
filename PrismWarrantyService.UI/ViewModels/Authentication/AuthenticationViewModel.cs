@@ -1,16 +1,15 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using System;
 using System.Security;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Threading.Tasks;
+using Prism.Mvvm;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.Views;
-using System.Threading.Tasks;
 
 namespace PrismWarrantyService.UI.ViewModels.Authentication
 {
@@ -19,7 +18,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         #region Fields
 
         private IAuthenticationService authenticationService;
-        private string employeeName;
+        private string employeeLogin;
 
         #endregion
 
@@ -35,10 +34,10 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
         #region Properties
 
-        public string EmployeeName
+        public string EmployeeLogin
         {
-            get => employeeName;
-            set => SetProperty(ref employeeName, value);
+            get { return employeeLogin; }
+            set { SetProperty(ref employeeLogin, value); }
         }
 
         #endregion
@@ -55,11 +54,12 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         {
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
+
             try
             {
                 Employee emp = null;
                 await Task.Factory.StartNew(() => {
-                    Employee answer  = authenticationService.AuthenticateEmployee(EmployeeName, clearTextPassword);
+                    Employee answer  = authenticationService.AuthenticateEmployee(EmployeeLogin, clearTextPassword);
                     emp = answer;
                     });
 
@@ -71,7 +71,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
                 LoginCommand.RaiseCanExecuteChanged();
 
-                EmployeeName = string.Empty;
+                EmployeeLogin = string.Empty;
                 passwordBox.Password = string.Empty;
 
                 Window shell = new ShellView();

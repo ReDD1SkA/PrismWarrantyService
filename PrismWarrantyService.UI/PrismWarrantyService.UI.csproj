@@ -112,10 +112,11 @@
     <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Clients\ClientsViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\WorkspaceLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\NavigationViewModel.cs" />
     <Compile Include="ViewModels\Orders\AddOrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrderDetailsViewModel.cs" />
-    <Compile Include="ViewModels\Orders\OrderListViewModel.cs" />
+    <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -130,17 +131,26 @@
     <Compile Include="Views\Clients\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Layouts\WorkspaceLayoutView.xaml.cs">
+      <DependentUpon>WorkspaceLayoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Navigation\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\AddOrderView.xaml.cs">
       <DependentUpon>AddOrderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Orders\OrderButtonsView.xaml.cs">
+      <DependentUpon>OrderButtonsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Orders\OrderDetailsView.xaml.cs">
       <DependentUpon>OrderDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\OrderListView.xaml.cs">
       <DependentUpon>OrderListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -157,6 +167,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Layouts\WorkspaceLayoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Navigation\NavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,11 +179,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Orders\OrderButtonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Orders\OrderDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Orders\OrderListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\OrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

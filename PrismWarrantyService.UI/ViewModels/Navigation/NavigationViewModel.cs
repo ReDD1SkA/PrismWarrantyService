@@ -26,7 +26,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
             NavigationItems = new ObservableCollection<NavigationItem>
             {
-                new NavigationItem() { Name = "Заказы", View = "OrderListView"},
+                new NavigationItem() { Name = "Заказы", View = "OrdersView"},
                 new NavigationItem() { Name = "Клиенты", View = "ClientsView"}
             };
 
@@ -58,7 +58,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
-                regionManager.RequestNavigate("MainRegion", navigatePath);
+                regionManager.RequestNavigate("MasterRegion", navigatePath);
         }
 
         #endregion

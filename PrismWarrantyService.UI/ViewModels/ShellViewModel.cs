@@ -1,5 +1,5 @@
 ﻿using Prism.Regions;
-using PrismWarrantyService.UI.Views.Orders;
+using PrismWarrantyService.UI.Views.Layouts;
 
 namespace PrismWarrantyService.UI.ViewModels
 {
@@ -25,8 +25,7 @@ namespace PrismWarrantyService.UI.ViewModels
 
         private void RegisterRegions()
         {
-            regionManager.RegisterViewWithRegion("MainRegion", typeof(OrderListView));
-            regionManager.RegisterViewWithRegion("DetailsRegion", typeof(OrderDetailsView));
+            regionManager.RegisterViewWithRegion("MainRegion", typeof(WorkspaceLayoutView));
         }
 
         #endregion

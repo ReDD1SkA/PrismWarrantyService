@@ -4,10 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:ordersViews="clr-namespace:PrismWarrantyService.UI.Views.Orders"
-        xmlns:clientsViews="clr-namespace:PrismWarrantyService.UI.Views.Clients"
-        xmlns:navigationViews="clr-namespace:PrismWarrantyService.UI.Views.Navigation"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -19,58 +15,5 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="Width"
         Title="Warranty service">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <materialDesign:Card Grid.Row="1"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <Expander ExpandDirection="Right">
-                <Expander.Header>
-                    <TextBlock Text="Меню">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="270" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                </Expander.Header>
-                <navigationViews:NavigationView Padding="0,24,24,24"/>
-            </Expander>
-        </materialDesign:Card>
-        <materialDesign:Card Padding="24,24,24,44"
-                             Grid.Row="1"
-                             Grid.Column="3"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <UserControl prism:RegionManager.RegionName="MainRegion"/>
-        </materialDesign:Card>
-        <materialDesign:Card Grid.Row="1"
-                             Grid.Column="5"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <Expander ExpandDirection="Left">
-                <Expander.Header>
-                    <TextBlock Text="Детали">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="90" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                </Expander.Header>
-                    <UserControl prism:RegionManager.RegionName="DetailsRegion"
-                                 Padding="24,24,0,24"/>
-            </Expander>
-        </materialDesign:Card>
-    </Grid>
+    <UserControl prism:RegionManager.RegionName="MainRegion"/>
 </Window>

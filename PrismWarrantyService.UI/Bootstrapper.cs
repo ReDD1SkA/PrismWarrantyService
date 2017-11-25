@@ -22,7 +22,6 @@ namespace PrismWarrantyService.UI
 
         protected override DependencyObject CreateShell()
         {
-            //return Kernel.Get<AuthenticationView>();
             return Kernel.Get<ShellView>();
         }
 
@@ -33,7 +32,7 @@ namespace PrismWarrantyService.UI
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
 
-            Kernel.RegisterTypeForNavigation<OrderListView>();
+            Kernel.RegisterTypeForNavigation<OrdersView>();
             Kernel.RegisterTypeForNavigation<ClientsView>();
             Kernel.RegisterTypeForNavigation<OrderDetailsView>();
             Kernel.RegisterTypeForNavigation<AddOrderView>();

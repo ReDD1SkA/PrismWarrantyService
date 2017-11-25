@@ -20,9 +20,9 @@
     <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="16"/>
             <RowDefinition />
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="16"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox Text="{Binding EmployeeName}"
