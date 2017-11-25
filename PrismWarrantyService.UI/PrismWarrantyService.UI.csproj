@@ -112,6 +112,8 @@
     <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Clients\ClientsViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\LayoutBaseViewModel.cs" />
     <Compile Include="ViewModels\Layouts\WorkspaceLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\NavigationViewModel.cs" />
     <Compile Include="ViewModels\Orders\AddOrderViewModel.cs" />
@@ -130,6 +132,9 @@
     </Compile>
     <Compile Include="Views\Clients\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\AuthenticationLayoutView.xaml.cs">
+      <DependentUpon>AuthenticationLayoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\WorkspaceLayoutView.xaml.cs">
       <DependentUpon>WorkspaceLayoutView.xaml</DependentUpon>
@@ -164,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Clients\ClientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\AuthenticationLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

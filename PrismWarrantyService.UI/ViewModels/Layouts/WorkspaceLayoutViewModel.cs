@@ -3,27 +3,18 @@ using PrismWarrantyService.UI.Views.Orders;
 
 namespace PrismWarrantyService.UI.ViewModels.Layouts
 {
-    public class WorkspaceLayoutViewModel
+    public class WorkspaceLayoutViewModel : LayoutBaseViewModel
     {
-        #region Fields
-
-        private IRegionManager regionManager;
-
-        #endregion
-
         #region Constructors and finalizers
 
         public WorkspaceLayoutViewModel(IRegionManager regionManager)
-        {
-            this.regionManager = regionManager;
-            RegisterRegions();
-        }
+            : base(regionManager) { }
 
         #endregion
 
         #region Methods
 
-        private void RegisterRegions()
+        protected override void RegisterRegions()
         {
             regionManager.RegisterViewWithRegion("MasterRegion", typeof(OrdersView));
             regionManager.RegisterViewWithRegion("DetailsRegion", typeof(OrderDetailsView));

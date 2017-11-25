@@ -1,5 +1,6 @@
 ﻿using Prism.Regions;
 using PrismWarrantyService.UI.Views.Layouts;
+using System.Threading.Tasks;
 
 namespace PrismWarrantyService.UI.ViewModels
 {
@@ -25,7 +26,7 @@ namespace PrismWarrantyService.UI.ViewModels
 
         private void RegisterRegions()
         {
-            regionManager.RegisterViewWithRegion("MainRegion", typeof(WorkspaceLayoutView));
+            regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView)); 
         }
 
         #endregion

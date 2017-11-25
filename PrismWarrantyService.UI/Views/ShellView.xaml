@@ -13,7 +13,6 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        SizeToContent="Width"
         Title="Warranty service">
-    <UserControl prism:RegionManager.RegionName="MainRegion"/>
+    <UserControl prism:RegionManager.RegionName="AppRegion"/>
 </Window>

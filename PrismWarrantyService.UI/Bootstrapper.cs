@@ -2,17 +2,14 @@
 using System.Windows;
 using Ninject;
 using Prism.Ninject;
-using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Concrete;
-using PrismWarrantyService.UI.ViewModels.Authentication;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
-using PrismWarrantyService.UI.ViewModels.Orders;
 using PrismWarrantyService.UI.Views;
-using PrismWarrantyService.UI.Views.Orders;
 using PrismWarrantyService.UI.Views.Clients;
-using PrismWarrantyService.UI.Views.Authentication;
+using PrismWarrantyService.UI.Views.Orders;
+using PrismWarrantyService.UI.Views.Layouts;
 
 namespace PrismWarrantyService.UI
 {
@@ -32,10 +29,8 @@ namespace PrismWarrantyService.UI
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
             Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
 
-            Kernel.RegisterTypeForNavigation<OrdersView>();
-            Kernel.RegisterTypeForNavigation<ClientsView>();
-            Kernel.RegisterTypeForNavigation<OrderDetailsView>();
-            Kernel.RegisterTypeForNavigation<AddOrderView>();
+            RegisterTypesForNavigation();
+            
         }
 
         protected override void InitializeModules()
@@ -48,6 +43,16 @@ namespace PrismWarrantyService.UI
         {
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
+        }
+
+        private void RegisterTypesForNavigation()
+        {
+            Kernel.RegisterTypeForNavigation<AuthenticationLayoutView>();
+            Kernel.RegisterTypeForNavigation<WorkspaceLayoutView>();
+            Kernel.RegisterTypeForNavigation<OrdersView>();
+            Kernel.RegisterTypeForNavigation<OrderDetailsView>();
+            Kernel.RegisterTypeForNavigation<AddOrderView>();
+            Kernel.RegisterTypeForNavigation<ClientsView>();
         }
 
         #endregion

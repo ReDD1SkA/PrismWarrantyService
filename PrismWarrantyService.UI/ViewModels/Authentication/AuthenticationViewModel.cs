@@ -9,7 +9,7 @@ using Prism.Mvvm;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
-using PrismWarrantyService.UI.Views;
+using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Authentication
 {
@@ -18,15 +18,18 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         #region Fields
 
         private IAuthenticationService authenticationService;
+        private IRegionManager regionManager;
         private string employeeLogin;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public AuthenticationViewModel(IAuthenticationService authenticationService)
+        public AuthenticationViewModel(IAuthenticationService authenticationService, IRegionManager regionManager)
         {
             this.authenticationService = authenticationService;
+            this.regionManager = regionManager;
+
             LoginCommand = new DelegateCommand<object>(Login);
         }
 
@@ -58,10 +61,11 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
             try
             {
                 Employee emp = null;
-                await Task.Factory.StartNew(() => {
-                    Employee answer  = authenticationService.AuthenticateEmployee(EmployeeLogin, clearTextPassword);
+                await Task.Factory.StartNew(() =>
+                {
+                    Employee answer = authenticationService.AuthenticateEmployee(EmployeeLogin, clearTextPassword);
                     emp = answer;
-                    });
+                });
 
                 CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
                 if (customPrincipal == null)
@@ -74,9 +78,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                 EmployeeLogin = string.Empty;
                 passwordBox.Password = string.Empty;
 
-                Window shell = new ShellView();
-                shell.Show();
-                Application.Current.MainWindow.Close();
+                regionManager.RequestNavigate("AppRegion", "WorkspaceLayoutView");
             }
             catch (SecurityException)
             {
