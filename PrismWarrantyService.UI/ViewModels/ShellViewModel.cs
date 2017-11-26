@@ -26,7 +26,8 @@ namespace PrismWarrantyService.UI.ViewModels
 
         private void RegisterRegions()
         {
-            regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView)); 
+            regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView));
+            //regionManager.RegisterViewWithRegion("AppRegion", typeof(WorkspaceLayoutView));
         }
 
         #endregion

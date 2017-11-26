@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Client : ModelBase
+    public class Client : ValidatableBindableBase
     {
         #region Fields
 

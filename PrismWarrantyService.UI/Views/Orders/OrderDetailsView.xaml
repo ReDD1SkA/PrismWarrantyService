@@ -19,14 +19,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="8"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -88,5 +90,14 @@
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
 	             VerticalScrollBarVisibility="Auto"/>
+        <Button Command="{Binding EditOrderCommand}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                HorizontalAlignment="Right"
+                Margin="0, 0, 16, 0"
+                Grid.Row="12"
+                Grid.Column="0"
+                Grid.ColumnSpan="3">
+            <materialDesign:PackIcon Kind="BorderColor" />
+        </Button>
     </Grid>
 </UserControl>

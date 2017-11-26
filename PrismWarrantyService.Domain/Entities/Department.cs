@@ -2,7 +2,7 @@
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Department : ModelBase
+    public class Department : ValidatableBindableBase
     {
         #region Fields
 

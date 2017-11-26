@@ -17,6 +17,7 @@
         </Grid.RowDefinitions>
         <TextBox Text="{Binding EmployeeLogin}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 MaxLength="12"
                  Grid.Row="0">
             <materialDesign:HintAssist.Hint >
                 <StackPanel Orientation="Horizontal">
@@ -28,6 +29,7 @@
         </TextBox>
         <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                      Name="passwordBox"
+                     MaxLength="12"
                      Grid.Row="2">
             <materialDesign:HintAssist.Hint >
                 <StackPanel Orientation="Horizontal">

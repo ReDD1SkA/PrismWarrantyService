@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace PrismWarrantyService.Domain.Concrete
 {
-    public class ModelBase : BindableBase, INotifyDataErrorInfo
+    public class ValidatableBindableBase : BindableBase, INotifyDataErrorInfo
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace PrismWarrantyService.Domain.Concrete
 
         #region Constructors and finalizers
 
-        public ModelBase()
+        public ValidatableBindableBase()
         {
             errors = new Dictionary<string, List<string>>();
             locker = new object();

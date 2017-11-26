@@ -1,15 +1,16 @@
-﻿using Prism.Commands;
-using System;
+﻿using System;
 using System.Security;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using Prism.Mvvm;
+using Prism.Regions;
+using Prism.Commands;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
-using Prism.Regions;
+
 
 namespace PrismWarrantyService.UI.ViewModels.Authentication
 {
@@ -36,11 +37,10 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         #endregion
 
         #region Properties
-
         public string EmployeeLogin
         {
-            get { return employeeLogin; }
-            set { SetProperty(ref employeeLogin, value); }
+            get => employeeLogin;
+            set => SetProperty(ref employeeLogin, value);
         }
 
         #endregion

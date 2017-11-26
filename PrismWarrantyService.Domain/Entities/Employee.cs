@@ -2,7 +2,7 @@
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Employee : ModelBase
+    public class Employee : ValidatableBindableBase
     {
         #region Fields
 
@@ -52,7 +52,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int RoleID { get; set; }
 
-        public Role Role
+        public virtual Role Role
         {
             get => role;
             set => SetProperty(ref role, value);
@@ -60,7 +60,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int DepartmentID { get; set; }
 
-        public Department Department
+        public virtual Department Department
         {
             get => department;
             set => SetProperty(ref department, value);

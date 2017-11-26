@@ -1,13 +1,10 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
@@ -18,6 +15,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private IRepository repository;
         private IEventAggregator eventAggregator;
+        private Order originalSelectedOrder;
         private Order selectedOrder;
 
         #endregion
@@ -32,6 +30,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
 
+            EditOrderCommand = new DelegateCommand(EditOrder);
+
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedHandler);
         }
 
@@ -39,11 +39,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Properties
 
+        public Order OriginalSelectedOrder
+        {
+            get => originalSelectedOrder;
+            set => SetProperty(ref originalSelectedOrder, value);
+        }
+
         public Order SelectedOrder
         {
             get => selectedOrder;
             set => SetProperty(ref selectedOrder, value);
-        }
+        }     
 
         public ObservableCollection<OrderState> OrderStates { get; set; }
 
@@ -51,11 +57,29 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #endregion
 
+        #region Commands
+
+        public DelegateCommand EditOrderCommand { get; private set; }
+
+        #endregion
+
         #region Methods
+
+        private async void EditOrder()
+        {
+            SelectedOrder.Validate();
+            if (SelectedOrder.HasErrors)
+                return;
+
+            OriginalSelectedOrder.GetInfoFrom(SelectedOrder);
+
+            await Task.Factory.StartNew(() => repository.EditOrder(OriginalSelectedOrder));
+        }
 
         private void OrderSelectionChangedHandler(Order parameter)
         {
-            SelectedOrder = parameter;
+            OriginalSelectedOrder = parameter;
+            SelectedOrder = parameter.Clone();
         }
 
         #endregion

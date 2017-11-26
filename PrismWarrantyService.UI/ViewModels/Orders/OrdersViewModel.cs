@@ -40,7 +40,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             LogoutCommand = new DelegateCommand(Logout);
             AddOrderCommand = new DelegateCommand(AddOrder);
-            EditOrderCommand = new DelegateCommand<Order>(EditOrder);
             DeleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
@@ -66,7 +65,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         public DelegateCommand LogoutCommand { get; private set; }
         public DelegateCommand AddOrderCommand { get; private set; }
-        public DelegateCommand<Order> EditOrderCommand { get; private set; }
         public DelegateCommand<Order> DeleteOrderCommand { get; private set; }
         public DelegateCommand OrderSelectionChangedCommand { get; private set; }
 
@@ -77,15 +75,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private void AddOrder()
         {
             regionManager.RequestNavigate("DetailsRegion", "AddOrderView");
-        }
-
-        private async void EditOrder(Order parameter)
-        {
-            if (parameter.HasErrors)
-                return;
-
-            await Task.Factory.StartNew(() => repository.EditOrder(parameter));
-        }
+        } 
 
         private async void DeleteOrder(Order parameter)
         {

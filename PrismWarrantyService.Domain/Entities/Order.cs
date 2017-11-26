@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Order : ModelBase
+    public class Order : ValidatableBindableBase
     {
         #region Fields
 
@@ -53,7 +53,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int ClientID { get; set; }
 
-        public Client Client
+        public virtual Client Client
         {
             get => client;
             set => SetProperty(ref client, value);
@@ -61,7 +61,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int? EmployeeID { get; set; }
 
-        public Employee Employee
+        public virtual Employee Employee
         {
             get => employee;
             set => SetProperty(ref employee, value);
@@ -69,7 +69,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int? OrderStateID { get; set; }
 
-        public OrderState OrderState
+        public virtual OrderState OrderState
         {
             get => orderState;
             set => SetProperty(ref orderState, value);
@@ -77,10 +77,41 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int? OrderTypeID { get; set; }
 
-        public OrderType OrderType
+        public virtual OrderType OrderType
         {
             get => orderType;
             set => SetProperty(ref orderType, value);
+        }
+
+        #endregion
+
+        #region Methods
+
+        public Order Clone()
+        {
+            return new Order()
+            {
+                Summary = Summary,
+                Description = Description,
+                Accepted = Accepted,
+                Finished = Finished,
+                Client = Client,
+                Employee = Employee,
+                OrderState = OrderState,
+                OrderType = OrderType
+            };
+        }
+
+        public void GetInfoFrom(Order donator)
+        {
+            Summary = donator.Summary;
+            Description = donator.Description;
+            Accepted = donator.Accepted;
+            Finished = donator.Finished;
+            Client = donator.Client;
+            Employee = donator.Employee;
+            OrderState = donator.OrderState;
+            OrderType = donator.OrderType;
         }
 
         #endregion

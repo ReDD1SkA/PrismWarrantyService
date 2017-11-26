@@ -35,8 +35,7 @@ namespace PrismWarrantyService.UI
 
         protected override void InitializeModules()
         {
-            CustomPrincipal customPrincipal = new CustomPrincipal();
-            AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
+            AppDomain.CurrentDomain.SetThreadPrincipal(new CustomPrincipal());
         }
 
         protected override void InitializeShell()

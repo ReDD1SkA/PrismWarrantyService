@@ -3,7 +3,7 @@ using System;
 
 namespace PrismWarrantyService.Domain.Entities
 {
-    public class Remark : ModelBase
+    public class Remark : ValidatableBindableBase
     {
         #region Fields
 
@@ -20,7 +20,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int OrderID { get; set; }
 
-        public Order Order
+        public virtual Order Order
         {
             get => order;
             set => SetProperty(ref order, value);
@@ -28,7 +28,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int EmployeeID { get; set; }
 
-        public Employee Employee
+        public virtual Employee Employee
         {
             get => employee;
             set => SetProperty(ref employee, value);
