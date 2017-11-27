@@ -22,7 +22,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private IRegionManager regionManager;
         private Order newOrder;
         private Client newClient;
-        private bool needNewClient;
 
         #endregion
 
@@ -43,6 +42,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);
+            SelectOrderClientCommand = new DelegateCommand(SelectOrderClient);
+            AddNewClientToOrderCommand = new DelegateCommand(AddNewClientToOrder);
         }
 
         #endregion
@@ -53,11 +54,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         public ObservableCollection<OrderType> OrderTypes { get; set; }
         public ObservableCollection<OrderState> OrderStates { get; set; }
 
-        public bool NeedNewClient
-        {
-            get => needNewClient;
-            set => SetProperty(ref needNewClient, value);
-        }
+        public bool NeedNewClient { get; private set; } = false;
 
         public Order NewOrder
         {
@@ -77,10 +74,24 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         public DelegateCommand SaveCommand { get; private set; }
         public DelegateCommand CancelCommand { get; private set; }
+        public DelegateCommand SelectOrderClientCommand { get; private set; }
+        public DelegateCommand AddNewClientToOrderCommand { get; private set; }
 
         #endregion
 
         #region Methods
+
+        private void AddNewClientToOrder()
+        {
+            regionManager.RequestNavigate("SelectOrderClientRegion", "AddNewClientToOrderView");
+            NeedNewClient = true;
+        }
+
+        private void SelectOrderClient()
+        {
+            regionManager.RequestNavigate("SelectOrderClientRegion", "SelectOrderClientView");
+            NeedNewClient = false;
+        }
 
         private void SaveOrder()
         {
@@ -114,6 +125,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
                 repository.AddOrder(NewOrder);
                 eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
+
+                NewClient = new Client();
+                NewOrder = new Order() { Client = Clients.FirstOrDefault() };
+
                 regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
             }
         }

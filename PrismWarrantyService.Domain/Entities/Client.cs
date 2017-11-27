@@ -36,7 +36,7 @@ namespace PrismWarrantyService.Domain.Entities
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Неверный формат E-mail")]
         [StringLength(30, ErrorMessage = "Максимальная длина - 30 символов")]
         public string Email
         {

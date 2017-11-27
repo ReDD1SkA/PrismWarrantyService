@@ -18,6 +18,7 @@ namespace PrismWarrantyService.UI.ViewModels.Layouts
         {
             regionManager.RegisterViewWithRegion("MasterRegion", typeof(OrdersView));
             regionManager.RegisterViewWithRegion("DetailsRegion", typeof(OrderDetailsView));
+            regionManager.RegisterViewWithRegion("SelectOrderClientRegion", typeof(SelectOrderClientView));
         }
 
         #endregion

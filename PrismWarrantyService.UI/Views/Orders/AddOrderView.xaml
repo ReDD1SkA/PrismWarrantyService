@@ -42,14 +42,12 @@
                   SelectedItem="{Binding NewOrder.OrderType}"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   materialDesign:HintAssist.Hint="Тип"
-                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="2"
                   Grid.Column="0"/>
         <ComboBox ItemsSource="{Binding OrderStates}"
                   SelectedItem="{Binding NewOrder.OrderState}"
                   Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                   materialDesign:HintAssist.Hint="Статус"
-                  IsSynchronizedWithCurrentItem="True"
                   Grid.Row="2"
                   Grid.Column="2"/>
         <TextBox Text="{Binding NewOrder.Description}"
@@ -62,72 +60,10 @@
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
 	             VerticalScrollBarVisibility="Auto"/>
-        <materialDesign:Flipper HorizontalAlignment="Stretch"
-                                IsFlipped="{Binding NeedNewClient, Mode=OneWayToSource}"
-                                Grid.Row="6"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="3">
-            <materialDesign:Flipper.FrontContent>
-                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
-                          Header="Клиент: выбрать из списка"
-                          Height="295">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="16"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <ListView ItemsSource="{Binding Clients}"
-                                  SelectedItem="{Binding NewOrder.Client}"
-                                  Grid.Row="0"/>
-                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="Добавить нового клиента"
-                                Grid.Row="2"/>
-                    </Grid>
-                </GroupBox>
-            </materialDesign:Flipper.FrontContent>
-            <materialDesign:Flipper.BackContent>
-                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
-                          Header="Клиент: новый"
-                          Height="295">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="16"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="16"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="16"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="16"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <TextBox Text="{Binding NewClient.Name}"
-	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="Клиент"
-                                 Grid.Row="0">
-                        </TextBox>
-                        <TextBox Text="{Binding NewClient.Company, ValidatesOnNotifyDataErrors=True}"
-	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="Компания"
-                                 Grid.Row="2"/>
-                        <TextBox Text="{Binding NewClient.Email}"
-	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="E-mail"
-                                 Grid.Row="4"/>
-                        <TextBox Text="{Binding NewClient.PhoneNumber}"
-	                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="Номер телефона"
-                                 Grid.Row="6"/>
-                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="Вернуться к списку"
-                                Grid.Row="8"/>
-                    </Grid>
-                </GroupBox>
-            </materialDesign:Flipper.BackContent>
-        </materialDesign:Flipper>
+        <UserControl prism:RegionManager.RegionName="SelectOrderClientRegion"
+                     Grid.Row="6"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"/>
         <Button Command="{Binding SaveCommand}"
                 Content="Сохранить"
                 Grid.Row="8"

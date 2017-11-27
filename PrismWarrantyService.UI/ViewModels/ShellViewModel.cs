@@ -17,17 +17,7 @@ namespace PrismWarrantyService.UI.ViewModels
         public ShellViewModel(IRegionManager regionManager)
         {
             this.regionManager = regionManager;
-            RegisterRegions();
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void RegisterRegions()
-        {
             regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView));
-            //regionManager.RegisterViewWithRegion("AppRegion", typeof(WorkspaceLayoutView));
         }
 
         #endregion

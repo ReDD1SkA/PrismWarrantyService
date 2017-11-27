@@ -75,14 +75,14 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private void AddOrder()
         {
             regionManager.RequestNavigate("DetailsRegion", "AddOrderView");
-        } 
+        }
 
         private async void DeleteOrder(Order parameter)
         {
-            await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
-
-            Orders.Remove(parameter);
             SelectedOrder = Orders.FirstOrDefault();
+            Orders.Remove(parameter);
+
+            await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
         }
 
         private void OrderAddedHandler(Order parameter)

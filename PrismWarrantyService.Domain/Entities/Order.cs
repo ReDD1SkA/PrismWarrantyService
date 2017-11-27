@@ -69,6 +69,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int? OrderStateID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
         public virtual OrderState OrderState
         {
             get => orderState;
@@ -77,6 +78,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int? OrderTypeID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
         public virtual OrderType OrderType
         {
             get => orderType;
