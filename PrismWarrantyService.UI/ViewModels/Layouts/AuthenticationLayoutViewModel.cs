@@ -11,15 +11,5 @@ namespace PrismWarrantyService.UI.ViewModels.Layouts
             : base(regionManager) { }
 
         #endregion
-
-        #region Methods
-
-        protected override void RegisterRegions()
-        {
-            regionManager.RegisterViewWithRegion("MasterRegion", typeof(OrdersView));
-            regionManager.RegisterViewWithRegion("DetailsRegion", typeof(OrderDetailsView));
-        }
-
-        #endregion
     }
 }

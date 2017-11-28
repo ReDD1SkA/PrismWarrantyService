@@ -1,4 +1,5 @@
-﻿using PrismWarrantyService.Domain.Concrete;
+﻿using System;
+using PrismWarrantyService.Domain.Concrete;
 
 namespace PrismWarrantyService.Domain.Entities
 {

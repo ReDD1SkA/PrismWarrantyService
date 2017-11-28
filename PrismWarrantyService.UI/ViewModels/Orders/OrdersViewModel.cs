@@ -38,7 +38,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
             SelectedOrder = Orders.FirstOrDefault();
 
-            LogoutCommand = new DelegateCommand(Logout);
             AddOrderCommand = new DelegateCommand(AddOrder);
             DeleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
@@ -94,16 +93,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         private void OrderSelectionChanged()
         {
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-        }
-
-        private void Logout()
-        {
-            if (Thread.CurrentPrincipal is CustomPrincipal customPrincipal)
-            {
-                customPrincipal.Identity = new AnonymousIdentity();
-
-                // ERROR
-            }
         }
 
         #endregion
