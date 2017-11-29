@@ -6,29 +6,26 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.Domain.Entities;
+using Prism.Events;
+using PrismWarrantyService.UI.Events;
 
 namespace PrismWarrantyService.UI.ViewModels.Navigation
 {
-    public class AccountViewModel : BindableBase
+    public class AccountViewModel : ViewModelBase
     {
         #region Fields
 
-        private IRepository repository;
-        private IRegionManager regionManager;
         private Employee currentEmployee;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public AccountViewModel(IRepository repository, IRegionManager regionManager)
+        public AccountViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
-            this.repository = repository;
-            this.regionManager = regionManager;
-
-            CurrentEmployee = repository.Employees
-                .Where(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
-                .FirstOrDefault();
+            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationHandler);
+            AuthenticationHandler();
 
             LogoutCommand = new DelegateCommand(Logout);
         }
@@ -61,6 +58,13 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
                 regionManager.RequestNavigate("AppRegion", "AuthenticationLayoutView");
                 customPrincipal.Identity = new AnonymousIdentity();
             }
+        }
+
+        private void AuthenticationHandler()
+        {
+            CurrentEmployee = repository.Employees
+                .Where(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
+                .FirstOrDefault();
         }
 
         #endregion

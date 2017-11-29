@@ -1,32 +1,32 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.UI.Services.Navigation.Concrete;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace PrismWarrantyService.UI.ViewModels.Navigation
 {
-    public class NavigationViewModel : BindableBase
+    public class NavigationViewModel : ViewModelBase
     {
         #region Fields
 
-        private readonly IRegionManager regionManager;
         private NavigationItem selectedItem;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public NavigationViewModel(IRegionManager regionManager)
+        public NavigationViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
-            this.regionManager = regionManager;
-
             NavigateCommand = new DelegateCommand<string>(Navigate);
 
             NavigationItems = new ObservableCollection<NavigationItem>
             {
-                new NavigationItem() { Name = "Заказы", View = "OrdersView"},
+                new NavigationItem() { Name = "Все заказы", View = "OrdersView"},
                 new NavigationItem() { Name = "Клиенты", View = "ClientsView"}
             };
 

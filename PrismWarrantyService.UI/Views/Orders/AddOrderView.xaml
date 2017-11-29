@@ -15,14 +15,14 @@
              TextElement.FontSize="13"
              TextOptions.TextFormattingMode="Ideal" 
              TextOptions.TextRenderingMode="Auto">
-    <Grid Width="300">
+    <Grid Width="250">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="16"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="16"/>
+            <RowDefinition Height="24"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="16"/>
             <RowDefinition Height="Auto"/>

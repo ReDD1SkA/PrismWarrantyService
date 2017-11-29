@@ -13,13 +13,10 @@ using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
-    public class AddOrderViewModel : BindableBase
+    public class AddOrderViewModel : ViewModelBase
     {
         #region Fields
 
-        private IRepository repository;
-        private IEventAggregator eventAggregator;
-        private IRegionManager regionManager;
         private Order newOrder;
         private Client newClient;
 
@@ -27,12 +24,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Constructors and finalizers
 
-        public AddOrderViewModel(IRepository repository, IEventAggregator eventAggregator, IRegionManager regionManager)
+        public AddOrderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
-            this.repository = repository;
-            this.eventAggregator = eventAggregator;
-            this.regionManager = regionManager;
-
             Clients = new ObservableCollection<Client>(repository.Clients);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
@@ -83,13 +77,13 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         private void AddNewClientToOrder()
         {
-            regionManager.RequestNavigate("SelectOrderClientRegion", "AddNewClientToOrderView");
+            regionManager.RequestNavigate("SelectOrderClientRegion", "AddOrderNewClientView");
             NeedNewClient = true;
         }
 
         private void SelectOrderClient()
         {
-            regionManager.RequestNavigate("SelectOrderClientRegion", "SelectOrderClientView");
+            regionManager.RequestNavigate("SelectOrderClientRegion", "AddOrderSelectClientView");
             NeedNewClient = false;
         }
 

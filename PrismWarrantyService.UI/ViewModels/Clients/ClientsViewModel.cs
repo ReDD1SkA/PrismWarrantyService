@@ -1,5 +1,5 @@
 ﻿using Prism.Events;
-using Prism.Mvvm;
+using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events;
@@ -8,23 +8,19 @@ using System.Linq;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients
 {
-    public class ClientsViewModel : BindableBase
+    public class ClientsViewModel : ViewModelBase
     {
         #region Fields
 
-        private IRepository repository;
-        private IEventAggregator eventAggregator;
         private Client selectedClient;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public ClientsViewModel(IRepository repository, IEventAggregator eventAggregator)
+        public ClientsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
-            this.repository = repository;
-            this.eventAggregator = eventAggregator;
-
             Clients = new ObservableCollection<Client>(repository.Clients);
             SelectedClient = Clients.FirstOrDefault();
 

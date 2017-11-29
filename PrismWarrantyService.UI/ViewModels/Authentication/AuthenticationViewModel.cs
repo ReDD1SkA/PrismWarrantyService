@@ -10,27 +10,28 @@ using Prism.Commands;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
-
+using Prism.Events;
+using PrismWarrantyService.UI.Events;
+using PrismWarrantyService.Domain.Abstract;
+using System.Linq;
 
 namespace PrismWarrantyService.UI.ViewModels.Authentication
 {
-    public class AuthenticationViewModel : BindableBase
+    public class AuthenticationViewModel : ViewModelBase
     {
         #region Fields
 
         private IAuthenticationService authenticationService;
-        private IRegionManager regionManager;
         private string employeeLogin;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public AuthenticationViewModel(IAuthenticationService authenticationService, IRegionManager regionManager)
+        public AuthenticationViewModel(IAuthenticationService authenticationService, IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
             this.authenticationService = authenticationService;
-            this.regionManager = regionManager;
-
             LoginCommand = new DelegateCommand<object>(Login);
         }
 
@@ -72,6 +73,8 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 customPrincipal.Identity = new CustomIdentity(emp.Login, emp.Role);
+                eventAggregator.GetEvent<AuthenticationEvent>().Publish();
+                await Task.Delay(1000);
 
                 LoginCommand.RaiseCanExecuteChanged();
 

@@ -15,60 +15,64 @@
         </i:Interaction.Triggers>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="5"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15"/>
-                        <ColumnDefinition Width="0.7*"/>
-                        <ColumnDefinition Width="0.3*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Grid.Column="1">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}#{0} - {1} - {2}">
-                                <Binding Path="OrderID"/>
-                                <Binding Path="OrderType.Name"/>
-                                <Binding Path="OrderState.Name"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <TextBlock Grid.Row="0"
-                               Grid.Column="2"
-                               TextAlignment="Right">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} / {1}">
-                                <Binding Path="Accepted"/>
-                                <Binding Path="Finished" TargetNullValue="Не завершен"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <TextBlock Text="{Binding Summary}"
+                <Border Padding="0,0,0,8"
+				        BorderBrush="{DynamicResource MaterialDesignDivider}"
+				        BorderThickness="0,0,0,2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="0.7*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}#{0} - {1} - {2}">
+                                    <Binding Path="OrderID"/>
+                                    <Binding Path="OrderType.Name"/>
+                                    <Binding Path="OrderState.Name"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="2"
+                                   TextAlignment="Right">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} / {1}">
+                                    <Binding Path="Accepted"/>
+                                    <Binding Path="Finished" TargetNullValue="Не завершен"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Summary}"
                                FontSize="20"
                                VerticalAlignment="Bottom"
                                Grid.Row="2"
                                Grid.Column="1"/>
-                    <TextBlock Grid.Row="2"
+                        <TextBlock Grid.Row="2"
                                Grid.Column="2"
                                TextAlignment="Right"
                                VerticalAlignment="Bottom"
                                FontSize="16">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} ({1})">
-                                <Binding Path="Client.Name"/>
-                                <Binding Path="Client.Company"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <Border Background="#3F51B5"
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} ({1})">
+                                    <Binding Path="Client.Name"/>
+                                    <Binding Path="Client.Company"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <Border Background="{StaticResource PrimaryHueMidBrush}"
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.RowSpan="3"
                             Width="4"/>
-                </Grid>
+                    </Grid>
+                </Border>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

@@ -7,40 +7,38 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <materialDesign:Card >
-        <Grid Width="150"
+    <Grid Width="150"
 			  Height="Auto">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <materialDesign:ColorZone VerticalAlignment="Stretch"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone VerticalAlignment="Stretch"
                                       Mode="PrimaryLight">
-                <materialDesign:PackIcon
+            <materialDesign:PackIcon
 					Width="80"
 					Height="80"
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center"
 					Kind="AccountCircle" />
-            </materialDesign:ColorZone>
-            <StackPanel Grid.Row="1">
-                <TextBlock HorizontalAlignment="Center"
+        </materialDesign:ColorZone>
+        <StackPanel Grid.Row="1">
+            <TextBlock HorizontalAlignment="Center"
                            Margin="0,16,0,0">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} {1}">
-                            <Binding Path="CurrentEmployee.Name"/>
-                            <Binding Path="CurrentEmployee.Surname"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
-                <TextBlock Text="{Binding CurrentEmployee.Role.Name, StringFormat={}({0})}"
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="CurrentEmployee.Name"/>
+                        <Binding Path="CurrentEmployee.Surname"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Text="{Binding CurrentEmployee.Role.Name, StringFormat={}({0})}"
                            HorizontalAlignment="Center">
-                </TextBlock>
-                <Button Command="{Binding LogoutCommand}"
+            </TextBlock>
+            <Button Command="{Binding LogoutCommand}"
                         Style="{StaticResource MaterialDesignFlatButton}"
 					    Margin="8"
 					    Content="Выйти"/>
-            </StackPanel>
-        </Grid>
-    </materialDesign:Card>
+        </StackPanel>
+    </Grid>
 </UserControl>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PrismWarrantyService.UI.Views.Orders
 {
     /// <summary>
-    /// Логика взаимодействия для AddNewClientToOrderView.xaml
+    /// Логика взаимодействия для AddOrderSelectClientView.xaml
     /// </summary>
-    public partial class AddNewClientToOrderView : UserControl
+    public partial class AddOrderSelectClientView : UserControl
     {
-        public AddNewClientToOrderView()
+        public AddOrderSelectClientView()
         {
             InitializeComponent();
         }

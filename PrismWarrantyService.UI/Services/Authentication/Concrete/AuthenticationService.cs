@@ -1,10 +1,10 @@
-﻿using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Services.Authentification.Abstract;
-using System;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using PrismWarrantyService.Domain.Abstract;
+using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Services.Authentification.Abstract;
 
 namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 {

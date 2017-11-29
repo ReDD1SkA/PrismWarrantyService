@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events;
@@ -9,12 +10,10 @@ using System.Threading.Tasks;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
-    public class OrderDetailsViewModel : BindableBase
+    public class OrderDetailsViewModel : ViewModelBase
     {
         #region Fields
 
-        private IRepository repository;
-        private IEventAggregator eventAggregator;
         private Order originalSelectedOrder;
         private Order selectedOrder;
 
@@ -22,11 +21,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
 
         #region Constructors and finalizers
 
-        public OrderDetailsViewModel(IRepository repository, IEventAggregator eventAggregator)
+        public OrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
-            this.repository = repository;
-            this.eventAggregator = eventAggregator;
-
             OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
             OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
 

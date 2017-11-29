@@ -52,8 +52,8 @@ namespace PrismWarrantyService.UI
             Kernel.RegisterTypeForNavigation<OrderDetailsView>();
             Kernel.RegisterTypeForNavigation<AddOrderView>();
             Kernel.RegisterTypeForNavigation<ClientsView>();
-            Kernel.RegisterTypeForNavigation<SelectOrderClientView>();
-            Kernel.RegisterTypeForNavigation<AddNewClientToOrderView>();
+            Kernel.RegisterTypeForNavigation<AddOrderSelectClientView>();
+            Kernel.RegisterTypeForNavigation<AddOrderNewClientView>();
         }
 
         #endregion

@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="PrismWarrantyService.UI.Views.Orders.AddNewClientToOrderView"
+﻿<UserControl x:Class="PrismWarrantyService.UI.Views.Orders.AddOrderNewClientView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders"
              mc:Ignorable="d">
     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
                           Header="Клиент: новый"

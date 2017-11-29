@@ -1,90 +1,73 @@
 ﻿using System.Linq;
 using System.Data.Entity;
 using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.Domain.Entities;
 using System;
+using PrismWarrantyService.Domain.Entities;
 
 namespace PrismWarrantyService.Domain.Concrete
 {
     public class EFRepository : IRepository
     {
+        #region Fields
+
         private WarrantyServiceDbContext context = new WarrantyServiceDbContext();
 
+        #endregion
+
         #region Properties
+
         public IQueryable<Client> Clients
         {
-            get
-            {
-                return context.Clients;
-            }
+            get => context.Clients;
         }
 
         public IQueryable<Department> Departments
         {
-            get
-            {
-                return context.Departments;
-            }
+            get => context.Departments;
         }
 
         public IQueryable<Employee> Employees
         {
-            get
-            {
-                return context.Employees
+            get => context.Employees
                     .Include(x => x.Department)
                     .Include(x => x.Role);
-            }
         }
 
         public IQueryable<Order> Orders
         {
-            get
-            {
-                return context.Orders
+            get => context.Orders
                     .Include(x => x.Client)
                     .Include(x => x.Employee)
                     .Include(x => x.OrderState)
                     .Include(x => x.OrderType);
-            }
         }
 
         public IQueryable<OrderState> OrderStates
         {
-            get
-            {
-                return context.OrderStates;
-            }
+            get => context.OrderStates;
         }
 
         public IQueryable<OrderType> OrderTypes
         {
-            get
-            {
-                return context.OrderTypes;
-            }
+            get => context.OrderTypes;
         }
 
         public IQueryable<Remark> Remarks
         {
-            get
-            {
-                return context.Remarks
+            get => context.Remarks
                     .Include(x => x.Employee)
                     .Include(x => x.Order);
-            }
         }
 
         public IQueryable<Role> Roles
         {
-            get
-            {
-                return context.Roles;
-            }
+            get => context.Roles;
         }
+
         #endregion
 
         #region Methods
+
         public void AddOrder(Order order)
         {
             order.Accepted = DateTime.Now;
@@ -122,6 +105,7 @@ namespace PrismWarrantyService.Domain.Concrete
             context.Entry(order).State = EntityState.Modified;
             context.SaveChanges();
         }
+
         #endregion
     }
 }

@@ -1,39 +1,29 @@
 ﻿using System.Collections.ObjectModel;
-using System.Threading;
 using Prism.Mvvm;
 using Prism.Commands;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using System.Linq;
 using System.Threading.Tasks;
-using PrismWarrantyService.UI.Views.Orders;
 using Prism.Events;
 using PrismWarrantyService.UI.Events;
-using System;
 using Prism.Regions;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders
 {
-    public class OrdersViewModel : BindableBase
+    public class OrdersViewModel : ViewModelBase
     {
         #region Fields
 
-        private IRepository repository;
-        private IEventAggregator eventAggregator;
-        private IRegionManager regionManager;
         private Order selectedOrder;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public OrdersViewModel(IRepository repository, IEventAggregator eventAggregator, IRegionManager regionManager)
+        public OrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+            : base(regionManager, eventAggregator, repository)
         {
-            this.repository = repository;
-            this.eventAggregator = eventAggregator;
-            this.regionManager = regionManager;
-
             Orders = new ObservableCollection<Order>(repository.Orders);
 
             SelectedOrder = Orders.FirstOrDefault();
