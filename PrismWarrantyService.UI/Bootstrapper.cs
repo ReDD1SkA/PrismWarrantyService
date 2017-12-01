@@ -26,9 +26,7 @@ namespace PrismWarrantyService.UI
         {
             base.ConfigureKernel();
 
-            Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
-            Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
-
+            AddBindings();
             RegisterTypesForNavigation();
             
         }
@@ -42,6 +40,12 @@ namespace PrismWarrantyService.UI
         {
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
+        }
+
+        private void AddBindings()
+        {
+            Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
+            Kernel.Bind<IRepository>().To<EFRepository>().InSingletonScope();
         }
 
         private void RegisterTypesForNavigation()

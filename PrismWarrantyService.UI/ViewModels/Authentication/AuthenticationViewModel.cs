@@ -83,10 +83,6 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
                 regionManager.RequestNavigate("AppRegion", "WorkspaceLayoutView");
             }
-            catch (SecurityException)
-            {
-                MessageBox.Show("Вы не авторизованы!");
-            }
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("Вход не выполнен! Предоставьте валидные данные!");

@@ -46,7 +46,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(16, ErrorMessage = "Максимальная длина - 16 символов")]
-        [RegularExpression(@"^\d{3}-\d{2}-\d{3}-\d{2}-\d{2}$", ErrorMessage = "Неверный формат номера")]
+        [RegularExpression(@"^\d{3}-\d{2}-\d{3}-\d{2}-\d{2}$", ErrorMessage = "Формат номера: XXX-XX-XXX-XX-XX")]
         public string PhoneNumber
         {
             get { return phoneNumber; }
