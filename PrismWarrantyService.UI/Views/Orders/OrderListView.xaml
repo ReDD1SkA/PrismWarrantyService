@@ -34,8 +34,8 @@
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}#{0} - {1} - {2}">
                                     <Binding Path="OrderID"/>
-                                    <Binding Path="OrderType.Name"/>
-                                    <Binding Path="OrderState.Name"/>
+                                    <Binding Path="Priority.Name"/>
+                                    <Binding Path="State.Name"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -62,15 +62,15 @@
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0} ({1})">
                                     <Binding Path="Client.Name"/>
-                                    <Binding Path="Client.Company"/>
+                                    <Binding Path="Client.Company.Name"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
                         <Border Background="{StaticResource PrimaryHueMidBrush}"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Grid.RowSpan="3"
-                            Width="4"/>
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.RowSpan="3"
+                                Width="4"/>
                     </Grid>
                 </Border>
             </DataTemplate>

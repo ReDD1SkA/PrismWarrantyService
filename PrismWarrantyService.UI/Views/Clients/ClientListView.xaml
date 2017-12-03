@@ -12,7 +12,7 @@
                                 Header="ID"/>
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"
                                 Header="Клиент"/>
-                <GridViewColumn DisplayMemberBinding="{Binding Path=Company}"
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Company.Name}"
                                 Header="Компания" />
                 <GridViewColumn DisplayMemberBinding="{Binding Path=Email}"
                                 Header="E-mail" />

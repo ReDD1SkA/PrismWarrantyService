@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Security;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
-using Prism.Mvvm;
-using Prism.Regions;
 using Prism.Commands;
+using Prism.Events;
+using Prism.Regions;
+using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Events;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
-using Prism.Events;
-using PrismWarrantyService.UI.Events;
-using PrismWarrantyService.Domain.Abstract;
-using System.Linq;
 
 namespace PrismWarrantyService.UI.ViewModels.Authentication
 {
@@ -22,6 +19,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         #region Fields
 
         private IAuthenticationService authenticationService;
+        private SnackbarViewModel snackbar;
         private string employeeLogin;
 
         #endregion
@@ -32,6 +30,9 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
             : base(regionManager, eventAggregator, repository)
         {
             this.authenticationService = authenticationService;
+
+            Snackbar = new SnackbarViewModel();
+
             LoginCommand = new DelegateCommand<object>(Login);
         }
 
@@ -42,6 +43,12 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         {
             get => employeeLogin;
             set => SetProperty(ref employeeLogin, value);
+        }
+
+        public SnackbarViewModel Snackbar
+        {
+            get => snackbar;
+            set => SetProperty(ref snackbar, value);
         }
 
         #endregion
@@ -85,11 +92,11 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
             }
             catch (UnauthorizedAccessException)
             {
-                MessageBox.Show("Вход не выполнен! Предоставьте валидные данные!");
+                Snackbar.Show("Неправильный логин или пароль!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("ERROR: {0}", ex.Message));
+                Snackbar.Show(string.Format("ERROR: {0}", ex.Message));
             }
         }
 

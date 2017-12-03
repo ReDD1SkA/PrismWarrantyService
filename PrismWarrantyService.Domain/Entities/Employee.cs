@@ -1,5 +1,5 @@
-﻿using System;
-using PrismWarrantyService.Domain.Concrete;
+﻿using PrismWarrantyService.Domain.Concrete;
+using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
 {
@@ -9,7 +9,8 @@ namespace PrismWarrantyService.Domain.Entities
 
         private string login;
         private string hashedPassword;
-        private string name;
+        private string firstName;
+        private string lastName;
         private string surname;
         private string position;
         private Role role;
@@ -21,6 +22,8 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int EmployeeID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(12, ErrorMessage = "Максимальная длина - 12 символов")]
         public string Login
         {
             get => login;
@@ -33,18 +36,32 @@ namespace PrismWarrantyService.Domain.Entities
             set => SetProperty(ref hashedPassword, value);
         }
 
-        public string Name
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
+        public string FirstName
         {
-            get => name;
-            set => SetProperty(ref name, value);
+            get => firstName;
+            set => SetProperty(ref firstName, value);
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
+        public string LastName
+        {
+            get => lastName;
+            set => SetProperty(ref lastName, value);
+        }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Surname
         {
             get => surname;
             set => SetProperty(ref surname, value);
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Position
         {
             get => position;

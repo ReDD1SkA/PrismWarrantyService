@@ -79,12 +79,13 @@
     <Compile Include="Concrete\ValidatableBindableBase.cs" />
     <Compile Include="Concrete\WarrantyServiceDbContext.cs" />
     <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\OrderState.cs" />
-    <Compile Include="Entities\OrderType.cs" />
-    <Compile Include="Entities\Remark.cs" />
+    <Compile Include="Entities\Performer.cs" />
+    <Compile Include="Entities\State.cs" />
+    <Compile Include="Entities\Priority.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

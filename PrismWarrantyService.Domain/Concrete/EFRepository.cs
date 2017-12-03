@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Data.Entity;
 using PrismWarrantyService.Domain.Abstract;
-using System;
 using PrismWarrantyService.Domain.Entities;
 
 namespace PrismWarrantyService.Domain.Concrete
@@ -18,7 +18,13 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public IQueryable<Client> Clients
         {
-            get => context.Clients;
+            get => context.Clients
+                .Include(x => x.Company);
+        }
+
+        public IQueryable<Company> Companies
+        {
+            get => context.Companies;
         }
 
         public IQueryable<Department> Departments
@@ -29,34 +35,34 @@ namespace PrismWarrantyService.Domain.Concrete
         public IQueryable<Employee> Employees
         {
             get => context.Employees
-                    .Include(x => x.Department)
-                    .Include(x => x.Role);
+                .Include(x => x.Role)
+                .Include(x => x.Department);
         }
 
         public IQueryable<Order> Orders
         {
             get => context.Orders
-                    .Include(x => x.Client)
-                    .Include(x => x.Employee)
-                    .Include(x => x.OrderState)
-                    .Include(x => x.OrderType);
+                .Include(x => x.Client)
+                .Include(x => x.Client.Company)
+                .Include(x => x.State)
+                .Include(x => x.Priority);
         }
 
-        public IQueryable<OrderState> OrderStates
+        public IQueryable<Performer> Performers
         {
-            get => context.OrderStates;
+            get => context.Performers
+                .Include(x => x.Order)
+                .Include(x => x.Employee);
         }
 
-        public IQueryable<OrderType> OrderTypes
+        public IQueryable<Priority> Priorities
         {
-            get => context.OrderTypes;
+            get => context.Priorities;
         }
 
-        public IQueryable<Remark> Remarks
+        public IQueryable<State> States
         {
-            get => context.Remarks
-                    .Include(x => x.Employee)
-                    .Include(x => x.Order);
+            get => context.States;
         }
 
         public IQueryable<Role> Roles
@@ -72,11 +78,7 @@ namespace PrismWarrantyService.Domain.Concrete
         {
             order.Accepted = DateTime.Now;
 
-            // TODO:
-            // поставить заказ в очередь с учетом срочности
-            // если он не является выполненным/отмененным
-
-            if (order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
+            if (order.State.Name.Equals("Выполненный") || order.State.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
 
             context.Entry(order).State = EntityState.Added;
@@ -85,19 +87,13 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public void DeleteOrder(Order order)
         {
-            // TODO:
-            // удалить заказ из очереди
-
             context.Entry(order).State = EntityState.Deleted;
             context.SaveChanges();
         }
 
         public void EditOrder(Order order)
         {
-            // TODO:
-            // изменить позицию заказа в зависимости от его типа и статуса
-
-            if (order.OrderState.Name.Equals("Выполненный") || order.OrderState.Name.Equals("Отмененный"))
+            if (order.State.Name.Equals("Выполненный") || order.State.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
             else
                 order.Finished = null;

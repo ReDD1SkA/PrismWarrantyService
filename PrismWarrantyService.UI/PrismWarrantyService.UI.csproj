@@ -113,12 +113,14 @@
     <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Clients\ClientsViewModel.cs" />
+    <Compile Include="ViewModels\SnackbarViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
     <Compile Include="ViewModels\Layouts\LayoutBaseViewModel.cs" />
     <Compile Include="ViewModels\Layouts\WorkspaceLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AccountViewModel.cs" />
     <Compile Include="ViewModels\Navigation\NavigationViewModel.cs" />
-    <Compile Include="ViewModels\Orders\AddOrderViewModel.cs" />
+    <Compile Include="ViewModels\Orders\AddOrder\AddOrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
     <Compile Include="App.xaml.cs">
@@ -126,7 +128,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\Authentication\AuthenticationView.xaml.cs">
       <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
@@ -148,13 +149,13 @@
     <Compile Include="Views\Navigation\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\AddOrderNewClientView.xaml.cs">
+    <Compile Include="Views\Orders\AddOrder\AddOrderNewClientView.xaml.cs">
       <DependentUpon>AddOrderNewClientView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\AddOrderSelectClientView.xaml.cs">
+    <Compile Include="Views\Orders\AddOrder\AddOrderSelectClientView.xaml.cs">
       <DependentUpon>AddOrderSelectClientView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\AddOrderView.xaml.cs">
+    <Compile Include="Views\Orders\AddOrder\AddOrderView.xaml.cs">
       <DependentUpon>AddOrderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\OrderButtonsView.xaml.cs">
@@ -200,15 +201,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Orders\AddOrderNewClientView.xaml">
+    <Page Include="Views\Orders\AddOrder\AddOrderNewClientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Orders\AddOrderSelectClientView.xaml">
+    <Page Include="Views\Orders\AddOrder\AddOrderSelectClientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Orders\AddOrderView.xaml">
+    <Page Include="Views\Orders\AddOrder\AddOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

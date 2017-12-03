@@ -7,13 +7,14 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d">
-    <Grid Width="200">
+    <Grid Width="300">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="16"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="16"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBox Text="{Binding EmployeeLogin}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -43,5 +44,10 @@
                 CommandParameter="{Binding ElementName=passwordBox}"
                 Content="Войти"
                 Grid.Row="4"/>
+        <materialDesign:Snackbar IsActive="{Binding Snackbar.IsActive}"
+                                 VerticalAlignment="Bottom"
+                                 Grid.Row="5">
+            <materialDesign:SnackbarMessage Content="{Binding Snackbar.Content}"/>
+        </materialDesign:Snackbar>
     </Grid>
 </UserControl>

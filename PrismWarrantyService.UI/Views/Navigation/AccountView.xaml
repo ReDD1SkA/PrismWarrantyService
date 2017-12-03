@@ -27,7 +27,7 @@
                            Margin="0,16,0,0">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0} {1}">
-                        <Binding Path="CurrentEmployee.Name"/>
+                        <Binding Path="CurrentEmployee.FirstName"/>
                         <Binding Path="CurrentEmployee.Surname"/>
                     </MultiBinding>
                 </TextBlock.Text>

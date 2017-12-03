@@ -7,90 +7,81 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <Grid Width="250">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="16"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBox Text="{Binding SelectedOrder.Summary}"
-	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Заказ"
-                 Grid.Row="0"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"/>
-        <ComboBox ItemsSource="{Binding OrderTypes}"
-                  SelectedItem="{Binding SelectedOrder.OrderType}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Тип"
-                  Grid.Row="2"
-                  Grid.Column="0"/>
-        <ComboBox ItemsSource="{Binding OrderStates}"
-                  SelectedItem="{Binding SelectedOrder.OrderState}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Статус"
-                  Grid.Row="2"
-                  Grid.Column="2"/>
-        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Клиент"
-                 Grid.Row="4"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"
-                 IsReadOnly="True">
-            <TextBox.Text>
-                <MultiBinding StringFormat="{}{0} ({1})">
-                    <Binding Path="SelectedOrder.Client.Name"/>
-                    <Binding Path="SelectedOrder.Client.Company"/>
-                </MultiBinding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox Text="{Binding SelectedOrder.Client.Email}"
-	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="E-mail"
-                 Grid.Row="6"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"
-                 IsReadOnly="True"/>
-        <TextBox Text="{Binding SelectedOrder.Client.PhoneNumber}"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Номер телефона"
-                 Grid.Row="8"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"
-                 IsReadOnly="True"/>
-        <TextBox Text="{Binding SelectedOrder.Description}"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Описание"
-                 Grid.Row="10"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"
-                 VerticalAlignment="Stretch"
-                 AcceptsReturn="True"
-                 TextWrapping="Wrap"
-	             VerticalScrollBarVisibility="Auto"/>
-        <Button Command="{Binding EditOrderCommand}"
-                Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                HorizontalAlignment="Right"
-                Margin="0, 0, 16, 0"
-                Grid.Row="12"
-                Grid.Column="0"
-                Grid.ColumnSpan="3">
-            <materialDesign:PackIcon Kind="BorderColor" />
-        </Button>
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid Width="250">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding SelectedOrder.Summary}"
+	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Заказ"
+                     Grid.Row="0"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"/>
+            <ComboBox ItemsSource="{Binding Priorities}"
+                      SelectedItem="{Binding SelectedOrder.Priority}"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      materialDesign:HintAssist.Hint="Приоритет"
+                      Grid.Row="2"
+                      Grid.Column="0"/>
+            <ComboBox ItemsSource="{Binding States}"
+                      SelectedItem="{Binding SelectedOrder.State}"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      materialDesign:HintAssist.Hint="Статус"
+                      Grid.Row="2"
+                      Grid.Column="2"/>
+            <DatePicker SelectedDate="{Binding SelectedOrder.Deadline}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        materialDesign:HintAssist.Hint="Дедлайн"
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"/>
+            <TextBox Text="{Binding SelectedOrder.Description}"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Описание"
+                     Grid.Row="6"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     VerticalAlignment="Stretch"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"/>
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Клиент"
+                     Grid.Row="8"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     IsReadOnly="True">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0} ({1})">
+                        <Binding Path="SelectedOrder.Client.Name"/>
+                        <Binding Path="SelectedOrder.Client.Company.Name"/>
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+            <Button Command="{Binding EditOrderCommand}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                    HorizontalAlignment="Right"
+                    Margin="0, 0, 16, 0"
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3">
+                <materialDesign:PackIcon Kind="BorderColor" />
+            </Button>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

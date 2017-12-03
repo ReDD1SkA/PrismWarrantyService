@@ -11,11 +11,11 @@ namespace PrismWarrantyService.Domain.Entities
         private string summary;
         private string description;
         private DateTime accepted;
+        private DateTime deadline;
         private DateTime? finished;
         private Client client;
-        private Employee employee;
-        private OrderState orderState;
-        private OrderType orderType;
+        private State state;
+        private Priority priority;
 
         #endregion
 
@@ -39,10 +39,18 @@ namespace PrismWarrantyService.Domain.Entities
             set { ValidateProperty(value); SetProperty(ref description, value); }
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
         public DateTime Accepted
         {
             get => accepted;
             set => SetProperty(ref accepted, value);
+        }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        public DateTime Deadline
+        {
+            get => deadline;
+            set => SetProperty(ref deadline, value);
         }
 
         public DateTime? Finished
@@ -53,36 +61,29 @@ namespace PrismWarrantyService.Domain.Entities
 
         public int ClientID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
         public virtual Client Client
         {
             get => client;
             set => SetProperty(ref client, value);
         }
 
-        public int? EmployeeID { get; set; }
-
-        public virtual Employee Employee
-        {
-            get => employee;
-            set => SetProperty(ref employee, value);
-        }
-
-        public int? OrderStateID { get; set; }
+        public int? StateID { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        public virtual OrderState OrderState
+        public virtual State State
         {
-            get => orderState;
-            set => SetProperty(ref orderState, value);
+            get => state;
+            set => SetProperty(ref state, value);
         }
 
-        public int? OrderTypeID { get; set; }
+        public int? PriorityID { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        public virtual OrderType OrderType
+        public virtual Priority Priority
         {
-            get => orderType;
-            set => SetProperty(ref orderType, value);
+            get => priority;
+            set => SetProperty(ref priority, value);
         }
 
         #endregion
@@ -96,11 +97,11 @@ namespace PrismWarrantyService.Domain.Entities
                 Summary = Summary,
                 Description = Description,
                 Accepted = Accepted,
+                Deadline = Deadline,
                 Finished = Finished,
                 Client = Client,
-                Employee = Employee,
-                OrderState = OrderState,
-                OrderType = OrderType
+                State = State,
+                Priority = Priority
             };
         }
 
@@ -109,11 +110,11 @@ namespace PrismWarrantyService.Domain.Entities
             Summary = donator.Summary;
             Description = donator.Description;
             Accepted = donator.Accepted;
+            Deadline = donator.Deadline;
             Finished = donator.Finished;
             Client = donator.Client;
-            Employee = donator.Employee;
-            OrderState = donator.OrderState;
-            OrderType = donator.OrderType;
+            State = donator.State;
+            Priority = donator.Priority;
         }
 
         #endregion

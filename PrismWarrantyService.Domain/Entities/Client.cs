@@ -9,9 +9,9 @@ namespace PrismWarrantyService.Domain.Entities
         #region Fields
 
         private string name;
-        private string company;
         private string email;
         private string phoneNumber;
+        private Company company;
 
         #endregion
 
@@ -25,14 +25,6 @@ namespace PrismWarrantyService.Domain.Entities
         {
             get { return name; }
             set { ValidateProperty(value); SetProperty(ref name, value); }
-        }
-
-        [Required(ErrorMessage = "Обязательное поле")]
-        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
-        public string Company
-        {
-            get { return company; }
-            set { ValidateProperty(value); SetProperty(ref company, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -53,13 +45,22 @@ namespace PrismWarrantyService.Domain.Entities
             set { ValidateProperty(value); SetProperty(ref phoneNumber, value); }
         }
 
+        public int CompanyID { get; set; }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        public virtual Company Company
+        {
+            get { return company; }
+            set { ValidateProperty(value); SetProperty(ref company, value); }
+        }
+
         #endregion
 
         #region Methods
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", Name, Company);
+            return string.Format("{0} ({1})", Name, Company.Name);
         }
 
         #endregion

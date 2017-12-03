@@ -8,8 +8,9 @@ using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.Views;
 using PrismWarrantyService.UI.Views.Clients;
-using PrismWarrantyService.UI.Views.Orders;
 using PrismWarrantyService.UI.Views.Layouts;
+using PrismWarrantyService.UI.Views.Orders;
+using PrismWarrantyService.UI.Views.Orders.AddOrder;
 
 namespace PrismWarrantyService.UI
 {

@@ -24,8 +24,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
         public OrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            OrderStates = new ObservableCollection<OrderState>(repository.OrderStates);
-            OrderTypes = new ObservableCollection<OrderType>(repository.OrderTypes);
+            States = new ObservableCollection<State>(repository.States);
+            Priorities = new ObservableCollection<Priority>(repository.Priorities);
 
             EditOrderCommand = new DelegateCommand(EditOrder);
 
@@ -48,9 +48,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders
             set => SetProperty(ref selectedOrder, value);
         }     
 
-        public ObservableCollection<OrderState> OrderStates { get; set; }
+        public ObservableCollection<State> States { get; set; }
 
-        public ObservableCollection<OrderType> OrderTypes { get; set; }
+        public ObservableCollection<Priority> Priorities { get; set; }
 
         #endregion
 

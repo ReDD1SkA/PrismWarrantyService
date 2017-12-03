@@ -9,14 +9,15 @@ namespace PrismWarrantyService.Domain.Abstract
         #region Properties
 
         IQueryable<Client> Clients { get; }
+        IQueryable<Company> Companies { get; }
         IQueryable<Department> Departments { get; }
         IQueryable<Employee> Employees { get; }
         IQueryable<Order> Orders { get; }
-        IQueryable<OrderState> OrderStates { get; }
-        IQueryable<OrderType> OrderTypes { get; }
-        IQueryable<Remark> Remarks { get; }
+        IQueryable<Performer> Performers { get; }
+        IQueryable<Priority> Priorities { get; }
         IQueryable<Role> Roles { get; }
-
+        IQueryable<State> States { get; }
+  
         #endregion
 
         #region Methods

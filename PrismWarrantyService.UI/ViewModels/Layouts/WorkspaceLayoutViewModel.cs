@@ -1,6 +1,7 @@
 ﻿using Prism.Regions;
 using PrismWarrantyService.UI.Views.Navigation;
 using PrismWarrantyService.UI.Views.Orders;
+using PrismWarrantyService.UI.Views.Orders.AddOrder;
 
 namespace PrismWarrantyService.UI.ViewModels.Layouts
 {
