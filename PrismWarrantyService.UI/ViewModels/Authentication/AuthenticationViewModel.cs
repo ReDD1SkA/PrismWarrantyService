@@ -94,7 +94,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                         regionManager.RequestNavigate("AppRegion", "AdminWorkspaceLayoutView");
                         break;
                     case "Пользователь":
-                        Snackbar.Show("Недостаточно прав для доступа!");
+                        regionManager.RequestNavigate("AppRegion", "EmployeeWorkspaceLayoutView");
                         break;
                 }                
             }

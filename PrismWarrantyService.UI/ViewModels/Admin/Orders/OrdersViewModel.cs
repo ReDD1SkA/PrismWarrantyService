@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
-using Prism.Mvvm;
-using Prism.Commands;
-using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.Domain.Entities;
 using System.Linq;
 using System.Threading.Tasks;
+using Prism.Commands;
 using Prism.Events;
-using PrismWarrantyService.UI.Events;
 using Prism.Regions;
+using PrismWarrantyService.Domain.Abstract;
+using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Events;
 
 namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 {

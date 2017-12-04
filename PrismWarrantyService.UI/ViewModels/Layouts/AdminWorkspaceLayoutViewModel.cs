@@ -20,7 +20,6 @@ namespace PrismWarrantyService.UI.ViewModels.Layouts
         {
             // "navigation" regions
             regionManager.RegisterViewWithRegion("NavigationRegion", typeof(AdminNavigationView));
-            regionManager.RegisterViewWithRegion("AccountRegion", typeof(AccountView));
 
             // "master" regions
             regionManager.RegisterViewWithRegion("MasterRegion", typeof(OrdersView));
