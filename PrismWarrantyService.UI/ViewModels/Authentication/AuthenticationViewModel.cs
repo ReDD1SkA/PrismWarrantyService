@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using Prism.Commands;
@@ -39,6 +38,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         #endregion
 
         #region Properties
+
         public string EmployeeLogin
         {
             get => employeeLogin;
@@ -88,15 +88,19 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                 EmployeeLogin = string.Empty;
                 passwordBox.Password = string.Empty;
 
-                regionManager.RequestNavigate("AppRegion", "WorkspaceLayoutView");
+                switch(customPrincipal.Identity.Role.Name)
+                {
+                    case "Администратор":
+                        regionManager.RequestNavigate("AppRegion", "AdminWorkspaceLayoutView");
+                        break;
+                    case "Пользователь":
+                        Snackbar.Show("Недостаточно прав для доступа!");
+                        break;
+                }                
             }
             catch (UnauthorizedAccessException)
             {
                 Snackbar.Show("Неправильный логин или пароль!");
-            }
-            catch (Exception ex)
-            {
-                Snackbar.Show(string.Format("ERROR: {0}", ex.Message));
             }
         }
 

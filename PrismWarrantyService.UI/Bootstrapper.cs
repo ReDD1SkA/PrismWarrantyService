@@ -52,13 +52,15 @@ namespace PrismWarrantyService.UI
         private void RegisterTypesForNavigation()
         {
             Kernel.RegisterTypeForNavigation<AuthenticationLayoutView>();
-            Kernel.RegisterTypeForNavigation<WorkspaceLayoutView>();
+            Kernel.RegisterTypeForNavigation<AdminWorkspaceLayoutView>();
             Kernel.RegisterTypeForNavigation<OrdersView>();
             Kernel.RegisterTypeForNavigation<OrderDetailsView>();
             Kernel.RegisterTypeForNavigation<AddOrderView>();
-            Kernel.RegisterTypeForNavigation<ClientsView>();
             Kernel.RegisterTypeForNavigation<AddOrderSelectClientView>();
             Kernel.RegisterTypeForNavigation<AddOrderNewClientView>();
+            Kernel.RegisterTypeForNavigation<AddOrderSelectCompanyView>();
+            Kernel.RegisterTypeForNavigation<AddOrderNewCompanyView>();
+            Kernel.RegisterTypeForNavigation<ClientsView>();
         }
 
         #endregion

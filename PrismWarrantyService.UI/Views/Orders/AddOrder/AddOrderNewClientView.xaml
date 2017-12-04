@@ -7,11 +7,9 @@
              mc:Ignorable="d">
     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
               Header="Клиент: новый"
-              Height="295">
+              Height="245">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="16"/>
                 <RowDefinition Height="Auto"/>
@@ -35,16 +33,10 @@
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Номер телефона"
                      Grid.Row="4"/>
-            <ComboBox ItemsSource="{Binding Companies}"
-                      SelectedItem="{Binding NewClient.Company}"
-                      IsEditable="True"
-	                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                      materialDesign:HintAssist.Hint="Компания"
-                      Grid.Row="6"/>
             <Button Command="{Binding SelectOrderClientCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Content="Вернуться к списку"
-                    Grid.Row="8"/>
+                    Grid.Row="6"/>
         </Grid>
     </GroupBox>
 </UserControl>

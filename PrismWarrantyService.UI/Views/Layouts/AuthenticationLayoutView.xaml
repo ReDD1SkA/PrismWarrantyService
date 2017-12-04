@@ -8,5 +8,5 @@
              xmlns:authenticationViews="clr-namespace:PrismWarrantyService.UI.Views.Authentication"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <authenticationViews:AuthenticationView Margin="100,100,100,0"/>
+    <UserControl prism:RegionManager.RegionName="AuthenticationRegion" Margin="100,100,100,0"/>
 </UserControl>

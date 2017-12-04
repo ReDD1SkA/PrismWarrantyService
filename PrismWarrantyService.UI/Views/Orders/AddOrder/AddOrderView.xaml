@@ -4,29 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:addOrderViews="clr-namespace:PrismWarrantyService.UI.Views.Orders.AddOrder"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d"
-             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="{DynamicResource MaterialDesignPaper}"
-             FontFamily="{DynamicResource MaterialDesignFont}"
-             TextElement.FontWeight="Regular"
-             TextElement.FontSize="13"
-             TextOptions.TextFormattingMode="Ideal" 
-             TextOptions.TextRenderingMode="Auto">
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+             mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Visible"
+                  Padding="0,0,8,0">
         <Grid Width="250">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="100"/>
                 <RowDefinition Height="24"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="24"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -34,51 +25,25 @@
                 <ColumnDefinition Width="16"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding NewOrder.Summary}"
-	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Заказ"
-                 Grid.Row="0"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"/>
-            <ComboBox ItemsSource="{Binding Priorities}"
-                  SelectedItem="{Binding NewOrder.Priority}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Приоритет"
-                  Grid.Row="2"
-                  Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding States}"
-                  SelectedItem="{Binding NewOrder.State}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Статус"
-                  Grid.Row="2"
-                  Grid.Column="2"/>
-            <DatePicker SelectedDate="{Binding NewOrder.Deadline}"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    materialDesign:HintAssist.Hint="Дедлайн"
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"/>
-            <TextBox Text="{Binding NewOrder.Description}"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Описание"
-                 Grid.Row="6"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="3"
-                 VerticalAlignment="Stretch"
-                 AcceptsReturn="True"
-                 TextWrapping="Wrap"
-	             VerticalScrollBarVisibility="Auto"/>
+            <addOrderViews:AddOrderOrderDetailsView
+                     Grid.Row="0"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"/>
             <UserControl prism:RegionManager.RegionName="SelectOrderClientRegion"
-                     Grid.Row="8"
+                     Grid.Row="2"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"/>
+            <UserControl prism:RegionManager.RegionName="SelectClientCompanyRegion"
+                     Grid.Row="4"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"/>
             <Button Command="{Binding SaveCommand}"
                 Content="Сохранить"
-                Grid.Row="10"
+                Grid.Row="6"
                 Grid.Column="0"/>
             <Button Command="{Binding CancelCommand}"
                 Content="Отмена"
-                Grid.Row="10"
+                Grid.Row="6"
                 Grid.Column="2"/>
         </Grid>
     </ScrollViewer>

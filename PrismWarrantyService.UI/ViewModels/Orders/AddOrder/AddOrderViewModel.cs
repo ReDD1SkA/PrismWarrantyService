@@ -32,12 +32,15 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.AddOrder
             Companies = new ObservableCollection<Company>(repository.Companies);
 
             NewOrder = new Order() { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
-            NewClient = new Client();
+            NewClient = new Client() { Company = Companies.FirstOrDefault() };
+            NewCompany = new Company();
 
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);
             SelectOrderClientCommand = new DelegateCommand(SelectOrderClient);
             AddNewClientToOrderCommand = new DelegateCommand(AddNewClientToOrder);
+            SelectClientCompanyCommand = new DelegateCommand(SelectClientCompany);
+            AddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
         }
 
         #endregion
@@ -50,6 +53,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.AddOrder
         public ObservableCollection<State> States { get; set; }
 
         public bool NeedNewClient { get; private set; } = false;
+        public bool NeedNewCompany { get; private set; } = false;
 
         public Order NewOrder
         {
@@ -77,6 +81,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.AddOrder
         public DelegateCommand CancelCommand { get; private set; }
         public DelegateCommand SelectOrderClientCommand { get; private set; }
         public DelegateCommand AddNewClientToOrderCommand { get; private set; }
+        public DelegateCommand SelectClientCompanyCommand { get; private set; }
+        public DelegateCommand AddNewCompanyToClientCommand { get; private set; }
 
         #endregion
 
@@ -94,32 +100,61 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.AddOrder
             NeedNewClient = false;
         }
 
+        private void SelectClientCompany()
+        {
+            regionManager.RequestNavigate("SelectClientCompanyRegion", "AddOrderSelectCompanyView");
+            NeedNewCompany = false;
+        }
+
+        private void AddNewCompanyToClient()
+        {
+            regionManager.RequestNavigate("SelectClientCompanyRegion", "AddOrderNewCompanyView");
+            NeedNewCompany = true;
+        }
+
         private void SaveOrder()
         {
             NewOrder.Validate();
             if (NewOrder.IsValid)
             {
-                // если создается новый клиент
                 if (NeedNewClient)
                 {
-                    // проверка на валидность
                     NewClient.Validate();
                     if (NewClient.HasErrors)
                         return;
 
-                    // проверка на новизну
-                    var existCheck = repository
+                    if (NeedNewCompany)
+                    {
+                        NewCompany.Validate();
+                        if (NewCompany.HasErrors)
+                            return;
+
+                        var companyExistCheck = repository
+                            .Companies
+                            .Where(x => x.Name == NewCompany.Name)
+                            .FirstOrDefault();
+
+                        if (companyExistCheck != null)
+                        {
+                            MessageBox.Show(string.Format("Клиент {0} ({1}) уже существует!", NewClient.Name, NewCompany.Name));
+                            return;
+                        }
+
+                        NewClient.Company = NewCompany;
+                        //eventAggregator.GetEvent<CompanyAddedEvent>().Publish(NewCompany);
+                    }
+
+                    var clientExistCheck = repository
                         .Clients
                         .Where(x => x.Name == NewClient.Name && x.Company.Name == NewClient.Company.Name)
                         .FirstOrDefault();
 
-                    if (existCheck != null)
+                    if (clientExistCheck != null)
                     {
                         MessageBox.Show(string.Format("Клиент {0} ({1}) уже существует!", NewClient.Name, NewClient.Company));
                         return;
                     }
 
-                    // иначе связываем нового клиента с заказом
                     NewOrder.Client = NewClient;
                     eventAggregator.GetEvent<ClientAddedEvent>().Publish(NewClient);
                 }
@@ -127,8 +162,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.AddOrder
                 repository.AddOrder(NewOrder);
                 eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
 
-                NewClient = new Client();
                 NewOrder = new Order() { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
+                NewClient = new Client();
+                NewCompany = new Company();
 
                 regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
             }

@@ -117,9 +117,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
     <Compile Include="ViewModels\Layouts\LayoutBaseViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\WorkspaceLayoutViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\AdminWorkspaceLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AccountViewModel.cs" />
-    <Compile Include="ViewModels\Navigation\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\Navigation\AdminNavigationViewModel.cs" />
     <Compile Include="ViewModels\Orders\AddOrder\AddOrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
@@ -137,23 +137,32 @@
     <Compile Include="Views\Clients\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Layouts\AdminWorkspaceLayoutView.xaml.cs">
+      <DependentUpon>AdminWorkspaceLayoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Layouts\AuthenticationLayoutView.xaml.cs">
       <DependentUpon>AuthenticationLayoutView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Layouts\WorkspaceLayoutView.xaml.cs">
-      <DependentUpon>WorkspaceLayoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Navigation\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Navigation\NavigationView.xaml.cs">
-      <DependentUpon>NavigationView.xaml</DependentUpon>
+    <Compile Include="Views\Navigation\AdminNavigationView.xaml.cs">
+      <DependentUpon>AdminNavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\AddOrder\AddOrderNewClientView.xaml.cs">
       <DependentUpon>AddOrderNewClientView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Orders\AddOrder\AddOrderNewCompanyView.xaml.cs">
+      <DependentUpon>AddOrderNewCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\AddOrder\AddOrderOrderDetailsView.xaml.cs">
+      <DependentUpon>AddOrderOrderDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Orders\AddOrder\AddOrderSelectClientView.xaml.cs">
       <DependentUpon>AddOrderSelectClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\AddOrder\AddOrderSelectCompanyView.xaml.cs">
+      <DependentUpon>AddOrderSelectCompanyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\AddOrder\AddOrderView.xaml.cs">
       <DependentUpon>AddOrderView.xaml</DependentUpon>
@@ -185,11 +194,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\AuthenticationLayoutView.xaml">
+    <Page Include="Views\Layouts\AdminWorkspaceLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\WorkspaceLayoutView.xaml">
+    <Page Include="Views\Layouts\AuthenticationLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,7 +206,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Navigation\NavigationView.xaml">
+    <Page Include="Views\Navigation\AdminNavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,7 +214,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Orders\AddOrder\AddOrderNewCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\AddOrder\AddOrderOrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Orders\AddOrder\AddOrderSelectClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\AddOrder\AddOrderSelectCompanyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

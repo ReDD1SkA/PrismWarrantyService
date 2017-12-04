@@ -6,7 +6,7 @@
              mc:Ignorable="d" >
     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
               Header="Клиент: выбрать из списка"
-              Height="295">
+              Height="245">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
