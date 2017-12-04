@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="PrismWarrantyService.UI.Views.Admin.Clients.ClientListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d">
+    <ListView ItemsSource="{Binding Clients}"
+              SelectedItem="{Binding SelectedClient}">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=ClientID}"
+                                Header="ID"/>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"
+                                Header="Клиент"/>
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Company.Name}"
+                                Header="Компания" />
+                <GridViewColumn DisplayMemberBinding="{Binding Path=Email}"
+                                Header="E-mail" />
+                <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber}"
+                                Header="Номер телефона" />
+            </GridView>
+        </ListView.View>
+    </ListView>
+</UserControl>

@@ -112,7 +112,7 @@
     <Compile Include="Services\Authentication\Concrete\CustomPrincipal.cs" />
     <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
-    <Compile Include="ViewModels\Clients\ClientsViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Clients\ClientsViewModel.cs" />
     <Compile Include="ViewModels\SnackbarViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
@@ -120,22 +120,52 @@
     <Compile Include="ViewModels\Layouts\AdminWorkspaceLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AccountViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AdminNavigationViewModel.cs" />
-    <Compile Include="ViewModels\Orders\AddOrder\AddOrderViewModel.cs" />
-    <Compile Include="ViewModels\Orders\OrderDetailsViewModel.cs" />
-    <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Orders\AddOrder\AddOrderViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Orders\OrderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Orders\OrdersViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\Authentication\AuthenticationView.xaml.cs">
-      <DependentUpon>AuthenticationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Clients\ClientListView.xaml.cs">
+    <Compile Include="Views\Admin\Clients\ClientListView.xaml.cs">
       <DependentUpon>ClientListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Clients\ClientsView.xaml.cs">
+    <Compile Include="Views\Admin\Clients\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\AddOrder\AddOrderNewClientView.xaml.cs">
+      <DependentUpon>AddOrderNewClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\AddOrder\AddOrderNewCompanyView.xaml.cs">
+      <DependentUpon>AddOrderNewCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\AddOrder\AddOrderOrderDetailsView.xaml.cs">
+      <DependentUpon>AddOrderOrderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\AddOrder\AddOrderSelectClientView.xaml.cs">
+      <DependentUpon>AddOrderSelectClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\AddOrder\AddOrderSelectCompanyView.xaml.cs">
+      <DependentUpon>AddOrderSelectCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\AddOrder\AddOrderView.xaml.cs">
+      <DependentUpon>AddOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\OrderButtonsView.xaml.cs">
+      <DependentUpon>OrderButtonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\OrderDetailsView.xaml.cs">
+      <DependentUpon>OrderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\OrderListView.xaml.cs">
+      <DependentUpon>OrderListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Authentication\AuthenticationView.xaml.cs">
+      <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\AdminWorkspaceLayoutView.xaml.cs">
       <DependentUpon>AdminWorkspaceLayoutView.xaml</DependentUpon>
@@ -149,48 +179,58 @@
     <Compile Include="Views\Navigation\AdminNavigationView.xaml.cs">
       <DependentUpon>AdminNavigationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\AddOrder\AddOrderNewClientView.xaml.cs">
-      <DependentUpon>AddOrderNewClientView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\AddOrder\AddOrderNewCompanyView.xaml.cs">
-      <DependentUpon>AddOrderNewCompanyView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\AddOrder\AddOrderOrderDetailsView.xaml.cs">
-      <DependentUpon>AddOrderOrderDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\AddOrder\AddOrderSelectClientView.xaml.cs">
-      <DependentUpon>AddOrderSelectClientView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\AddOrder\AddOrderSelectCompanyView.xaml.cs">
-      <DependentUpon>AddOrderSelectCompanyView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\AddOrder\AddOrderView.xaml.cs">
-      <DependentUpon>AddOrderView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\OrderButtonsView.xaml.cs">
-      <DependentUpon>OrderButtonsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\OrderDetailsView.xaml.cs">
-      <DependentUpon>OrderDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\OrderListView.xaml.cs">
-      <DependentUpon>OrderListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\OrdersView.xaml.cs">
-      <DependentUpon>OrdersView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Admin\Clients\ClientListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Clients\ClientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\AddOrder\AddOrderNewClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\AddOrder\AddOrderNewCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\AddOrder\AddOrderOrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\AddOrder\AddOrderSelectClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\AddOrder\AddOrderSelectCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\AddOrder\AddOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\OrderButtonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\OrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\OrderListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\OrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Authentication\AuthenticationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Clients\ClientListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Clients\ClientsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,46 +247,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Navigation\AdminNavigationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\AddOrder\AddOrderNewClientView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\AddOrder\AddOrderNewCompanyView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\AddOrder\AddOrderOrderDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\AddOrder\AddOrderSelectClientView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\AddOrder\AddOrderSelectCompanyView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\AddOrder\AddOrderView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\OrderButtonsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\OrderDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\OrderListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\OrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,6 +311,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="ViewModels\User\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
