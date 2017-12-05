@@ -113,8 +113,10 @@
     <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Admin\Clients\ClientsViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\EmployeeWorkspaceLayoutViewModel.cs" />
-    <Compile Include="ViewModels\Navigation\EmployeeNavigationViewModel.cs" />
+    <Compile Include="ViewModels\User\Orders\UserOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\User\Orders\UserOrdersViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\UserWorkspaceLayoutViewModel.cs" />
+    <Compile Include="ViewModels\Navigation\UserNavigationViewModel.cs" />
     <Compile Include="Services\ViewModels\Concrete\SnackbarViewModel.cs" />
     <Compile Include="Services\ViewModels\Concrete\ViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
@@ -175,8 +177,8 @@
     <Compile Include="Views\Layouts\AuthenticationLayoutView.xaml.cs">
       <DependentUpon>AuthenticationLayoutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\EmployeeWorkspaceLayoutView.xaml.cs">
-      <DependentUpon>EmployeeWorkspaceLayoutView.xaml</DependentUpon>
+    <Compile Include="Views\Layouts\UserWorkspaceLayoutView.xaml.cs">
+      <DependentUpon>UserWorkspaceLayoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Navigation\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -184,11 +186,20 @@
     <Compile Include="Views\Navigation\AdminNavigationView.xaml.cs">
       <DependentUpon>AdminNavigationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Navigation\EmployeeNavigationView.xaml.cs">
-      <DependentUpon>EmployeeNavigationView.xaml</DependentUpon>
+    <Compile Include="Views\Navigation\UserNavigationView.xaml.cs">
+      <DependentUpon>UserNavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\Orders\UserOrderDetailsView.xaml.cs">
+      <DependentUpon>UserOrderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\Orders\UserOrderListView.xaml.cs">
+      <DependentUpon>UserOrderListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\User\Orders\UserOrdersView.xaml.cs">
+      <DependentUpon>UserOrdersView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Admin\Clients\ClientListView.xaml">
       <SubType>Designer</SubType>
@@ -250,7 +261,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\EmployeeWorkspaceLayoutView.xaml">
+    <Page Include="Views\Layouts\UserWorkspaceLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,11 +273,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Navigation\EmployeeNavigationView.xaml">
+    <Page Include="Views\Navigation\UserNavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\User\Orders\UserOrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\User\Orders\UserOrderListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\User\Orders\UserOrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -327,8 +350,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="ViewModels\Employee\" />
-    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

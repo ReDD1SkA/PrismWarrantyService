@@ -94,7 +94,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                         regionManager.RequestNavigate("AppRegion", "AdminWorkspaceLayoutView");
                         break;
                     case "Пользователь":
-                        regionManager.RequestNavigate("AppRegion", "EmployeeWorkspaceLayoutView");
+                        regionManager.RequestNavigate("AppRegion", "UserWorkspaceLayoutView");
                         break;
                 }                
             }

@@ -51,7 +51,6 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 
         #region Commands
 
-        public DelegateCommand LogoutCommand { get; private set; }
         public DelegateCommand AddOrderCommand { get; private set; }
         public DelegateCommand<Order> DeleteOrderCommand { get; private set; }
         public DelegateCommand OrderSelectionChangedCommand { get; private set; }
@@ -62,7 +61,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 
         private void AddOrder()
         {
-            regionManager.RequestNavigate("DetailsRegion", "AddOrderView");
+            regionManager.RequestNavigate("AdminLayoutDetailsRegion", "AddOrderView");
         }
 
         private async void DeleteOrder(Order parameter)

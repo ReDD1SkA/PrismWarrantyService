@@ -19,13 +19,13 @@ namespace PrismWarrantyService.UI.ViewModels.Layouts
         protected override void RegisterRegions()
         {
             // "navigation" regions
-            regionManager.RegisterViewWithRegion("NavigationRegion", typeof(AdminNavigationView));
+            regionManager.RegisterViewWithRegion("AdminLayoutNavigationRegion", typeof(AdminNavigationView));
 
             // "master" regions
-            regionManager.RegisterViewWithRegion("MasterRegion", typeof(OrdersView));
+            regionManager.RegisterViewWithRegion("AdminLayoutMasterRegion", typeof(OrdersView));
 
             // "details" regions
-            regionManager.RegisterViewWithRegion("DetailsRegion", typeof(OrderDetailsView));
+            regionManager.RegisterViewWithRegion("AdminLayoutDetailsRegion", typeof(OrderDetailsView));
             regionManager.RegisterViewWithRegion("SelectOrderClientRegion", typeof(AddOrderSelectClientView));
             regionManager.RegisterViewWithRegion("SelectClientCompanyRegion", typeof(AddOrderSelectCompanyView));
         }

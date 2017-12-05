@@ -34,7 +34,7 @@
                         </TextBlock.LayoutTransform>
                     </TextBlock>
                 </Expander.Header>
-                <UserControl prism:RegionManager.RegionName="NavigationRegion" Padding="16,16,16,16"/>
+                <UserControl prism:RegionManager.RegionName="AdminLayoutNavigationRegion" Padding="16,16,16,16"/>
             </Expander>
         </materialDesign:Card>
         <materialDesign:Card Padding="16,16,16,16"
@@ -42,13 +42,13 @@
                              Grid.Column="3"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
-            <UserControl prism:RegionManager.RegionName="MasterRegion"/>
+            <UserControl prism:RegionManager.RegionName="AdminLayoutMasterRegion"/>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="1"
                              Grid.Column="5"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch">
-            <UserControl prism:RegionManager.RegionName="DetailsRegion"
+            <UserControl prism:RegionManager.RegionName="AdminLayoutDetailsRegion"
                          Padding="16,16,16,16"/>
         </materialDesign:Card>
     </Grid>

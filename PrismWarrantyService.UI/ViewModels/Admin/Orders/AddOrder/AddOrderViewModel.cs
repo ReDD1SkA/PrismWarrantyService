@@ -166,13 +166,13 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
                 NewClient = new Client();
                 NewCompany = new Company();
 
-                regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
+                regionManager.RequestNavigate("AdminLayoutDetailsRegion", "OrderDetailsView");
             }
         }
 
         private void Cancel()
         {
-            regionManager.RequestNavigate("DetailsRegion", "OrderDetailsView");
+            regionManager.RequestNavigate("AdminLayoutDetailsRegion", "OrderDetailsView");
         }
 
         #endregion
