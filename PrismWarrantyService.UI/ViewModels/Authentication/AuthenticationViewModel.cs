@@ -91,10 +91,10 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
                 switch(customPrincipal.Identity.Role.Name)
                 {
                     case "Администратор":
-                        regionManager.RequestNavigate("AppRegion", "AdminWorkspaceLayoutView");
+                        regionManager.RequestNavigate("AppRegion", "AdminLayoutView");
                         break;
                     case "Пользователь":
-                        regionManager.RequestNavigate("AppRegion", "UserWorkspaceLayoutView");
+                        regionManager.RequestNavigate("AppRegion", "UserLayoutView");
                         break;
                 }                
             }

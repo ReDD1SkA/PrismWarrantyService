@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Prism.Commands;
@@ -61,7 +62,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 
         private void AddOrder()
         {
-            regionManager.RequestNavigate("AdminLayoutDetailsRegion", "AddOrderView");
+            regionManager.RequestNavigate("Admin.DetailsRegion", "AddOrderView");
         }
 
         private async void DeleteOrder(Order parameter)
@@ -72,15 +73,15 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
             await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
         }
 
+        private void OrderSelectionChanged()
+        {
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
+        }
+
         private void OrderAddedHandler(Order parameter)
         {
             Orders.Add(parameter);
             SelectedOrder = Orders.LastOrDefault();
-        }
-
-        private void OrderSelectionChanged()
-        {
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
         }
 
         #endregion

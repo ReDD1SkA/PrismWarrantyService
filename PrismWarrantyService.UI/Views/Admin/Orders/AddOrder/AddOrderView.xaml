@@ -29,11 +29,11 @@
                      Grid.Row="0"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"/>
-            <UserControl prism:RegionManager.RegionName="SelectOrderClientRegion"
+            <UserControl prism:RegionManager.RegionName="Admin.AddOrder.SelectOrderClientRegion"
                      Grid.Row="2"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"/>
-            <UserControl prism:RegionManager.RegionName="SelectClientCompanyRegion"
+            <UserControl prism:RegionManager.RegionName="Admin.AddOrder.SelectClientCompanyRegion"
                      Grid.Row="4"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"/>

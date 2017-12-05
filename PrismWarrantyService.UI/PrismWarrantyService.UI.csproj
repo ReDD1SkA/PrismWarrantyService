@@ -115,13 +115,13 @@
     <Compile Include="ViewModels\Admin\Clients\ClientsViewModel.cs" />
     <Compile Include="ViewModels\User\Orders\UserOrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\User\Orders\UserOrdersViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\UserWorkspaceLayoutViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\UserLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\UserNavigationViewModel.cs" />
     <Compile Include="Services\ViewModels\Concrete\SnackbarViewModel.cs" />
     <Compile Include="Services\ViewModels\Concrete\ViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
     <Compile Include="Services\ViewModels\Concrete\LayoutViewModelBase.cs" />
-    <Compile Include="ViewModels\Layouts\AdminWorkspaceLayoutViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\AdminLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AccountViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AdminNavigationViewModel.cs" />
     <Compile Include="ViewModels\Admin\Orders\AddOrder\AddOrderViewModel.cs" />
@@ -171,14 +171,14 @@
     <Compile Include="Views\Authentication\AuthenticationView.xaml.cs">
       <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\AdminWorkspaceLayoutView.xaml.cs">
-      <DependentUpon>AdminWorkspaceLayoutView.xaml</DependentUpon>
+    <Compile Include="Views\Layouts\AdminLayoutView.xaml.cs">
+      <DependentUpon>AdminLayoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\AuthenticationLayoutView.xaml.cs">
       <DependentUpon>AuthenticationLayoutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\UserWorkspaceLayoutView.xaml.cs">
-      <DependentUpon>UserWorkspaceLayoutView.xaml</DependentUpon>
+    <Compile Include="Views\Layouts\UserLayoutView.xaml.cs">
+      <DependentUpon>UserLayoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Navigation\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -253,7 +253,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\AdminWorkspaceLayoutView.xaml">
+    <Page Include="Views\Layouts\AdminLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -261,7 +261,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\UserWorkspaceLayoutView.xaml">
+    <Page Include="Views\Layouts\UserLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -88,27 +88,27 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
 
         #region Methods
 
-        private void AddNewClientToOrder()
-        {
-            regionManager.RequestNavigate("SelectOrderClientRegion", "AddOrderNewClientView");
-            NeedNewClient = true;
-        }
-
         private void SelectOrderClient()
         {
-            regionManager.RequestNavigate("SelectOrderClientRegion", "AddOrderSelectClientView");
+            regionManager.RequestNavigate("Admin.AddOrder.SelectOrderClientRegion", "AddOrderSelectClientView");
             NeedNewClient = false;
+        }
+
+        private void AddNewClientToOrder()
+        {
+            regionManager.RequestNavigate("Admin.AddOrder.SelectOrderClientRegion", "AddOrderNewClientView");
+            NeedNewClient = true;
         }
 
         private void SelectClientCompany()
         {
-            regionManager.RequestNavigate("SelectClientCompanyRegion", "AddOrderSelectCompanyView");
+            regionManager.RequestNavigate("Admin.AddOrder.SelectClientCompanyRegion", "AddOrderSelectCompanyView");
             NeedNewCompany = false;
         }
 
         private void AddNewCompanyToClient()
         {
-            regionManager.RequestNavigate("SelectClientCompanyRegion", "AddOrderNewCompanyView");
+            regionManager.RequestNavigate("Admin.AddOrder.SelectClientCompanyRegion", "AddOrderNewCompanyView");
             NeedNewCompany = true;
         }
 
@@ -166,13 +166,13 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
                 NewClient = new Client();
                 NewCompany = new Company();
 
-                regionManager.RequestNavigate("AdminLayoutDetailsRegion", "OrderDetailsView");
+                regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
             }
         }
 
         private void Cancel()
         {
-            regionManager.RequestNavigate("AdminLayoutDetailsRegion", "OrderDetailsView");
+            regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 
         #endregion

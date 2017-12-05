@@ -58,7 +58,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
         private void Navigate(string navigatePath)
         {
             if (navigatePath != null)
-                regionManager.RequestNavigate("AdminLayoutMasterRegion", navigatePath);
+                regionManager.RequestNavigate("Admin.MasterRegion", navigatePath);
         }
 
         #endregion

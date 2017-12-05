@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
@@ -22,14 +23,17 @@ namespace PrismWarrantyService.UI.ViewModels.User.Orders
         public UserOrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            Orders = new ObservableCollection<Order>(repository.Orders);
+            var orders = repository.Performers
+                .Where(x => x.Employee.Login == Thread.CurrentPrincipal.Identity.Name)
+                .Select(x => x.Order);
+            Orders = new ObservableCollection<Order>(orders);
 
             SelectedOrder = Orders.FirstOrDefault();
 
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedHandler);
+            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationHandler);
         }
 
         #endregion
@@ -54,15 +58,20 @@ namespace PrismWarrantyService.UI.ViewModels.User.Orders
 
         #region Methods
 
-        private void OrderAddedHandler(Order parameter)
-        {
-            Orders.Add(parameter);
-            SelectedOrder = Orders.LastOrDefault();
-        }
-
         private void OrderSelectionChanged()
         {
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder ?? new Order());
+        }
+
+        private void AuthenticationHandler()
+        {
+            var orders = repository.Performers
+               .Where(x => x.Employee.Login == Thread.CurrentPrincipal.Identity.Name)
+               .Select(x => x.Order);
+
+            Orders.Clear();
+            Orders.AddRange(orders);
+            SelectedOrder = Orders.FirstOrDefault();
         }
 
         #endregion
