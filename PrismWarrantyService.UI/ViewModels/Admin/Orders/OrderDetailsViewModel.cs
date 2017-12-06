@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Events;
+using System.Linq;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
@@ -23,12 +24,16 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
         public OrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            States = new ObservableCollection<State>(repository.States);
-            Priorities = new ObservableCollection<Priority>(repository.Priorities);
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
 
             EditOrderCommand = new DelegateCommand(EditOrder);
 
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
+            States = new ObservableCollection<State>(repository.States);
+            Priorities = new ObservableCollection<Priority>(repository.Priorities);
+
+            OriginalSelectedOrder = repository.Orders
+                .FirstOrDefault();
+            SelectedOrder = OriginalSelectedOrder.Clone();
         }
 
         #endregion

@@ -37,7 +37,9 @@
 				                  CommandParameter="{x:Static Dock.Left}"
                                   Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                                   IsChecked="{Binding ElementName=drawerHost, Path=IsLeftDrawerOpen}"/>
-                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center">Lorem ipsum dolor sit amet</TextBlock>
+                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center"
+                               Text="Warranty Service: панель администратора"
+                               FontSize="18"/>
                 </StackPanel>
             </materialDesign:ColorZone>
             <materialDesign:Card Padding="16,16,16,16"

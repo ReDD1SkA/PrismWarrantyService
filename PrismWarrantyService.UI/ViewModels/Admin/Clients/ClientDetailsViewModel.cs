@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
@@ -25,6 +26,10 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Clients
             EditClientCommand = new DelegateCommand(EditClient);
 
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler);
+
+            OriginalSelectedClient = repository.Clients
+                .FirstOrDefault();
+            SelectedClient = OriginalSelectedClient.Clone();
         }
 
         #endregion
