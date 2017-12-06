@@ -15,6 +15,7 @@
             </Grid.RowDefinitions>
             <ListView ItemsSource="{Binding Clients}"
                       SelectedItem="{Binding NewOrder.Client}"
+                      Validation.ErrorTemplate="{x:Null}"
                       Grid.Row="0"/>
             <Button Command="{Binding AddNewClientToOrderCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"

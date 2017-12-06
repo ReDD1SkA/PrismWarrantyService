@@ -15,6 +15,7 @@
             </Grid.RowDefinitions>
             <ListView ItemsSource="{Binding Companies}"
                       SelectedItem="{Binding NewClient.Company}"
+                      Validation.ErrorTemplate="{x:Null}"
                       Grid.Row="0"/>
             <Button Command="{Binding AddNewCompanyToClientCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
