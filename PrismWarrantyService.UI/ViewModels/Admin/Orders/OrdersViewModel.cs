@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Prism.Commands;
@@ -7,7 +6,7 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events;
+using PrismWarrantyService.UI.Events.Orders;
 
 namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 {
@@ -25,7 +24,6 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
             : base(regionManager, eventAggregator, repository)
         {
             Orders = new ObservableCollection<Order>(repository.Orders);
-
             SelectedOrder = Orders.FirstOrDefault();
 
             AddOrderCommand = new DelegateCommand(AddOrder);
@@ -33,7 +31,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedHandler);
+            eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedEventHandler);
         }
 
         #endregion
@@ -70,7 +68,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
             SelectedOrder = Orders.FirstOrDefault();
             Orders.Remove(parameter);
 
-            await Task.Factory.StartNew(() => repository.DeleteOrder(parameter));
+            await Task.Run(() => repository.DeleteOrder(parameter));
         }
 
         private void OrderSelectionChanged()
@@ -78,7 +76,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
         }
 
-        private void OrderAddedHandler(Order parameter)
+        private void OrderAddedEventHandler(Order parameter)
         {
             Orders.Add(parameter);
             SelectedOrder = Orders.LastOrDefault();

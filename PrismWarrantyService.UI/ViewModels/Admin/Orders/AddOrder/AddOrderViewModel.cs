@@ -6,8 +6,10 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events;
 using System;
+using PrismWarrantyService.UI.Events.Clients;
+using PrismWarrantyService.UI.Events.Companies;
+using PrismWarrantyService.UI.Events.Orders;
 
 namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
 {
@@ -141,7 +143,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
                         }
 
                         NewClient.Company = NewCompany;
-                        //eventAggregator.GetEvent<CompanyAddedEvent>().Publish(NewCompany);
+                        eventAggregator.GetEvent<CompanyAddedEvent>().Publish(NewCompany);
                     }
 
                     var clientExistCheck = repository

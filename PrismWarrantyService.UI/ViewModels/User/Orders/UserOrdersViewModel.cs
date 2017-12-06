@@ -6,7 +6,8 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events;
+using PrismWarrantyService.UI.Events.Authentication;
+using PrismWarrantyService.UI.Events.Orders;
 
 namespace PrismWarrantyService.UI.ViewModels.User.Orders
 {
@@ -25,7 +26,8 @@ namespace PrismWarrantyService.UI.ViewModels.User.Orders
         {
             var orders = repository.Performers
                 .Where(x => x.Employee.Login == Thread.CurrentPrincipal.Identity.Name)
-                .Select(x => x.Order);
+                .Select(x => x.Order)
+                .OrderBy(x => x.PriorityID);
             Orders = new ObservableCollection<Order>(orders);
 
             SelectedOrder = Orders.FirstOrDefault();
@@ -33,7 +35,7 @@ namespace PrismWarrantyService.UI.ViewModels.User.Orders
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationHandler);
+            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler);
         }
 
         #endregion
@@ -63,11 +65,12 @@ namespace PrismWarrantyService.UI.ViewModels.User.Orders
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder ?? new Order());
         }
 
-        private void AuthenticationHandler()
+        private void AuthenticationEventHandler()
         {
             var orders = repository.Performers
                .Where(x => x.Employee.Login == Thread.CurrentPrincipal.Identity.Name)
-               .Select(x => x.Order);
+               .Select(x => x.Order)
+               .OrderBy(x => x.PriorityID);
 
             Orders.Clear();
             Orders.AddRange(orders);

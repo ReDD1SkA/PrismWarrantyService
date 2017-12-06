@@ -14,7 +14,6 @@ namespace PrismWarrantyService.Domain.Entities
         private string surname;
         private string position;
         private Role role;
-        private Department department;
 
         #endregion
 
@@ -74,14 +73,6 @@ namespace PrismWarrantyService.Domain.Entities
         {
             get => role;
             set => SetProperty(ref role, value);
-        }
-
-        public int DepartmentID { get; set; }
-
-        public virtual Department Department
-        {
-            get => department;
-            set => SetProperty(ref department, value);
         }
 
         #endregion

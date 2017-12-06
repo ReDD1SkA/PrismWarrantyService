@@ -80,7 +80,6 @@
     <Compile Include="Concrete\WarrantyServiceDbContext.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Company.cs" />
-    <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\Performer.cs" />

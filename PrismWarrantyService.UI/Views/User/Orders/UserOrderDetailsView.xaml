@@ -6,10 +6,12 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Visible"
+             mc:Ignorable="d"
+             
+             Background="White">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
                   Padding="0,0,8,0">
-        <Grid Width="250">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="16"/>
@@ -20,8 +22,6 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="16"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -31,6 +31,7 @@
             <TextBox Text="{Binding SelectedOrder.Summary}"
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Заказ"
+                     IsReadOnly="True"
                      Grid.Row="0"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"/>
@@ -38,29 +39,33 @@
                       SelectedItem="{Binding SelectedOrder.Priority}"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       materialDesign:HintAssist.Hint="Приоритет"
+                      IsReadOnly="True"
                       Grid.Row="2"
                       Grid.Column="0"/>
             <ComboBox ItemsSource="{Binding States}"
                       SelectedItem="{Binding SelectedOrder.State}"
                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       materialDesign:HintAssist.Hint="Статус"
+                      IsReadOnly="True"
                       Grid.Row="2"
                       Grid.Column="2"/>
-            <DatePicker SelectedDate="{Binding SelectedOrder.Deadline}"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        materialDesign:HintAssist.Hint="Дедлайн"
-                        Grid.Row="4"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="3"/>
+            <TextBox Text="{Binding SelectedOrder.Deadline}"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Дедлайн"
+                     IsReadOnly="True"
+                     Grid.Row="4"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"/>
             <TextBox Text="{Binding SelectedOrder.Description}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Описание"
-                     Grid.Row="6"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"
+                     IsReadOnly="True"
                      VerticalAlignment="Stretch"
                      AcceptsReturn="True"
-                     TextWrapping="Wrap"/>
+                     TextWrapping="Wrap"
+                     Grid.Row="6"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"/>
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Клиент"
                      Grid.Row="8"
@@ -74,15 +79,6 @@
                     </MultiBinding>
                 </TextBox.Text>
             </TextBox>
-            <Button Command="{Binding EditOrderCommand}"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                    HorizontalAlignment="Right"
-                    Margin="0, 0, 16, 0"
-                    Grid.Row="10"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3">
-                <materialDesign:PackIcon Kind="BorderColor" />
-            </Button>
         </Grid>
     </ScrollViewer>
 </UserControl>

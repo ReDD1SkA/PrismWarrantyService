@@ -27,16 +27,10 @@ namespace PrismWarrantyService.Domain.Concrete
             get => context.Companies;
         }
 
-        public IQueryable<Department> Departments
-        {
-            get => context.Departments;
-        }
-
         public IQueryable<Employee> Employees
         {
             get => context.Employees
-                .Include(x => x.Role)
-                .Include(x => x.Department);
+                .Include(x => x.Role);
         }
 
         public IQueryable<Order> Orders
@@ -99,6 +93,12 @@ namespace PrismWarrantyService.Domain.Concrete
                 order.Finished = null;
 
             context.Entry(order).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public void EditClient(Client client)
+        {
+            context.Entry(client).State = EntityState.Modified;
             context.SaveChanges();
         }
 

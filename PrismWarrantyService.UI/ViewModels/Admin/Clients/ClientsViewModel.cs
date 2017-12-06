@@ -1,8 +1,9 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events;
+using PrismWarrantyService.UI.Events.Clients;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -24,7 +25,10 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Clients
             Clients = new ObservableCollection<Client>(repository.Clients);
             SelectedClient = Clients.FirstOrDefault();
 
-            eventAggregator.GetEvent<ClientAddedEvent>().Subscribe(ClientAddedHandler);
+            ClientSelectionChangedCommand = new DelegateCommand(ClientSelectionChanged);
+
+            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
+            eventAggregator.GetEvent<ClientAddedEvent>().Subscribe(ClientAddedEventHandler);
         }
 
         #endregion
@@ -35,33 +39,29 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Clients
 
         public Client SelectedClient
         {
-            get { return selectedClient; }
-            set
-            {
-                SetProperty(ref selectedClient, value);
-                //RefreshClientOrders();
-            }
+            get => selectedClient;
+            set => SetProperty(ref selectedClient, value);
         }
 
         #endregion
 
         #region Commands
+
+        public DelegateCommand ClientSelectionChangedCommand { get; private set; }
+
         #endregion
 
         #region Methods
 
-        //private void RefreshClientOrders()
-        //{
-        //    Orders.Clear();
-        //    Orders.AddRange(repository
-        //        .Orders
-        //        .Where(x => x.ClientID == SelectedClient.ClientID)
-        //        .ToList());
-        //}
+        private void ClientSelectionChanged()
+        {
+            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
+        }
 
-        private void ClientAddedHandler(Client newClient)
+        private void ClientAddedEventHandler(Client newClient)
         {
             Clients.Add(newClient);
+            SelectedClient = Clients.LastOrDefault();
         }
 
         #endregion

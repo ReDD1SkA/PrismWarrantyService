@@ -7,7 +7,6 @@ namespace PrismWarrantyService.Domain.Concrete
     {
         public DbSet<Client> Clients { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Performer> Performers { get; set; }

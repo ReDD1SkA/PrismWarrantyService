@@ -21,7 +21,7 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding NavigateCommand}"
-                                           CommandParameter="{Binding SelectedItem.View}"/>
+                                           CommandParameter="{Binding SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>

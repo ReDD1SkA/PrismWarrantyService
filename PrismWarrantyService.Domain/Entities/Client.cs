@@ -58,6 +58,25 @@ namespace PrismWarrantyService.Domain.Entities
 
         #region Methods
 
+        public Client Clone()
+        {
+            return new Client()
+            {
+                Name = Name,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                Company = Company
+            };
+        }
+
+        public void GetInfoFrom(Client donator)
+        {
+            Name = donator.Name;
+            Email = donator.Email;
+            PhoneNumber = donator.PhoneNumber;
+            Company = donator.Company;
+        }
+
         public override string ToString()
         {
             return string.Format("{0} ({1})", Name, Company.Name);

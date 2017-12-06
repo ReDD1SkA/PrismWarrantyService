@@ -1,9 +1,4 @@
 ﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrismWarrantyService.UI.Services.Navigation.Concrete
 {
@@ -12,7 +7,8 @@ namespace PrismWarrantyService.UI.Services.Navigation.Concrete
         #region Fields
 
         private string name;
-        private string view;
+        private string masterView;
+        private string detailsView;
 
         #endregion
 
@@ -24,10 +20,16 @@ namespace PrismWarrantyService.UI.Services.Navigation.Concrete
             set => SetProperty(ref name, value);
         }
 
-        public string View
+        public string MasterView
         {
-            get => view;
-            set => SetProperty(ref view, value);
+            get => masterView;
+            set => SetProperty(ref masterView, value);
+        }
+
+        public string DetailsView
+        {
+            get => detailsView;
+            set => SetProperty(ref detailsView, value);
         }
 
         #endregion

@@ -10,7 +10,6 @@ namespace PrismWarrantyService.Domain.Abstract
 
         IQueryable<Client> Clients { get; }
         IQueryable<Company> Companies { get; }
-        IQueryable<Department> Departments { get; }
         IQueryable<Employee> Employees { get; }
         IQueryable<Order> Orders { get; }
         IQueryable<Performer> Performers { get; }
@@ -25,6 +24,8 @@ namespace PrismWarrantyService.Domain.Abstract
         void AddOrder(Order order);
         void DeleteOrder(Order order);
         void EditOrder(Order order);
+
+        void EditClient(Client client);
 
         #endregion
     }

@@ -1,12 +1,11 @@
-﻿using Prism.Commands;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Prism.Commands;
 using Prism.Events;
-using Prism.Mvvm;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+using PrismWarrantyService.UI.Events.Orders;
 
 namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 {
@@ -29,7 +28,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 
             EditOrderCommand = new DelegateCommand(EditOrder);
 
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedHandler);
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
         }
 
         #endregion
@@ -70,10 +69,10 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
 
             OriginalSelectedOrder.GetInfoFrom(SelectedOrder);
 
-            await Task.Factory.StartNew(() => repository.EditOrder(OriginalSelectedOrder));
+            await Task.Run(() => repository.EditOrder(OriginalSelectedOrder));
         }
 
-        private void OrderSelectionChangedHandler(Order parameter)
+        private void OrderSelectionChangedEventHandler(Order parameter)
         {
             OriginalSelectedOrder = parameter;
             SelectedOrder = parameter.Clone();

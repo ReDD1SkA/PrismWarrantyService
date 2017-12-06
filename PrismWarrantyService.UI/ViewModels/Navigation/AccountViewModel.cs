@@ -1,13 +1,12 @@
 ﻿using System.Linq;
 using System.Threading;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Events.Authentication;
+using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using Prism.Events;
-using PrismWarrantyService.UI.Events;
 
 namespace PrismWarrantyService.UI.ViewModels.Navigation
 {
@@ -24,8 +23,8 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
         public AccountViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationHandler);
-            AuthenticationHandler();
+            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler);
+            AuthenticationEventHandler();
 
             LogoutCommand = new DelegateCommand(Logout);
         }
@@ -60,7 +59,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
             }
         }
 
-        private void AuthenticationHandler()
+        private void AuthenticationEventHandler()
         {
             CurrentEmployee = repository.Employees
                 .Where(x => x.Login == Thread.CurrentPrincipal.Identity.Name)

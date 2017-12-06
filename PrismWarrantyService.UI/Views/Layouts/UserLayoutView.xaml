@@ -7,49 +7,61 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <materialDesign:Card Grid.Row="1"
-                             Grid.Column="1"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <Expander ExpandDirection="Right">
-                <Expander.Header>
-                    <TextBlock Text="Меню">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform Angle="270" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                </Expander.Header>
-                <UserControl prism:RegionManager.RegionName="User.NavigationRegion" Padding="16,16,16,16"/>
-            </Expander>
-        </materialDesign:Card>
-        <materialDesign:Card Padding="16,16,16,16"
-                             Grid.Row="1"
-                             Grid.Column="3"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <UserControl prism:RegionManager.RegionName="User.MasterRegion"/>
-        </materialDesign:Card>
-        <materialDesign:Card Grid.Row="1"
-                             Grid.Column="5"
-                             HorizontalAlignment="Stretch"
-                             VerticalAlignment="Stretch">
-            <UserControl prism:RegionManager.RegionName="User.DetailsRegion"
+    <materialDesign:DrawerHost Name="drawerHost">
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <UserControl prism:RegionManager.RegionName="User.NavigationRegion"
                          Padding="16,16,16,16"/>
-        </materialDesign:Card>
-    </Grid>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                      Padding="16"
+                                      Mode="PrimaryDark"
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="5">
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+				                  CommandParameter="{x:Static Dock.Left}"
+                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                                  IsChecked="{Binding ElementName=drawerHost, Path=IsLeftDrawerOpen}"/>
+                    <TextBlock Margin="16,0,0,0" VerticalAlignment="Center">Lorem ipsum dolor sit amet</TextBlock>
+                </StackPanel>
+            </materialDesign:ColorZone>
+            <materialDesign:Card Padding="16,16,16,16"
+                                 Grid.Row="2"
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch">
+                <UserControl prism:RegionManager.RegionName="User.MasterRegion"/>
+            </materialDesign:Card>
+            <GridSplitter Grid.Row="2"
+                          Grid.Column="2"
+                          Grid.RowSpan="2"
+                          ShowsPreview="False"
+                          Width="20"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Stretch"
+                          Background="{StaticResource MaterialDesignPaper}"/>
+            <materialDesign:Card Grid.Row="2"
+                                 Grid.Column="3"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Stretch">
+                <UserControl prism:RegionManager.RegionName="User.DetailsRegion"
+                             Padding="16,16,16,16"/>
+            </materialDesign:Card>
+        </Grid>
+    </materialDesign:DrawerHost>
 </UserControl>

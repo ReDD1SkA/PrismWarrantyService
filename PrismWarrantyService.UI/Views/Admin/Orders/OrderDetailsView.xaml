@@ -7,9 +7,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Visible"
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
                   Padding="0,0,8,0">
-        <Grid Width="250">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="16"/>
