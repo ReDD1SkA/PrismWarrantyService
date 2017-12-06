@@ -74,6 +74,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders
         private void OrderSelectionChanged()
         {
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
+            regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 
         private void OrderAddedEventHandler(Order parameter)
