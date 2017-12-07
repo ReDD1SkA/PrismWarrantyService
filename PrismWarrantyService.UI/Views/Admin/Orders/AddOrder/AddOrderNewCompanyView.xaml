@@ -7,10 +7,18 @@
              mc:Ignorable="d" >
     <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
               Header="Компания: новая"
-              Height="200">
+              Height="355">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="16"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -18,10 +26,26 @@
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Клиент"
                      Grid.Row="0"/>
+            <TextBox Text="{Binding NewCompany.Swift}"
+	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="SWIFT-код"
+                     Grid.Row="2"/>
+            <TextBox Text="{Binding NewCompany.Address}"
+	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Адрес"
+                     Grid.Row="4"/>
+            <TextBox Text="{Binding NewCompany.Email}"
+	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="E-mail"
+                     Grid.Row="6"/>
+            <TextBox Text="{Binding NewCompany.PhoneNumber}"
+	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Номер телефона"
+                     Grid.Row="8"/>
             <Button Command="{Binding SelectClientCompanyCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Content="Вернуться к списку"
-                    Grid.Row="2"/>
+                    Grid.Row="10"/>
         </Grid>
     </GroupBox>
 </UserControl>

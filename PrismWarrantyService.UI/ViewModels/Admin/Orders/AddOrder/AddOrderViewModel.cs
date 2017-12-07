@@ -10,6 +10,9 @@ using System;
 using PrismWarrantyService.UI.Events.Clients;
 using PrismWarrantyService.UI.Events.Companies;
 using PrismWarrantyService.UI.Events.Orders;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Windows.Data;
 
 namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
 {
@@ -165,7 +168,7 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
                 eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
 
                 NewOrder = new Order() { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
-                NewClient = new Client();
+                NewClient = new Client() { Company = Companies.FirstOrDefault() };
                 NewCompany = new Company();
 
                 regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
@@ -174,6 +177,10 @@ namespace PrismWarrantyService.UI.ViewModels.Admin.Orders.AddOrder
 
         private void Cancel()
         {
+            NewOrder = new Order() { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
+            NewClient = new Client() { Company = Companies.FirstOrDefault() };
+            NewCompany = new Company();
+
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 

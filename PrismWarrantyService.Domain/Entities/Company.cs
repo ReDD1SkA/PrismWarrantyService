@@ -38,7 +38,6 @@ namespace PrismWarrantyService.Domain.Entities
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(200, ErrorMessage = "Максимальная длина - 200 символов")]
-        [RegularExpression(@"^[A-Z]{6}[A-Z,0-9]{5}$", ErrorMessage = "Неверный формат SWIFT-кода")]
         public string Address
         {
             get { return address; }
