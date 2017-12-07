@@ -1,8 +1,8 @@
 ﻿using Prism.Mvvm;
 
-namespace PrismWarrantyService.UI.Services.Navigation.Concrete
+namespace PrismWarrantyService.UI.Services.ViewModels.Concrete
 {
-    public class NavigationItem : BindableBase
+    public class NavigationItemViewModel : BindableBase
     {
         #region Fields
 

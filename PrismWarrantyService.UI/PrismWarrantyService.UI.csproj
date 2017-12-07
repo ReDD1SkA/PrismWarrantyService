@@ -112,7 +112,9 @@
     <Compile Include="Services\Authentication\Concrete\AuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomIdentity.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomPrincipal.cs" />
-    <Compile Include="Services\Navigation\Concrete\NavigationItem.cs" />
+    <Compile Include="Services\ViewModels\Concrete\NavigationItemViewModel.cs" />
+    <Compile Include="Services\ViewModels\Concrete\SortDirectionViewModel.cs" />
+    <Compile Include="Services\ViewModels\Concrete\SortPropertyViewModel.cs" />
     <Compile Include="ViewModels\Admin\Clients\ClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\Admin\Companies\CompaniesViewModel.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
@@ -174,6 +176,9 @@
     </Compile>
     <Compile Include="Views\Admin\Orders\OrderDetailsView.xaml.cs">
       <DependentUpon>OrderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Orders\OrderListFiltersView.xaml.cs">
+      <DependentUpon>OrderListFiltersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\Orders\OrderListView.xaml.cs">
       <DependentUpon>OrderListView.xaml</DependentUpon>
@@ -263,6 +268,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\Orders\OrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Orders\OrderListFiltersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

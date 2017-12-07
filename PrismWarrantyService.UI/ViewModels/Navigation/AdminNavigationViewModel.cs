@@ -5,7 +5,7 @@ using Prism.Events;
 using Prism.Regions;
 using MaterialDesignThemes.Wpf;
 using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.UI.Services.Navigation.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Navigation
 {
@@ -13,7 +13,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
     {
         #region Fields
 
-        private NavigationItem selectedItem;
+        private NavigationItemViewModel selectedItem;
 
         #endregion
 
@@ -22,13 +22,13 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
         public AdminNavigationViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            NavigateCommand = new DelegateCommand<NavigationItem>(Navigate);
+            NavigateCommand = new DelegateCommand<NavigationItemViewModel>(Navigate);
 
-            NavigationItems = new ObservableCollection<NavigationItem>
+            NavigationItems = new ObservableCollection<NavigationItemViewModel>
             {
-                new NavigationItem() { Name = "Заказы", MasterView = "OrdersView", DetailsView = "OrderDetailsView"},
-                new NavigationItem() { Name = "Клиенты", MasterView = "ClientsView", DetailsView = "ClientDetailsView"},
-                new NavigationItem() { Name = "Компании", MasterView = "CompaniesView", DetailsView = "CompanyDetailsView"}
+                new NavigationItemViewModel() { Name = "Заказы", MasterView = "OrdersView", DetailsView = "OrderDetailsView"},
+                new NavigationItemViewModel() { Name = "Клиенты", MasterView = "ClientsView", DetailsView = "ClientDetailsView"},
+                new NavigationItemViewModel() { Name = "Компании", MasterView = "CompaniesView", DetailsView = "CompanyDetailsView"}
             };
 
             SelectedItem = NavigationItems.FirstOrDefault();
@@ -38,25 +38,25 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         #region Properties
 
-        public NavigationItem SelectedItem
+        public NavigationItemViewModel SelectedItem
         {
             get => selectedItem;
             set => SetProperty(ref selectedItem, value);
         }
 
-        public ObservableCollection<NavigationItem> NavigationItems { get; private set; }
+        public ObservableCollection<NavigationItemViewModel> NavigationItems { get; private set; }
 
         #endregion
 
         #region Commands
 
-        public DelegateCommand<NavigationItem> NavigateCommand { get; private set; }
+        public DelegateCommand<NavigationItemViewModel> NavigateCommand { get; private set; }
 
         #endregion
 
         #region Methods
 
-        private void Navigate(NavigationItem item)
+        private void Navigate(NavigationItemViewModel item)
         {
             if (item.MasterView != null)
                 regionManager.RequestNavigate("Admin.MasterRegion", item.MasterView);
