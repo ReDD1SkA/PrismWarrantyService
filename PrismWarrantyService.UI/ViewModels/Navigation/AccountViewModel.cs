@@ -14,7 +14,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
     {
         #region Fields
 
-        private Employee currentEmployee;
+        private Employee _currentEmployee;
 
         #endregion
 
@@ -35,15 +35,15 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         public Employee CurrentEmployee
         {
-            get => currentEmployee;
-            set => SetProperty(ref currentEmployee, value);
+            get => _currentEmployee;
+            set => SetProperty(ref _currentEmployee, value);
         }
 
         #endregion
 
         #region Commands
 
-        public DelegateCommand LogoutCommand { get; private set; }
+        public DelegateCommand LogoutCommand { get; }
 
         #endregion
 
@@ -62,8 +62,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
         private void AuthenticationEventHandler()
         {
             CurrentEmployee = repository.Employees
-                .Where(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.Login == Thread.CurrentPrincipal.Identity.Name);
         }
 
         #endregion

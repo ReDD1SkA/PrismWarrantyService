@@ -7,7 +7,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
     {
         #region Fields
 
-        private CustomIdentity identity;
+        private CustomIdentity _identity;
 
         #endregion
 
@@ -15,14 +15,11 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         public CustomIdentity Identity
         {
-            get => identity ?? new AnonymousIdentity();
-            set => identity = value;
+            get => _identity ?? new AnonymousIdentity();
+            set => _identity = value;
         }
 
-        IIdentity IPrincipal.Identity
-        {
-            get => Identity;
-        }
+        IIdentity IPrincipal.Identity => Identity;
 
         #endregion
 
@@ -30,7 +27,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         public bool IsInRole(string role)
         {
-            return identity.Role.Name.Equals(role);
+            return _identity.Role.Name.Equals(role);
         }
 
         #endregion

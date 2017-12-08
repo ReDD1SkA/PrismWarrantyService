@@ -14,8 +14,7 @@ namespace PrismWarrantyService.UI.ViewModels
             : base(regionManager, eventAggregator, repository)
         {
             repository.Employees
-                .Where(x => x.Login == "initialize")
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.Login == "initialize");
 
             regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView));
         }

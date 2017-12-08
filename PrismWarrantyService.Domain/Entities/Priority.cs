@@ -7,7 +7,7 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
 
-        private string name;
+        private string _name;
 
         #endregion
 
@@ -18,8 +18,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public string Name
         {
-            get => name;
-            set => SetProperty(ref name, value);
+            get { return _name; }
+            set { ValidateProperty(value); SetProperty(ref _name, value); }
         }
 
         #endregion

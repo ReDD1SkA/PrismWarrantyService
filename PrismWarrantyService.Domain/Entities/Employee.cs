@@ -7,13 +7,13 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
 
-        private string login;
-        private string hashedPassword;
-        private string firstName;
-        private string lastName;
-        private string surname;
-        private string position;
-        private Role role;
+        private string _login;
+        private string _hashedPassword;
+        private string _firstName;
+        private string _lastName;
+        private string _surname;
+        private string _position;
+        private Role _role;
 
         #endregion
 
@@ -25,54 +25,54 @@ namespace PrismWarrantyService.Domain.Entities
         [StringLength(12, ErrorMessage = "Максимальная длина - 12 символов")]
         public string Login
         {
-            get => login;
-            set => SetProperty(ref login, value);
+            get { return _login; } 
+            set { ValidateProperty(value); SetProperty(ref _login, value); }
         }
 
         public string HashedPassword
         {
-            get => hashedPassword;
-            set => SetProperty(ref hashedPassword, value);
+            get { return _hashedPassword; }
+            set { ValidateProperty(value); SetProperty(ref _hashedPassword, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string FirstName
         {
-            get => firstName;
-            set => SetProperty(ref firstName, value);
+            get { return _firstName; }
+            set { ValidateProperty(value); SetProperty(ref _firstName, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string LastName
         {
-            get => lastName;
-            set => SetProperty(ref lastName, value);
+            get { return _lastName; }
+            set { ValidateProperty(value); SetProperty(ref _lastName, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Surname
         {
-            get => surname;
-            set => SetProperty(ref surname, value);
+            get { return _surname; }
+            set { ValidateProperty(value); SetProperty(ref _surname, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Position
         {
-            get => position;
-            set => SetProperty(ref position, value);
+            get { return _position; }
+            set { ValidateProperty(value); SetProperty(ref _position, value); }
         }
 
         public int RoleID { get; set; }
 
         public virtual Role Role
         {
-            get => role;
-            set => SetProperty(ref role, value);
+            get { return _role; }
+            set { ValidateProperty(value); SetProperty(ref _role, value); }
         }
 
         #endregion

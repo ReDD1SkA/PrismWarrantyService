@@ -10,7 +10,7 @@ namespace PrismWarrantyService.Domain.Concrete
     {
         #region Fields
 
-        private WarrantyServiceDbContext context = new WarrantyServiceDbContext();
+        private readonly WarrantyServiceDbContext _context = new WarrantyServiceDbContext();
 
         #endregion
 
@@ -18,24 +18,24 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public IQueryable<Client> Clients
         {
-            get => context.Clients
+            get => _context.Clients
                 .Include(x => x.Company);
         }
 
         public IQueryable<Company> Companies
         {
-            get => context.Companies;
+            get => _context.Companies;
         }
 
         public IQueryable<Employee> Employees
         {
-            get => context.Employees
+            get => _context.Employees
                 .Include(x => x.Role);
         }
 
         public IQueryable<Order> Orders
         {
-            get => context.Orders
+            get => _context.Orders
                 .Include(x => x.Client)
                 .Include(x => x.Client.Company)
                 .Include(x => x.State)
@@ -44,62 +44,62 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public IQueryable<Performer> Performers
         {
-            get => context.Performers
+            get => _context.Performers
                 .Include(x => x.Order)
                 .Include(x => x.Employee);
         }
 
         public IQueryable<Priority> Priorities
         {
-            get => context.Priorities;
+            get => _context.Priorities;
         }
 
         public IQueryable<State> States
         {
-            get => context.States;
+            get => _context.States;
         }
 
         public IQueryable<Role> Roles
         {
-            get => context.Roles;
+            get => _context.Roles;
         }
 
         #endregion
 
         #region Methods
 
-        public void AddOrder(Order order)
+        public void CreateOrder(Order order)
         {
             order.Accepted = DateTime.Now;
 
             if (order.State.Name.Equals("Выполненный") || order.State.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
 
-            context.Entry(order).State = EntityState.Added;
-            context.SaveChanges();
+            _context.Entry(order).State = EntityState.Added;
+            _context.SaveChanges();
         }
 
         public void DeleteOrder(Order order)
         {
-            context.Entry(order).State = EntityState.Deleted;
-            context.SaveChanges();
+            _context.Entry(order).State = EntityState.Deleted;
+            _context.SaveChanges();
         }
 
-        public void EditOrder(Order order)
+        public void UpdateOrder(Order order)
         {
             if (order.State.Name.Equals("Выполненный") || order.State.Name.Equals("Отмененный"))
                 order.Finished = DateTime.Now;
             else
                 order.Finished = null;
 
-            context.Entry(order).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(order).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
-        public void EditClient(Client client)
+        public void UpdateClient(Client client)
         {
-            context.Entry(client).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(client).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         #endregion

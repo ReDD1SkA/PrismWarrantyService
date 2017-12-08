@@ -8,10 +8,10 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
 
-        private string name;
-        private string email;
-        private string phoneNumber;
-        private Company company;
+        private string _name;
+        private string _email;
+        private string _phoneNumber;
+        private Company _company;
 
         #endregion
 
@@ -23,8 +23,8 @@ namespace PrismWarrantyService.Domain.Entities
         [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
         public string Name
         {
-            get { return name; }
-            set { ValidateProperty(value); SetProperty(ref name, value); }
+            get { return _name; }
+            set { ValidateProperty(value); SetProperty(ref _name, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -32,8 +32,8 @@ namespace PrismWarrantyService.Domain.Entities
         [StringLength(30, ErrorMessage = "Максимальная длина - 30 символов")]
         public string Email
         {
-            get { return email; }
-            set { ValidateProperty(value); SetProperty(ref email, value); }
+            get { return _email; }
+            set { ValidateProperty(value); SetProperty(ref _email, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -41,8 +41,8 @@ namespace PrismWarrantyService.Domain.Entities
         [RegularExpression(@"^\d{3}-\d{2}-\d{3}-\d{2}-\d{2}$", ErrorMessage = "Формат номера: XXX-XX-XXX-XX-XX")]
         public string PhoneNumber
         {
-            get { return phoneNumber; }
-            set { ValidateProperty(value); SetProperty(ref phoneNumber, value); }
+            get { return _phoneNumber; }
+            set { ValidateProperty(value); SetProperty(ref _phoneNumber, value); }
         }
 
         public int CompanyID { get; set; }
@@ -50,8 +50,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Company Company
         {
-            get { return company; }
-            set { ValidateProperty(value); SetProperty(ref company, value); }
+            get { return _company; }
+            set { ValidateProperty(value); SetProperty(ref _company, value); }
         }
 
         #endregion
@@ -79,7 +79,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", Name, Company.Name);
+            return $"{Name} ({Company.Name})";
         }
 
         #endregion

@@ -17,9 +17,9 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
     {
         #region Fields
 
-        private IAuthenticationService authenticationService;
-        private SnackbarViewModel snackbar;
-        private string employeeLogin;
+        private readonly IAuthenticationService _authenticationService;
+        private SnackbarViewModel _snackbar;
+        private string _employeeLogin;
 
         #endregion
 
@@ -28,7 +28,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         public AuthenticationViewModel(IAuthenticationService authenticationService, IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            this.authenticationService = authenticationService;
+            _authenticationService = authenticationService;
 
             Snackbar = new SnackbarViewModel();
 
@@ -41,21 +41,21 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
         public string EmployeeLogin
         {
-            get => employeeLogin;
-            set => SetProperty(ref employeeLogin, value);
+            get => _employeeLogin;
+            set => SetProperty(ref _employeeLogin, value);
         }
 
         public SnackbarViewModel Snackbar
         {
-            get => snackbar;
-            set => SetProperty(ref snackbar, value);
+            get => _snackbar;
+            set => SetProperty(ref _snackbar, value);
         }
 
         #endregion
 
         #region Commands
 
-        public DelegateCommand<object> LoginCommand { get; private set; }
+        public DelegateCommand<object> LoginCommand { get; }
 
         #endregion
 
@@ -63,20 +63,15 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
         private async void Login(object parameter)
         {
-            PasswordBox passwordBox = parameter as PasswordBox;
-            string clearTextPassword = passwordBox.Password;
+            var passwordBox = parameter as PasswordBox;
+            var clearTextPassword = passwordBox.Password;
 
             try
             {
                 Employee emp = null;
-                await Task.Factory.StartNew(() =>
-                {
-                    Employee answer = authenticationService.AuthenticateEmployee(EmployeeLogin, clearTextPassword);
-                    emp = answer;
-                });
+                await Task.Run(() => emp = _authenticationService.AuthenticateEmployee(EmployeeLogin, clearTextPassword));
 
-                CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-                if (customPrincipal == null)
+                if (!(Thread.CurrentPrincipal is CustomPrincipal customPrincipal))
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
 
                 customPrincipal.Identity = new CustomIdentity(emp.Login, emp.Role);

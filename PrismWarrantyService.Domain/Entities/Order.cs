@@ -8,14 +8,14 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
 
-        private string summary;
-        private string description;
-        private DateTime accepted;
-        private DateTime deadline;
-        private DateTime? finished;
-        private Client client;
-        private State state;
-        private Priority priority;
+        private string _summary;
+        private string _description;
+        private DateTime _accepted;
+        private DateTime _deadline;
+        private DateTime? _finished;
+        private Client _client;
+        private State _state;
+        private Priority _priority;
 
         #endregion
 
@@ -27,36 +27,36 @@ namespace PrismWarrantyService.Domain.Entities
         [StringLength(100, ErrorMessage = "Максимальная длина - 100 символов")]
         public string Summary
         {
-            get { return summary; }
-            set { ValidateProperty(value); SetProperty(ref summary, value); }
+            get { return _summary; }
+            set { ValidateProperty(value); SetProperty(ref _summary, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(1000, ErrorMessage = "Максимальная длина - 1000 символов")]
         public string Description
         {
-            get { return description; }
-            set { ValidateProperty(value); SetProperty(ref description, value); }
+            get { return _description; }
+            set { ValidateProperty(value); SetProperty(ref _description, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         public DateTime Accepted
         {
-            get => accepted;
-            set => SetProperty(ref accepted, value);
+            get { return _accepted; }
+            set { ValidateProperty(value); SetProperty(ref _accepted, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         public DateTime Deadline
         {
-            get => deadline;
-            set => SetProperty(ref deadline, value);
+            get { return _deadline; }
+            set { ValidateProperty(value); SetProperty(ref _deadline, value); }
         }
 
         public DateTime? Finished
         {
-            get => finished;
-            set => SetProperty(ref finished, value);
+            get { return _finished; }
+            set { ValidateProperty(value); SetProperty(ref _finished, value); }
         }
 
         public int ClientID { get; set; }
@@ -64,8 +64,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Client Client
         {
-            get => client;
-            set => SetProperty(ref client, value);
+            get { return _client; }
+            set { ValidateProperty(value); SetProperty(ref _client, value); }
         }
 
         public int? StateID { get; set; }
@@ -73,8 +73,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual State State
         {
-            get => state;
-            set => SetProperty(ref state, value);
+            get { return _state; }
+            set { ValidateProperty(value); SetProperty(ref _state, value); }
         }
 
         public int? PriorityID { get; set; }
@@ -82,8 +82,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Priority Priority
         {
-            get => priority;
-            set => SetProperty(ref priority, value);
+            get { return _priority; }
+            set { ValidateProperty(value); SetProperty(ref _priority, value); }
         }
 
         #endregion

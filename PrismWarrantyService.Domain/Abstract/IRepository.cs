@@ -21,11 +21,11 @@ namespace PrismWarrantyService.Domain.Abstract
 
         #region Methods
 
-        void AddOrder(Order order);
+        void CreateOrder(Order order);
         void DeleteOrder(Order order);
-        void EditOrder(Order order);
+        void UpdateOrder(Order order);
 
-        void EditClient(Client client);
+        void UpdateClient(Client client);
 
         #endregion
     }

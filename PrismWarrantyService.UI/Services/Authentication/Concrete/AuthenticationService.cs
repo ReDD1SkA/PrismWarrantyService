@@ -12,7 +12,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
     {
         #region Fields
 
-        private IRepository repository;
+        private readonly IRepository _repository;
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         public AuthenticationService(IRepository repo)
         {
-            repository = repo;
+            _repository = repo;
         }
 
         #endregion
@@ -29,9 +29,8 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         public Employee AuthenticateEmployee(string login, string clearTextPassword)
         {
-            Employee employee = repository.Employees
-                .Where(x => x.Login == login)
-                .FirstOrDefault();
+            Employee employee = _repository.Employees
+                .FirstOrDefault(x => x.Login == login);
 
             if (employee == null)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");

@@ -14,8 +14,8 @@ namespace PrismWarrantyService.Domain.Concrete
         #region Fields
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-        private Dictionary<string, List<string>> errors;
-        private object locker;
+        private readonly Dictionary<string, List<string>> _errors;
+        private readonly object _locker;
 
         #endregion
 
@@ -23,8 +23,8 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public ValidatableBindableBase()
         {
-            errors = new Dictionary<string, List<string>>();
-            locker = new object();
+            _errors = new Dictionary<string, List<string>>();
+            _locker = new object();
             // Validate();
         }
 
@@ -32,15 +32,9 @@ namespace PrismWarrantyService.Domain.Concrete
 
         #region Properties
 
-        public bool IsValid
-        {
-            get => !HasErrors;
-        }
+        public bool IsValid => !HasErrors;
 
-        public bool HasErrors
-        {
-            get => errors.Any(propertyErrors => propertyErrors.Value != null && propertyErrors.Value.Count > 0);
-        }
+        public bool HasErrors => _errors.Any(propertyErrors => propertyErrors.Value != null && propertyErrors.Value.Count > 0);
 
         #endregion
 
@@ -50,26 +44,26 @@ namespace PrismWarrantyService.Domain.Concrete
         {
             if (!string.IsNullOrEmpty(propertyName))
             {
-                if (errors.ContainsKey(propertyName) && errors[propertyName] != null && errors[propertyName].Count > 0)
-                    return errors[propertyName].ToList();
+                if (_errors.ContainsKey(propertyName) && _errors[propertyName] != null && _errors[propertyName].Count > 0)
+                    return _errors[propertyName].ToList();
 
                 return null;
             }
 
-            return errors.SelectMany(err => err.Value.ToList());
+            return _errors.SelectMany(err => err.Value.ToList());
         }
 
         public void ValidateProperty(object value, [CallerMemberName] string propertyName = null)
         {
-            lock (locker)
+            lock (_locker)
             {
                 var validationContext = new ValidationContext(this, null, null) { MemberName = propertyName };
                 var validationResults = new List<ValidationResult>();
 
                 Validator.TryValidateProperty(value, validationContext, validationResults);
 
-                if (errors.ContainsKey(propertyName))
-                    errors.Remove(propertyName);
+                if (_errors.ContainsKey(propertyName))
+                    _errors.Remove(propertyName);
                 OnErrorsChanged(propertyName);
 
                 HandleValidationResults(validationResults);
@@ -78,16 +72,16 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public void Validate()
         {
-            lock (locker)
+            lock (_locker)
             {
                 var validationContext = new ValidationContext(this, null, null);
                 var validationResults = new List<ValidationResult>();
 
                 Validator.TryValidateObject(this, validationContext, validationResults, true);
 
-                var propertyNames = errors.Keys.ToList();
-                errors.Clear();
-                propertyNames.ForEach(pn => OnErrorsChanged(pn));
+                var propertyNames = _errors.Keys.ToList();
+                _errors.Clear();
+                propertyNames.ForEach(OnErrorsChanged);
 
                 HandleValidationResults(validationResults);
             }
@@ -103,7 +97,7 @@ namespace PrismWarrantyService.Domain.Concrete
             foreach (var property in resultsByPropertyNames)
             {
                 var messages = property.Select(result => result.ErrorMessage).ToList();
-                errors.Add(property.Key, messages);
+                _errors.Add(property.Key, messages);
                 OnErrorsChanged(property.Key);
             }
         }

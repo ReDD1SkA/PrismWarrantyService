@@ -17,18 +17,12 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         #region Properties
 
-        public string Name { get; private set; }
-        public Role Role { get; private set; }
+        public string Name { get; }
+        public Role Role { get; }
 
-        public string AuthenticationType
-        {
-            get => "Custom authentication";
-        }
+        public string AuthenticationType => "Custom authentication";
 
-        public bool IsAuthenticated
-        {
-            get => Role != null ? true : false;
-        }
+        public bool IsAuthenticated => Role != null;
 
         #endregion
     }

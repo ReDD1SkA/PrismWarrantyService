@@ -7,8 +7,8 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
 
-        private Order order;
-        private Employee employee;
+        private Order _order;
+        private Employee _employee;
 
         #endregion
 
@@ -21,8 +21,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Order Order
         {
-            get => order;
-            set => SetProperty(ref order, value);
+            get { return _order; }
+            set { ValidateProperty(value); SetProperty(ref _order, value); }
         }
 
         public int EmployeeID { get; set; }
@@ -30,8 +30,8 @@ namespace PrismWarrantyService.Domain.Entities
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Employee Employee
         {
-            get => employee;
-            set => SetProperty(ref employee, value);
+            get { return _employee; }
+            set { ValidateProperty(value); SetProperty(ref _employee, value); }
         }
 
         #endregion

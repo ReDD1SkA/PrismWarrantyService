@@ -7,11 +7,11 @@ namespace PrismWarrantyService.Domain.Entities
     {
         #region Fields
 
-        private string name;
-        private string swift;
-        private string address;
-        private string email;
-        private string phoneNumber;
+        private string _name;
+        private string _swift;
+        private string _address;
+        private string _email;
+        private string _phoneNumber;
 
         #endregion
 
@@ -23,8 +23,8 @@ namespace PrismWarrantyService.Domain.Entities
         [StringLength(200, ErrorMessage = "Максимальная длина - 200 символов")]
         public string Name
         {
-            get { return name; }
-            set { ValidateProperty(value); SetProperty(ref name, value); }
+            get { return _name; }
+            set { ValidateProperty(value); SetProperty(ref _name, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -32,16 +32,16 @@ namespace PrismWarrantyService.Domain.Entities
         [RegularExpression(@"^[A-Z]{6}[A-Z,0-9]{5}$", ErrorMessage = "Неверный формат SWIFT-кода")]
         public string Swift
         {
-            get { return swift; }
-            set { ValidateProperty(value); SetProperty(ref swift, value); }
+            get { return _swift; }
+            set { ValidateProperty(value); SetProperty(ref _swift, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(200, ErrorMessage = "Максимальная длина - 200 символов")]
         public string Address
         {
-            get { return address; }
-            set { ValidateProperty(value); SetProperty(ref address, value); }
+            get { return _address; }
+            set { ValidateProperty(value); SetProperty(ref _address, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -49,8 +49,8 @@ namespace PrismWarrantyService.Domain.Entities
         [StringLength(30, ErrorMessage = "Максимальная длина - 30 символов")]
         public string Email
         {
-            get { return email; }
-            set { ValidateProperty(value); SetProperty(ref email, value); }
+            get { return _email; }
+            set { ValidateProperty(value); SetProperty(ref _email, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -58,8 +58,8 @@ namespace PrismWarrantyService.Domain.Entities
         [RegularExpression(@"^\d{3}-\d{2}-\d{3}-\d{2}-\d{2}$", ErrorMessage = "Формат номера: XXX-XX-XXX-XX-XX")]
         public string PhoneNumber
         {
-            get { return phoneNumber; }
-            set { ValidateProperty(value); SetProperty(ref phoneNumber, value); }
+            get { return _phoneNumber; }
+            set { ValidateProperty(value); SetProperty(ref _phoneNumber, value); }
         }
 
         #endregion

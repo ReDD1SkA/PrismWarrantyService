@@ -13,7 +13,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
     {
         #region Fields
 
-        private NavigationItemViewModel selectedItem;
+        private NavigationItemViewModel _selectedItem;
 
         #endregion
 
@@ -38,17 +38,17 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         public NavigationItemViewModel SelectedItem
         {
-            get => selectedItem;
-            set => SetProperty(ref selectedItem, value);
+            get => _selectedItem;
+            set => SetProperty(ref _selectedItem, value);
         }
 
-        public ObservableCollection<NavigationItemViewModel> NavigationItems { get; private set; }
+        public ObservableCollection<NavigationItemViewModel> NavigationItems { get; }
 
         #endregion
 
         #region Commands
 
-        public DelegateCommand<NavigationItemViewModel> NavigateCommand { get; private set; }
+        public DelegateCommand<NavigationItemViewModel> NavigateCommand { get; }
 
         #endregion
 

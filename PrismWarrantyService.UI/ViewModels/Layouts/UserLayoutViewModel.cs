@@ -1,6 +1,7 @@
 ﻿using Prism.Regions;
 using PrismWarrantyService.UI.Views.Navigation;
-using PrismWarrantyService.UI.Views.User.Orders;
+using UserOrderDetailsView = PrismWarrantyService.UI.Views.Orders.User.UserOrderDetailsView;
+using UserOrdersView = PrismWarrantyService.UI.Views.Orders.User.UserOrdersView;
 
 namespace PrismWarrantyService.UI.ViewModels.Layouts
 {
