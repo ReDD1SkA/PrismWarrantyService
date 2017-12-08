@@ -7,7 +7,9 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
+    <GroupBox Style="{StaticResource MaterialDesignGroupBox}"
+              materialDesign:ShadowAssist.ShadowDepth="Depth3"
+              BorderThickness="0"
               Header="Заказ: детали"
               Height="310">
         <Grid>

@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
-    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}"
+    <GroupBox Style="{StaticResource MaterialDesignGroupBox}"
+              materialDesign:ShadowAssist.ShadowDepth="Depth3"
+              BorderThickness="0"
               Header="Клиент: новый"
               Height="245">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="16"/>
                 <RowDefinition Height="Auto"/>

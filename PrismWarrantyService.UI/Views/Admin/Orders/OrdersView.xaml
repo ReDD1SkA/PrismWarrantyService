@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ordersViews:OrderListFiltersView Margin="16,0,16,0"
-            Grid.Row="0"/>
+                                          Grid.Row="0"/>
         <ordersViews:OrderListView Grid.Row="2"/>
         <ordersViews:OrderButtonsView Grid.Row="4"/>
     </Grid>
