@@ -90,6 +90,7 @@
                     <DatePicker SelectedDate="{Binding SelectedOrder.Deadline}"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                                 materialDesign:HintAssist.Hint="Дедлайн"
+                                Margin="0,8,0,0"
                                 Grid.Row="6"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="3" />
@@ -123,8 +124,8 @@
                 Grid.Row="2"
                 Grid.Column="0">
         </Button>
-        <Button Command="{Binding DeleteOrderCommand}"
-                Content="Удалить"
+        <Button Command="{Binding UndoOrderCommand}"
+                Content="Отмена"
                 Grid.Row="2"
                 Grid.Column="2">
         </Button>

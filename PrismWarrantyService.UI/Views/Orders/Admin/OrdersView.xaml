@@ -3,16 +3,168 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders.Admin"
+             xmlns:converters="clr-namespace:PrismWarrantyService.UI.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:OrderDateTimeToDateConverter x:Key="OrderDateTimeToDateConverter" />
+        <ItemContainerTemplate x:Key="OrderItemTemplate">
+            <Border Padding="0,0,0,8"
+				    BorderBrush="{DynamicResource MaterialDesignDivider}"
+				    BorderThickness="0,0,0,1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="0,7*"/>
+                        <ColumnDefinition Width="0,3*"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Margin="8,0,16,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.RowSpan="4">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding DataContext.OrderCheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding DataContext.OrderUncheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <TextBlock Text="{Binding OrderID, StringFormat={}№{0}}"
+                               FontSize="18"
+                               Margin="0,0,8,0"
+                               VerticalAlignment="Center"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Grid.RowSpan="2"/>
+                    <TextBlock Text="{Binding State, StringFormat={}{0} заказ}"
+                               Grid.Row="0"
+                               Grid.Column="2"/>
+                    <TextBlock Text="{Binding Priority, StringFormat={}{0} приоритет}"
+                               Grid.Row="1"
+                               Grid.Column="2"/>
+                    <TextBlock Text="{Binding Accepted, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Принят: {0}}"
+                        TextAlignment="Right"
+                        Grid.Row="0"
+                        Grid.Column="3"/>
+                    <TextBlock Text="{Binding Finished, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Завершен: {0}}"
+                        TextAlignment="Right"
+                        Grid.Row="1"
+                        Grid.Column="3"/>
+                    <TextBlock Text="{Binding Summary}"
+                        FontSize="18"
+                        VerticalAlignment="Bottom"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"/>
+                    <TextBlock TextAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontSize="14"
+                        Grid.Row="3"
+                        Grid.Column="3">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1})">
+                                <Binding Path="Client.Name"/>
+                                <Binding Path="Client.Company.Name"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </ItemContainerTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <local:OrderListFiltersView Grid.Row="0"/>
-        <local:OrderListView Grid.Row="1"/>
+        <GroupBox BorderThickness="0"
+                  Grid.Row="0">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="FormatListBulleted"
+                                         Foreground="{StaticResource MaterialDesignBackground}"
+                                         Margin="0,0,4,0"/>
+                    <TextBlock Text="Список заказов"
+                           Foreground="{StaticResource MaterialDesignBackground}"/>
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="150"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Grid.Column="0">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Magnify"
+                                             Margin="0,0,4,0"/>
+                            <TextBlock Text="Поиск по названию"/>
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+                <ComboBox ItemsSource="{Binding SortProperties}"
+                  SelectedItem="{Binding SortProperty}"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  materialDesign:HintAssist.Hint="Сортировка"
+                  Grid.Column="2"/>
+                <ComboBox ItemsSource="{Binding SortDirections}"
+                  SelectedItem="{Binding SortDirection}"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                  materialDesign:HintAssist.Hint="Направление"
+                  Grid.Column="4"/>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding Orders}"
+                      SelectedItem="{Binding SelectedOrder}"
+                      ItemTemplate="{StaticResource OrderItemTemplate}"
+                      Validation.ErrorTemplate="{x:Null}"
+                      HorizontalContentAlignment="Stretch"
+                      Grid.Row="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding OrderSelectionChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Grid.Row="1">
+                <Button Command="{Binding CreateOrderCommand}"
+                        Margin="0,16,16,0">
+                    <materialDesign:PackIcon Kind="Plus" />
+                </Button>
+                <Button Command="{Binding DeleteOrderCommand}"
+                        Margin="0, 16, 0, 0">
+                    <materialDesign:PackIcon Kind="Delete" />
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

@@ -107,7 +107,6 @@
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
     <Compile Include="Events\Companies\CompanyAddedEvent.cs" />
     <Compile Include="Events\Orders\OrderCreatedEvent.cs" />
-    <Compile Include="Events\Orders\OrderDeletedEvent.cs" />
     <Compile Include="Events\Orders\OrderSelectionChangedEvent.cs" />
     <Compile Include="Services\Authentication\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\AnonymousIdentity.cs" />
@@ -175,12 +174,6 @@
     </Compile>
     <Compile Include="Views\Orders\Admin\OrderDetailsView.xaml.cs">
       <DependentUpon>OrderDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\Admin\OrderListFiltersView.xaml.cs">
-      <DependentUpon>OrderListFiltersView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\Admin\OrderListView.xaml.cs">
-      <DependentUpon>OrderListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\Admin\OrdersView.xaml.cs">
       <DependentUpon>OrdersView.xaml</DependentUpon>
@@ -263,14 +256,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Orders\Admin\OrderDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\Admin\OrderListFiltersView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\Admin\OrderListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

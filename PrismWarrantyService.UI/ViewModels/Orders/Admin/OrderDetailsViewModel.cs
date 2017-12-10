@@ -33,7 +33,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
             // Commands init
             UpdateOrderCommand = new DelegateCommand(UpdateOrder);
-            DeleteOrderCommand = new DelegateCommand(DeleteOrder);
+            UndoOrderCommand = new DelegateCommand(UndoOrder);
         }
 
         #endregion
@@ -61,7 +61,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         #region Commands
 
         public DelegateCommand UpdateOrderCommand { get; }
-        public DelegateCommand DeleteOrderCommand { get; }
+        public DelegateCommand UndoOrderCommand { get; }
 
         #endregion
 
@@ -79,10 +79,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             await Task.Run(() => repository.UpdateOrder(OriginOfSelectedOrder));
         }
 
-        private async void DeleteOrder()
+        private void UndoOrder()
         {
-            await Task.Run(() => repository.DeleteOrder(OriginOfSelectedOrder));
-            eventAggregator.GetEvent<OrderDeletedEvent>().Publish(OriginOfSelectedOrder);
+            SelectedOrder = OriginOfSelectedOrder.Clone();
         }
 
         // Event handlers

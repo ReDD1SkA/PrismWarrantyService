@@ -20,11 +20,11 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         // Orders fields
         private Order _selectedOrder;
-
+        
         // Sort-filter fields
         private string _filterText;
-        private SortPropertyViewModel _sortProperty = new SortPropertyViewModel() { Name = "ID", Property = "OrderID" };
-        private SortDirectionViewModel _sortDirection = new SortDirectionViewModel() { Name = "По возрастанию", Direction = ListSortDirection.Ascending };
+        private SortPropertyViewModel _sortProperty = new SortPropertyViewModel { Name = "ID", Property = "OrderID" };
+        private SortDirectionViewModel _sortDirection = new SortDirectionViewModel { Name = "По возрастанию", Direction = ListSortDirection.Ascending };
 
         #endregion
 
@@ -36,6 +36,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             // Orders properties init
             Orders = new ListCollectionView(repository.Orders.ToList());
             SelectedOrder = Orders.CurrentItem as Order;
+            CheckedOrders = new List<Order>();
 
             // Sort-filters properties init
             SortProperties = new[]
@@ -43,7 +44,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
                 SortProperty,
                 new SortPropertyViewModel { Name = "Заказ", Property = "Summary" },
                 new SortPropertyViewModel { Name = "Принят", Property = "Accepted"},
-                new SortPropertyViewModel { Name = "Завершен", Property = "Finished"}
+                new SortPropertyViewModel { Name = "Завершен", Property = "Finished"},
+                new SortPropertyViewModel { Name = "Приоритет", Property = "PriorityID"},
+                new SortPropertyViewModel { Name = "Статус", Property = "StateID"}
             };
 
             SortDirections = new[]
@@ -57,12 +60,14 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
             // Commands init
             CreateOrderCommand = new DelegateCommand(CreateOrder);
+            DeleteOrderCommand = new DelegateCommand(DeleteOrder);
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
+            OrderCheckedCommand = new DelegateCommand<Order>(OrderChecked);
+            OrderUncheckedCommand = new DelegateCommand<Order>(OrderUnchecked);
 
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
             eventAggregator.GetEvent<OrderCreatedEvent>().Subscribe(OrderCreatedEventHandler);
-            eventAggregator.GetEvent<OrderDeletedEvent>().Subscribe(OrderDeletedEventHandler);
         }
 
         #endregion
@@ -77,6 +82,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             get => _selectedOrder;
             set => SetProperty(ref _selectedOrder, value);
         }
+
+        public List<Order> CheckedOrders { get; set; }
 
         // Sort-filter properties
         public IEnumerable<SortPropertyViewModel> SortProperties { get; }
@@ -106,7 +113,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         #region Commands
 
         public DelegateCommand CreateOrderCommand { get; }
+        public DelegateCommand DeleteOrderCommand { get; }
         public DelegateCommand OrderSelectionChangedCommand { get; }
+        public DelegateCommand<Order> OrderCheckedCommand { get; }
+        public DelegateCommand<Order> OrderUncheckedCommand { get; }
 
         #endregion
 
@@ -116,6 +126,30 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         private void CreateOrder()
         {
             regionManager.RequestNavigate("Admin.DetailsRegion", "CreateOrderView");
+        }
+
+        private async void DeleteOrder()
+        {
+            if (CheckedOrders.Count == 0)
+                return;
+
+            foreach (var order in CheckedOrders )
+            {
+                Orders.Remove(order);
+                await Task.Run(() => repository.DeleteOrder(order));
+            }
+            CheckedOrders.Clear();
+        }
+
+        private void OrderChecked(Order parameter)
+        {
+            CheckedOrders.Add(parameter);
+        }
+
+        private void OrderUnchecked(Order parameter)
+        {
+
+            CheckedOrders.Remove(parameter);
         }
 
         // Event handlers
@@ -130,12 +164,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             Orders.AddNewItem(parameter);
             Orders.CommitNew();
             SelectedOrder = parameter;
-        }
-
-        private void OrderDeletedEventHandler(Order parameter)
-        {
-            Orders.Remove(parameter);
-            SelectedOrder = Orders.GetItemAt(0) as Order;
         }
 
         // Sort-filter methods
