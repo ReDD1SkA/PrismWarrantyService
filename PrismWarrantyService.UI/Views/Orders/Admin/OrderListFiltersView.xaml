@@ -7,7 +7,17 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <Grid>
+    <GroupBox BorderThickness="0">
+        <GroupBox.Header>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FormatListBulleted"
+                                         Foreground="{StaticResource MaterialDesignBackground}"
+                                         Margin="0,0,4,0"/>
+                <TextBlock Text="Список заказов"
+                           Foreground="{StaticResource MaterialDesignBackground}"/>
+            </StackPanel>
+        </GroupBox.Header>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="150"/>
             <ColumnDefinition Width="16"/>
@@ -37,4 +47,5 @@
                   materialDesign:HintAssist.Hint="Направление"
                   Grid.Column="4"/>
     </Grid>
+    </GroupBox>
 </UserControl>

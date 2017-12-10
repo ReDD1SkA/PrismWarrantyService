@@ -57,12 +57,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
             // Commands init
             CreateOrderCommand = new DelegateCommand(CreateOrder);
-            DeleteOrderCommand = new DelegateCommand<Order>(DeleteOrder);
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<OrderAddedEvent>().Subscribe(OrderAddedEventHandler);
+            eventAggregator.GetEvent<OrderCreatedEvent>().Subscribe(OrderCreatedEventHandler);
+            eventAggregator.GetEvent<OrderDeletedEvent>().Subscribe(OrderDeletedEventHandler);
         }
 
         #endregion
@@ -106,7 +106,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         #region Commands
 
         public DelegateCommand CreateOrderCommand { get; }
-        public DelegateCommand<Order> DeleteOrderCommand { get; }
         public DelegateCommand OrderSelectionChangedCommand { get; }
 
         #endregion
@@ -119,25 +118,24 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             regionManager.RequestNavigate("Admin.DetailsRegion", "CreateOrderView");
         }
 
-        private async void DeleteOrder(Order parameter)
-        {
-            SelectedOrder = Orders.GetItemAt(0) as Order;
-            Orders.Remove(parameter);
-            await Task.Run(() => repository.DeleteOrder(parameter));
-        }
-
         // Event handlers
         private void OrderSelectionChanged()
         {
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
+            if (SelectedOrder != null) eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 
-        private void OrderAddedEventHandler(Order parameter)
+        private void OrderCreatedEventHandler(Order parameter)
         {
             Orders.AddNewItem(parameter);
             Orders.CommitNew();
             SelectedOrder = parameter;
+        }
+
+        private void OrderDeletedEventHandler(Order parameter)
+        {
+            Orders.Remove(parameter);
+            SelectedOrder = Orders.GetItemAt(0) as Order;
         }
 
         // Sort-filter methods

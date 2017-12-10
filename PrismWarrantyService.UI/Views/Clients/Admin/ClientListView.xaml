@@ -7,6 +7,7 @@
              mc:Ignorable="d">
     <ListView ItemsSource="{Binding Clients}"
               SelectedItem="{Binding SelectedClient}"
+              Validation.ErrorTemplate="{x:Null}"
               HorizontalContentAlignment="Stretch">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="SelectionChanged">

@@ -4,20 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
-             prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders.Admin"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
             <RowDefinition/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <local:OrderListFiltersView Margin="16,0,16,0"
-                                          Grid.Row="0"/>
-        <local:OrderListView Grid.Row="2"/>
-        <local:OrderButtonsView Grid.Row="4"/>
+        <local:OrderListFiltersView Grid.Row="0"/>
+        <local:OrderListView Grid.Row="1"/>
     </Grid>
 </UserControl>

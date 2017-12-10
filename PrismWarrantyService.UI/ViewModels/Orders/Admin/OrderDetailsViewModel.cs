@@ -24,23 +24,23 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         public OrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
-
-            EditOrderCommand = new DelegateCommand(EditOrder);
-
+            // Properties init
             States = new ObservableCollection<State>(repository.States);
             Priorities = new ObservableCollection<Priority>(repository.Priorities);
 
-            OriginalSelectedOrder = repository.Orders
-                .FirstOrDefault();
-            SelectedOrder = OriginalSelectedOrder.Clone();
+            // Events init
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
+
+            // Commands init
+            UpdateOrderCommand = new DelegateCommand(UpdateOrder);
+            DeleteOrderCommand = new DelegateCommand(DeleteOrder);
         }
 
         #endregion
 
         #region Properties
 
-        public Order OriginalSelectedOrder
+        public Order OriginOfSelectedOrder
         {
             get => _originalSelectedOrder;
             set => SetProperty(ref _originalSelectedOrder, value);
@@ -60,26 +60,35 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         #region Commands
 
-        public DelegateCommand EditOrderCommand { get; }
+        public DelegateCommand UpdateOrderCommand { get; }
+        public DelegateCommand DeleteOrderCommand { get; }
 
         #endregion
 
         #region Methods
 
-        private async void EditOrder()
+        // CRUD methods
+        private async void UpdateOrder()
         {
             SelectedOrder.Validate();
             if (SelectedOrder.HasErrors)
                 return;
 
-            OriginalSelectedOrder.GetInfoFrom(SelectedOrder);
+            OriginOfSelectedOrder.GetInfoFrom(SelectedOrder);
 
-            await Task.Run(() => repository.UpdateOrder(OriginalSelectedOrder));
+            await Task.Run(() => repository.UpdateOrder(OriginOfSelectedOrder));
         }
 
+        private async void DeleteOrder()
+        {
+            await Task.Run(() => repository.DeleteOrder(OriginOfSelectedOrder));
+            eventAggregator.GetEvent<OrderDeletedEvent>().Publish(OriginOfSelectedOrder);
+        }
+
+        // Event handlers
         private void OrderSelectionChangedEventHandler(Order parameter)
         {
-            OriginalSelectedOrder = parameter;
+            OriginOfSelectedOrder = parameter;
             SelectedOrder = parameter.Clone();
         }
 

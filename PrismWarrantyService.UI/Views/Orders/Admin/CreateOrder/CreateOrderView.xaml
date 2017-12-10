@@ -8,43 +8,58 @@
              xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders.Admin.CreateOrder"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Visible"
-                  Padding="0,0,8,0">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="16"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <local:CreateOrderOrderDetailsView
-                     Grid.Row="0"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"/>
-            <UserControl prism:RegionManager.RegionName="Admin.CreateOrder.SelectOrderClientRegion"
-                     Grid.Row="2"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"/>
-            <UserControl prism:RegionManager.RegionName="Admin.CreateOrder.SelectClientCompanyRegion"
-                     Grid.Row="4"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"/>
-            <Button Command="{Binding SaveCommand}"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="16"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Padding="0,0,8,0"
+                      Grid.Row="0"
+                      Grid.Column="0"
+                      Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="16"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="16"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="16"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <local:CreateOrderOrderDetailsView
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"/>
+                <UserControl prism:RegionManager.RegionName="Admin.CreateOrder.SelectOrderClientRegion"
+                         Grid.Row="2"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"/>
+                <UserControl prism:RegionManager.RegionName="Admin.CreateOrder.SelectClientCompanyRegion"
+                         Grid.Row="4"
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"/>
+            </Grid>
+        </ScrollViewer>
+        <Button Command="{Binding SaveCommand}"
                 Content="Сохранить"
-                Grid.Row="6"
+                Grid.Row="2"
                 Grid.Column="0"/>
-            <Button Command="{Binding CancelCommand}"
+        <Button Command="{Binding CancelCommand}"
                 Content="Отмена"
-                Grid.Row="6"
+                Grid.Row="2"
                 Grid.Column="2"/>
-        </Grid>
-    </ScrollViewer>
+    </Grid>
 </UserControl>

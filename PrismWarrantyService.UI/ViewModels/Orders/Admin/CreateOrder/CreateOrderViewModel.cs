@@ -160,7 +160,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                 }
 
                 repository.CreateOrder(NewOrder);
-                eventAggregator.GetEvent<OrderAddedEvent>().Publish(NewOrder);
+                eventAggregator.GetEvent<OrderCreatedEvent>().Publish(NewOrder);
 
                 NewOrder = new Order { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
                 NewClient = new Client { Company = Companies.FirstOrDefault() };

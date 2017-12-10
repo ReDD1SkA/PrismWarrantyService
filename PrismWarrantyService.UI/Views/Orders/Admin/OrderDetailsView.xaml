@@ -1,88 +1,132 @@
 ﻿<UserControl x:Class="PrismWarrantyService.UI.Views.Orders.Admin.OrderDetailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:PrismWarrantyService.UI.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  Padding="0,0,8,0">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="16"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding SelectedOrder.Summary}"
-	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Заказ"
-                     Grid.Row="0"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"/>
-            <ComboBox ItemsSource="{Binding Priorities}"
-                      SelectedItem="{Binding SelectedOrder.Priority}"
-                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                      materialDesign:HintAssist.Hint="Приоритет"
-                      Grid.Row="2"
-                      Grid.Column="0"/>
-            <ComboBox ItemsSource="{Binding States}"
-                      SelectedItem="{Binding SelectedOrder.State}"
-                      Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                      materialDesign:HintAssist.Hint="Статус"
-                      Grid.Row="2"
-                      Grid.Column="2"/>
-            <DatePicker SelectedDate="{Binding SelectedOrder.Deadline}"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        materialDesign:HintAssist.Hint="Дедлайн"
+    <UserControl.Resources>
+        <converters:OrderDateTimeToDateConverter x:Key="OrderDateTimeToDateConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="16"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Padding="0,0,8,0"
+                      Grid.Row="0"
+                      Grid.ColumnSpan="3">
+            <GroupBox BorderThickness="0">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="{StaticResource MaterialDesignBackground}"
+                                                 Kind="LibraryBooks"
+                                                 Margin="0,0,4,0" />
+                        <TextBlock Foreground="{StaticResource MaterialDesignBackground}"
+                                   Text="Детали заказа"/>
+                    </StackPanel>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding SelectedOrder.Summary}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Заказ"
+                             Grid.Row="0"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="3" />
+                    <ComboBox ItemsSource="{Binding Priorities}"
+                              SelectedItem="{Binding SelectedOrder.Priority}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="Приоритет"
+                              Grid.Row="2"
+                              Grid.Column="0" />
+                    <ComboBox ItemsSource="{Binding States}"
+                              SelectedItem="{Binding SelectedOrder.State}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="Статус"
+                              Grid.Row="2"
+                              Grid.Column="2" />
+                    <TextBox
+                        Text="{Binding SelectedOrder.Accepted, Converter={StaticResource OrderDateTimeToDateConverter}}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Принят"
+                        IsReadOnly="True"
                         Grid.Row="4"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="3"/>
-            <TextBox Text="{Binding SelectedOrder.Description}"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Описание"
-                     Grid.Row="6"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"
-                     VerticalAlignment="Stretch"
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"/>
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Клиент"
-                     Grid.Row="8"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="3"
-                     IsReadOnly="True">
-                <TextBox.Text>
-                    <MultiBinding StringFormat="{}{0} ({1})">
-                        <Binding Path="SelectedOrder.Client.Name"/>
-                        <Binding Path="SelectedOrder.Client.Company.Name"/>
-                    </MultiBinding>
-                </TextBox.Text>
-            </TextBox>
-            <Button Command="{Binding EditOrderCommand}"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                    HorizontalAlignment="Right"
-                    Margin="0, 0, 16, 0"
-                    Grid.Row="10"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3">
-                <materialDesign:PackIcon Kind="BorderColor" />
-            </Button>
-        </Grid>
-    </ScrollViewer>
+                        Grid.Column="0" />
+                    <TextBox
+                        Text="{Binding SelectedOrder.Finished, Converter={StaticResource OrderDateTimeToDateConverter}}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Завершен"
+                        IsReadOnly="True"
+                        Grid.Row="4"
+                        Grid.Column="2" />
+                    <DatePicker SelectedDate="{Binding SelectedOrder.Deadline}"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                materialDesign:HintAssist.Hint="Дедлайн"
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="3" />
+                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Клиент"
+                             Grid.Row="8"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="3"
+                             IsReadOnly="True">
+                        <TextBox.Text>
+                            <MultiBinding StringFormat="{}{0} ({1})">
+                                <Binding Path="SelectedOrder.Client.Name" />
+                                <Binding Path="SelectedOrder.Client.Company.Name" />
+                            </MultiBinding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Text="{Binding SelectedOrder.Description}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Описание"
+                             Grid.Row="10"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="3"
+                             VerticalAlignment="Stretch"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap" />
+                </Grid>
+            </GroupBox>
+        </ScrollViewer>
+        <Button Command="{Binding UpdateOrderCommand}"
+                Content="Сохранить"
+                Grid.Row="2"
+                Grid.Column="0">
+        </Button>
+        <Button Command="{Binding DeleteOrderCommand}"
+                Content="Удалить"
+                Grid.Row="2"
+                Grid.Column="2">
+        </Button>
+    </Grid>
 </UserControl>

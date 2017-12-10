@@ -101,11 +101,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Converters\OrderDateTimeToDateConverter.cs" />
     <Compile Include="Events\Authentication\AuthenticationEvent.cs" />
     <Compile Include="Events\Clients\ClientAddedEvent.cs" />
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
     <Compile Include="Events\Companies\CompanyAddedEvent.cs" />
-    <Compile Include="Events\Orders\OrderAddedEvent.cs" />
+    <Compile Include="Events\Orders\OrderCreatedEvent.cs" />
+    <Compile Include="Events\Orders\OrderDeletedEvent.cs" />
     <Compile Include="Events\Orders\OrderSelectionChangedEvent.cs" />
     <Compile Include="Services\Authentication\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\AnonymousIdentity.cs" />
@@ -170,9 +172,6 @@
     </Compile>
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderView.xaml.cs">
       <DependentUpon>CreateOrderView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\Admin\OrderButtonsView.xaml.cs">
-      <DependentUpon>OrderButtonsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\Admin\OrderDetailsView.xaml.cs">
       <DependentUpon>OrderDetailsView.xaml</DependentUpon>
@@ -260,10 +259,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Orders\Admin\CreateOrder\CreateOrderView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\Admin\OrderButtonsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
