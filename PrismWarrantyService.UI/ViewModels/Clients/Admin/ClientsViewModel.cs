@@ -11,6 +11,7 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Clients;
+using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
@@ -35,7 +36,9 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             : base(regionManager, eventAggregator, repository)
         {
             // Clients properties init
-            Clients = new ListCollectionView(repository.Clients.ToList());
+            ClientsSource = new ObservableCollection<Client>(repository.Clients);
+            Clients = new ListCollectionView(ClientsSource);
+
             SelectedClient = Clients.CurrentItem as Client;
             CheckedClients = new List<Client>();
 
@@ -68,7 +71,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
             // Events init
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
-            eventAggregator.GetEvent<ClientCreatedEvent>().Subscribe(ClientAddedEventHandler);
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -77,6 +80,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         // Clients properties
         public ListCollectionView Clients { get; set; }
+
+        public ObservableCollection<Client> ClientsSource { get; }
 
         public Client SelectedClient
         {
@@ -87,7 +92,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         public List<Client> CheckedClients { get; set; }
 
         // Client order properties
-        public ObservableCollection<Order> ClientOrders { get; set; }
+        public ObservableCollection<Order> ClientOrders { get; }
 
         // Sort-filter properties
         public IEnumerable<SortPropertyViewModel> SortProperties { get; }
@@ -139,13 +144,14 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
             foreach (var client in CheckedClients)
             {
-                eventAggregator.GetEvent<ClientDeletedEvent>().Publish(client);
-
-                Clients.Remove(client);
                 ClientOrders.Clear();
+                Clients.Remove(client);
+                
                 await Task.Run(() => repository.DeleteClient(client));
             }
             CheckedClients.Clear();
+
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
         }
 
         private void ClientChecked(Client parameter)
@@ -171,11 +177,17 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
         }
 
-        private void ClientAddedEventHandler(Client newClient)
+        private void NeedRefreshListsEventHandler()
         {
-            Clients.AddNewItem(newClient);
-            Clients.CommitNew();
-            SelectedClient = Clients.CurrentItem as Client;
+            ClientsSource.Clear();
+            ClientOrders.Clear();
+            CheckedClients.Clear();
+
+            ClientsSource.AddRange(repository.Clients);
+            SelectedClient = Clients.GetItemAt(0) as Client;
+            ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+
+            RefreshSort();
         }
 
         // Sort-filter methods
@@ -193,7 +205,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             if (!(obj is Client client)) return false;
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
-            return client.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1 || client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
+            return client.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1 ||
+                client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
         }
 
         #endregion

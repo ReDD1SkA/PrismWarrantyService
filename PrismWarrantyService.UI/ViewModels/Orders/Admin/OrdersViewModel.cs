@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using Prism.Commands;
@@ -10,7 +9,7 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Clients;
+using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
@@ -36,7 +35,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             : base(regionManager, eventAggregator, repository)
         {
             // Orders properties init
-            Orders = new ListCollectionView(repository.Orders.ToList());
+            
+            OrdersSource = new ObservableCollection<Order>(repository.Orders);
+            Orders = new ListCollectionView(OrdersSource);
+
             SelectedOrder = Orders.CurrentItem as Order;
             CheckedOrders = new List<Order>();
 
@@ -69,9 +71,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<OrderCreatedEvent>().Subscribe(OrderCreatedEventHandler);
-            eventAggregator.GetEvent<OrderDeletedEvent>().Subscribe(OrderDeletedEventHandler);
-            eventAggregator.GetEvent<ClientDeletedEvent>().Subscribe(ClientDeletedEventHandler);
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -80,6 +80,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         // Orders properties
         public ListCollectionView Orders { get; set; }
+
+        public ObservableCollection<Order> OrdersSource { get; }
 
         public Order SelectedOrder
         {
@@ -152,7 +154,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         private void OrderUnchecked(Order parameter)
         {
-
             CheckedOrders.Remove(parameter);
         }
 
@@ -163,25 +164,15 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 
-        private void OrderCreatedEventHandler(Order parameter)
+        private void NeedRefreshListsEventHandler()
         {
-            Orders.AddNewItem(parameter);
-            Orders.CommitNew();
-            SelectedOrder = parameter;
-        }
+            OrdersSource.Clear();
+            OrdersSource.AddRange(repository.Orders);
 
-        private void OrderDeletedEventHandler(Order parameter)
-        {
-            Orders.Remove(parameter);
-        }
+            CheckedOrders.Clear();
+            SelectedOrder = Orders.GetItemAt(0) as Order;
 
-        private void ClientDeletedEventHandler(Client parameter)
-        {
-            var clientOrders = repository.Orders
-                .Where(x => x.ClientID == parameter.ClientID);
-
-            foreach (var order in clientOrders)
-                Orders.Remove(order);
+            RefreshSort();
         }
 
         // Sort-filter methods
@@ -197,7 +188,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         private bool FilterBySummary(object obj)
         {
             if (!(obj is Order order)) return false;
-            if (string.IsNullOrWhiteSpace(FilterText)) return true;;
+            if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
             return order.Summary.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
         }

@@ -27,7 +27,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             : base(regionManager, eventAggregator, repository)
         {
             // Properties init
-            SelectedOrder = repository.Orders.FirstOrDefault();
+            OriginOfSelectedOrder = repository.Orders.First();
+            SelectedOrder = OriginOfSelectedOrder.Clone();
+
             States = new ObservableCollection<State>(repository.States);
             Priorities = new ObservableCollection<Priority>(repository.Priorities);
 

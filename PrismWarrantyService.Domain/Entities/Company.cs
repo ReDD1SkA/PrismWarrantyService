@@ -66,6 +66,27 @@ namespace PrismWarrantyService.Domain.Entities
 
         #region Methods
 
+        public Company Clone()
+        {
+            return new Company()
+            {
+                Name = Name,
+                Swift = Swift,
+                Address = Address,
+                Email = Email,
+                PhoneNumber = PhoneNumber
+            };
+        }
+
+        public void GetInfoFrom(Company donator)
+        {
+            Name = donator.Name;
+            Swift = donator.Swift;
+            Address = donator.Address;
+            Email = donator.Email;
+            PhoneNumber = donator.PhoneNumber;
+        }
+
         public override string ToString()
         {
             return Name;

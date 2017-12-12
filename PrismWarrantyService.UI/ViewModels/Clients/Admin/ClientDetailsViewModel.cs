@@ -15,7 +15,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         #region Fields
 
         // Order fields
-        private Client _originalSelectedClient;
+        private Client _originOfSelectedClient;
         private Client _selectedClient;
 
         #endregion
@@ -26,7 +26,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             : base(regionManager, eventAggregator, repository)
         {         
             // Properties init
-            SelectedClient = repository.Clients.FirstOrDefault();
+            OriginOfSelectedClient = repository.Clients.First();
+            SelectedClient = OriginOfSelectedClient.Clone();
 
             // Events init
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler);
@@ -41,10 +42,10 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         #region Properties
 
         // Client properties
-        public Client OriginalSelectedClient
+        public Client OriginOfSelectedClient
         {
-            get => _originalSelectedClient;
-            set => SetProperty(ref _originalSelectedClient, value);
+            get => _originOfSelectedClient;
+            set => SetProperty(ref _originOfSelectedClient, value);
         }
 
         public Client SelectedClient
@@ -71,20 +72,20 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             if (SelectedClient.HasErrors)
                 return;
 
-            OriginalSelectedClient.GetInfoFrom(SelectedClient);
+            OriginOfSelectedClient.GetInfoFrom(SelectedClient);
 
-            await Task.Run(() => repository.UpdateClient(OriginalSelectedClient));
+            await Task.Run(() => repository.UpdateClient(OriginOfSelectedClient));
         }
 
         private void UndoClient()
         {
-            SelectedClient = OriginalSelectedClient.Clone();
+            SelectedClient = OriginOfSelectedClient.Clone();
         }
 
         // Event handlers
         private void ClientSelectionChangedEventHandler(Client parameter)
         {
-            OriginalSelectedClient = parameter;
+            OriginOfSelectedClient = parameter;
             SelectedClient = parameter.Clone();
         }
 

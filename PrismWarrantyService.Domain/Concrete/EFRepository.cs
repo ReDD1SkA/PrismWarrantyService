@@ -16,58 +16,35 @@ namespace PrismWarrantyService.Domain.Concrete
 
         #region Properties
 
-        public IQueryable<Client> Clients
-        {
-            get => _context.Clients
-                .Include(x => x.Company);
-        }
+        public IQueryable<Client> Clients => _context.Clients
+            .Include(x => x.Company);
 
-        public IQueryable<Company> Companies
-        {
-            get => _context.Companies;
-        }
+        public IQueryable<Company> Companies => _context.Companies;
 
-        public IQueryable<Employee> Employees
-        {
-            get => _context.Employees
-                .Include(x => x.Role);
-        }
+        public IQueryable<Employee> Employees => _context.Employees
+            .Include(x => x.Role);
 
-        public IQueryable<Order> Orders
-        {
-            get => _context.Orders
-                .Include(x => x.Client)
-                .Include(x => x.Client.Company)
-                .Include(x => x.State)
-                .Include(x => x.Priority);
-        }
+        public IQueryable<Order> Orders => _context.Orders
+            .Include(x => x.Client)
+            .Include(x => x.Client.Company)
+            .Include(x => x.State)
+            .Include(x => x.Priority);
 
-        public IQueryable<Performer> Performers
-        {
-            get => _context.Performers
-                .Include(x => x.Order)
-                .Include(x => x.Employee);
-        }
+        public IQueryable<Performer> Performers => _context.Performers
+            .Include(x => x.Order)
+            .Include(x => x.Employee);
 
-        public IQueryable<Priority> Priorities
-        {
-            get => _context.Priorities;
-        }
+        public IQueryable<Priority> Priorities => _context.Priorities;
 
-        public IQueryable<State> States
-        {
-            get => _context.States;
-        }
+        public IQueryable<State> States => _context.States;
 
-        public IQueryable<Role> Roles
-        {
-            get => _context.Roles;
-        }
+        public IQueryable<Role> Roles => _context.Roles;
 
         #endregion
 
         #region Methods
 
+        // Orders CRUD
         public void CreateOrder(Order order)
         {
             order.Accepted = DateTime.Now;
@@ -96,7 +73,7 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
-
+        // Clients CRUD
         public void CreateClient(Client client)
         {
             _context.Entry(client).State = EntityState.Added;
@@ -120,6 +97,40 @@ namespace PrismWarrantyService.Domain.Concrete
             }
 
             _context.Entry(client).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
+        // Companies CRUD
+        public void CreateCompany(Company company)
+        {
+            _context.Entry(company).State = EntityState.Added;
+            _context.SaveChanges();
+        }
+
+        public void UpdateCompany(Company company)
+        {
+            _context.Entry(company).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void DeleteCompany(Company company)
+        {
+            var companyClients = _context.Clients
+                .Where(x => x.CompanyID == company.CompanyID);
+
+            foreach (var client in companyClients)
+            {
+                var clientOrders = _context.Orders
+                    .Where(x => x.ClientID == client.ClientID);
+
+                foreach (var order in clientOrders)
+                {
+                    _context.Entry(order).State = EntityState.Deleted;
+                }
+
+                _context.Entry(client).State = EntityState.Deleted;
+            }
+            _context.Entry(company).State = EntityState.Deleted;
             _context.SaveChanges();
         }
 

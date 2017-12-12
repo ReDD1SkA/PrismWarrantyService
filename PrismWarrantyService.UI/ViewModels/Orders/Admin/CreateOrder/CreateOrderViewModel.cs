@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Clients;
-using PrismWarrantyService.UI.Events.Companies;
-using PrismWarrantyService.UI.Events.Orders;
+using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
@@ -29,21 +28,27 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
         public CreateOrderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
+            // Lists init
             Clients = new ObservableCollection<Client>(repository.Clients);
             Priorities = new ObservableCollection<Priority>(repository.Priorities);
             States = new ObservableCollection<State>(repository.States);
             Companies = new ObservableCollection<Company>(repository.Companies);
 
+            // Properties init
             NewOrder = new Order { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
             NewClient = new Client { Company = Companies.FirstOrDefault() };
             NewCompany = new Company();
 
+            // Commands init
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);
             SelectOrderClientCommand = new DelegateCommand(SelectOrderClient);
             AddNewClientToOrderCommand = new DelegateCommand(AddNewClientToOrder);
             SelectClientCompanyCommand = new DelegateCommand(SelectClientCompany);
             AddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
+
+            // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -91,6 +96,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
 
         #region Methods
 
+        // Navigation methods
         private void SelectOrderClient()
         {
             regionManager.RequestNavigate("Admin.CreateOrder.SelectOrderClientRegion", "CreateOrderSelectClientView");
@@ -115,7 +121,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
             NeedNewCompany = true;
         }
 
-        private void SaveOrder()
+        // CRUD methods
+        private async void SaveOrder()
         {
             NewOrder.Validate();
             if (NewOrder.IsValid)
@@ -143,7 +150,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                         }
 
                         NewClient.Company = NewCompany;
-                        eventAggregator.GetEvent<CompanyAddedEvent>().Publish(NewCompany);
                     }
 
                     var clientExistCheck = repository
@@ -157,11 +163,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                     }
 
                     NewOrder.Client = NewClient;
-                    eventAggregator.GetEvent<ClientCreatedEvent>().Publish(NewClient);
                 }
 
-                repository.CreateOrder(NewOrder);
-                eventAggregator.GetEvent<OrderCreatedEvent>().Publish(NewOrder);
+                await Task.Run(() => repository.CreateOrder(NewOrder));
+                eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
 
                 NewOrder = new Order { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
                 NewClient = new Client { Company = Companies.FirstOrDefault() };
@@ -178,6 +183,16 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
             NewCompany = new Company();
 
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
+        }
+
+        // Event handlers
+        private void NeedRefreshListsEventHandler()
+        {
+            Clients.Clear();
+            Companies.Clear();
+
+            Clients.AddRange(repository.Clients);
+            Companies.AddRange(repository.Companies);
         }
 
         #endregion
