@@ -6,6 +6,7 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Clients;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 {
@@ -13,6 +14,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
     {
         #region Fields
 
+        // Order fields
         private Client _originalSelectedClient;
         private Client _selectedClient;
 
@@ -22,20 +24,23 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         public ClientDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
-        {
-            EditClientCommand = new DelegateCommand(EditClient);
+        {         
+            // Properties init
+            SelectedClient = repository.Clients.FirstOrDefault();
 
+            // Events init
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler);
 
-            OriginalSelectedClient = repository.Clients
-                .FirstOrDefault();
-            SelectedClient = OriginalSelectedClient.Clone();
+            // Commands init
+            UpdateClientCommand = new DelegateCommand(UpdateClient);
+            UndoClientCommand = new DelegateCommand(UndoClient);
         }
 
         #endregion
 
         #region Properties
 
+        // Client properties
         public Client OriginalSelectedClient
         {
             get => _originalSelectedClient;
@@ -52,13 +57,15 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         #region Commands
 
-        public DelegateCommand EditClientCommand { get; private set; }
+        public DelegateCommand UpdateClientCommand { get; }
+        public DelegateCommand UndoClientCommand { get; }
 
         #endregion
 
         #region Methods
 
-        private async void EditClient()
+        // CRUD methods
+        private async void UpdateClient()
         {
             SelectedClient.Validate();
             if (SelectedClient.HasErrors)
@@ -69,6 +76,12 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             await Task.Run(() => repository.UpdateClient(OriginalSelectedClient));
         }
 
+        private void UndoClient()
+        {
+            SelectedClient = OriginalSelectedClient.Clone();
+        }
+
+        // Event handlers
         private void ClientSelectionChangedEventHandler(Client parameter)
         {
             OriginalSelectedClient = parameter;

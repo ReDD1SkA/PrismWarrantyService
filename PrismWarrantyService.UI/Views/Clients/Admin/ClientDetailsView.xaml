@@ -7,43 +7,69 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  Padding="0,0,8,0">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="16"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <TextBox Text="{Binding SelectedClient.Name}"
-	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Клиент"
-                     Grid.Row="0"/>
-            <TextBox Text="{Binding SelectedClient.Company.Name}"
-	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Компания"
-                     Grid.Row="2"/>
-            <TextBox Text="{Binding SelectedClient.Email}"
-	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="E-mail"
-                     Grid.Row="4"/>
-            <TextBox Text="{Binding SelectedClient.PhoneNumber}"
-	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Номер телефона"
-                     Grid.Row="6"/>
-            <Button Command="{Binding EditClientCommand}"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                    HorizontalAlignment="Right"
-                    Margin="0, 0, 16, 0"
-                    Grid.Row="8">
-                <materialDesign:PackIcon Kind="BorderColor" />
-            </Button>
-        </Grid>
-    </ScrollViewer>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="16" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.Row="0"
+                      Grid.ColumnSpan="3">
+            <GroupBox BorderThickness="0">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="{StaticResource MaterialDesignBackground}"
+                                                 Kind="Account"
+                                                 Margin="0,0,4,0" />
+                        <TextBlock Foreground="{StaticResource MaterialDesignBackground}"
+                                   Text="Данные клиента" />
+                    </StackPanel>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox Text="{Binding SelectedClient.Name}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Клиент"
+                             Grid.Row="0" />
+                    <TextBox Text="{Binding SelectedClient.Company.Name}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Компания"
+                             IsReadOnly="True"
+                             Grid.Row="2" />
+                    <TextBox Text="{Binding SelectedClient.Email}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="E-mail"
+                             Grid.Row="4" />
+                    <TextBox Text="{Binding SelectedClient.PhoneNumber}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Номер телефона"
+                             Grid.Row="6" />
+                </Grid>
+            </GroupBox>
+        </ScrollViewer>
+        <Button Command="{Binding UpdateClientCommand}"
+                Content="Сохранить"
+                Grid.Row="2"
+                Grid.Column="0">
+        </Button>
+        <Button Command="{Binding UndoClientCommand}"
+                Content="Отмена"
+                Grid.Row="2"
+                Grid.Column="2">
+        </Button>
+    </Grid>
 </UserControl>

@@ -10,6 +10,7 @@ using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Clients;
 using PrismWarrantyService.UI.Events.Companies;
 using PrismWarrantyService.UI.Events.Orders;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
 {
@@ -156,7 +157,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                     }
 
                     NewOrder.Client = NewClient;
-                    eventAggregator.GetEvent<ClientAddedEvent>().Publish(NewClient);
+                    eventAggregator.GetEvent<ClientCreatedEvent>().Publish(NewClient);
                 }
 
                 repository.CreateOrder(NewOrder);

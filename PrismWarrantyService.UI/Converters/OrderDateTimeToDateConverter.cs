@@ -9,7 +9,7 @@ namespace PrismWarrantyService.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((DateTime?) value)?.ToString("dd.MM.yyyy") ?? "Не завершен";
+            return ((DateTime?) value)?.ToString("dd.MM.yyyy") ?? "не завершен";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

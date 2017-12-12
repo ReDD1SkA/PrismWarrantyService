@@ -7,6 +7,7 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Orders;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 {
@@ -14,6 +15,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
     {
         #region Fields
 
+        // Order fields
         private Order _originalSelectedOrder;
         private Order _selectedOrder;
 
@@ -25,6 +27,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             : base(regionManager, eventAggregator, repository)
         {
             // Properties init
+            SelectedOrder = repository.Orders.FirstOrDefault();
             States = new ObservableCollection<State>(repository.States);
             Priorities = new ObservableCollection<Priority>(repository.Priorities);
 
@@ -40,6 +43,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         #region Properties
 
+        // Order properties
         public Order OriginOfSelectedOrder
         {
             get => _originalSelectedOrder;

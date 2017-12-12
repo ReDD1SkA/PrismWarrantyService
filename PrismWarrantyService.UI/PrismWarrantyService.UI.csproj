@@ -103,10 +103,12 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Converters\OrderDateTimeToDateConverter.cs" />
     <Compile Include="Events\Authentication\AuthenticationEvent.cs" />
-    <Compile Include="Events\Clients\ClientAddedEvent.cs" />
+    <Compile Include="Events\Clients\ClientCreatedEvent.cs" />
+    <Compile Include="Events\Clients\ClientDeletedEvent.cs" />
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
     <Compile Include="Events\Companies\CompanyAddedEvent.cs" />
     <Compile Include="Events\Orders\OrderCreatedEvent.cs" />
+    <Compile Include="Events\Orders\OrderDeletedEvent.cs" />
     <Compile Include="Events\Orders\OrderSelectionChangedEvent.cs" />
     <Compile Include="Services\Authentication\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\AnonymousIdentity.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Services\ViewModels\Concrete\SortDirectionViewModel.cs" />
     <Compile Include="Services\ViewModels\Concrete\SortPropertyViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\ClientDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Clients\Admin\CreateClient\CreateClientViewModel.cs" />
     <Compile Include="ViewModels\Companies\Admin\CompaniesViewModel.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\ClientsViewModel.cs" />
@@ -142,11 +145,11 @@
     <Compile Include="Views\Clients\Admin\ClientDetailsView.xaml.cs">
       <DependentUpon>ClientDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Clients\Admin\ClientListView.xaml.cs">
-      <DependentUpon>ClientListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Clients\Admin\ClientsView.xaml.cs">
       <DependentUpon>ClientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\Admin\CreateClient\CreateClientView.xaml.cs">
+      <DependentUpon>CreateClientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Companies\Admin\CompaniesListView.xaml.cs">
       <DependentUpon>CompaniesListView.xaml</DependentUpon>
@@ -159,9 +162,6 @@
     </Compile>
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderNewCompanyView.xaml.cs">
       <DependentUpon>CreateOrderNewCompanyView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderOrderDetailsView.xaml.cs">
-      <DependentUpon>CreateOrderOrderDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderSelectClientView.xaml.cs">
       <DependentUpon>CreateOrderSelectClientView.xaml</DependentUpon>
@@ -215,11 +215,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Clients\Admin\ClientListView.xaml">
+    <Page Include="Views\Clients\Admin\ClientsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Clients\Admin\ClientsView.xaml">
+    <Page Include="Views\Clients\Admin\CreateClient\CreateClientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,10 +236,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Orders\Admin\CreateOrder\CreateOrderNewCompanyView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\Admin\CreateOrder\CreateOrderOrderDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

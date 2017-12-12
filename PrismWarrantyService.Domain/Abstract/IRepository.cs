@@ -25,6 +25,8 @@ namespace PrismWarrantyService.Domain.Abstract
         void DeleteOrder(Order order);
         void UpdateOrder(Order order);
 
+        void CreateClient(Client client);
+        void DeleteClient(Client client);
         void UpdateClient(Client client);
 
         #endregion

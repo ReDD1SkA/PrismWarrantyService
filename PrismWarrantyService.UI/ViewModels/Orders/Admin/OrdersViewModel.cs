@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -9,6 +10,7 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Events.Clients;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
@@ -68,6 +70,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
             eventAggregator.GetEvent<OrderCreatedEvent>().Subscribe(OrderCreatedEventHandler);
+            eventAggregator.GetEvent<OrderDeletedEvent>().Subscribe(OrderDeletedEventHandler);
+            eventAggregator.GetEvent<ClientDeletedEvent>().Subscribe(ClientDeletedEventHandler);
         }
 
         #endregion
@@ -164,6 +168,20 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             Orders.AddNewItem(parameter);
             Orders.CommitNew();
             SelectedOrder = parameter;
+        }
+
+        private void OrderDeletedEventHandler(Order parameter)
+        {
+            Orders.Remove(parameter);
+        }
+
+        private void ClientDeletedEventHandler(Client parameter)
+        {
+            var clientOrders = repository.Orders
+                .Where(x => x.ClientID == parameter.ClientID);
+
+            foreach (var order in clientOrders)
+                Orders.Remove(order);
         }
 
         // Sort-filter methods

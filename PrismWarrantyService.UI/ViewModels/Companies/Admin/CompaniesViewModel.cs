@@ -5,6 +5,7 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Companies;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
 {

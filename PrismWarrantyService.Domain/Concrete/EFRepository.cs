@@ -79,12 +79,6 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
-        public void DeleteOrder(Order order)
-        {
-            _context.Entry(order).State = EntityState.Deleted;
-            _context.SaveChanges();
-        }
-
         public void UpdateOrder(Order order)
         {
             if (order.State.Name.Equals("Выполненный") || order.State.Name.Equals("Отмененный"))
@@ -96,9 +90,36 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
+        public void DeleteOrder(Order order)
+        {
+            _context.Entry(order).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
+
+        public void CreateClient(Client client)
+        {
+            _context.Entry(client).State = EntityState.Added;
+            _context.SaveChanges();
+        }
+
         public void UpdateClient(Client client)
         {
             _context.Entry(client).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void DeleteClient(Client client)
+        {
+            var clientOrders = _context.Orders
+                .Where(x => x.ClientID == client.ClientID);
+
+            foreach (var order in clientOrders)
+            {
+                _context.Entry(order).State = EntityState.Deleted;
+            }
+
+            _context.Entry(client).State = EntityState.Deleted;
             _context.SaveChanges();
         }
 

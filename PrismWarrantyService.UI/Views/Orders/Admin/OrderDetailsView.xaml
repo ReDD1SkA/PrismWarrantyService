@@ -23,7 +23,6 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Padding="0,0,8,0"
                       Grid.Row="0"
                       Grid.ColumnSpan="3">
             <GroupBox BorderThickness="0">

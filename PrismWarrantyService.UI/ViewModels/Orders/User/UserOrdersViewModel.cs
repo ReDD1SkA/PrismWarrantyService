@@ -8,6 +8,7 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Authentication;
 using PrismWarrantyService.UI.Events.Orders;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.User
 {

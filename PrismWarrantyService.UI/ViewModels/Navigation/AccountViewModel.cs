@@ -7,6 +7,7 @@ using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Authentication;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using Prism.Events;
+using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
 namespace PrismWarrantyService.UI.ViewModels.Navigation
 {

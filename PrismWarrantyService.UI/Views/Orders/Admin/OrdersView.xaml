@@ -25,11 +25,13 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="0,7*"/>
                         <ColumnDefinition Width="0,3*"/>
                     </Grid.ColumnDefinitions>
-                    <CheckBox Margin="8,0,16,0"
+                    <ToggleButton Style="{StaticResource MaterialDesignActionDarkToggleButton}"
+                        Content="{Binding OrderID}"
+                        FontSize="10"
+                        Margin="8,0,16,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Grid.Row="0"
@@ -45,39 +47,32 @@
                                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                    </CheckBox>
-                    <TextBlock Text="{Binding OrderID, StringFormat={}№{0}}"
-                               FontSize="18"
-                               Margin="0,0,8,0"
-                               VerticalAlignment="Center"
-                               Grid.Row="0"
-                               Grid.Column="1"
-                               Grid.RowSpan="2"/>
+                    </ToggleButton>
                     <TextBlock Text="{Binding State, StringFormat={}{0} заказ}"
                                Grid.Row="0"
-                               Grid.Column="2"/>
+                               Grid.Column="1"/>
                     <TextBlock Text="{Binding Priority, StringFormat={}{0} приоритет}"
                                Grid.Row="1"
-                               Grid.Column="2"/>
+                               Grid.Column="1"/>
                     <TextBlock Text="{Binding Accepted, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Принят: {0}}"
                         TextAlignment="Right"
                         Grid.Row="0"
-                        Grid.Column="3"/>
+                        Grid.Column="2"/>
                     <TextBlock Text="{Binding Finished, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Завершен: {0}}"
                         TextAlignment="Right"
                         Grid.Row="1"
-                        Grid.Column="3"/>
+                        Grid.Column="2"/>
                     <TextBlock Text="{Binding Summary}"
                         FontSize="18"
                         VerticalAlignment="Bottom"
+                        Margin="0,0,8,0"
                         Grid.Row="3"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"/>
+                        Grid.Column="1"/>
                     <TextBlock TextAlignment="Right"
                         VerticalAlignment="Bottom"
                         FontSize="14"
                         Grid.Row="3"
-                        Grid.Column="3">
+                        Grid.Column="2">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} ({1})">
                                 <Binding Path="Client.Name"/>
@@ -89,82 +84,79 @@
             </Border>
         </ItemContainerTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <GroupBox BorderThickness="0"
-                  Grid.Row="0">
-            <GroupBox.Header>
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="FormatListBulleted"
+    <GroupBox Name="OrderListGroupBox"
+              BorderThickness="0">
+        <GroupBox.Header>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FormatListBulleted"
                                          Foreground="{StaticResource MaterialDesignBackground}"
-                                         Margin="0,0,4,0"/>
-                    <TextBlock Text="Список заказов"
-                           Foreground="{StaticResource MaterialDesignBackground}"/>
-                </StackPanel>
-            </GroupBox.Header>
-            <Grid>
+                                         Margin="0,0,4,0" />
+                <TextBlock Text="Список заказов"
+                           Foreground="{StaticResource MaterialDesignBackground}" />
+            </StackPanel>
+        </GroupBox.Header>
+        <Grid Name="OrderListGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Name="SearchFiltersButtonsGrid"
+                  Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition MinWidth="150"/>
-                    <ColumnDefinition Width="16"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="16"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
-	             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 Grid.Column="0">
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         MinWidth="150"
+                         Margin="0,0,16,8"
+                         Grid.Column="0">
                     <materialDesign:HintAssist.Hint>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Magnify"
-                                             Margin="0,0,4,0"/>
-                            <TextBlock Text="Поиск по названию"/>
+                                                     Margin="0,0,4,0" />
+                            <TextBlock Text="Поиск по названию" />
                         </StackPanel>
                     </materialDesign:HintAssist.Hint>
                 </TextBox>
-                <ComboBox ItemsSource="{Binding SortProperties}"
-                  SelectedItem="{Binding SortProperty}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Сортировка"
-                  Grid.Column="2"/>
-                <ComboBox ItemsSource="{Binding SortDirections}"
-                  SelectedItem="{Binding SortDirection}"
-                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                  materialDesign:HintAssist.Hint="Направление"
-                  Grid.Column="4"/>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,0,0,8"
+                            Grid.Column="1">
+                    <ComboBox ItemsSource="{Binding SortProperties}"
+                              SelectedItem="{Binding SortProperty}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="Сортировка"
+                              Margin="0,0,16,0"
+                              Width="120" />
+                    <ComboBox ItemsSource="{Binding SortDirections}"
+                              SelectedItem="{Binding SortDirection}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="Направление"
+                              Margin="0,0,16,0"
+                              Width="120" />
+                    <Button Command="{Binding CreateOrderCommand}"
+                            Margin="0,0,16,0">
+                        <materialDesign:PackIcon Kind="Plus" />
+                    </Button>
+                    <Button Command="{Binding DeleteOrderCommand}">
+                        <materialDesign:PackIcon Kind="Delete" />
+                    </Button>
+                </StackPanel>
             </Grid>
-        </GroupBox>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <ListView ItemsSource="{Binding Orders}"
+            <ListView Name="OrderListListView"
+                      ItemsSource="{Binding Orders}"
                       SelectedItem="{Binding SelectedOrder}"
                       ItemTemplate="{StaticResource OrderItemTemplate}"
                       Validation.ErrorTemplate="{x:Null}"
                       HorizontalContentAlignment="Stretch"
-                      Grid.Row="0">
+                      Grid.Row="1">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding OrderSelectionChangedCommand}"/>
+                        <i:InvokeCommandAction Command="{Binding OrderSelectionChangedCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListView>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        Grid.Row="1">
-                <Button Command="{Binding CreateOrderCommand}"
-                        Margin="0,16,16,0">
-                    <materialDesign:PackIcon Kind="Plus" />
-                </Button>
-                <Button Command="{Binding DeleteOrderCommand}"
-                        Margin="0, 16, 0, 0">
-                    <materialDesign:PackIcon Kind="Delete" />
-                </Button>
-            </StackPanel>
         </Grid>
-    </Grid>
+    </GroupBox>
 </UserControl>
