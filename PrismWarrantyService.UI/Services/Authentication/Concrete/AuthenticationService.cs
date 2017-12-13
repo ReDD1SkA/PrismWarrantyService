@@ -40,7 +40,7 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
             return employee;
         }
 
-        private string CalculateHash(string clearTextPassword, string salt)
+        public string CalculateHash(string clearTextPassword, string salt)
         {
             byte[] saltedHashBytes = Encoding.UTF8.GetBytes(clearTextPassword + salt);
             HashAlgorithm algorithm = new SHA256Managed();

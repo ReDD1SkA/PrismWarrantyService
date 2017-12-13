@@ -23,16 +23,25 @@ namespace PrismWarrantyService.Domain.Entities
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(12, ErrorMessage = "Максимальная длина - 12 символов")]
+        [RegularExpression(@"^[a-z0-9_-]{4,12}$", ErrorMessage = "Неверный формат логина")]
         public string Login
         {
-            get { return _login; } 
-            set { ValidateProperty(value); SetProperty(ref _login, value); }
+            get { return _login; }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _login, value);
+            }
         }
 
         public string HashedPassword
         {
             get { return _hashedPassword; }
-            set { ValidateProperty(value); SetProperty(ref _hashedPassword, value); }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _hashedPassword, value);
+            }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -40,7 +49,11 @@ namespace PrismWarrantyService.Domain.Entities
         public string FirstName
         {
             get { return _firstName; }
-            set { ValidateProperty(value); SetProperty(ref _firstName, value); }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _firstName, value);
+            }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -48,7 +61,11 @@ namespace PrismWarrantyService.Domain.Entities
         public string LastName
         {
             get { return _lastName; }
-            set { ValidateProperty(value); SetProperty(ref _lastName, value); }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _lastName, value);
+            }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -56,7 +73,11 @@ namespace PrismWarrantyService.Domain.Entities
         public string Surname
         {
             get { return _surname; }
-            set { ValidateProperty(value); SetProperty(ref _surname, value); }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _surname, value);
+            }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -64,15 +85,58 @@ namespace PrismWarrantyService.Domain.Entities
         public string Position
         {
             get { return _position; }
-            set { ValidateProperty(value); SetProperty(ref _position, value); }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _position, value);
+            }
         }
 
         public int RoleID { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
         public virtual Role Role
         {
             get { return _role; }
-            set { ValidateProperty(value); SetProperty(ref _role, value); }
+            set
+            {
+                ValidateProperty(value);
+                SetProperty(ref _role, value);
+            }
+        }
+
+        #endregion
+
+        #region  Methods
+
+        public Employee Clone()
+        {
+            return new Employee
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Surname = Surname,
+                Position = Position,
+                Login = Login,
+                HashedPassword = HashedPassword,
+                Role = Role
+            };
+        }
+
+        public void GetInfoFrom(Employee donator)
+        {
+            FirstName = donator.FirstName;
+            LastName = donator.LastName;
+            Surname = donator.Surname;
+            Position = donator.Position;
+            Login = donator.Login;
+            HashedPassword = donator.HashedPassword;
+            Role = donator.Role;
+        }
+
+        public override string ToString()
+        {
+            return $"{Surname} {FirstName} {LastName}";
         }
 
         #endregion

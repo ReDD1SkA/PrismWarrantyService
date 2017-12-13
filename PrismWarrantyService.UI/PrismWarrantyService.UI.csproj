@@ -105,6 +105,7 @@
     <Compile Include="Events\Authentication\AuthenticationEvent.cs" />
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
     <Compile Include="Events\Companies\CompanySelectionChangedEvent.cs" />
+    <Compile Include="Events\Employees\EmployeeSelectionChangedEvent.cs" />
     <Compile Include="Events\Lists\NeedRefreshListsEvent.cs" />
     <Compile Include="Events\Orders\OrderSelectionChangedEvent.cs" />
     <Compile Include="Services\Authentication\Abstract\IAuthenticationService.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="ViewModels\Clients\Admin\ClientsViewModel.cs" />
     <Compile Include="ViewModels\Companies\Admin\CompanyDetailsViewModel.cs" />
     <Compile Include="ViewModels\Companies\Admin\CreateCompanyViewModel.cs" />
+    <Compile Include="ViewModels\Employees\Admin\CreateEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\Employees\Admin\EmployeeDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Employees\Admin\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\Orders\User\UserOrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\User\UserOrdersViewModel.cs" />
     <Compile Include="ViewModels\Layouts\UserLayoutViewModel.cs" />
@@ -158,6 +162,15 @@
     </Compile>
     <Compile Include="Views\Companies\Admin\CreateCompanyView.xaml.cs">
       <DependentUpon>CreateCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employees\Admin\CreateEmployeeView.xaml.cs">
+      <DependentUpon>CreateEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employees\Admin\EmployeeDetailsView.xaml.cs">
+      <DependentUpon>EmployeeDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employees\Admin\EmployeesView.xaml.cs">
+      <DependentUpon>EmployeesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderNewClientView.xaml.cs">
       <DependentUpon>CreateOrderNewClientView.xaml</DependentUpon>
@@ -234,6 +247,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Companies\Admin\CreateCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employees\Admin\CreateEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employees\Admin\EmployeeDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employees\Admin\EmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

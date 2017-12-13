@@ -134,6 +134,27 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
+        // Employees CRUD
+        public void CreateEmployee(Employee employee)
+        {
+            _context.Entry(employee).State = EntityState.Added;
+            _context.SaveChanges();
+        }
+
+        public void UpdateEmployee(Employee employee)
+        {
+            _context.Entry(employee).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            // могут опять не работать FK в таблице Performers
+
+            _context.Entry(employee).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
         #endregion
     }
 }

@@ -190,7 +190,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             if (!(obj is Order order)) return false;
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
-            return order.Summary.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
+            return order.Summary.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
+                || order.Client.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
+                || order.Client.Company.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
         }
 
         #endregion

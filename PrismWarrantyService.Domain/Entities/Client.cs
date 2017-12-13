@@ -1,5 +1,4 @@
-﻿using Prism.Mvvm;
-using PrismWarrantyService.Domain.Concrete;
+﻿using PrismWarrantyService.Domain.Concrete;
 using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities

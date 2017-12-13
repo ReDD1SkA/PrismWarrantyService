@@ -31,11 +31,15 @@ namespace PrismWarrantyService.Domain.Abstract
         void DeleteClient(Client client);
         void UpdateClient(Client client);
 
-
         // Companies CRUD
         void CreateCompany(Company company);
         void DeleteCompany(Company company);
         void UpdateCompany(Company company);
+
+        // Employees CRUD
+        void CreateEmployee(Employee employee);
+        void DeleteEmployee(Employee employee);
+        void UpdateEmployee(Employee employee);
 
         #endregion
     }

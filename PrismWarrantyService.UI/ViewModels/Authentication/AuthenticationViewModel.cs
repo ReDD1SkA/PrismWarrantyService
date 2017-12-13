@@ -33,7 +33,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
             Snackbar = new SnackbarViewModel();
 
-            LoginCommand = new DelegateCommand<object>(Login);
+            LoginCommand = new DelegateCommand<PasswordBox>(Login);
         }
 
         #endregion
@@ -56,21 +56,18 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
         #region Commands
 
-        public DelegateCommand<object> LoginCommand { get; }
+        public DelegateCommand<PasswordBox> LoginCommand { get; }
 
         #endregion
 
         #region Methods
 
-        private async void Login(object parameter)
+        private async void Login(PasswordBox passwordBox)
         {
-            var passwordBox = parameter as PasswordBox;
-            var clearTextPassword = passwordBox.Password;
-
             try
             {
                 Employee emp = null;
-                await Task.Run(() => emp = _authenticationService.AuthenticateEmployee(EmployeeLogin, clearTextPassword));
+                await Task.Run(() => emp = _authenticationService.AuthenticateEmployee(EmployeeLogin, passwordBox.Password));
 
                 if (!(Thread.CurrentPrincipal is CustomPrincipal customPrincipal))
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
