@@ -42,10 +42,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
             // Commands init
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);
-            SelectOrderClientCommand = new DelegateCommand(SelectOrderClient);
-            AddNewClientToOrderCommand = new DelegateCommand(AddNewClientToOrder);
-            SelectClientCompanyCommand = new DelegateCommand(SelectClientCompany);
-            AddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
+            ToSelectOrderClientCommand = new DelegateCommand(ToSelectOrderClient);
+            ToAddNewClientToOrderCommand = new DelegateCommand(ToAddNewClientToOrder);
+            ToSelectClientCompanyCommand = new DelegateCommand(ToSelectClientCompany);
+            ToAddNewCompanyToClientCommand = new DelegateCommand(ToAddNewCompanyToClient);
 
             // Events init
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
@@ -87,35 +87,35 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
 
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
-        public DelegateCommand SelectOrderClientCommand { get; }
-        public DelegateCommand AddNewClientToOrderCommand { get; }
-        public DelegateCommand SelectClientCompanyCommand { get; }
-        public DelegateCommand AddNewCompanyToClientCommand { get; }
+        public DelegateCommand ToSelectOrderClientCommand { get; }
+        public DelegateCommand ToAddNewClientToOrderCommand { get; }
+        public DelegateCommand ToSelectClientCompanyCommand { get; }
+        public DelegateCommand ToAddNewCompanyToClientCommand { get; }
 
         #endregion
 
         #region Methods
 
         // Navigation methods
-        private void SelectOrderClient()
+        private void ToSelectOrderClient()
         {
             regionManager.RequestNavigate("Admin.CreateOrder.SelectOrderClientRegion", "CreateOrderSelectClientView");
             NeedNewClient = false;
         }
 
-        private void AddNewClientToOrder()
+        private void ToAddNewClientToOrder()
         {
             regionManager.RequestNavigate("Admin.CreateOrder.SelectOrderClientRegion", "CreateOrderNewClientView");
             NeedNewClient = true;
         }
 
-        private void SelectClientCompany()
+        private void ToSelectClientCompany()
         {
             regionManager.RequestNavigate("Admin.CreateOrder.SelectClientCompanyRegion", "CreateOrderSelectCompanyView");
             NeedNewCompany = false;
         }
 
-        private void AddNewCompanyToClient()
+        private void ToAddNewCompanyToClient()
         {
             regionManager.RequestNavigate("Admin.CreateOrder.SelectClientCompanyRegion", "CreateOrderNewCompanyView");
             NeedNewCompany = true;

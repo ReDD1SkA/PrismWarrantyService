@@ -94,26 +94,34 @@ namespace PrismWarrantyService.Domain.Entities
         {
             return new Order()
             {
+                OrderID = OrderID,
                 Summary = Summary,
                 Description = Description,
                 Accepted = Accepted,
                 Deadline = Deadline,
                 Finished = Finished,
+                ClientID = ClientID,
                 Client = Client,
+                StateID = StateID,
                 State = State,
+                PriorityID = PriorityID,
                 Priority = Priority
             };
         }
 
         public void GetInfoFrom(Order donator)
         {
+            OrderID = donator.OrderID;
             Summary = donator.Summary;
             Description = donator.Description;
             Accepted = donator.Accepted;
             Deadline = donator.Deadline;
             Finished = donator.Finished;
+            ClientID = donator.ClientID;
             Client = donator.Client;
+            StateID = donator.StateID;
             State = donator.State;
+            PriorityID = donator.PriorityID;
             Priority = donator.Priority;
         }
 

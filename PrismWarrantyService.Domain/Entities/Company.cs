@@ -70,6 +70,7 @@ namespace PrismWarrantyService.Domain.Entities
         {
             return new Company()
             {
+                CompanyID = CompanyID,
                 Name = Name,
                 Swift = Swift,
                 Address = Address,
@@ -80,6 +81,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public void GetInfoFrom(Company donator)
         {
+            CompanyID = donator.CompanyID;
             Name = donator.Name;
             Swift = donator.Swift;
             Address = donator.Address;

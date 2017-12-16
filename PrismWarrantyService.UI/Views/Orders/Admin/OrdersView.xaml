@@ -6,83 +6,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:converters="clr-namespace:PrismWarrantyService.UI.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <converters:OrderDateTimeToDateConverter x:Key="OrderDateTimeToDateConverter" />
-        <ItemContainerTemplate x:Key="OrderItemTemplate">
-            <Border Padding="0,0,0,8"
-				    BorderBrush="{DynamicResource MaterialDesignDivider}"
-				    BorderThickness="0,0,0,1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="4"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="0,7*"/>
-                        <ColumnDefinition Width="0,3*"/>
-                    </Grid.ColumnDefinitions>
-                    <ToggleButton Style="{StaticResource MaterialDesignActionDarkToggleButton}"
-                        Content="{Binding OrderID}"
-                        FontSize="10"
-                        Margin="8,0,16,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Grid.RowSpan="4">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Checked">
-                                <i:InvokeCommandAction Command="{Binding DataContext.OrderCheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}"/>
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="Unchecked">
-                                <i:InvokeCommandAction Command="{Binding DataContext.OrderUncheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ToggleButton>
-                    <TextBlock Text="{Binding State, StringFormat={}{0} заказ}"
-                               Grid.Row="0"
-                               Grid.Column="1"/>
-                    <TextBlock Text="{Binding Priority, StringFormat={}{0} приоритет}"
-                               Grid.Row="1"
-                               Grid.Column="1"/>
-                    <TextBlock Text="{Binding Accepted, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Принят: {0}}"
-                        TextAlignment="Right"
-                        Grid.Row="0"
-                        Grid.Column="2"/>
-                    <TextBlock Text="{Binding Finished, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Завершен: {0}}"
-                        TextAlignment="Right"
-                        Grid.Row="1"
-                        Grid.Column="2"/>
-                    <TextBlock Text="{Binding Summary}"
-                        FontSize="18"
-                        VerticalAlignment="Bottom"
-                        Margin="0,0,8,0"
-                        Grid.Row="3"
-                        Grid.Column="1"/>
-                    <TextBlock TextAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        FontSize="14"
-                        Grid.Row="3"
-                        Grid.Column="2">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} ({1})">
-                                <Binding Path="Client.Name"/>
-                                <Binding Path="Client.Company.Name"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </ItemContainerTemplate>
-    </UserControl.Resources>
     <GroupBox Name="OrderListGroupBox"
               BorderThickness="0">
         <GroupBox.Header>

@@ -1,7 +1,8 @@
 ﻿using Prism.Regions;
 using PrismWarrantyService.UI.Views.Navigation;
 using PrismWarrantyService.UI.Views.Orders.Admin.CreateOrder;
-using OrderDetailsView = PrismWarrantyService.UI.Views.Orders.Admin.OrderDetailsView;
+using PrismWarrantyService.UI.Views.Orders.Admin.OrderDetails;
+using OrderDetailsView = PrismWarrantyService.UI.Views.Orders.Admin.OrderDetails.OrderDetailsView;
 using OrdersView = PrismWarrantyService.UI.Views.Orders.Admin.OrdersView;
 
 namespace PrismWarrantyService.UI.ViewModels.Layouts
@@ -30,6 +31,7 @@ namespace PrismWarrantyService.UI.ViewModels.Layouts
             regionManager.RegisterViewWithRegion("Admin.CreateOrder.SelectOrderClientRegion", typeof(CreateOrderSelectClientView));
             regionManager.RegisterViewWithRegion("Admin.CreateOrder.SelectClientCompanyRegion", typeof(CreateOrderSelectCompanyView));
             regionManager.RegisterViewWithRegion("Admin.CreateClient.SelectClientCompanyRegion", typeof(CreateOrderSelectCompanyView));
+            regionManager.RegisterViewWithRegion("Admin.OrderDetails.Employees", typeof(OrderEmployeesView));
         }
 
         #endregion

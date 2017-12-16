@@ -42,7 +42,7 @@
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Номер телефона"
                      Grid.Row="8"/>
-            <Button Command="{Binding SelectClientCompanyCommand}"
+            <Button Command="{Binding ToSelectClientCompanyCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Content="Вернуться к списку"
                     Grid.Row="10"/>

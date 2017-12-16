@@ -138,7 +138,7 @@
     <Compile Include="ViewModels\Navigation\AccountViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AdminNavigationViewModel.cs" />
     <Compile Include="ViewModels\Orders\Admin\CreateOrder\CreateOrderViewModel.cs" />
-    <Compile Include="ViewModels\Orders\Admin\OrderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Orders\Admin\OrderDetails\OrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\Admin\OrdersViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -187,8 +187,14 @@
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderView.xaml.cs">
       <DependentUpon>CreateOrderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\Admin\OrderDetailsView.xaml.cs">
+    <Compile Include="Views\Orders\Admin\OrderDetails\OrderAddEmployeeView.xaml.cs">
+      <DependentUpon>OrderAddEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\Admin\OrderDetails\OrderDetailsView.xaml.cs">
       <DependentUpon>OrderDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\Admin\OrderDetails\OrderEmployeesView.xaml.cs">
+      <DependentUpon>OrderEmployeesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\Admin\OrdersView.xaml.cs">
       <DependentUpon>OrdersView.xaml</DependentUpon>
@@ -226,6 +232,14 @@
     <Compile Include="Views\Orders\User\UserOrdersView.xaml.cs">
       <DependentUpon>UserOrdersView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\ConvertersResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ItemTemplatesResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Clients\Admin\ClientDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,7 +296,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Orders\Admin\OrderDetailsView.xaml">
+    <Page Include="Views\Orders\Admin\OrderDetails\OrderAddEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\Admin\OrderDetails\OrderDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Orders\Admin\OrderDetails\OrderEmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,7 +412,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="ViewModels\Clients\User\" />
     <Folder Include="ViewModels\Companies\User\" />
     <Folder Include="Views\Clients\User\" />

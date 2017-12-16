@@ -31,7 +31,7 @@
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Номер телефона"
                      Grid.Row="4"/>
-            <Button Command="{Binding SelectOrderClientCommand}"
+            <Button Command="{Binding ToSelectOrderClientCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Content="Вернуться к списку"
                     Grid.Row="6"/>

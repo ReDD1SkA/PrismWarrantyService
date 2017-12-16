@@ -113,24 +113,28 @@ namespace PrismWarrantyService.Domain.Entities
         {
             return new Employee
             {
+                EmployeeID = EmployeeID,
                 FirstName = FirstName,
                 LastName = LastName,
                 Surname = Surname,
                 Position = Position,
                 Login = Login,
                 HashedPassword = HashedPassword,
+                RoleID = RoleID,
                 Role = Role
             };
         }
 
         public void GetInfoFrom(Employee donator)
         {
+            EmployeeID = donator.EmployeeID;
             FirstName = donator.FirstName;
             LastName = donator.LastName;
             Surname = donator.Surname;
             Position = donator.Position;
             Login = donator.Login;
             HashedPassword = donator.HashedPassword;
+            RoleID = donator.RoleID;
             Role = donator.Role;
         }
 

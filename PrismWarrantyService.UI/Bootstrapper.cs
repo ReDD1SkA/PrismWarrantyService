@@ -13,9 +13,8 @@ using PrismWarrantyService.UI.Views.Employees.Admin;
 using PrismWarrantyService.UI.Views.Layouts;
 using PrismWarrantyService.UI.Views.Orders.Admin;
 using PrismWarrantyService.UI.Views.Orders.Admin.CreateOrder;
+using PrismWarrantyService.UI.Views.Orders.Admin.OrderDetails;
 using PrismWarrantyService.UI.Views.Orders.User;
-using CreateClientView = PrismWarrantyService.UI.Views.Clients.Admin.CreateClientView;
-using CreateCompanyView = PrismWarrantyService.UI.Views.Companies.Admin.CreateCompanyView;
 
 namespace PrismWarrantyService.UI
 {
@@ -65,6 +64,8 @@ namespace PrismWarrantyService.UI
             // orders views
             Kernel.RegisterTypeForNavigation<OrdersView>();
             Kernel.RegisterTypeForNavigation<OrderDetailsView>();
+            Kernel.RegisterTypeForNavigation<OrderEmployeesView>();
+            Kernel.RegisterTypeForNavigation<OrderAddEmployeeView>();
             Kernel.RegisterTypeForNavigation<CreateOrderView>();
             Kernel.RegisterTypeForNavigation<CreateOrderSelectClientView>();
             Kernel.RegisterTypeForNavigation<CreateOrderNewClientView>();

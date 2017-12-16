@@ -18,7 +18,7 @@
                       SelectedItem="{Binding NewClient.Company}"
                       Validation.ErrorTemplate="{x:Null}"
                       Grid.Row="0"/>
-            <Button Command="{Binding AddNewCompanyToClientCommand}"
+            <Button Command="{Binding ToAddNewCompanyToClientCommand}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Content="Добавить новую компанию"
                     Grid.Row="2"/>

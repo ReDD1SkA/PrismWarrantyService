@@ -8,69 +8,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ItemContainerTemplate x:Key="CompanyItemTemplate">
-            <Border Padding="0,0,0,8"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}"
-                    BorderThickness="0,0,0,1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <ToggleButton Style="{StaticResource MaterialDesignActionDarkToggleButton}"
-                                  Content="{Binding CompanyID}"
-                                  FontSize="10"
-                                  Margin="8,0,16,0"
-                                  Grid.Column="0">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Checked">
-                                <i:InvokeCommandAction
-                                    Command="{Binding DataContext.CompanyCheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}" />
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="Unchecked">
-                                <i:InvokeCommandAction
-                                    Command="{Binding DataContext.CompanyUncheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ToggleButton>
-                    <TextBlock Text="{Binding Name}"
-                               FontSize="16"
-                               VerticalAlignment="Center"
-                               Grid.Column="1" />
-                </Grid>
-            </Border>
-        </ItemContainerTemplate>
-        <ItemContainerTemplate x:Key="ClientItemTemplate">
-            <Border Padding="0,0,0,8"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}"
-                    BorderThickness="0,0,0,1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <ToggleButton Style="{StaticResource MaterialDesignActionDarkToggleButton}"
-                                  Content="{Binding ClientID}"
-                                  FontSize="10"
-                                  Margin="8,0,16,0"
-                                  Grid.Column="0" />
-                    <TextBlock FontSize="16"
-                               VerticalAlignment="Center"
-                               Grid.Column="1">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} ({1})">
-                                <Binding Path="Name" />
-                                <Binding Path="Company.Name" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </ItemContainerTemplate>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />

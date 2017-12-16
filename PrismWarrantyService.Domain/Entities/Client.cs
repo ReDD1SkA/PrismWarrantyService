@@ -61,18 +61,22 @@ namespace PrismWarrantyService.Domain.Entities
         {
             return new Client()
             {
+                ClientID = ClientID,
                 Name = Name,
                 Email = Email,
                 PhoneNumber = PhoneNumber,
+                CompanyID = CompanyID,
                 Company = Company
             };
         }
 
         public void GetInfoFrom(Client donator)
         {
+            ClientID = donator.ClientID;
             Name = donator.Name;
             Email = donator.Email;
             PhoneNumber = donator.PhoneNumber;
+            CompanyID = donator.CompanyID;
             Company = donator.Company;
         }
 
