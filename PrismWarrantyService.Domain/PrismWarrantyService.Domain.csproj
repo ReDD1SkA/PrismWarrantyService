@@ -82,7 +82,6 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Order.cs" />
-    <Compile Include="Entities\Performer.cs" />
     <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\Priority.cs" />
     <Compile Include="Entities\Role.cs" />

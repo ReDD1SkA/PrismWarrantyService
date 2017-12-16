@@ -12,7 +12,6 @@ namespace PrismWarrantyService.Domain.Abstract
         IQueryable<Company> Companies { get; }
         IQueryable<Employee> Employees { get; }
         IQueryable<Order> Orders { get; }
-        IQueryable<Performer> Performers { get; }
         IQueryable<Priority> Priorities { get; }
         IQueryable<Role> Roles { get; }
         IQueryable<State> States { get; }

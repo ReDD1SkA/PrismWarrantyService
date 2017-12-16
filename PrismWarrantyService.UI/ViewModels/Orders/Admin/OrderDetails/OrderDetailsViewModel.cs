@@ -6,7 +6,6 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
@@ -19,7 +18,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         // Order fields
         private Order _originalSelectedOrder;
         private Order _selectedOrder;
-        private Employee _selectedEmployee;
 
         #endregion
 

@@ -30,10 +30,6 @@ namespace PrismWarrantyService.Domain.Concrete
             .Include(x => x.State)
             .Include(x => x.Priority);
 
-        public IQueryable<Performer> Performers => _context.Performers
-            .Include(x => x.Order)
-            .Include(x => x.Employee);
-
         public IQueryable<Priority> Priorities => _context.Priorities;
 
         public IQueryable<State> States => _context.States;

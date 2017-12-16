@@ -20,8 +20,8 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView ItemsSource="{Binding Employees}"
-                      SelectedItem="{Binding SelectedEmployee}"
+            <ListView ItemsSource="{Binding}"
+                      SelectedItem="{Binding}"
                       Validation.ErrorTemplate="{x:Null}"
                       Grid.Row="0"/>
             <StackPanel Orientation="Horizontal"

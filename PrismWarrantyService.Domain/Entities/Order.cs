@@ -1,5 +1,6 @@
 ﻿using PrismWarrantyService.Domain.Concrete;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
@@ -22,6 +23,8 @@ namespace PrismWarrantyService.Domain.Entities
         #region Properties
 
         public int OrderID { get; set; }
+
+        public virtual ObservableCollection<Employee> Performers { get; set; } = new ObservableCollection<Employee>();
 
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(100, ErrorMessage = "Максимальная длина - 100 символов")]

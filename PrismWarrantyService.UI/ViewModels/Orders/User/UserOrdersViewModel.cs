@@ -25,10 +25,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
         public UserOrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
             : base(regionManager, eventAggregator, repository)
         {
-            var orders = repository.Performers
-                .Where(x => x.Employee.Login == Thread.CurrentPrincipal.Identity.Name)
-                .Select(x => x.Order)
-                .OrderBy(x => x.PriorityID);
+            var orders = repository.Orders;
+
+            // just user orders
+            
             Orders = new ObservableCollection<Order>(orders);
 
             SelectedOrder = Orders.FirstOrDefault();
@@ -68,10 +68,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
 
         private void AuthenticationEventHandler()
         {
-            var orders = repository.Performers
-               .Where(x => x.Employee.Login == Thread.CurrentPrincipal.Identity.Name)
-               .Select(x => x.Order)
-               .OrderBy(x => x.PriorityID);
+            var orders = repository.Orders;
+            
+            // just user orders
 
             Orders.Clear();
             Orders.AddRange(orders);
