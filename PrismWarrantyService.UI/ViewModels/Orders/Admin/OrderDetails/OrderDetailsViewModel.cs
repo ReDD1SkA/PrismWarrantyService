@@ -32,19 +32,11 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
             OriginOfSelectedOrder = repository.Orders.First();
             SelectedOrder = OriginOfSelectedOrder.Clone();
 
-            var orderEmployees = repository.Performers
-                .Where(x => x.OrderID == SelectedOrder.OrderID)
-                .Select(x => x.Employee);
-
-            Employees = new ObservableCollection<Employee>(orderEmployees);
-            SelectedEmployee = Employees.FirstOrDefault();
-
             States = new ObservableCollection<State>(repository.States);
             Priorities = new ObservableCollection<Priority>(repository.Priorities);
 
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
 
             // Commands init
             UpdateOrderCommand = new DelegateCommand(UpdateOrder);
@@ -70,17 +62,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
             set => SetProperty(ref _selectedOrder, value);
         }
 
-        public Employee SelectedEmployee
-        {
-            get => _selectedEmployee;
-            set => SetProperty(ref _selectedEmployee, value);
-        }
-
         public ObservableCollection<State> States { get; set; }
 
         public ObservableCollection<Priority> Priorities { get; set; }
-
-        public ObservableCollection<Employee> Employees { get; set; }
 
         #endregion
 
@@ -128,25 +112,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         {
             OriginOfSelectedOrder = parameter;
             SelectedOrder = parameter.Clone();
-          
-            var orderEmployees = repository.Performers
-                .Where(x => x.OrderID == SelectedOrder.OrderID)
-                .Select(x => x.Employee);
-
-            Employees.Clear();
-            Employees.AddRange(orderEmployees);
-            SelectedEmployee = Employees.FirstOrDefault();
-        }
-
-        private void NeedRefreshListsEventHandler()
-        {
-            var orderEmployees = repository.Performers
-                .Where(x => x.OrderID == SelectedOrder.OrderID)
-                .Select(x => x.Employee);
-
-            Employees.Clear();
-            Employees.AddRange(orderEmployees);
-            SelectedEmployee = Employees.FirstOrDefault();
         }
 
         #endregion

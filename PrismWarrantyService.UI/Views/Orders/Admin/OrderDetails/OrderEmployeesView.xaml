@@ -32,7 +32,7 @@
                         Style="{StaticResource MaterialDesignFlatButton}">
                     <materialDesign:PackIcon Kind="Plus" />
                 </Button>
-                <Button Command="{Binding RemoveEmployeeCommand}"
+                <Button Command="{Binding}"
                         Style="{StaticResource MaterialDesignFlatButton}">
                     <materialDesign:PackIcon Kind="Minus" />
                 </Button>
