@@ -12,7 +12,7 @@
                                          Kind="Worker"
                                          Margin="0,0,4,0" />
                 <TextBlock Foreground="{StaticResource MaterialDesignBackground}"
-                           Text="Выполняют"/>
+                           Text="Заказ выполняют"/>
             </StackPanel>
         </GroupBox.Header>
         <Grid>
@@ -21,20 +21,20 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <ListView ItemsSource="{Binding SelectedOrder.Employees}"
+                      SelectedItem="{Binding SelectedOrderEmployee}"
                       Validation.ErrorTemplate="{x:Null}"
                       Grid.Row="0"/>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
-                        Margin="0,0,0,8"
+                        Margin="0,8,0,0"
                         Grid.Row="1">
                 <Button Command="{Binding ToAddEmployeeCommand}"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <materialDesign:PackIcon Kind="Plus" />
-                </Button>
-                <Button Command="{Binding}"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <materialDesign:PackIcon Kind="Minus" />
-                </Button>
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Content="Добавить"
+                        Margin="0,0,8,0"/>
+                <Button Command="{Binding RemoveEmployeeCommand}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Content="Удалить"/>
             </StackPanel>
         </Grid>
     </GroupBox>

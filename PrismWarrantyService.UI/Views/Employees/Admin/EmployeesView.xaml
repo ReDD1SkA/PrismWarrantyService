@@ -8,79 +8,112 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <GroupBox Name="EmployeeListGroupBox"
-              BorderThickness="0">
-        <GroupBox.Header>
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="FormatListBulleted"
-                                         Foreground="{StaticResource MaterialDesignBackground}"
-                                         Margin="0,0,4,0" />
-                <TextBlock Text="Список заказов"
-                           Foreground="{StaticResource MaterialDesignBackground}" />
-            </StackPanel>
-        </GroupBox.Header>
-        <Grid Name="EmployeeListGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid Name="SearchFiltersButtonsGrid"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0,5*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0,5*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Name="EmployeeListGroupBox"
+                  BorderThickness="0"
                   Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         MinWidth="150"
-                         Margin="0,0,16,8"
-                         Grid.Column="0">
-                    <materialDesign:HintAssist.Hint>
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Magnify"
-                                                     Margin="0,0,4,0" />
-                            <TextBlock Text="Поиск" />
-                        </StackPanel>
-                    </materialDesign:HintAssist.Hint>
-                </TextBox>
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Stretch"
-                            Margin="0,0,0,8"
-                            Grid.Column="1">
-                    <ComboBox ItemsSource="{Binding SortProperties}"
-                              SelectedItem="{Binding SortProperty}"
-                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              materialDesign:HintAssist.Hint="Сортировка"
-                              Margin="0,0,16,0"
-                              Width="120" />
-                    <ComboBox ItemsSource="{Binding SortDirections}"
-                              SelectedItem="{Binding SortDirection}"
-                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              materialDesign:HintAssist.Hint="Направление"
-                              Margin="0,0,16,0"
-                              Width="120" />
-                    <Button Command="{Binding CreateEmployeeCommand}"
-                            Margin="0,0,16,0">
-                        <materialDesign:PackIcon Kind="Plus" />
-                    </Button>
-                    <Button Command="{Binding DeleteEmployeeCommand}">
-                        <materialDesign:PackIcon Kind="Delete" />
-                    </Button>
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="FormatListBulleted"
+                                             Foreground="{StaticResource MaterialDesignBackground}"
+                                             Margin="0,0,4,0" />
+                    <TextBlock Text="Список сотрудников"
+                               Foreground="{StaticResource MaterialDesignBackground}" />
                 </StackPanel>
+            </GroupBox.Header>
+            <Grid Name="EmployeeListGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Name="SearchFiltersButtonsGrid"
+                      Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             MinWidth="150"
+                             Margin="0,0,16,8"
+                             Grid.Column="0">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Magnify"
+                                                         Margin="0,0,4,0" />
+                                <TextBlock Text="Поиск" />
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch"
+                                Margin="0,0,0,8"
+                                Grid.Column="1">
+                        <ComboBox ItemsSource="{Binding SortProperties}"
+                                  SelectedItem="{Binding SortProperty}"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  materialDesign:HintAssist.Hint="Сортировка"
+                                  Margin="0,0,16,0"
+                                  Width="120" />
+                        <ComboBox ItemsSource="{Binding SortDirections}"
+                                  SelectedItem="{Binding SortDirection}"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  materialDesign:HintAssist.Hint="Направление"
+                                  Margin="0,0,16,0"
+                                  Width="120" />
+                        <Button Command="{Binding CreateEmployeeCommand}"
+                                Margin="0,0,16,0">
+                            <materialDesign:PackIcon Kind="Plus" />
+                        </Button>
+                        <Button Command="{Binding DeleteEmployeeCommand}">
+                            <materialDesign:PackIcon Kind="Delete" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <ListView Name="OrderListListView"
+                          ItemsSource="{Binding Employees}"
+                          SelectedItem="{Binding SelectedEmployee}"
+                          ItemTemplate="{StaticResource EmployeeItemTemplate}"
+                          Validation.ErrorTemplate="{x:Null}"
+                          HorizontalContentAlignment="Stretch"
+                          Grid.Row="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding EmployeeSelectionChangedCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListView>
             </Grid>
-            <ListView Name="OrderListListView"
-                      ItemsSource="{Binding Employees}"
-                      SelectedItem="{Binding SelectedEmployee}"
-                      ItemTemplate="{StaticResource EmployeeItemTemplate}"
+        </GroupBox>
+        <GridSplitter Background="{StaticResource MaterialDesignBackground}"
+                      ShowsPreview="False"
+                      Height="4"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center"
+                      Grid.Row="1"/>
+        <GroupBox Name="EmployeeOrdersGroupBox"
+                  BorderThickness="0"
+                  Grid.Row="2">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="FormatListBulleted"
+                                             Foreground="{StaticResource MaterialDesignBackground}"
+                                             Margin="0,0,4,0" />
+                    <TextBlock Text="Выполняемые заказы"
+                               Foreground="{StaticResource MaterialDesignBackground}" />
+                </StackPanel>
+            </GroupBox.Header>
+            <ListView Name="EmployeeOrdersListView"
+                      ItemsSource="{Binding SelectedEmployee.Orders}"
+                      ItemTemplate="{StaticResource OrderItemTemplate}"
                       Validation.ErrorTemplate="{x:Null}"
-                      HorizontalContentAlignment="Stretch"
-                      Grid.Row="1">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding EmployeeSelectionChangedCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                      HorizontalContentAlignment="Stretch">
             </ListView>
-        </Grid>
-    </GroupBox>
+        </GroupBox>
+    </Grid>
 </UserControl>

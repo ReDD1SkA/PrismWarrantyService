@@ -43,8 +43,6 @@ namespace PrismWarrantyService.Domain.Entities
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Accepted
         {
             get { return _accepted; }
@@ -52,16 +50,12 @@ namespace PrismWarrantyService.Domain.Entities
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Deadline
         {
             get { return _deadline; }
             set { ValidateProperty(value); SetProperty(ref _deadline, value); }
         }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Finished
         {
             get { return _finished; }
@@ -117,7 +111,7 @@ namespace PrismWarrantyService.Domain.Entities
                 State = State,
                 PriorityID = PriorityID,
                 Priority = Priority,
-                Employees = Employees
+                Employees = new ObservableCollection<Employee>(Employees)
             };
         }
 
@@ -135,7 +129,9 @@ namespace PrismWarrantyService.Domain.Entities
             State = donator.State;
             PriorityID = donator.PriorityID;
             Priority = donator.Priority;
-            Employees = donator.Employees;
+
+            Employees.Clear();
+            Employees.AddRange(donator.Employees);
         }
 
         #endregion

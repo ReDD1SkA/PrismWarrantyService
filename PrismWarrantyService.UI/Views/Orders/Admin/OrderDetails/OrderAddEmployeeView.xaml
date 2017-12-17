@@ -1,11 +1,43 @@
 ﻿<UserControl x:Class="PrismWarrantyService.UI.Views.Orders.Admin.OrderDetails.OrderAddEmployeeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders.Admin.OrderDetails"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <Grid>
-            <Button Command ="{Binding ToOrderEmployeesCommand}"/>
+        <GroupBox BorderThickness="0">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="{StaticResource MaterialDesignBackground}"
+                                             Kind="Worker"
+                                             Margin="0,0,4,0" />
+                    <TextBlock Foreground="{StaticResource MaterialDesignBackground}"
+                               Text="Добавить исполнителя" />
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding FreeEmployees}"
+                          SelectedItem="{Binding SelectedFreeEmployee}"
+                          Validation.ErrorTemplate="{x:Null}"
+                          Grid.Row="0" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,8,0,0"
+                            Grid.Row="1">
+                    <Button Command="{Binding AddEmployeeCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Добавить"
+                            Margin="0,0,8,0"/>
+                    <Button Command="{Binding ToOrderEmployeesCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Отмена"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

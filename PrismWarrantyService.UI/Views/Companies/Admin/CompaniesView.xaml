@@ -11,11 +11,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
         <GroupBox Name="ClientListGroupBox"
                   BorderThickness="0"
-                  Margin="0,0,0,16"
                   Grid.Row="0">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
@@ -90,10 +90,15 @@
                 </ListView>
             </Grid>
         </GroupBox>
+        <GridSplitter Background="{StaticResource MaterialDesignBackground}"
+                      ShowsPreview="False"
+                      Height="4"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center"
+                      Grid.Row="1"/>
         <GroupBox Name="CompanyClientsGroupBox"
                   BorderThickness="0"
-                  Margin="0,0,0,16"
-                  Grid.Row="1">
+                  Grid.Row="2">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="FormatListBulleted"

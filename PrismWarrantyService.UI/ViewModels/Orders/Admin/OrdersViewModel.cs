@@ -83,13 +83,13 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         public ObservableCollection<Order> OrdersSource { get; }
 
+        public List<Order> CheckedOrders { get; set; }
+
         public Order SelectedOrder
         {
             get => _selectedOrder;
             set => SetProperty(ref _selectedOrder, value);
         }
-
-        public List<Order> CheckedOrders { get; set; }
 
         // Sort-filter properties
         public IEnumerable<SortPropertyViewModel> SortProperties { get; }
@@ -145,6 +145,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
                 await Task.Run(() => repository.DeleteOrder(order));
             }
             CheckedOrders.Clear();
+
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
         }
 
         private void OrderChecked(Order parameter)

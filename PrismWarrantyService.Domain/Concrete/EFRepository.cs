@@ -147,8 +147,6 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public void DeleteEmployee(Employee employee)
         {
-            // могут опять не работать FK в таблице Performers
-
             _context.Entry(employee).State = EntityState.Deleted;
             _context.SaveChanges();
         }

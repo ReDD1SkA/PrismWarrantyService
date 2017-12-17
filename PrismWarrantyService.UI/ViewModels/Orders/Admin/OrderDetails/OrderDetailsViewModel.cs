@@ -6,6 +6,7 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
+using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels.Concrete;
 
@@ -18,6 +19,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         // Order fields
         private Order _originalSelectedOrder;
         private Order _selectedOrder;
+        private Employee _selectedFreeEmployee;
+        private Employee _selectedOrderEmployee;
 
         #endregion
 
@@ -29,18 +32,27 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
             // Properties init
             OriginOfSelectedOrder = repository.Orders.First();
             SelectedOrder = OriginOfSelectedOrder.Clone();
+            SelectedOrderEmployee = SelectedOrder.Employees.FirstOrDefault();
+
+            FreeEmployees = new ObservableCollection<Employee>(repository
+                .Employees
+                .OrderBy(x => x.Surname));
+            SelectedFreeEmployee = FreeEmployees.FirstOrDefault();
 
             States = new ObservableCollection<State>(repository.States);
             Priorities = new ObservableCollection<Priority>(repository.Priorities);
 
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
 
             // Commands init
             UpdateOrderCommand = new DelegateCommand(UpdateOrder);
             UndoOrderCommand = new DelegateCommand(UndoOrder);
             ToAddEmployeeCommand = new DelegateCommand(ToAddEmployee);
             ToOrderEmployeesCommand = new DelegateCommand(ToOrderEmployees);
+            AddEmployeeCommand = new DelegateCommand(AddEmployee);
+            RemoveEmployeeCommand = new DelegateCommand(RemoveEmployee);
         }
 
         #endregion
@@ -60,9 +72,23 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
             set => SetProperty(ref _selectedOrder, value);
         }
 
+        public Employee SelectedFreeEmployee
+        {
+            get => _selectedFreeEmployee;
+            set => SetProperty(ref _selectedFreeEmployee, value);
+        }
+
+        public Employee SelectedOrderEmployee
+        {
+            get => _selectedOrderEmployee;
+            set => SetProperty(ref _selectedOrderEmployee, value);
+        }
+
         public ObservableCollection<State> States { get; set; }
 
         public ObservableCollection<Priority> Priorities { get; set; }
+
+        public ObservableCollection<Employee> FreeEmployees { get; set; }
 
         #endregion
 
@@ -72,6 +98,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         public DelegateCommand UndoOrderCommand { get; }
         public DelegateCommand ToAddEmployeeCommand { get; }
         public DelegateCommand ToOrderEmployeesCommand { get; }
+        public DelegateCommand AddEmployeeCommand { get; }
+        public DelegateCommand RemoveEmployeeCommand { get; }
 
         #endregion
 
@@ -105,11 +133,32 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
             SelectedOrder = OriginOfSelectedOrder.Clone();
         }
 
+        private void AddEmployee()
+        {
+            if (SelectedOrder.Employees.Contains(SelectedFreeEmployee))
+                return;
+
+            SelectedOrder.Employees.Add(SelectedFreeEmployee);
+            regionManager.RequestNavigate("Admin.OrderDetails.Employees", "OrderEmployeesView");
+        }
+
+        private void RemoveEmployee()
+        {
+            SelectedOrder.Employees.Remove(SelectedOrderEmployee);
+        }
+
         // Event handlers
         private void OrderSelectionChangedEventHandler(Order parameter)
         {
             OriginOfSelectedOrder = parameter;
             SelectedOrder = parameter.Clone();
+            SelectedOrderEmployee = SelectedOrder.Employees.FirstOrDefault();
+        }
+
+        private void NeedRefreshListsEventHandler()
+        {
+            FreeEmployees.Clear();
+            FreeEmployees.AddRange(repository.Employees);
         }
 
         #endregion

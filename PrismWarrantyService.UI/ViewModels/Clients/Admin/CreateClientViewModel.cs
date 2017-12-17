@@ -36,8 +36,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             // Commands init
             SaveCommand = new DelegateCommand(SaveClient);
             CancelCommand = new DelegateCommand(Cancel);
-            SelectClientCompanyCommand = new DelegateCommand(SelectClientCompany);
-            AddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
+            ToSelectClientCompanyCommand = new DelegateCommand(SelectClientCompany);
+            ToAddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
 
             // Events init
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
@@ -71,8 +71,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
-        public DelegateCommand SelectClientCompanyCommand { get; }
-        public DelegateCommand AddNewCompanyToClientCommand { get; }
+        public DelegateCommand ToSelectClientCompanyCommand { get; }
+        public DelegateCommand ToAddNewCompanyToClientCommand { get; }
 
         #endregion
 
