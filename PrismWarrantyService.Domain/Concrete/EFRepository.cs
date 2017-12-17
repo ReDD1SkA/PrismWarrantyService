@@ -56,7 +56,7 @@ namespace PrismWarrantyService.Domain.Concrete
 
         public void UpdateOrder(Order order)
         {
-            if (order.State.Name.Equals("Выполненный") || order.State.Name.Equals("Отмененный"))
+            if (order.State.Name.Equals("Выполненный"))
                 order.Finished = DateTime.Now;
             else
                 order.Finished = null;

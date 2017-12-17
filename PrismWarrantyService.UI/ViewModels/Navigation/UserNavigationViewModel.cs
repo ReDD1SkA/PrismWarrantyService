@@ -26,7 +26,8 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
             NavigationItems = new ObservableCollection<NavigationItemViewModel>
             {
-                new NavigationItemViewModel() { Name = "Мои заказы", MasterView = "UserOrdersView", DetailsView = ""}
+                new NavigationItemViewModel { Name = "Мои заказы", MasterView = "UserOrdersView", DetailsView = "UserOrderDetailsView"},
+                new NavigationItemViewModel { Name = "Мои клиенты", MasterView = "UserClientsView", DetailsView = "UserClientDetailsView"}
             };
 
             SelectedItem = NavigationItems.FirstOrDefault();

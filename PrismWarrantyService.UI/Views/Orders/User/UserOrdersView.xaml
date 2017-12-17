@@ -5,7 +5,75 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:local="clr-namespace:PrismWarrantyService.UI.Views.Orders.User"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d">
-    <local:UserOrderListView/>
+    <GroupBox Name="OrderListGroupBox"
+              BorderThickness="0">
+        <GroupBox.Header>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="FormatListBulleted"
+                                         Foreground="{StaticResource MaterialDesignBackground}"
+                                         Margin="0,0,4,0" />
+                <TextBlock Text="Список заказов"
+                           Foreground="{StaticResource MaterialDesignBackground}" />
+            </StackPanel>
+        </GroupBox.Header>
+        <Grid Name="OrderListGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Name="SearchFiltersButtonsGrid"
+                  Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         MinWidth="150"
+                         Margin="0,0,16,8"
+                         Grid.Column="0">
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Magnify"
+                                                     Margin="0,0,4,0" />
+                            <TextBlock Text="Поиск" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,0,0,8"
+                            Grid.Column="1">
+                    <ComboBox ItemsSource="{Binding SortProperties}"
+                              SelectedItem="{Binding SortProperty}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="Сортировка"
+                              Margin="0,0,16,0"
+                              Width="120" />
+                    <ComboBox ItemsSource="{Binding SortDirections}"
+                              SelectedItem="{Binding SortDirection}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="Направление"
+                              Margin="0,0,16,0"
+                              Width="120" />
+                </StackPanel>
+            </Grid>
+            <ListView Name="OrderListListView"
+                      ItemsSource="{Binding Orders}"
+                      SelectedItem="{Binding SelectedOrder}"
+                      ItemTemplate="{StaticResource OrderItemTemplate}"
+                      Validation.ErrorTemplate="{x:Null}"
+                      HorizontalContentAlignment="Stretch"
+                      Grid.Row="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding OrderSelectionChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+        </Grid>
+    </GroupBox>
 </UserControl>

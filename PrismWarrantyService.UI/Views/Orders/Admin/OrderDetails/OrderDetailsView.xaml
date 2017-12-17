@@ -8,9 +8,6 @@
              xmlns:converters="clr-namespace:PrismWarrantyService.UI.Converters"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <converters:OrderDateTimeToDateConverter x:Key="OrderDateTimeToDateConverter" />
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -126,12 +123,10 @@
         <Button Command="{Binding UpdateOrderCommand}"
                 Content="Сохранить"
                 Grid.Row="2"
-                Grid.Column="0">
-        </Button>
-        <Button Command="{Binding UndoOrderCommand}"
+                Grid.Column="0"/>
+            <Button Command="{Binding UndoOrderCommand}"
                 Content="Отмена"
                 Grid.Row="2"
-                Grid.Column="2">
-        </Button>
+                Grid.Column="2"/>
     </Grid>
 </UserControl>

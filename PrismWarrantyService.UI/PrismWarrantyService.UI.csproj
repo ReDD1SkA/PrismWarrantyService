@@ -101,6 +101,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\OrderDateTimeToDateConverter.cs" />
     <Compile Include="Events\Authentication\AuthenticationEvent.cs" />
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
@@ -118,6 +119,8 @@
     <Compile Include="Services\ViewModels\Concrete\SortPropertyViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\ClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\CreateClientViewModel.cs" />
+    <Compile Include="ViewModels\Clients\User\UserClientDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Clients\User\UserClientsViewModel.cs" />
     <Compile Include="ViewModels\Companies\Admin\CompaniesViewModel.cs" />
     <Compile Include="ViewModels\Authentication\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\ClientsViewModel.cs" />
@@ -126,7 +129,7 @@
     <Compile Include="ViewModels\Employees\Admin\CreateEmployeeViewModel.cs" />
     <Compile Include="ViewModels\Employees\Admin\EmployeeDetailsViewModel.cs" />
     <Compile Include="ViewModels\Employees\Admin\EmployeesViewModel.cs" />
-    <Compile Include="ViewModels\Orders\User\UserOrderDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Orders\User\UserOrderDetails\UserOrderDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\User\UserOrdersViewModel.cs" />
     <Compile Include="ViewModels\Layouts\UserLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\UserNavigationViewModel.cs" />
@@ -153,6 +156,12 @@
     </Compile>
     <Compile Include="Views\Clients\Admin\CreateClientView.xaml.cs">
       <DependentUpon>CreateClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\User\UserClientDetailsView.xaml.cs">
+      <DependentUpon>UserClientDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\User\UserClientsView.xaml.cs">
+      <DependentUpon>UserClientsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Companies\Admin\CompaniesView.xaml.cs">
       <DependentUpon>CompaniesView.xaml</DependentUpon>
@@ -223,11 +232,8 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\User\UserOrderDetailsView.xaml.cs">
+    <Compile Include="Views\Orders\User\UserOrderDetails\UserOrderDetailsView.xaml.cs">
       <DependentUpon>UserOrderDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\User\UserOrderListView.xaml.cs">
-      <DependentUpon>UserOrderListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\User\UserOrdersView.xaml.cs">
       <DependentUpon>UserOrdersView.xaml</DependentUpon>
@@ -249,6 +255,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Clients\Admin\CreateClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\User\UserClientDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\User\UserClientsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -344,11 +358,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Orders\User\UserOrderDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\User\UserOrderListView.xaml">
+    <Page Include="Views\Orders\User\UserOrderDetails\UserOrderDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,11 +421,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Clients\User\" />
-    <Folder Include="ViewModels\Companies\User\" />
-    <Folder Include="Views\Clients\User\" />
-    <Folder Include="Views\Companies\User\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

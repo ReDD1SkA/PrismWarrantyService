@@ -8,6 +8,7 @@ using PrismWarrantyService.UI.Services.Authentification.Abstract;
 using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.Views;
 using PrismWarrantyService.UI.Views.Clients.Admin;
+using PrismWarrantyService.UI.Views.Clients.User;
 using PrismWarrantyService.UI.Views.Companies.Admin;
 using PrismWarrantyService.UI.Views.Employees.Admin;
 using PrismWarrantyService.UI.Views.Layouts;
@@ -15,6 +16,7 @@ using PrismWarrantyService.UI.Views.Orders.Admin;
 using PrismWarrantyService.UI.Views.Orders.Admin.CreateOrder;
 using PrismWarrantyService.UI.Views.Orders.Admin.OrderDetails;
 using PrismWarrantyService.UI.Views.Orders.User;
+using PrismWarrantyService.UI.Views.Orders.User.UserOrderDetails;
 
 namespace PrismWarrantyService.UI
 {
@@ -22,6 +24,7 @@ namespace PrismWarrantyService.UI
     {
         #region Methods
 
+        // Overrided methods
         protected override DependencyObject CreateShell()
         {
             return Kernel.Get<ShellView>();
@@ -33,7 +36,6 @@ namespace PrismWarrantyService.UI
 
             AddBindings();
             RegisterTypesForNavigation();
-            
         }
 
         protected override void InitializeModules()
@@ -47,6 +49,7 @@ namespace PrismWarrantyService.UI
             Application.Current.MainWindow.Show();
         }
 
+        // Helpers
         private void AddBindings()
         {
             Kernel.Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
@@ -55,13 +58,13 @@ namespace PrismWarrantyService.UI
 
         private void RegisterTypesForNavigation()
         {
-            // layouts
+            // Layouts
             Kernel.RegisterTypeForNavigation<AuthenticationLayoutView>();
             Kernel.RegisterTypeForNavigation<AdminLayoutView>();
             Kernel.RegisterTypeForNavigation<UserLayoutView>();
 
-            // admin layout views
-            // orders views
+            // Admin layout views
+            // Orders views
             Kernel.RegisterTypeForNavigation<OrdersView>();
             Kernel.RegisterTypeForNavigation<OrderDetailsView>();
             Kernel.RegisterTypeForNavigation<OrderEmployeesView>();
@@ -72,25 +75,29 @@ namespace PrismWarrantyService.UI
             Kernel.RegisterTypeForNavigation<CreateOrderSelectCompanyView>();
             Kernel.RegisterTypeForNavigation<CreateOrderNewCompanyView>();
 
-            // client views
+            // Client views
             Kernel.RegisterTypeForNavigation<ClientsView>();
             Kernel.RegisterTypeForNavigation<ClientDetailsView>();
             Kernel.RegisterTypeForNavigation<CreateClientView>();
 
-            // companies views
+            // Companies views
             Kernel.RegisterTypeForNavigation<CompaniesView>();
             Kernel.RegisterTypeForNavigation<CompanyDetailsView>();
             Kernel.RegisterTypeForNavigation<CreateCompanyView>();
 
-            // employees views
+            // Employees views
             Kernel.RegisterTypeForNavigation<EmployeesView>();
             Kernel.RegisterTypeForNavigation<EmployeeDetailsView>();
             Kernel.RegisterTypeForNavigation<CreateEmployeeView>();
 
-            // user layout views
-            // orders views
+            // User layout views
+            // Orders views
             Kernel.RegisterTypeForNavigation<UserOrdersView>();
             Kernel.RegisterTypeForNavigation<UserOrderDetailsView>();
+
+            // Clients view
+            Kernel.RegisterTypeForNavigation<UserClientsView>();
+            Kernel.RegisterTypeForNavigation<UserClientDetailsView>();
         }
 
         #endregion
