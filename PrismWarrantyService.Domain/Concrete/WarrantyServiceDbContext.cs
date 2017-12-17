@@ -12,5 +12,20 @@ namespace PrismWarrantyService.Domain.Concrete
         public DbSet<Priority> Priorities { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<State> States { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.Employees)
+                .WithMany(e => e.Orders)
+                .Map(m =>
+                {
+                    m.ToTable("Performers");
+                    m.MapLeftKey("OrderID");
+                    m.MapRightKey("EmployeeID");
+                });
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -22,9 +22,11 @@ namespace PrismWarrantyService.Domain.Concrete
         public IQueryable<Company> Companies => _context.Companies;
 
         public IQueryable<Employee> Employees => _context.Employees
+            .Include(x => x.Orders)
             .Include(x => x.Role);
 
         public IQueryable<Order> Orders => _context.Orders
+            .Include(x => x.Employees)
             .Include(x => x.Client)
             .Include(x => x.Client.Company)
             .Include(x => x.State)

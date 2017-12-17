@@ -1,4 +1,5 @@
-﻿using PrismWarrantyService.Domain.Concrete;
+﻿using System.Collections.ObjectModel;
+using PrismWarrantyService.Domain.Concrete;
 using System.ComponentModel.DataAnnotations;
 
 namespace PrismWarrantyService.Domain.Entities
@@ -104,6 +105,8 @@ namespace PrismWarrantyService.Domain.Entities
                 SetProperty(ref _role, value);
             }
         }
+
+        public ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
 
         #endregion
 
