@@ -3,7 +3,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 
-namespace PrismWarrantyService.UI.Services.ViewModels.Concrete
+namespace PrismWarrantyService.UI.Services.ViewModels
 {
     public class ViewModelBase : BindableBase
     {

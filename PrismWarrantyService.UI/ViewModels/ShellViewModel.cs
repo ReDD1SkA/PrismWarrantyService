@@ -2,7 +2,7 @@
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 using PrismWarrantyService.UI.Views.Layouts;
 
 namespace PrismWarrantyService.UI.ViewModels

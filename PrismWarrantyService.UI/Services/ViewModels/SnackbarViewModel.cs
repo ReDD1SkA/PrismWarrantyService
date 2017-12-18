@@ -1,7 +1,7 @@
-﻿using Prism.Mvvm;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Prism.Mvvm;
 
-namespace PrismWarrantyService.UI.ViewModels
+namespace PrismWarrantyService.UI.Services.ViewModels
 {
     public class SnackbarViewModel : BindableBase
     {

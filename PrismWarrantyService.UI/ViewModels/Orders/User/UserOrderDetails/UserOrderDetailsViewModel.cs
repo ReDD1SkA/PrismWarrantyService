@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Events;
@@ -6,7 +7,7 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Orders;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
 {
@@ -93,7 +94,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
             SelectedOrder = parameter;
 
             CanBeAccepted = SelectedOrder.State.Name == "Новый";
-            CanBeCompleted = SelectedOrder.State.Name == "Выполняемый";  
+            CanBeCompleted = SelectedOrder.State.Name == "Выполняемый";
         }
 
         #endregion

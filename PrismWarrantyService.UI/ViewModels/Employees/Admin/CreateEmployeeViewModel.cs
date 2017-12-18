@@ -10,8 +10,7 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
-using PrismWarrantyService.UI.Services.Authentification.Concrete;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 {

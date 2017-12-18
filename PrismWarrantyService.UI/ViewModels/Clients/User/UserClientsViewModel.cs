@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
+using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -13,7 +15,7 @@ using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Authentication;
 using PrismWarrantyService.UI.Events.Clients;
 using PrismWarrantyService.UI.Events.Lists;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.User
 {
@@ -139,7 +141,15 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
                 .Orders
                 .Select(x => x.Client)
                 .Distinct());
-            SelectedClient = Clients.GetItemAt(0) as Client;
+
+            try
+            {
+                SelectedClient = Clients.GetItemAt(0) as Client;
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
 
             RefreshSort();
         }

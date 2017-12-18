@@ -114,9 +114,9 @@
     <Compile Include="Services\Authentication\Concrete\AuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomIdentity.cs" />
     <Compile Include="Services\Authentication\Concrete\CustomPrincipal.cs" />
-    <Compile Include="Services\ViewModels\Concrete\NavigationItemViewModel.cs" />
-    <Compile Include="Services\ViewModels\Concrete\SortDirectionViewModel.cs" />
-    <Compile Include="Services\ViewModels\Concrete\SortPropertyViewModel.cs" />
+    <Compile Include="Services\ViewModels\NavigationItemViewModel.cs" />
+    <Compile Include="Services\ViewModels\SortDirectionViewModel.cs" />
+    <Compile Include="Services\ViewModels\SortPropertyViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\ClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\Clients\Admin\CreateClientViewModel.cs" />
     <Compile Include="ViewModels\Clients\User\UserClientDetailsViewModel.cs" />
@@ -133,10 +133,10 @@
     <Compile Include="ViewModels\Orders\User\UserOrdersViewModel.cs" />
     <Compile Include="ViewModels\Layouts\UserLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\UserNavigationViewModel.cs" />
-    <Compile Include="Services\ViewModels\Concrete\SnackbarViewModel.cs" />
-    <Compile Include="Services\ViewModels\Concrete\ViewModelBase.cs" />
+    <Compile Include="Services\ViewModels\SnackbarViewModel.cs" />
+    <Compile Include="Services\ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AuthenticationLayoutViewModel.cs" />
-    <Compile Include="Services\ViewModels\Concrete\LayoutViewModelBase.cs" />
+    <Compile Include="Services\ViewModels\LayoutViewModelBase.cs" />
     <Compile Include="ViewModels\Layouts\AdminLayoutViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AccountViewModel.cs" />
     <Compile Include="ViewModels\Navigation\AdminNavigationViewModel.cs" />

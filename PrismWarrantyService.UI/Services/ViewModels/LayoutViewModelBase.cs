@@ -1,6 +1,6 @@
 ﻿using Prism.Regions;
 
-namespace PrismWarrantyService.UI.ViewModels.Layouts
+namespace PrismWarrantyService.UI.Services.ViewModels
 {
     public class LayoutBaseViewModel
     {

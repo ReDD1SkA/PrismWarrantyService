@@ -5,7 +5,7 @@ using Prism.Events;
 using Prism.Regions;
 using MaterialDesignThemes.Wpf;
 using PrismWarrantyService.Domain.Abstract;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Navigation
 {

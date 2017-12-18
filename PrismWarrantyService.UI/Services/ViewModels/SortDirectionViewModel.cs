@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Prism.Mvvm;
 
-namespace PrismWarrantyService.UI.Services.ViewModels.Concrete
+namespace PrismWarrantyService.UI.Services.ViewModels
 {
     public class SortDirectionViewModel : BindableBase
     {

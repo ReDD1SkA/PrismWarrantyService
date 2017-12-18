@@ -1,4 +1,5 @@
 ﻿using Prism.Regions;
+using PrismWarrantyService.UI.Services.ViewModels;
 using PrismWarrantyService.UI.Views.Authentication;
 
 namespace PrismWarrantyService.UI.ViewModels.Layouts

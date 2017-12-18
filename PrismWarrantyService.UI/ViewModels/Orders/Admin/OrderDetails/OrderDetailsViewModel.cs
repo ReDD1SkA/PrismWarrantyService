@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Prism.Commands;
@@ -8,7 +9,7 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
 {
@@ -30,10 +31,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
             : base(regionManager, eventAggregator, repository)
         {
             // Properties init
-            OriginOfSelectedOrder = repository.Orders.First();
-            SelectedOrder = OriginOfSelectedOrder.Clone();
-            SelectedOrderEmployee = SelectedOrder.Employees.FirstOrDefault();
-
             FreeEmployees = new ObservableCollection<Employee>(repository
                 .Employees
                 .OrderBy(x => x.Surname));

@@ -1,4 +1,5 @@
 ﻿using Prism.Regions;
+using PrismWarrantyService.UI.Services.ViewModels;
 using PrismWarrantyService.UI.Views.Navigation;
 using PrismWarrantyService.UI.Views.Orders.User;
 using PrismWarrantyService.UI.Views.Orders.User.UserOrderDetails;

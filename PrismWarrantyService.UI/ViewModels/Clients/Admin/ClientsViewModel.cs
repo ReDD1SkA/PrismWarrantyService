@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -12,7 +13,7 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Clients;
 using PrismWarrantyService.UI.Events.Lists;
-using PrismWarrantyService.UI.Services.ViewModels.Concrete;
+using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 {
@@ -184,8 +185,16 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             CheckedClients.Clear();
 
             ClientsSource.AddRange(repository.Clients);
-            SelectedClient = Clients.GetItemAt(0) as Client;
-            ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+
+            try
+            {
+                SelectedClient = Clients.GetItemAt(0) as Client;
+                ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+            }
+            catch (ArgumentOutOfRangeException exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
 
             RefreshSort();
         }
