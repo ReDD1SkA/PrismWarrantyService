@@ -74,11 +74,13 @@
                 </GroupBox>
             </ScrollViewer>
             <Button Command="{Binding UpdateCompanyCommand}"
+                    Visibility="{Binding SelectedCompany, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                     Content="Сохранить"
                     Grid.Row="2"
                     Grid.Column="0">
             </Button>
             <Button Command="{Binding UndoCompanyCommand}"
+                    Visibility="{Binding SelectedCompany, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                     Content="Отмена"
                     Grid.Row="2"
                     Grid.Column="2">

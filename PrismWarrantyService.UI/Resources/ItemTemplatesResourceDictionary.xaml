@@ -159,7 +159,20 @@
                               Content="{Binding EmployeeID}"
                               FontSize="10"
                               Margin="8,0,16,0"
-                              Grid.Column="0" />
+                              Grid.Column="0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction
+                                Command="{Binding DataContext.EmployeeCheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unchecked">
+                            <i:InvokeCommandAction
+                                Command="{Binding DataContext.EmployeeUncheckedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                CommandParameter="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListViewItem}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ToggleButton>
                 <TextBlock FontSize="16"
                            VerticalAlignment="Center"
                            Validation.ErrorTemplate="{x:Null}"

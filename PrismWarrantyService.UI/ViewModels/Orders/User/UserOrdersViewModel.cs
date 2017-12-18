@@ -71,9 +71,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
             // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler, ThreadOption.UIThread);
+
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
-            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler);
         }
 
         #endregion
@@ -127,7 +128,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
         // Event handlers
         private void OrderSelectionChanged()
         {
-            if (SelectedOrder != null) eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 

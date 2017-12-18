@@ -71,8 +71,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             OrderUncheckedCommand = new DelegateCommand<Order>(OrderUnchecked);
 
             // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -140,7 +141,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             if (CheckedOrders.Count == 0)
                 return;
 
-            foreach (var order in CheckedOrders )
+            foreach (var order in CheckedOrders)
             {
                 Orders.Remove(order);
                 await Task.Run(() => repository.DeleteOrder(order));
@@ -163,7 +164,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         // Event handlers
         private void OrderSelectionChanged()
         {
-            if (SelectedOrder != null) eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
         }
 

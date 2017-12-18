@@ -24,7 +24,7 @@
             </Grid.RowDefinitions>
             <TextBox Text="{Binding NewCompany.Name}"
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Клиент"
+                     materialDesign:HintAssist.Hint="Название"
                      Grid.Row="0"/>
             <TextBox Text="{Binding NewCompany.Swift}"
 	                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"

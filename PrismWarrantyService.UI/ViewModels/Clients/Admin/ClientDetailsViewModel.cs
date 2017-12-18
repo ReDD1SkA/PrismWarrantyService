@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
@@ -26,7 +25,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             : base(regionManager, eventAggregator, repository)
         {         
             // Events init
-            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler);
+            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler, ThreadOption.UIThread);
 
             // Commands init
             UpdateClientCommand = new DelegateCommand(UpdateClient);
@@ -82,7 +81,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         private void ClientSelectionChangedEventHandler(Client parameter)
         {
             OriginOfSelectedClient = parameter;
-            SelectedClient = parameter.Clone();
+            SelectedClient = OriginOfSelectedClient?.Clone();
         }
 
         #endregion

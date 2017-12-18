@@ -23,7 +23,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             : base(regionManager, eventAggregator, repository)
         {
             // Events init
-            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler);
+            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler, ThreadOption.UIThread);
         }
 
         #endregion

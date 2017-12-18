@@ -117,14 +117,17 @@
                              TextWrapping="Wrap" />
                 </Grid>
             </GroupBox>
-                <UserControl prism:RegionManager.RegionName="Admin.OrderDetails.Employees"/>
+                <UserControl prism:RegionManager.RegionName="Admin.OrderDetails.Employees"
+                             Visibility="{Binding SelectedOrder, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"/>
             </StackPanel>
         </ScrollViewer>
         <Button Command="{Binding UpdateOrderCommand}"
                 Content="Сохранить"
+                Visibility="{Binding SelectedOrder, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                 Grid.Row="2"
                 Grid.Column="0"/>
             <Button Command="{Binding UndoOrderCommand}"
+                    Visibility="{Binding SelectedOrder, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                 Content="Отмена"
                 Grid.Row="2"
                 Grid.Column="2"/>

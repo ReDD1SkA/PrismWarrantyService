@@ -30,12 +30,12 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
             OriginOfSelectedCompany = repository.Companies.First();
             SelectedCompany = OriginOfSelectedCompany.Clone();
 
-            // Events init
-            eventAggregator.GetEvent<CompanySelectionChangedEvent>().Subscribe(CompanySelectionChangedEventHandler);
-
             // Commands init
             UpdateCompanyCommand = new DelegateCommand(UpdateCompany);
             UndoCompanyCommand = new DelegateCommand(UndoCompany);
+
+            // Events init
+            eventAggregator.GetEvent<CompanySelectionChangedEvent>().Subscribe(CompanySelectionChangedEventHandler, ThreadOption.UIThread);
         }
 
         #endregion
@@ -87,7 +87,7 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
         private void CompanySelectionChangedEventHandler(Company parameter)
         {
             OriginOfSelectedCompany = parameter;
-            SelectedCompany = parameter.Clone();
+            SelectedCompany = OriginOfSelectedCompany?.Clone();
         }
 
         #endregion

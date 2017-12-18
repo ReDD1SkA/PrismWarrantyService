@@ -70,11 +70,13 @@
             </GroupBox>
         </ScrollViewer>
         <Button Command="{Binding UpdateEmployeeCommand}"
+                Visibility="{Binding SelectedEmployee, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                 Content="Сохранить"
                 Grid.Row="2"
                 Grid.Column="0">
         </Button>
         <Button Command="{Binding UndoEmployeeCommand}"
+                Visibility="{Binding SelectedEmployee, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                 Content="Отмена"
                 Grid.Row="2"
                 Grid.Column="2">

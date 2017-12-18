@@ -31,7 +31,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
             OrderCompletedCommand = new DelegateCommand(OrderCompleted);
 
             // Events init
-            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler);
+            eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler, ThreadOption.UIThread);
         }
 
         #endregion
@@ -93,8 +93,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
         {
             SelectedOrder = parameter;
 
-            CanBeAccepted = SelectedOrder.State.Name == "Новый";
-            CanBeCompleted = SelectedOrder.State.Name == "Выполняемый";
+            if (SelectedOrder != null)
+            {
+                CanBeAccepted = SelectedOrder?.State.Name == "Новый";
+                CanBeCompleted = SelectedOrder?.State.Name == "Выполняемый";
+            }
+            else
+            {
+                CanBeAccepted = false;
+                CanBeCompleted = false;
+            }
+            
         }
 
         #endregion

@@ -3,4 +3,5 @@
                     xmlns:converters="clr-namespace:PrismWarrantyService.UI.Converters">
     <converters:OrderDateTimeToDateConverter x:Key="OrderDateTimeToDateConverter" />
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
 </ResourceDictionary>

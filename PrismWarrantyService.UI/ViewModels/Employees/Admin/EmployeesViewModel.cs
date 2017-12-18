@@ -65,14 +65,15 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
             // Commands init
             CreateEmployeeCommand = new DelegateCommand(CreateEmployee);
-            DeleteEmployeeCommand = new DelegateCommand(DeleteOrder);
+            DeleteEmployeeCommand = new DelegateCommand(DeleteEmployee);
             EmployeeSelectionChangedCommand = new DelegateCommand(EmployeeSelectionChanged);
             EmployeeCheckedCommand = new DelegateCommand<Employee>(EmployeeChecked);
             EmployeeUncheckedCommand = new DelegateCommand<Employee>(EmployeeUnchecked);
 
             // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+
             eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Publish(SelectedEmployee);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -135,17 +136,18 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             regionManager.RequestNavigate("Admin.DetailsRegion", "CreateEmployeeView");
         }
 
-        private async void DeleteOrder()
+        private async void DeleteEmployee()
         {
             if (CheckedEmployees.Count == 0)
                 return;
 
             foreach (var employee in CheckedEmployees)
             {
-                Employees.Remove(employee);
                 await Task.Run(() => repository.DeleteEmployee(employee));
             }
             CheckedEmployees.Clear();
+
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
         }
 
         private void EmployeeChecked(Employee parameter)
@@ -161,7 +163,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
         // Event handlers
         private void EmployeeSelectionChanged()
         {
-            if (SelectedEmployee != null) eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Publish(SelectedEmployee);
+            eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Publish(SelectedEmployee);
             regionManager.RequestNavigate("Admin.DetailsRegion", "EmployeeDetailsView");
         }
 

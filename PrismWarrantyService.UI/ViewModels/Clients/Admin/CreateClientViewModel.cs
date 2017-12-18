@@ -40,7 +40,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ToAddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
         }
 
         #endregion
@@ -126,11 +126,11 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 MessageBox.Show($"Клиент {NewClient.Name} ({NewClient.Company.Name}) уже существует!");
                 return;
             }
-
+            
             await Task.Run(() => repository.CreateClient(NewClient));
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
 
-            NewClient = new Client {Company = Companies.FirstOrDefault()};
+            NewClient = new Client { Company = Companies.FirstOrDefault() };
             NewCompany = new Company();
 
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");

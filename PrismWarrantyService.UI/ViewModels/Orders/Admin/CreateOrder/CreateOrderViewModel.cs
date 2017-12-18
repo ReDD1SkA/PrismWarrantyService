@@ -48,7 +48,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
             ToAddNewCompanyToClientCommand = new DelegateCommand(ToAddNewCompanyToClient);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
         }
 
         #endregion

@@ -71,8 +71,9 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ClientUncheckedCommand = new DelegateCommand<Client>(ClientUnchecked);
 
             // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -146,7 +147,6 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             foreach (var client in CheckedClients)
             {
                 ClientOrders.Clear();
-                Clients.Remove(client);
                 
                 await Task.Run(() => repository.DeleteClient(client));
             }
@@ -168,13 +168,12 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         // Event handlers
         private void ClientSelectionChanged()
         {
+            ClientOrders.Clear();
+
             if (SelectedClient != null)
-            {
-                ClientOrders.Clear();
                 ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
 
-                eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
-            }
+            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
         }
 
@@ -184,7 +183,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ClientOrders.Clear();
             CheckedClients.Clear();
 
-            ClientsSource.AddRange(repository.Clients);
+            ClientsSource.AddRange(repository.Clients.ToList());
 
             try
             {

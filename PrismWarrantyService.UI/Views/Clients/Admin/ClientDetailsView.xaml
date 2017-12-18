@@ -62,14 +62,14 @@
             </GroupBox>
         </ScrollViewer>
         <Button Command="{Binding UpdateClientCommand}"
+                Visibility="{Binding SelectedClient, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                 Content="Сохранить"
                 Grid.Row="2"
-                Grid.Column="0">
-        </Button>
+                Grid.Column="0"/>
         <Button Command="{Binding UndoClientCommand}"
+                Visibility="{Binding SelectedClient, Converter={StaticResource ObjectToVisibilityConverter}, Mode=OneWay}"
                 Content="Отмена"
                 Grid.Row="2"
-                Grid.Column="2">
-        </Button>
+                Grid.Column="2"/>
     </Grid>
 </UserControl>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Data;
@@ -70,9 +69,10 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             ClientSelectionChangedCommand = new DelegateCommand(ClientSelectionChanged);
 
             // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler, ThreadOption.UIThread);
+
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
-            eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler);
         }
 
         #endregion
@@ -126,8 +126,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
         // Event handlers
         private void ClientSelectionChanged()
         {
-            if (SelectedClient != null)
-                eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
+            eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
         }
 

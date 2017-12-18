@@ -69,8 +69,9 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
             CompanyUncheckedCommand = new DelegateCommand<Company>(CompanyUnchecked);
 
             // Events init
+            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+
             eventAggregator.GetEvent<CompanySelectionChangedEvent>().Publish(SelectedCompany);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler);
         }
 
         #endregion
@@ -143,14 +144,12 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
 
             foreach (var company in CheckedCompanies)
             {
-                Companies.Remove(company);
                 CompanyClients.Clear();
                 await Task.Run(() => repository.DeleteCompany(company));
             }
             CheckedCompanies.Clear();
 
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
-
         }
 
         private void CompanyChecked(Company parameter)
@@ -166,13 +165,11 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
         // Event handlers
         private void CompanySelectionChanged()
         {
+            CompanyClients.Clear();
             if (SelectedCompany != null)
-            {
-                CompanyClients.Clear();
                 CompanyClients.AddRange(repository.Clients.Where(x => x.CompanyID == SelectedCompany.CompanyID));
 
-                eventAggregator.GetEvent<CompanySelectionChangedEvent>().Publish(SelectedCompany);
-            }
+            eventAggregator.GetEvent<CompanySelectionChangedEvent>().Publish(SelectedCompany);
             regionManager.RequestNavigate("Admin.DetailsRegion", "CompanyDetailsView");
         }
 

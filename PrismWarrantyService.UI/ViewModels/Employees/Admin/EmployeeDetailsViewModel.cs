@@ -33,12 +33,12 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
             Roles = new ObservableCollection<Role>(repository.Roles);
 
-            // Events init
-            eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Subscribe(EmployeeSelectionChangedEventHandler);
-
             // Commands init
             UpdateEmployeeCommand = new DelegateCommand(UpdateEmployee);
             UndoEmployeeCommand = new DelegateCommand(UndoEmployee);
+
+            // Events init
+            eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Subscribe(EmployeeSelectionChangedEventHandler, ThreadOption.UIThread);
         }
 
         #endregion
@@ -92,7 +92,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
         private void EmployeeSelectionChangedEventHandler(Employee parameter)
         {
             OriginOfSelectedEmployee = parameter;
-            SelectedEmployee = parameter.Clone();
+            SelectedEmployee = OriginOfSelectedEmployee?.Clone();
         }
 
         #endregion
