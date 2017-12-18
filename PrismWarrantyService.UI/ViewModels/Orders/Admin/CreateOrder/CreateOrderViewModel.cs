@@ -144,10 +144,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                             .FirstOrDefault(x => x.Name == NewCompany.Name);
 
                         if (companyExistCheck != null)
-                        {
-                            MessageBox.Show($"Клиент {NewClient.Name} ({NewCompany.Name}) уже существует!");
                             return;
-                        }
 
                         NewClient.Company = NewCompany;
                     }
@@ -157,10 +154,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                         .FirstOrDefault(x => x.Name == NewClient.Name && x.Company.Name == NewClient.Company.Name);
 
                     if (clientExistCheck != null)
-                    {
-                        MessageBox.Show($"Клиент {NewClient.Name} ({NewClient.Company}) уже существует!");
                         return;
-                    }
 
                     NewOrder.Client = NewClient;
                 }

@@ -109,10 +109,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                     .FirstOrDefault(x => x.Name == NewCompany.Name);
 
                 if (companyExistCheck != null)
-                {
-                    MessageBox.Show($"Клиент {NewClient.Name} ({NewCompany.Name}) уже существует!");
                     return;
-                }
 
                 NewClient.Company = NewCompany;
             }
@@ -122,10 +119,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 .FirstOrDefault(x => x.Name == NewClient.Name && x.Company.Name == NewClient.Company.Name);
 
             if (clientExistCheck != null)
-            {
-                MessageBox.Show($"Клиент {NewClient.Name} ({NewClient.Company.Name}) уже существует!");
                 return;
-            }
             
             await Task.Run(() => repository.CreateClient(NewClient));
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();

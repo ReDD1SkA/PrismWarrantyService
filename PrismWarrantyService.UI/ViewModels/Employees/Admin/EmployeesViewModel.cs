@@ -177,10 +177,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             {
                 SelectedEmployee = Employees.GetItemAt(0) as Employee;
             }
-            catch (ArgumentOutOfRangeException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }       
+            catch (ArgumentOutOfRangeException) { }
 
             RefreshSort();
         }

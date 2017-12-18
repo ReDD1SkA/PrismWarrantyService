@@ -13,6 +13,10 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
+        Height="600"
+        Width="1000"
+        MinHeight="600"
+        MinWidth="1000"
         BorderThickness="0"
         Title="Warranty service"
         Icon="pack://application:,,,/Images/Shield.png">

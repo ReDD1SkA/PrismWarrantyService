@@ -190,10 +190,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 SelectedClient = Clients.GetItemAt(0) as Client;
                 ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
             }
-            catch (ArgumentOutOfRangeException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             RefreshSort();
         }
@@ -213,8 +210,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             if (!(obj is Client client)) return false;
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
-            return client.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1 ||
-                client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
+            return client.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
+                || client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
         }
 
         #endregion

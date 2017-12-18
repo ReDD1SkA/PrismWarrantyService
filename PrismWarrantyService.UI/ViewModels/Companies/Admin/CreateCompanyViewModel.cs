@@ -67,10 +67,7 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
                 .FirstOrDefault(x => x.Name == NewCompany.Name);
 
             if (companyExistCheck != null)
-            {
-                MessageBox.Show($"Компания ({NewCompany.Name}) уже существует!");
                 return;
-            }
 
             await Task.Run(() => repository.CreateCompany(NewCompany));
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();

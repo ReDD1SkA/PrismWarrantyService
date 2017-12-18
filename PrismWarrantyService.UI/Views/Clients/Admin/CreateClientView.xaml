@@ -27,9 +27,17 @@
             <StackPanel>
                 <GroupBox Name="ClientDetailsGroupBox"
                           BorderThickness="0"
-                          Header="Заказ: детали"
                           Height="Auto"
                           Margin="0,0,0,16">
+                    <GroupBox.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="{StaticResource MaterialDesignBackground}"
+                                                     Kind="Account"
+                                                     Margin="0,0,4,0" />
+                            <TextBlock Foreground="{StaticResource MaterialDesignBackground}"
+                                       Text="Клиент: детали" />
+                        </StackPanel>
+                    </GroupBox.Header>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />

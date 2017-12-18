@@ -7,47 +7,62 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d">
-    <Grid Width="300">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="16"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <TextBox Text="{Binding EmployeeLogin}"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 MaxLength="12"
-                 Grid.Row="0">
-            <materialDesign:HintAssist.Hint >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Account"
-                                             Margin="0,0,4,0"/>
-                    <TextBlock>Имя пользователя</TextBlock>
-                </StackPanel>
-            </materialDesign:HintAssist.Hint>
-        </TextBox>
-        <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                     Name="passwordBox"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="AuthenticationFormGrid"
+              VerticalAlignment="Center"
+              Grid.Row="0"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="16"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox Text="{Binding EmployeeLogin}"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      MaxLength="12"
-                     Grid.Row="2">
-            <materialDesign:HintAssist.Hint >
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Key"
-                                             Margin="0,0,4,0"/>
-                    <TextBlock>Пароль</TextBlock>
-                </StackPanel>
-            </materialDesign:HintAssist.Hint>
-        </PasswordBox>
-        <Button Command="{Binding LoginCommand, Mode=OneTime}"
-                CommandParameter="{Binding ElementName=passwordBox}"
-                Content="Войти"
-                Grid.Row="4"/>
+                     Grid.Row="0">
+                <materialDesign:HintAssist.Hint >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Account"
+                                                 Margin="0,0,4,0"/>
+                        <TextBlock Text="Имя пользователя"/>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
+            <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                         Name="passwordBox"
+                         MaxLength="12"
+                         Grid.Row="2">
+                <materialDesign:HintAssist.Hint >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Key"
+                                                 Margin="0,0,4,0"/>
+                        <TextBlock>Пароль</TextBlock>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </PasswordBox>
+            <Button Command="{Binding LoginCommand, Mode=OneTime}"
+                    CommandParameter="{Binding ElementName=passwordBox}"
+                    Content="Войти"
+                    Grid.Row="4"/>
+        </Grid>
         <materialDesign:Snackbar IsActive="{Binding Snackbar.IsActive}"
+                                 Message="{Binding Snackbar.Content}"
                                  VerticalAlignment="Bottom"
-                                 Grid.Row="5">
-            <materialDesign:SnackbarMessage Content="{Binding Snackbar.Content}"/>
-        </materialDesign:Snackbar>
+                                 Grid.Row="1"
+                                 Grid.Column="1"/>
     </Grid>
+    
 </UserControl>

@@ -23,8 +23,16 @@
                       Grid.Row="0"
                       Grid.Column="0"
                       Grid.ColumnSpan="3">
-            <GroupBox BorderThickness="0"
-                      Header="Сотрудник: новый">
+            <GroupBox BorderThickness="0">
+                <GroupBox.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="{StaticResource MaterialDesignBackground}"
+                                                 Kind="Worker"
+                                                 Margin="0,0,4,0" />
+                        <TextBlock Foreground="{StaticResource MaterialDesignBackground}"
+                                   Text="Сотрудник: новая" />
+                    </StackPanel>
+                </GroupBox.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

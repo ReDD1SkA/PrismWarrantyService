@@ -49,7 +49,8 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
             // Sort-filters properties init
             SortProperties = new[]
             {
-                SortProperty
+                SortProperty,
+                new SortPropertyViewModel { Name = "Название", Property = "Name"}
             };
 
             SortDirections = new[]
@@ -186,10 +187,7 @@ namespace PrismWarrantyService.UI.ViewModels.Companies.Admin
                 SelectedCompany = Companies.GetItemAt(0) as Company;
                 CompanyClients.AddRange(repository.Clients.Where(x => x.CompanyID == SelectedCompany.CompanyID));
             }
-            catch (ArgumentOutOfRangeException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             RefreshSort();
         }

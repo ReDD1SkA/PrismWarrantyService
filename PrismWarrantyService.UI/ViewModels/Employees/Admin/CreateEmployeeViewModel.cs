@@ -79,10 +79,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
                 .FirstOrDefault(x => x.Name == NewEmployee.FirstName);
 
             if (employeeExistCheck != null)
-            {
-                MessageBox.Show($"Сотрудник {NewEmployee.FirstName} {NewEmployee.LastName} {NewEmployee.Surname} уже существует!");
                 return;
-            }
 
             NewEmployee.HashedPassword = _authenticationService.CalculateHash(passwordBox.Password, NewEmployee.Login);
 

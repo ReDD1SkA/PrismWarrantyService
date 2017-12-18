@@ -141,10 +141,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
             {
                 SelectedOrder = Orders.GetItemAt(0) as Order;
             }
-            catch (ArgumentOutOfRangeException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             RefreshSort();
         }
@@ -174,8 +171,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
             return order.Summary.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
-                || order.Client.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
-                || order.Client.Company.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
+                   || order.Client.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
+                   || order.Client.Company.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
+                   || order.Priority.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
+                   || order.State.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
         }
 
         #endregion

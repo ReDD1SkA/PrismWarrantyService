@@ -145,10 +145,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             {
                 SelectedClient = Clients.GetItemAt(0) as Client;
             }
-            catch (ArgumentOutOfRangeException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            catch (ArgumentOutOfRangeException) { }
 
             RefreshSort();
         }
