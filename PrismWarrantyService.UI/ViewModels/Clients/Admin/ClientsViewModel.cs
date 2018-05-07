@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -12,7 +11,7 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Clients;
-using PrismWarrantyService.UI.Events.Lists;
+using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
@@ -71,8 +70,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ClientUncheckedCommand = new DelegateCommand<Client>(ClientUnchecked);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
-
+            eventAggregator.GetEvent<OrderListChangedEvent>().Subscribe(OrderListChangedEventHandler, ThreadOption.UIThread);
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
         }
 
@@ -146,13 +144,13 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
             foreach (var client in CheckedClients)
             {
-                ClientOrders.Clear();
-                
+                ClientOrders.Clear();               
                 await Task.Run(() => repository.DeleteClient(client));
             }
             CheckedClients.Clear();
 
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
+            ClientListChangedEventHandler();
+            OrderListChangedEventHandler();
         }
 
         private void ClientChecked(Client parameter)
@@ -177,22 +175,33 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
         }
 
-        private void NeedRefreshListsEventHandler()
+        private void ClientListChangedEventHandler()
         {
             ClientsSource.Clear();
             ClientOrders.Clear();
-            CheckedClients.Clear();
-
             ClientsSource.AddRange(repository.Clients.ToList());
 
-            try
+            if (ClientsSource.Any())
             {
+                CheckedClients = CheckedClients.Where(x => ClientsSource.Contains(x)).ToList();
                 SelectedClient = Clients.GetItemAt(0) as Client;
-                ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
             }
-            catch (ArgumentOutOfRangeException) { }
+            else
+            {
+                CheckedClients.Clear();
+                SelectedClient = null;
+            }
 
+            OrderListChangedEventHandler();
             RefreshSort();
+        }
+
+        private void OrderListChangedEventHandler()
+        {
+            ClientOrders.Clear();
+
+            if (SelectedClient != null)
+                ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
         }
 
         // Sort-filter methods

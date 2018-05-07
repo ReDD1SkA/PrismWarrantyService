@@ -68,7 +68,6 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 return;
 
             OriginOfSelectedClient.GetInfoFrom(SelectedClient);
-
             await Task.Run(() => repository.UpdateClient(OriginOfSelectedClient));
         }
 

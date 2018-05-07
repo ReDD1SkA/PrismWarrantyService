@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -13,7 +12,7 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Authentication;
 using PrismWarrantyService.UI.Events.Clients;
-using PrismWarrantyService.UI.Events.Lists;
+using PrismWarrantyService.UI.Events.Companies;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.User
@@ -69,7 +68,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             ClientSelectionChangedCommand = new DelegateCommand(ClientSelectionChanged);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+            eventAggregator.GetEvent<CompanyListChangedEvent>().Subscribe(CompanyListChangedEventHandler, ThreadOption.UIThread);
             eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler, ThreadOption.UIThread);
 
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
@@ -130,16 +129,10 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
         }
 
-        private void NeedRefreshListsEventHandler()
+        private void CompanyListChangedEventHandler()
         {
             ClientsSource.Clear();
-
-            ClientsSource.AddRange(repository
-                .Employees
-                .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
-                .Orders
-                .Select(x => x.Client)
-                .Distinct());
+            ClientsSource.AddRange(repository.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
 
             try
             {
@@ -153,12 +146,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
         private void AuthenticationEventHandler()
         {
             ClientsSource.Clear();
-            ClientsSource.AddRange(repository
-                .Employees
-                .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
-                .Orders
-                .Select(x => x.Client)
-                .Distinct());
+            ClientsSource.AddRange(repository.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
         }
 
         // Sort-filter methods

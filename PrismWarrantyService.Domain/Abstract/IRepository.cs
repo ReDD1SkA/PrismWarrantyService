@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using PrismWarrantyService.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PrismWarrantyService.Domain.Abstract
 {
@@ -20,25 +21,33 @@ namespace PrismWarrantyService.Domain.Abstract
 
         #region Methods
 
-        // Orders CRUD
+        // orders CRUD
         void CreateOrder(Order order);
         void DeleteOrder(Order order);
-        void UpdateOrder(Order order);
+        void UpdateOrder(Order order);        
 
-        // Clients CRUD
+        // clients CRUD
         void CreateClient(Client client);
         void DeleteClient(Client client);
         void UpdateClient(Client client);
+        Task CreateClientAsync(Client client);
 
-        // Companies CRUD
+        // clients accessors
+        IEnumerable<Client> GetClientsForEmployee(string login);
+
+        // companies CRUD
         void CreateCompany(Company company);
         void DeleteCompany(Company company);
         void UpdateCompany(Company company);
 
-        // Employees CRUD
+        // employees CRUD
         void CreateEmployee(Employee employee);
         void DeleteEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
+
+        // existance check methods
+        Task<Client> ClientAlreadyExistAsync(string clientName, string companyName);
+        Task<Company> CompanyAlreadyExistAsync(string companyName);
 
         #endregion
     }

@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Lists;
+using PrismWarrantyService.UI.Events.Clients;
+using PrismWarrantyService.UI.Events.Companies;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
@@ -40,7 +40,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ToAddNewCompanyToClientCommand = new DelegateCommand(AddNewCompanyToClient);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
+            eventAggregator.GetEvent<CompanyListChangedEvent>().Subscribe(CompanyListChangedEventHandler, ThreadOption.UIThread);
         }
 
         #endregion
@@ -104,25 +104,19 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 if (NewCompany.HasErrors)
                     return;
 
-                var companyExistCheck = repository
-                    .Companies
-                    .FirstOrDefault(x => x.Name == NewCompany.Name);
-
-                if (companyExistCheck != null)
+                if (repository.CompanyAlreadyExistAsync(NewCompany.Name) != null)
                     return;
 
                 NewClient.Company = NewCompany;
             }
 
-            var clientExistCheck = repository
-                .Clients
-                .FirstOrDefault(x => x.Name == NewClient.Name && x.Company.Name == NewClient.Company.Name);
-
-            if (clientExistCheck != null)
+            if (repository.ClientAlreadyExistAsync(NewClient.Name, NewCompany.Name) != null)
                 return;
             
-            await Task.Run(() => repository.CreateClient(NewClient));
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
+            await repository.CreateClientAsync(NewClient);
+
+            eventAggregator.GetEvent<ClientListChangedEvent>().Publish();
+            if (NeedNewCompany) eventAggregator.GetEvent<CompanyListChangedEvent>().Publish();
 
             NewClient = new Client { Company = Companies.FirstOrDefault() };
             NewCompany = new Company();
@@ -139,7 +133,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         }
 
         // Event handlers
-        private void NeedRefreshListsEventHandler()
+        private void CompanyListChangedEventHandler()
         {
             Companies.Clear();
             Companies.AddRange(repository.Companies);

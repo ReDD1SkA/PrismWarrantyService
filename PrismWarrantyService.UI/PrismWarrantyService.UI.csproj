@@ -105,10 +105,13 @@
     <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
     <Compile Include="Converters\OrderDateTimeToDateConverter.cs" />
     <Compile Include="Events\Authentication\AuthenticationEvent.cs" />
+    <Compile Include="Events\Clients\ClientListChangedEvent.cs" />
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
+    <Compile Include="Events\Companies\CompanyListChangedEvent.cs" />
     <Compile Include="Events\Companies\CompanySelectionChangedEvent.cs" />
+    <Compile Include="Events\Employees\EmployeeListChangedEvent.cs" />
     <Compile Include="Events\Employees\EmployeeSelectionChangedEvent.cs" />
-    <Compile Include="Events\Lists\NeedRefreshListsEvent.cs" />
+    <Compile Include="Events\Orders\OrderListChangedEvent.cs" />
     <Compile Include="Events\Orders\OrderSelectionChangedEvent.cs" />
     <Compile Include="Services\Authentication\Abstract\IAuthenticationService.cs" />
     <Compile Include="Services\Authentication\Concrete\AnonymousIdentity.cs" />
