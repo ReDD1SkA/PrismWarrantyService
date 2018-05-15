@@ -164,7 +164,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             if (!(obj is Client client)) return false;
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
-            return client.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
+            return client.Title.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
                 || client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
         }
 

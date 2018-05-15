@@ -151,7 +151,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
 
                     var clientExistCheck = repository
                         .Clients
-                        .FirstOrDefault(x => x.Name == NewClient.Name && x.Company.Name == NewClient.Company.Name);
+                        .FirstOrDefault(x => x.Title == NewClient.Title && x.Company.Name == NewClient.Company.Name);
 
                     if (clientExistCheck != null)
                         return;

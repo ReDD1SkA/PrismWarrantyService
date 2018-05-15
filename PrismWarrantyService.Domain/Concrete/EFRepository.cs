@@ -164,7 +164,7 @@ namespace PrismWarrantyService.Domain.Concrete
         {
             return await _context.Clients
                 .Include(x => x.Company)
-                .FirstOrDefaultAsync(x => x.Name == clientName && x.Company.Name == companyName);
+                .FirstOrDefaultAsync(x => x.Title == clientName && x.Company.Name == companyName);
         }
 
         public async Task<Company> CompanyAlreadyExistAsync(string companyName)

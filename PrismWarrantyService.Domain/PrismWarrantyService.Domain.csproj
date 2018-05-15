@@ -79,7 +79,8 @@
     <Compile Include="Concrete\ValidatableBindableBase.cs" />
     <Compile Include="Concrete\WarrantyServiceDbContext.cs" />
     <Compile Include="Entities\Client.cs" />
-    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Device.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\State.cs" />

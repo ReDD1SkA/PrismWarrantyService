@@ -110,7 +110,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 NewClient.Company = NewCompany;
             }
 
-            if (repository.ClientAlreadyExistAsync(NewClient.Name, NewCompany.Name) != null)
+            if (repository.ClientAlreadyExistAsync(NewClient.Title, NewCompany.Name) != null)
                 return;
             
             await repository.CreateClientAsync(NewClient);
