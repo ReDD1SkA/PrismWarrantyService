@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using PrismWarrantyService.Domain.Concrete;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,7 +14,10 @@ namespace PrismWarrantyService.Domain.Entities
         private string _firstName;
         private string _lastName;
         private string _surname;
-        private string _position;
+        private string _email;
+        private string _phoneNumber;
+        private string _room;
+        private Position _position;
         private Role _role;
 
         #endregion
@@ -28,21 +32,13 @@ namespace PrismWarrantyService.Domain.Entities
         public string Login
         {
             get { return _login; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _login, value);
-            }
+            set { ValidateProperty(value); SetProperty(ref _login, value); }
         }
 
         public string HashedPassword
         {
             get { return _hashedPassword; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _hashedPassword, value);
-            }
+            set { ValidateProperty(value); SetProperty(ref _hashedPassword, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -50,11 +46,7 @@ namespace PrismWarrantyService.Domain.Entities
         public string FirstName
         {
             get { return _firstName; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _firstName, value);
-            }
+            set { ValidateProperty(value); SetProperty(ref _firstName, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -62,11 +54,7 @@ namespace PrismWarrantyService.Domain.Entities
         public string LastName
         {
             get { return _lastName; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _lastName, value);
-            }
+            set { ValidateProperty(value); SetProperty(ref _lastName, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -74,36 +62,50 @@ namespace PrismWarrantyService.Domain.Entities
         public string Surname
         {
             get { return _surname; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _surname, value);
-            }
+            set { ValidateProperty(value); SetProperty(ref _surname, value); }
         }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [StringLength(50, ErrorMessage = "Максимальная длина - 50 символов")]
-        public string Position
+        [EmailAddress(ErrorMessage = "Неверный формат E-mail")]
+        [StringLength(320, ErrorMessage = "Максимальная длина - 320 символов")]
+        public string Email
         {
-            get { return _position; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _position, value);
-            }
+            get { return _email; }
+            set { ValidateProperty(value); SetProperty(ref _email, value); }
         }
 
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(16, ErrorMessage = "Максимальная длина - 16 символов")]
+        [RegularExpression(@"^\d{3}-\d{2}-\d{3}-\d{2}-\d{2}$", ErrorMessage = "Формат номера: XXX-XX-XXX-XX-XX")]
+        public string PhoneNumber
+        {
+            get { return _phoneNumber; }
+            set { ValidateProperty(value); SetProperty(ref _phoneNumber, value); }
+        }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        [StringLength(4, ErrorMessage = "Максимальная длина - 16 символов")]
+        public string Room
+        {
+            get { return _room; }
+            set { ValidateProperty(value); SetProperty(ref _room, value); }
+        }
+
+        public int PositionID { get; set; }
         public int RoleID { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Role Role
         {
             get { return _role; }
-            set
-            {
-                ValidateProperty(value);
-                SetProperty(ref _role, value);
-            }
+            set { ValidateProperty(value); SetProperty(ref _role, value); }
+        }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        public virtual Position Position
+        {
+            get { return _role; }
+            set { ValidateProperty(value); SetProperty(ref _role, value); }
         }
 
         public ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
@@ -117,14 +119,14 @@ namespace PrismWarrantyService.Domain.Entities
             return new Employee
             {
                 EmployeeID = EmployeeID,
+                Login = Login,
+                HashedPassword = HashedPassword,
                 FirstName = FirstName,
                 LastName = LastName,
                 Surname = Surname,
-                Position = Position,
-                Login = Login,
-                HashedPassword = HashedPassword,
-                RoleID = RoleID,
-                Role = Role
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                
             };
         }
 

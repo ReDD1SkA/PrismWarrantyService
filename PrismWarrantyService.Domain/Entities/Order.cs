@@ -134,6 +134,11 @@ namespace PrismWarrantyService.Domain.Entities
             Employees.AddRange(donator.Employees);
         }
 
+        public override string ToString()
+        {
+            return Summary;
+        }
+
         #endregion
     }
 }
