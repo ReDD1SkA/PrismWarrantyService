@@ -16,7 +16,7 @@ namespace PrismWarrantyService.Domain.Entities
         private string _surname;
         private string _email;
         private string _phoneNumber;
-        private string _room;
+        private Room _room;
         private Position _position;
         private Role _role;
 
@@ -83,26 +83,29 @@ namespace PrismWarrantyService.Domain.Entities
             set { ValidateProperty(value); SetProperty(ref _phoneNumber, value); }
         }
 
+        public int RoomID { get; set; }
+
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(4, ErrorMessage = "Максимальная длина - 16 символов")]
-        public string Room
+        public virtual Room Room
         {
             get { return _room; }
             set { ValidateProperty(value); SetProperty(ref _room, value); }
         }
 
         public int PositionID { get; set; }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        public virtual Position Position
+        {
+            get { return _position; }
+            set { ValidateProperty(value); SetProperty(ref _position, value); }
+        }
+
         public int RoleID { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Role Role
-        {
-            get { return _role; }
-            set { ValidateProperty(value); SetProperty(ref _role, value); }
-        }
-
-        [Required(ErrorMessage = "Обязательное поле")]
-        public virtual Position Position
         {
             get { return _role; }
             set { ValidateProperty(value); SetProperty(ref _role, value); }
@@ -126,19 +129,29 @@ namespace PrismWarrantyService.Domain.Entities
                 Surname = Surname,
                 Email = Email,
                 PhoneNumber = PhoneNumber,
-                
+                RoomID = RoomID,
+                Room = Room,
+                PositionID = PositionID,
+                Position = Position,
+                RoleID = RoleID,
+                Role = Role
             };
         }
 
         public void GetInfoFrom(Employee donator)
         {
             EmployeeID = donator.EmployeeID;
+            Login = donator.Login;
+            HashedPassword = donator.HashedPassword;
             FirstName = donator.FirstName;
             LastName = donator.LastName;
             Surname = donator.Surname;
+            Email = donator.Email;
+            PhoneNumber = donator.PhoneNumber;
+            RoomID = donator.RoomID;
+            Room = donator.Room;
+            PositionID = donator.PositionID;
             Position = donator.Position;
-            Login = donator.Login;
-            HashedPassword = donator.HashedPassword;
             RoleID = donator.RoleID;
             Role = donator.Role;
         }

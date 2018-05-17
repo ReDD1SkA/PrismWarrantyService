@@ -14,18 +14,18 @@ namespace PrismWarrantyService.Domain.Entities
         private DateTime _accepted;
         private DateTime _deadline;
         private DateTime? _finished;
+        private decimal _cost;
         private Client _client;
+        private Device _device;
         private State _state;
         private Priority _priority;
 
         #endregion
 
         #region Properties
-
-        // Primary key
+        
         public int OrderID { get; set; }
-
-        // Simple properties
+        
         [Required(ErrorMessage = "Обязательное поле")]
         [StringLength(100, ErrorMessage = "Максимальная длина - 100 символов")]
         public string Summary
@@ -61,13 +61,9 @@ namespace PrismWarrantyService.Domain.Entities
             get { return _finished; }
             set { ValidateProperty(value); SetProperty(ref _finished, value); }
         }
-
-        // Navigation properties
+        
         public int ClientID { get; set; }
-        public int? StateID { get; set; }
-        public int? PriorityID { get; set; }
-
-        // Complex properties
+        
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Client Client
         {
@@ -75,12 +71,25 @@ namespace PrismWarrantyService.Domain.Entities
             set { ValidateProperty(value); SetProperty(ref _client, value); }
         }
 
+        public int DeviceID { get; set; }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        public virtual Device Device
+        {
+            get { return _device; }
+            set { ValidateProperty(value); SetProperty(ref _device, value); }
+        }
+
+        public int StateID { get; set; }
+
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual State State
         {
             get { return _state; }
             set { ValidateProperty(value); SetProperty(ref _state, value); }
         }
+
+        public int PriorityID { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
         public virtual Priority Priority
@@ -107,6 +116,8 @@ namespace PrismWarrantyService.Domain.Entities
                 Finished = Finished,
                 ClientID = ClientID,
                 Client = Client,
+                DeviceID = DeviceID,
+                Device = Device,
                 StateID = StateID,
                 State = State,
                 PriorityID = PriorityID,
@@ -125,6 +136,8 @@ namespace PrismWarrantyService.Domain.Entities
             Finished = donator.Finished;
             ClientID = donator.ClientID;
             Client = donator.Client;
+            DeviceID = donator.DeviceID;
+            Device = donator.Device;
             StateID = donator.StateID;
             State = donator.State;
             PriorityID = donator.PriorityID;
@@ -136,7 +149,7 @@ namespace PrismWarrantyService.Domain.Entities
 
         public override string ToString()
         {
-            return Summary;
+            return $"#{OrderID} {Summary}";
         }
 
         #endregion
