@@ -15,6 +15,7 @@ namespace PrismWarrantyService.Domain.Abstract
         IEnumerable<Client> GetAllClients();
         IEnumerable<Client> GetClientsForEmployee(string login);
 
+        Task<IEnumerable<Client>> GetAllClientsAsync();
         Task CreateClientAsync(Client client);
         Task<Client> ClientAlreadyExistAsync(string clientName, string companyName);
 

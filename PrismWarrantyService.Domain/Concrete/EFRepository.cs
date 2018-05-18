@@ -16,29 +16,66 @@ namespace PrismWarrantyService.Domain.Concrete
 
         #endregion
 
-        #region Properties
+        #region Client methods
 
-        public IQueryable<Client> Clients => _context.Clients
-            .Include(x => x.Company);
+        public void CreateClient(Client client)
+        {
+            _context.Entry(client).State = EntityState.Added;
+            _context.SaveChanges();
+        }
 
-        public IQueryable<Company> Companies => _context.Companies;
+        public void UpdateClient(Client client)
+        {
+            _context.Entry(client).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
 
-        public IQueryable<Employee> Employees => _context.Employees
-            .Include(x => x.Orders)
-            .Include(x => x.Role);
+        public void DeleteClient(Client client)
+        {
+            var clientOrders = _context.Orders
+                .Where(x => x.ClientID == client.ClientID);
 
-        public IQueryable<Order> Orders => _context.Orders
-            .Include(x => x.Employees)
-            .Include(x => x.Client)
-            .Include(x => x.Client.Company)
-            .Include(x => x.State)
-            .Include(x => x.Priority);
+            foreach (var order in clientOrders)
+            {
+                _context.Entry(order).State = EntityState.Deleted;
+            }
 
-        public IQueryable<Priority> Priorities => _context.Priorities;
+            _context.Entry(client).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
 
-        public IQueryable<State> States => _context.States;
+        public IEnumerable<Client> GetAllCliens()
+        {
+            return _context.Clients
+                .ToList();
+        }
 
-        public IQueryable<Role> Roles => _context.Roles;
+        public IEnumerable<Client> GetClientsForEmployee(Employee employee)
+        {
+            return _context.Orders
+                .Include(x => x.Client)
+                .Where(x => x.Employees.Contains(employee))
+                .Select(x => x.Client)
+                .Distinct();
+        }
+
+        public async Task<IEnumerable<Client>> GetAllClientsAsync()
+        {
+            return await _context.Clients
+                .ToListAsync();
+        }
+ 
+        public async Task CreateClientAsync(Client client)
+        {
+            _context.Entry(client).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Client> ClientAlreadyExistAsync(string clientName, string companyName)
+        {
+            return await _context.Clients
+                .FirstOrDefaultAsync(x => x.Title == clientName);
+        }
 
         #endregion
 
@@ -74,37 +111,7 @@ namespace PrismWarrantyService.Domain.Concrete
         }
 
         // clients CRUD
-        public void CreateClient(Client client)
-        {
-            _context.Entry(client).State = EntityState.Added;
-            _context.SaveChanges();
-        }
-
-        public void UpdateClient(Client client)
-        {
-            _context.Entry(client).State = EntityState.Modified;
-            _context.SaveChanges();
-        }
-
-        public void DeleteClient(Client client)
-        {
-            var clientOrders = _context.Orders
-                .Where(x => x.ClientID == client.ClientID);
-
-            foreach (var order in clientOrders)
-            {
-                _context.Entry(order).State = EntityState.Deleted;
-            }
-
-            _context.Entry(client).State = EntityState.Deleted;
-            _context.SaveChanges();
-        }
-
-        public async Task CreateClientAsync(Client client)
-        {
-            _context.Entry(client).State = EntityState.Added;
-            await _context.SaveChangesAsync();
-        }
+        
 
         // companies CRUD
         public void CreateCompany(Company company)
@@ -160,12 +167,7 @@ namespace PrismWarrantyService.Domain.Concrete
         }
 
         // existance check methods
-        public async Task<Client> ClientAlreadyExistAsync(string clientName, string companyName)
-        {
-            return await _context.Clients
-                .Include(x => x.Company)
-                .FirstOrDefaultAsync(x => x.Title == clientName && x.Company.Name == companyName);
-        }
+        
 
         public async Task<Company> CompanyAlreadyExistAsync(string companyName)
         {
