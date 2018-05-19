@@ -21,8 +21,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         #region Constructors and finalizers
 
-        public ClientDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public ClientDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {         
             // Events init
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler, ThreadOption.UIThread);
@@ -68,7 +68,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 return;
 
             OriginOfSelectedClient.GetInfoFrom(SelectedClient);
-            await Task.Run(() => repository.UpdateClient(OriginOfSelectedClient));
+            await Task.Run(() => repo.UpdateClient(OriginOfSelectedClient));
         }
 
         private void UndoClient()

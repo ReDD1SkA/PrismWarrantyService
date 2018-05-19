@@ -32,12 +32,12 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
         #region Constructors and finalizers
 
-        public EmployeesViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public EmployeesViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Orders properties init
 
-            EmployeesSource = new ObservableCollection<Employee>(repository.Employees);
+            EmployeesSource = new ObservableCollection<Employee>(repo.Employees);
             Employees = new ListCollectionView(EmployeesSource);
 
             SelectedEmployee = Employees.CurrentItem as Employee;
@@ -143,7 +143,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
             foreach (var employee in CheckedEmployees)
             {
-                await Task.Run(() => repository.DeleteEmployee(employee));
+                await Task.Run(() => repo.DeleteEmployee(employee));
             }
             CheckedEmployees.Clear();
 
@@ -171,7 +171,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
         {
             EmployeesSource.Clear();
             CheckedEmployees.Clear();
-            EmployeesSource.AddRange(repository.Employees);
+            EmployeesSource.AddRange(repo.Employees);
 
             try
             {

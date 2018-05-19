@@ -11,11 +11,11 @@ namespace PrismWarrantyService.UI.ViewModels
     {
         #region Constructors and finalizers
 
-        public ShellViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public ShellViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // To accelerate authentication
-            repository.Employees.FirstOrDefault();
+            repo.Employees.FirstOrDefault();
 
             regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView));
         }

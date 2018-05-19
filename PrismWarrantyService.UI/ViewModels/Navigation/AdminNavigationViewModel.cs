@@ -19,8 +19,8 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         #region Constructors and finalizers
 
-        public AdminNavigationViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public AdminNavigationViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             NavigateCommand = new DelegateCommand<NavigationItemViewModel>(Navigate);
 

@@ -9,7 +9,6 @@ using PrismWarrantyService.UI.Services.Authentification.Concrete;
 using PrismWarrantyService.UI.Views;
 using PrismWarrantyService.UI.Views.Clients.Admin;
 using PrismWarrantyService.UI.Views.Clients.User;
-using PrismWarrantyService.UI.Views.Companies.Admin;
 using PrismWarrantyService.UI.Views.Employees.Admin;
 using PrismWarrantyService.UI.Views.Layouts;
 using PrismWarrantyService.UI.Views.Orders.Admin;
@@ -45,7 +44,7 @@ namespace PrismWarrantyService.UI
 
         protected override void InitializeShell()
         {
-            Application.Current.MainWindow = (Window)Shell;
+            Application.Current.MainWindow = Shell as Window;
             Application.Current.MainWindow.Show();
         }
 
@@ -79,11 +78,6 @@ namespace PrismWarrantyService.UI
             Kernel.RegisterTypeForNavigation<ClientsView>();
             Kernel.RegisterTypeForNavigation<ClientDetailsView>();
             Kernel.RegisterTypeForNavigation<CreateClientView>();
-
-            // Companies views
-            Kernel.RegisterTypeForNavigation<CompaniesView>();
-            Kernel.RegisterTypeForNavigation<CompanyDetailsView>();
-            Kernel.RegisterTypeForNavigation<CreateCompanyView>();
 
             // Employees views
             Kernel.RegisterTypeForNavigation<EmployeesView>();

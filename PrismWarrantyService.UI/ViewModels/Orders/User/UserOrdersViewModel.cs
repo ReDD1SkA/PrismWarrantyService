@@ -34,12 +34,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
 
         #region Constructors and finalizers
 
-        public UserOrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public UserOrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Orders properties init
 
-            OrdersSource = new ObservableCollection<Order>(repository
+            OrdersSource = new ObservableCollection<Order>(repo
                 .Employees
                 .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
                 .Orders);
@@ -135,7 +135,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
         private void NeedRefreshListsEventHandler()
         {
             OrdersSource.Clear();
-            OrdersSource.AddRange(repository.Orders);
+            OrdersSource.AddRange(repo.Orders);
 
             try
             {
@@ -149,7 +149,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
         private void AuthenticationEventHandler()
         {
             OrdersSource.Clear();
-            OrdersSource.AddRange(repository
+            OrdersSource.AddRange(repo
                 .Employees
                 .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
                 .Orders);

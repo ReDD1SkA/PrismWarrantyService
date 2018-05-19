@@ -8,7 +8,6 @@ using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
@@ -19,49 +18,39 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
 
         private Order _newOrder;
         private Client _newClient;
-        private Company _newCompany;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public CreateOrderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public CreateOrderViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Lists init
-            Clients = new ObservableCollection<Client>(repository.Clients);
-            Priorities = new ObservableCollection<Priority>(repository.Priorities);
-            States = new ObservableCollection<State>(repository.States);
-            Companies = new ObservableCollection<Company>(repository.Companies);
+            Clients = new ObservableCollection<Client>(repo.GetAllClientsAsync().Result);
+            Priorities = new ObservableCollection<Priority>(repo.GetAllPrioritiesAsync().Result);
+            States = new ObservableCollection<State>(repo.GetAllStatesAsync().Result);
 
             // Properties init
             NewOrder = new Order { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
-            NewClient = new Client { Company = Companies.FirstOrDefault() };
-            NewCompany = new Company();
+            NewClient = new Client();
 
             // Commands init
             SaveCommand = new DelegateCommand(SaveOrder);
             CancelCommand = new DelegateCommand(Cancel);
             ToSelectOrderClientCommand = new DelegateCommand(ToSelectOrderClient);
             ToAddNewClientToOrderCommand = new DelegateCommand(ToAddNewClientToOrder);
-            ToSelectClientCompanyCommand = new DelegateCommand(ToSelectClientCompany);
-            ToAddNewCompanyToClientCommand = new DelegateCommand(ToAddNewCompanyToClient);
-
-            // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
         }
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<Client> Clients { get; set; }
-        public ObservableCollection<Company> Companies { get; set; }
-        public ObservableCollection<Priority> Priorities { get; set; }
-        public ObservableCollection<State> States { get; set; }
+        public ObservableCollection<Client> Clients { get; }
+        public ObservableCollection<Priority> Priorities { get; }
+        public ObservableCollection<State> States { get; }
 
         public bool NeedNewClient { get; private set; }
-        public bool NeedNewCompany { get; private set; }
 
         public Order NewOrder
         {
@@ -75,12 +64,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
             set => SetProperty(ref _newClient, value);
         }
 
-        public Company NewCompany
-        {
-            get => _newCompany;
-            set => SetProperty(ref _newCompany, value);
-        }
-
         #endregion
 
         #region Commands
@@ -89,8 +72,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
         public DelegateCommand CancelCommand { get; }
         public DelegateCommand ToSelectOrderClientCommand { get; }
         public DelegateCommand ToAddNewClientToOrderCommand { get; }
-        public DelegateCommand ToSelectClientCompanyCommand { get; }
-        public DelegateCommand ToAddNewCompanyToClientCommand { get; }
 
         #endregion
 
@@ -109,18 +90,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
             NeedNewClient = true;
         }
 
-        private void ToSelectClientCompany()
-        {
-            regionManager.RequestNavigate("Admin.CreateOrder.SelectClientCompanyRegion", "CreateOrderSelectCompanyView");
-            NeedNewCompany = false;
-        }
-
-        private void ToAddNewCompanyToClient()
-        {
-            regionManager.RequestNavigate("Admin.CreateOrder.SelectClientCompanyRegion", "CreateOrderNewCompanyView");
-            NeedNewCompany = true;
-        }
-
         // CRUD methods
         private async void SaveOrder()
         {
@@ -133,38 +102,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
                     if (NewClient.HasErrors)
                         return;
 
-                    if (NeedNewCompany)
-                    {
-                        NewCompany.Validate();
-                        if (NewCompany.HasErrors)
-                            return;
-
-                        var companyExistCheck = repository
-                            .Companies
-                            .FirstOrDefault(x => x.Name == NewCompany.Name);
-
-                        if (companyExistCheck != null)
-                            return;
-
-                        NewClient.Company = NewCompany;
-                    }
-
-                    var clientExistCheck = repository
-                        .Clients
-                        .FirstOrDefault(x => x.Title == NewClient.Title && x.Company.Name == NewClient.Company.Name);
-
-                    if (clientExistCheck != null)
+                    if (await repo.ClientAlreadyExistAsync(NewClient.Title) != null)
                         return;
 
                     NewOrder.Client = NewClient;
                 }
 
-                await Task.Run(() => repository.CreateOrder(NewOrder));
-                eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
+                // TODO: async repo method
+                await Task.Run(() => repo.CreateOrder(NewOrder));
 
                 NewOrder = new Order { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
-                NewClient = new Client { Company = Companies.FirstOrDefault() };
-                NewCompany = new Company();
+                NewClient = new Client();
 
                 regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
             }
@@ -173,20 +121,9 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.CreateOrder
         private void Cancel()
         {
             NewOrder = new Order { Client = Clients.FirstOrDefault(), Deadline = DateTime.Now };
-            NewClient = new Client { Company = Companies.FirstOrDefault() };
-            NewCompany = new Company();
+            NewClient = new Client();
 
             regionManager.RequestNavigate("Admin.DetailsRegion", "OrderDetailsView");
-        }
-
-        // Event handlers
-        private void NeedRefreshListsEventHandler()
-        {
-            Clients.Clear();
-            Companies.Clear();
-
-            Clients.AddRange(repository.Clients);
-            Companies.AddRange(repository.Companies);
         }
 
         #endregion

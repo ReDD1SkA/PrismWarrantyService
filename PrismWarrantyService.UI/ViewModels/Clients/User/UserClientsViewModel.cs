@@ -33,11 +33,11 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
 
         #region Constructors and finalizers
 
-        public UserClientsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public UserClientsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Clients properties init
-            ClientsSource = new ObservableCollection<Client>(repository
+            ClientsSource = new ObservableCollection<Client>(repo
                 .Employees
                 .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
                 .Orders
@@ -132,7 +132,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
         private void CompanyListChangedEventHandler()
         {
             ClientsSource.Clear();
-            ClientsSource.AddRange(repository.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
+            ClientsSource.AddRange(repo.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
 
             try
             {
@@ -146,7 +146,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
         private void AuthenticationEventHandler()
         {
             ClientsSource.Clear();
-            ClientsSource.AddRange(repository.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
+            ClientsSource.AddRange(repo.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
         }
 
         // Sort-filter methods

@@ -15,9 +15,9 @@ namespace PrismWarrantyService.Domain.Abstract
         IEnumerable<Client> GetAllClients();
         IEnumerable<Client> GetClientsForEmployee(string login);
 
-        Task<IEnumerable<Client>> GetAllClientsAsync();
         Task CreateClientAsync(Client client);
-        Task<Client> ClientAlreadyExistAsync(string clientName, string companyName);
+        Task<IEnumerable<Client>> GetAllClientsAsync();
+        Task<Client> ClientAlreadyExistAsync(string clientName);
 
         #endregion
 
@@ -51,5 +51,18 @@ namespace PrismWarrantyService.Domain.Abstract
 
         #endregion
 
+        #region Priority methods
+
+        IEnumerable<Priority> GetAllPriorities();
+        Task<IEnumerable<Priority>> GetAllPrioritiesAsync();
+
+        #endregion
+
+        #region State methods
+
+        IEnumerable<State> GetAllStates();
+        Task<IEnumerable<State>> GetAllStatesAsync();
+
+        #endregion
     }
 }

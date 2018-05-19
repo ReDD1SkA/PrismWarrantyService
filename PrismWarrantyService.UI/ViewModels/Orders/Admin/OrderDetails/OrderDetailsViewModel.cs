@@ -28,17 +28,17 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
 
         #region Constructors and finalizers
 
-        public OrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public OrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Properties init
-            FreeEmployees = new ObservableCollection<Employee>(repository
+            FreeEmployees = new ObservableCollection<Employee>(repo
                 .Employees
                 .OrderBy(x => x.Surname));
             SelectedFreeEmployee = FreeEmployees.FirstOrDefault();
 
-            States = new ObservableCollection<State>(repository.States);
-            Priorities = new ObservableCollection<Priority>(repository.Priorities);
+            States = new ObservableCollection<State>(repo.States);
+            Priorities = new ObservableCollection<Priority>(repo.Priorities);
 
             // Commands init
             UpdateOrderCommand = new DelegateCommand(UpdateOrder);
@@ -123,7 +123,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
 
             OriginOfSelectedOrder.GetInfoFrom(SelectedOrder);
 
-            await Task.Run(() => repository.UpdateOrder(OriginOfSelectedOrder));
+            await Task.Run(() => repo.UpdateOrder(OriginOfSelectedOrder));
         }
 
         private void UndoOrder()
@@ -156,7 +156,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         private void NeedRefreshListsEventHandler()
         {
             FreeEmployees.Clear();
-            FreeEmployees.AddRange(repository.Employees);
+            FreeEmployees.AddRange(repo.Employees);
         }
 
         #endregion

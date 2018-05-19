@@ -32,12 +32,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
         #region Constructors and finalizers
 
-        public OrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public OrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Orders properties init
             
-            OrdersSource = new ObservableCollection<Order>(repository.Orders);
+            OrdersSource = new ObservableCollection<Order>(repo.Orders);
             Orders = new ListCollectionView(OrdersSource);
 
             SelectedOrder = Orders.CurrentItem as Order;
@@ -144,7 +144,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             foreach (var order in CheckedOrders)
             {
                 Orders.Remove(order);
-                await Task.Run(() => repository.DeleteOrder(order));
+                await Task.Run(() => repo.DeleteOrder(order));
             }
             CheckedOrders.Clear();
 
@@ -172,7 +172,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         {
             OrdersSource.Clear();
             CheckedOrders.Clear();
-            OrdersSource.AddRange(repository.Orders);
+            OrdersSource.AddRange(repo.Orders);
 
             try
             {

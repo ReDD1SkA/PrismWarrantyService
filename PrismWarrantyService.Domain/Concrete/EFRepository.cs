@@ -44,19 +44,15 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
-        public IEnumerable<Client> GetAllCliens()
+        public IEnumerable<Client> GetAllClients()
         {
             return _context.Clients
                 .ToList();
         }
 
-        public IEnumerable<Client> GetClientsForEmployee(Employee employee)
+        public IEnumerable<Client> GetClientsForEmployee(string login)
         {
-            return _context.Orders
-                .Include(x => x.Client)
-                .Where(x => x.Employees.Contains(employee))
-                .Select(x => x.Client)
-                .Distinct();
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Client>> GetAllClientsAsync()
@@ -71,7 +67,7 @@ namespace PrismWarrantyService.Domain.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Client> ClientAlreadyExistAsync(string clientName, string companyName)
+        public async Task<Client> ClientAlreadyExistAsync(string clientName)
         {
             return await _context.Clients
                 .FirstOrDefaultAsync(x => x.Title == clientName);
@@ -79,9 +75,69 @@ namespace PrismWarrantyService.Domain.Concrete
 
         #endregion
 
-        #region Methods
+        #region Device methods
 
-        // orders CRUD
+        public void CreateDevice(Device device)
+        {
+            _context.Entry(device).State = EntityState.Added;
+            _context.SaveChanges();
+        }
+
+        public void UpdateDevice(Device device)
+        {
+            _context.Entry(device).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void DeleteDevice(Device device)
+        {
+            _context.Entry(device).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<Device> GetAllDevices()
+        {
+            return _context.Devices
+                .Include(x => x.Producer)
+                .Include(x => x.Producer.Country)
+                .ToList();
+        }
+
+        #endregion
+
+        #region Employee methods
+
+        public void CreateEmployee(Employee employee)
+        {
+            _context.Entry(employee).State = EntityState.Added;
+            _context.SaveChanges();
+        }
+
+        public void UpdateEmployee(Employee employee)
+        {
+            _context.Entry(employee).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            _context.Entry(employee).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<Employee> GetAllEmployees()
+        {
+            return _context.Employees
+                .Include(x => x.Room)
+                .Include(x => x.Position)
+                .Include(x => x.Role)
+                .ToList();
+        }
+
+        #endregion
+
+        #region Order methods
+
         public void CreateOrder(Order order)
         {
             order.Accepted = DateTime.Now;
@@ -110,82 +166,46 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
-        // clients CRUD
-        
-
-        // companies CRUD
-        public void CreateCompany(Company company)
+        public IEnumerable<Order> GetAllOrders()
         {
-            _context.Entry(company).State = EntityState.Added;
-            _context.SaveChanges();
+            return _context.Orders
+                .Include(x => x.Client)
+                .Include(x => x.Device)
+                .Include(x => x.Priority)
+                .Include(x => x.State)
+                .ToList();
         }
 
-        public void UpdateCompany(Company company)
+        #endregion
+
+        #region Priority methods
+
+        public IEnumerable<Priority> GetAllPriorities()
         {
-            _context.Entry(company).State = EntityState.Modified;
-            _context.SaveChanges();
+            return _context.Priorities
+                .ToList();
         }
 
-        public void DeleteCompany(Company company)
+        public async Task<IEnumerable<Priority>> GetAllPrioritiesAsync()
         {
-            var companyClients = _context.Clients
-                .Where(x => x.CompanyID == company.CompanyID);
-
-            foreach (var client in companyClients)
-            {
-                var clientOrders = _context.Orders
-                    .Where(x => x.ClientID == client.ClientID);
-
-                foreach (var order in clientOrders)
-                {
-                    _context.Entry(order).State = EntityState.Deleted;
-                }
-
-                _context.Entry(client).State = EntityState.Deleted;
-            }
-            _context.Entry(company).State = EntityState.Deleted;
-            _context.SaveChanges();
+            return await _context.Priorities
+                .ToListAsync();
         }
 
-        // employees CRUD
-        public void CreateEmployee(Employee employee)
+        #endregion
+
+        #region State methods
+
+        public IEnumerable<State> GetAllStates()
         {
-            _context.Entry(employee).State = EntityState.Added;
-            _context.SaveChanges();
+            return _context.States
+                .ToList();
         }
 
-        public void UpdateEmployee(Employee employee)
+        public async Task<IEnumerable<State>> GetAllStatesAsync()
         {
-            _context.Entry(employee).State = EntityState.Modified;
-            _context.SaveChanges();
-        }
-
-        public void DeleteEmployee(Employee employee)
-        {
-            _context.Entry(employee).State = EntityState.Deleted;
-            _context.SaveChanges();
-        }
-
-        // existance check methods
-        
-
-        public async Task<Company> CompanyAlreadyExistAsync(string companyName)
-        {
-            return await _context.Companies
-                .FirstOrDefaultAsync(x => x.Name == companyName);
-        }
-
-        // clients accessors
-        public IEnumerable<Client> GetClientsForEmployee(string login)
-        {
-            var clients = _context.Employees
-                .Include(x => x.Orders)
-                .First(x => x.Login == login)
-                .Orders
-                .Select(x => x.ClientID);
-
-            return _context.Clients
-                .Where(x => clients.Contains(x.ClientID));
+            return await _context.States
+                .ToListAsync();
         }
 
         #endregion

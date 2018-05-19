@@ -26,8 +26,8 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
 
         #region Constructors and finalizers
 
-        public AuthenticationViewModel(IAuthenticationService authenticationService, IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public AuthenticationViewModel(IAuthenticationService authenticationService, IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             _authenticationService = authenticationService;
 

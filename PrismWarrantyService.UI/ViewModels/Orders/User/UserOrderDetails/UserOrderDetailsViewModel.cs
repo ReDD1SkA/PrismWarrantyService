@@ -23,8 +23,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
 
         #region Constructors and finalizers
 
-        public UserOrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public UserOrderDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Сommands init
             OrderAcceptedCommand = new DelegateCommand(OrderAccepted);
@@ -69,10 +69,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
 
         private async void OrderAccepted()
         {
-            SelectedOrder.State = repository.States
+            SelectedOrder.State = repo.States
                 .FirstOrDefault(x => x.Name == "Выполняемый");
 
-            await Task.Run(() => repository.UpdateOrder(SelectedOrder));
+            await Task.Run(() => repo.UpdateOrder(SelectedOrder));
 
             CanBeAccepted = false;
             CanBeCompleted = true;
@@ -80,10 +80,10 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
 
         private async void OrderCompleted()
         {
-            SelectedOrder.State = repository.States
+            SelectedOrder.State = repo.States
                 .FirstOrDefault(x => x.Name == "Выполненный");
 
-            await Task.Run(() => repository.UpdateOrder(SelectedOrder));
+            await Task.Run(() => repo.UpdateOrder(SelectedOrder));
 
             CanBeAccepted = false;
             CanBeCompleted = false;

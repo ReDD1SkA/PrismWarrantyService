@@ -25,14 +25,14 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
         #region Constructors and finalizers
 
-        public CreateEmployeeViewModel(IAuthenticationService authenticationService, IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public CreateEmployeeViewModel(IAuthenticationService authenticationService, IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Services init
             _authenticationService = authenticationService;
 
             // Lists init
-            Roles = new ObservableCollection<Role>(repository.Roles);
+            Roles = new ObservableCollection<Role>(repo.Roles);
 
             // Properties init
             NewEmployee = new Employee();
@@ -75,7 +75,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             if (passwordBox.Password == string.Empty)
                 return;
 
-            var employeeExistCheck = repository.Companies
+            var employeeExistCheck = repo.Companies
                 .FirstOrDefault(x => x.Name == NewEmployee.FirstName);
 
             if (employeeExistCheck != null)
@@ -83,7 +83,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
             NewEmployee.HashedPassword = _authenticationService.CalculateHash(passwordBox.Password, NewEmployee.Login);
 
-            await Task.Run(() => repository.CreateEmployee(NewEmployee));
+            await Task.Run(() => repo.CreateEmployee(NewEmployee));
             eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
 
             NewEmployee = new Employee();

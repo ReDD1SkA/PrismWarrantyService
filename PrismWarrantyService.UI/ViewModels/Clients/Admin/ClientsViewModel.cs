@@ -32,18 +32,18 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         #region Constructors and finalizers
 
-        public ClientsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public ClientsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Clients properties init
-            ClientsSource = new ObservableCollection<Client>(repository.Clients);
+            ClientsSource = new ObservableCollection<Client>(repo.Clients);
             Clients = new ListCollectionView(ClientsSource);
 
             SelectedClient = Clients.CurrentItem as Client;
             CheckedClients = new List<Client>();
 
             // Client orders init
-            ClientOrders = new ObservableCollection<Order>(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+            ClientOrders = new ObservableCollection<Order>(repo.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
 
             // Sort-filters properties init
             SortProperties = new[]
@@ -145,7 +145,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             foreach (var client in CheckedClients)
             {
                 ClientOrders.Clear();               
-                await Task.Run(() => repository.DeleteClient(client));
+                await Task.Run(() => repo.DeleteClient(client));
             }
             CheckedClients.Clear();
 
@@ -169,7 +169,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ClientOrders.Clear();
 
             if (SelectedClient != null)
-                ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+                ClientOrders.AddRange(repo.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
 
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
@@ -179,7 +179,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         {
             ClientsSource.Clear();
             ClientOrders.Clear();
-            ClientsSource.AddRange(repository.Clients.ToList());
+            ClientsSource.AddRange(repo.Clients.ToList());
 
             if (ClientsSource.Any())
             {
@@ -201,7 +201,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             ClientOrders.Clear();
 
             if (SelectedClient != null)
-                ClientOrders.AddRange(repository.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+                ClientOrders.AddRange(repo.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
         }
 
         // Sort-filter methods

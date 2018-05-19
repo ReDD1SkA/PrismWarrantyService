@@ -19,8 +19,8 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
 
         #region Constructors and finalizers
 
-        public UserClientDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public UserClientDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Events init
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Subscribe(ClientSelectionChangedEventHandler, ThreadOption.UIThread);

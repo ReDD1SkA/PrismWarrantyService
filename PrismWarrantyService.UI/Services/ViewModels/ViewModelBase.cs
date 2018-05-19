@@ -11,17 +11,17 @@ namespace PrismWarrantyService.UI.Services.ViewModels
 
         protected IRegionManager regionManager;
         protected IEventAggregator eventAggregator;
-        protected IRepository repository;
+        protected IRepository repo;
 
         #endregion
 
         #region Constructors and finalizers
 
-        public ViewModelBase(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
+        public ViewModelBase(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
         {
             this.regionManager = regionManager;
             this.eventAggregator = eventAggregator;
-            this.repository = repository;
+            this.repo = repo;
         }
 
         #endregion

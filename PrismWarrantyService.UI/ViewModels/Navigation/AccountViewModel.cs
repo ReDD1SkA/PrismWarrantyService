@@ -21,8 +21,8 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         #region Constructors and finalizers
 
-        public AccountViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public AccountViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler);
             AuthenticationEventHandler();
@@ -62,7 +62,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         private void AuthenticationEventHandler()
         {
-            CurrentEmployee = repository.Employees
+            CurrentEmployee = repo.Employees
                 .FirstOrDefault(x => x.Login == Thread.CurrentPrincipal.Identity.Name);
         }
 

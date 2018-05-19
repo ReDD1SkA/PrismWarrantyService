@@ -24,14 +24,14 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
         #region Constructors and finalizers
 
-        public EmployeeDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repository)
-            : base(regionManager, eventAggregator, repository)
+        public EmployeeDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
+            : base(regionManager, eventAggregator, repo)
         {
             // Properties init
-            OriginOfSelectedEmployee = repository.Employees.First();
+            OriginOfSelectedEmployee = repo.Employees.First();
             SelectedEmployee = OriginOfSelectedEmployee.Clone();
 
-            Roles = new ObservableCollection<Role>(repository.Roles);
+            Roles = new ObservableCollection<Role>(repo.Roles);
 
             // Commands init
             UpdateEmployeeCommand = new DelegateCommand(UpdateEmployee);
@@ -80,7 +80,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
             OriginOfSelectedEmployee.GetInfoFrom(SelectedEmployee);
 
-            await Task.Run(() => repository.UpdateEmployee(OriginOfSelectedEmployee));
+            await Task.Run(() => repo.UpdateEmployee(OriginOfSelectedEmployee));
         }
 
         private void UndoEmployee()
