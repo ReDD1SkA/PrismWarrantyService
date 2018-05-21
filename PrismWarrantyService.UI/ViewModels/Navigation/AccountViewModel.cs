@@ -62,8 +62,7 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
 
         private void AuthenticationEventHandler()
         {
-            CurrentEmployee = repo.Employees
-                .FirstOrDefault(x => x.Login == Thread.CurrentPrincipal.Identity.Name);
+            CurrentEmployee = repo.GetEmployeeByLogin(Thread.CurrentPrincipal.Identity.Name);
         }
 
         #endregion

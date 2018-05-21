@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -36,14 +35,15 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             : base(regionManager, eventAggregator, repo)
         {
             // Clients properties init
-            ClientsSource = new ObservableCollection<Client>(repo.Clients);
+            ClientsSource = new ObservableCollection<Client>(repo.GetAllClients());
             Clients = new ListCollectionView(ClientsSource);
 
             SelectedClient = Clients.CurrentItem as Client;
             CheckedClients = new List<Client>();
 
             // Client orders init
-            ClientOrders = new ObservableCollection<Order>(repo.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+            if (SelectedClient != null)
+                ClientOrders = new ObservableCollection<Order>(repo.GetOrdersByClientID(SelectedClient.ClientID));
 
             // Sort-filters properties init
             SortProperties = new[]
@@ -83,13 +83,13 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
 
         public ObservableCollection<Client> ClientsSource { get; }
 
+        public List<Client> CheckedClients { get; set; }
+
         public Client SelectedClient
         {
             get => _selectedClient;
             set => SetProperty(ref _selectedClient, value);
         }
-
-        public List<Client> CheckedClients { get; set; }
 
         // Client order properties
         public ObservableCollection<Order> ClientOrders { get; }
@@ -145,7 +145,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             foreach (var client in CheckedClients)
             {
                 ClientOrders.Clear();               
-                await Task.Run(() => repo.DeleteClient(client));
+                await repo.DeleteClientAsync(client);
             }
             CheckedClients.Clear();
 
@@ -164,22 +164,22 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         }
 
         // Event handlers
-        private void ClientSelectionChanged()
+        private async void ClientSelectionChanged()
         {
             ClientOrders.Clear();
 
             if (SelectedClient != null)
-                ClientOrders.AddRange(repo.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+                ClientOrders.AddRange(await repo.GetOrdersByClientIDAsync(SelectedClient.ClientID));
 
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");
         }
 
-        private void ClientListChangedEventHandler()
+        private async void ClientListChangedEventHandler()
         {
             ClientsSource.Clear();
             ClientOrders.Clear();
-            ClientsSource.AddRange(repo.Clients.ToList());
+            ClientsSource.AddRange(await repo.GetAllClientsAsync());
 
             if (ClientsSource.Any())
             {
@@ -196,12 +196,11 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             RefreshSort();
         }
 
-        private void OrderListChangedEventHandler()
+        private async void OrderListChangedEventHandler()
         {
             ClientOrders.Clear();
-
             if (SelectedClient != null)
-                ClientOrders.AddRange(repo.Orders.Where(x => x.ClientID == SelectedClient.ClientID));
+                ClientOrders.AddRange(await repo.GetOrdersByClientIDAsync(SelectedClient.ClientID));
         }
 
         // Sort-filter methods
@@ -219,8 +218,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
             if (!(obj is Client client)) return false;
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
-            return client.Title.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
-                || client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
+            return client.Title.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
         }
 
         #endregion

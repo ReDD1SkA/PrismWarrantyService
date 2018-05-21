@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Services.Authentification.Abstract;
@@ -27,14 +28,12 @@ namespace PrismWarrantyService.UI.Services.Authentification.Concrete
 
         #region Methods
 
-        public Employee AuthenticateEmployee(string login, string clearTextPassword)
+        public async Task<Employee> AuthenticateEmployeeAsync(string login, string clearTextPassword)
         {
-            Employee employee = _repository.Employees
-                .FirstOrDefault(x => x.Login == login);
+            var employee = await _repository
+                .GetEmployeeByLoginAsync(login);
 
-            if (employee == null)
-                throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
-            if (CalculateHash(clearTextPassword, employee.Login) != employee.HashedPassword)
+            if (employee == null || CalculateHash(clearTextPassword, employee.Login) != employee.HashedPassword)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
 
             return employee;

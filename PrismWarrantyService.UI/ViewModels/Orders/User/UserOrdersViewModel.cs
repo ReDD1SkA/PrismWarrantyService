@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
-using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -12,7 +11,6 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Authentication;
-using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels;
 
@@ -40,7 +38,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
             // Orders properties init
 
             OrdersSource = new ObservableCollection<Order>(repo
-                .Employees
+                .GetAllEmployees()
                 .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
                 .Orders);
             Orders = new ListCollectionView(OrdersSource);
@@ -71,7 +69,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
             OrderSelectionChangedCommand = new DelegateCommand(OrderSelectionChanged);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
             eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler, ThreadOption.UIThread);
 
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
@@ -135,7 +132,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
         private void NeedRefreshListsEventHandler()
         {
             OrdersSource.Clear();
-            OrdersSource.AddRange(repo.Orders);
+            OrdersSource.AddRange(repo.GetAllOrders());
 
             try
             {
@@ -150,7 +147,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
         {
             OrdersSource.Clear();
             OrdersSource.AddRange(repo
-                .Employees
+                .GetAllEmployees()
                 .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
                 .Orders);
         }
@@ -172,7 +169,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User
 
             return order.Summary.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
                    || order.Client.Title.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
-                   || order.Client.Company.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
                    || order.Priority.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
                    || order.State.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
         }

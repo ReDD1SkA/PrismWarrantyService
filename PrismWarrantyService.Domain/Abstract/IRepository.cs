@@ -12,10 +12,13 @@ namespace PrismWarrantyService.Domain.Abstract
         void UpdateClient(Client client);
         void DeleteClient(Client client);
 
-        IEnumerable<Client> GetAllClients();
-        IEnumerable<Client> GetClientsForEmployee(string login);
-
         Task CreateClientAsync(Client client);
+        Task UpdateClientAsync(Client client);
+        Task DeleteClientAsync(Client client);
+
+        IEnumerable<Client> GetAllClients();
+        IEnumerable<Client> GetClientsForEmployee(string login);    
+
         Task<IEnumerable<Client>> GetAllClientsAsync();
         Task<Client> ClientAlreadyExistAsync(string clientName);
 
@@ -33,11 +36,14 @@ namespace PrismWarrantyService.Domain.Abstract
 
         #region Employee methods
 
-        void CreateEmployee(Employee employee);
-        void UpdateEmployee(Employee employee);
-        void DeleteEmployee(Employee employee);
+        Task CreateEmployeeAsync(Employee employee);
+        Task UpdateEmployeeAsync(Employee employee);
+        Task DeleteEmployeeAsync(Employee employee);
 
         IEnumerable<Employee> GetAllEmployees();
+        Employee GetEmployeeByLogin(string login);
+
+        Task<Employee> GetEmployeeByLoginAsync(string login);
 
         #endregion
 
@@ -48,6 +54,16 @@ namespace PrismWarrantyService.Domain.Abstract
         void DeleteOrder(Order order);
 
         IEnumerable<Order> GetAllOrders();
+        IEnumerable<Order> GetOrdersByClientID(int ClientID);
+
+        Task<IEnumerable<Order>> GetOrdersByClientIDAsync(int clientID);
+
+        #endregion
+
+        #region Position methods
+
+        IEnumerable<Position> GetAllPositions();
+        Task<IEnumerable<Position>> GetAllPositionsAsync();
 
         #endregion
 
@@ -55,6 +71,20 @@ namespace PrismWarrantyService.Domain.Abstract
 
         IEnumerable<Priority> GetAllPriorities();
         Task<IEnumerable<Priority>> GetAllPrioritiesAsync();
+
+        #endregion
+
+        #region Roles
+
+        IEnumerable<Role> GetAllRoles();
+        Task<IEnumerable<Role>> GetAllRolesAsync();
+
+        #endregion
+
+        #region Room methods
+
+        IEnumerable<Room> GetAllRooms();
+        Task<IEnumerable<Room>> GetAllRoomsAsync();
 
         #endregion
 

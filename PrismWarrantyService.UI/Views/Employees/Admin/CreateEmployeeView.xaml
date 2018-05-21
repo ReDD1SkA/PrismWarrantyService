@@ -49,37 +49,74 @@
                         <RowDefinition Height="16" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
                     </Grid.RowDefinitions>
-                    <TextBox Text="{Binding NewEmployee.Login}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Логин"
-                             Grid.Row="0" />
-                    <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                 Name="passwordBox"
-                                 materialDesign:HintAssist.Hint="Пароль"
-                                 MaxLength="12"
-                                 Grid.Row="2" />
-                    <ComboBox ItemsSource="{Binding Roles}"
-                              SelectedItem="{Binding NewEmployee.Role}"
-                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              materialDesign:HintAssist.Hint="Роль"
-                              Grid.Row="4" />
-                    <TextBox Text="{Binding NewEmployee.Surname}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Фамилия"
-                             Grid.Row="6" />
-                    <TextBox Text="{Binding NewEmployee.FirstName}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Имя"
-                             Grid.Row="8" />
-                    <TextBox Text="{Binding NewEmployee.LastName}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Отчество"
-                             Grid.Row="10" />
-                    <TextBox Text="{Binding NewEmployee.Position}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Должность"
-                             Grid.Row="12" />
+                    <TextBox
+                        Text="{Binding NewEmployee.Login}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Логин"
+                        Grid.Row="0" />
+                    <PasswordBox
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                        Name="passwordBox"
+                        materialDesign:HintAssist.Hint="Пароль"
+                        MaxLength="12"
+                        Grid.Row="2" />
+                    <TextBox
+                        Text="{Binding NewEmployee.Login}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Логин"
+                        Grid.Row="4" />
+                    <TextBox
+                        Text="{Binding NewEmployee.Surname}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Фамилия"
+                        Grid.Row="6" />
+                    <TextBox
+                        Text="{Binding NewEmployee.FirstName}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Имя"
+                        Grid.Row="8" />
+                    <TextBox
+                        Text="{Binding NewEmployee.LastName}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Отчество"
+                        Grid.Row="10" />
+                    <TextBox
+                        Text="{Binding NewEmployee.Email}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Адрес электронной почты"
+                        Grid.Row="12" />
+                    <TextBox
+                        Text="{Binding NewEmployee.PhoneNumber}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Номер телефона"
+                        Grid.Row="14" />
+                    <ComboBox
+                        ItemsSource="{Binding Roles}"
+                        SelectedItem="{Binding NewEmployee.Role}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Роль в системе"
+                        Grid.Row="16" />
+                    <ComboBox
+                        ItemsSource="{Binding Positions}"
+                        SelectedItem="{Binding NewEmployee.Position}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Должность"
+                        Grid.Row="18" />
+                    <ComboBox
+                        ItemsSource="{Binding Rooms}"
+                        SelectedItem="{Binding NewEmployee.Room}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Кабинет"
+                        Grid.Row="20" />
                 </Grid>
             </GroupBox>
         </ScrollViewer>

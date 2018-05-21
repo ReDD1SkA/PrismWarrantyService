@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels;
 
@@ -35,9 +33,8 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         public OrdersViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
             : base(regionManager, eventAggregator, repo)
         {
-            // Orders properties init
-            
-            OrdersSource = new ObservableCollection<Order>(repo.Orders);
+            // Orders properties init            
+            OrdersSource = new ObservableCollection<Order>(repo.GetAllOrders());
             Orders = new ListCollectionView(OrdersSource);
 
             SelectedOrder = Orders.CurrentItem as Order;
@@ -71,8 +68,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
             OrderUncheckedCommand = new DelegateCommand<Order>(OrderUnchecked);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
-
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Publish(SelectedOrder);
         }
 
@@ -147,8 +142,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
                 await Task.Run(() => repo.DeleteOrder(order));
             }
             CheckedOrders.Clear();
-
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
         }
 
         private void OrderChecked(Order parameter)
@@ -172,7 +165,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
         {
             OrdersSource.Clear();
             CheckedOrders.Clear();
-            OrdersSource.AddRange(repo.Orders);
+            OrdersSource.AddRange(repo.GetAllOrders());
 
             try
             {
@@ -200,7 +193,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin
 
             return order.Summary.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
                    || order.Client.Title.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
-                   || order.Client.Company.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
                    || order.Priority.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
                    || order.State.Name.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
         }

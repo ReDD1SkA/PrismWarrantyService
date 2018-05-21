@@ -48,7 +48,9 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="16" />
                         <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="16" />
@@ -86,35 +88,40 @@
                         IsReadOnly="True"
                         Grid.Row="4"
                         Grid.Column="2" />
-                    <DatePicker SelectedDate="{Binding SelectedOrder.Deadline}"
-                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                materialDesign:HintAssist.Hint="Дедлайн"
-                                Margin="0,8,0,0"
-                                Grid.Row="6"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="3" />
-                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Клиент"
-                             Grid.Row="8"
-                             Grid.Column="0"
-                             Grid.ColumnSpan="3"
-                             IsReadOnly="True">
-                        <TextBox.Text>
-                            <MultiBinding StringFormat="{}{0} ({1})">
-                                <Binding Path="SelectedOrder.Client.Name" />
-                                <Binding Path="SelectedOrder.Client.Company.Name" />
-                            </MultiBinding>
-                        </TextBox.Text>
-                    </TextBox>
-                    <TextBox Text="{Binding SelectedOrder.Description}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Описание"
-                             Grid.Row="10"
-                             Grid.Column="0"
-                             Grid.ColumnSpan="3"
-                             VerticalAlignment="Stretch"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap" />
+                    <DatePicker
+                        SelectedDate="{Binding SelectedOrder.Deadline}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        materialDesign:HintAssist.Hint="Дедлайн"
+                        Margin="0,8,0,0"
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3" />
+                    <TextBox
+                        Text="{Binding SelectedOrder.Client.Title}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Клиент"
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        IsReadOnly="True" />
+                    <TextBox
+                        Text="{Binding SelectedOrder.Cost}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Стоимость (BYN)"
+                        Grid.Row="10"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"/>
+                    <TextBox
+                        Text="{Binding SelectedOrder.Description}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Описание"
+                        Grid.Row="12"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        VerticalAlignment="Stretch"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap" />
+                    
                 </Grid>
             </GroupBox>
                 <UserControl prism:RegionManager.RegionName="Admin.OrderDetails.Employees"

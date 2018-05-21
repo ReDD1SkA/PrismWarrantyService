@@ -28,7 +28,6 @@ namespace PrismWarrantyService.UI.ViewModels.Navigation
             {
                 new NavigationItemViewModel { Name = "Заказы", MasterView = "OrdersView", DetailsView = "OrderDetailsView"},
                 new NavigationItemViewModel { Name = "Клиенты", MasterView = "ClientsView", DetailsView = "ClientDetailsView"},
-                new NavigationItemViewModel { Name = "Компании", MasterView = "CompaniesView", DetailsView = "CompanyDetailsView"},
                 new NavigationItemViewModel { Name = "Сотрудники", MasterView = "EmployeesView", DetailsView = "EmployeeDetailsView"}
             };
 

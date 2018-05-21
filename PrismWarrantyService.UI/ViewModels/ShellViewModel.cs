@@ -15,8 +15,7 @@ namespace PrismWarrantyService.UI.ViewModels
             : base(regionManager, eventAggregator, repo)
         {
             // To accelerate authentication
-            repo.Employees.FirstOrDefault();
-
+            repo.GetEmployeeByLogin(string.Empty);
             regionManager.RegisterViewWithRegion("AppRegion", typeof(AuthenticationLayoutView));
         }
 

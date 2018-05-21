@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using Prism.Commands;
 using Prism.Events;
@@ -11,7 +10,6 @@ using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Employees;
-using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
@@ -37,7 +35,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
         {
             // Orders properties init
 
-            EmployeesSource = new ObservableCollection<Employee>(repo.Employees);
+            EmployeesSource = new ObservableCollection<Employee>(repo.GetAllEmployees());
             Employees = new ListCollectionView(EmployeesSource);
 
             SelectedEmployee = Employees.CurrentItem as Employee;
@@ -71,8 +69,6 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             EmployeeUncheckedCommand = new DelegateCommand<Employee>(EmployeeUnchecked);
 
             // Events init
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);
-
             eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Publish(SelectedEmployee);
         }
 
@@ -143,11 +139,9 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
             foreach (var employee in CheckedEmployees)
             {
-                await Task.Run(() => repo.DeleteEmployee(employee));
+                await repo.DeleteEmployeeAsync(employee);
             }
             CheckedEmployees.Clear();
-
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Publish();
         }
 
         private void EmployeeChecked(Employee parameter)
@@ -171,7 +165,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
         {
             EmployeesSource.Clear();
             CheckedEmployees.Clear();
-            EmployeesSource.AddRange(repo.Employees);
+            EmployeesSource.AddRange(repo.GetAllEmployees());
 
             try
             {
@@ -200,8 +194,7 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             return employee.FirstName.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
                    || employee.LastName.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
                    || employee.Surname.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
-                   || employee.Login.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1
-                   || employee.Position.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
+                   || employee.Login.IndexOf(FilterText, StringComparison.CurrentCultureIgnoreCase) != -1;
         }
 
         #endregion

@@ -69,7 +69,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
 
         private async void OrderAccepted()
         {
-            SelectedOrder.State = repo.States
+            SelectedOrder.State = repo.GetAllStates()
                 .FirstOrDefault(x => x.Name == "Выполняемый");
 
             await Task.Run(() => repo.UpdateOrder(SelectedOrder));
@@ -80,7 +80,7 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.User.UserOrderDetails
 
         private async void OrderCompleted()
         {
-            SelectedOrder.State = repo.States
+            SelectedOrder.State = repo.GetAllStates()
                 .FirstOrDefault(x => x.Name == "Выполненный");
 
             await Task.Run(() => repo.UpdateOrder(SelectedOrder));

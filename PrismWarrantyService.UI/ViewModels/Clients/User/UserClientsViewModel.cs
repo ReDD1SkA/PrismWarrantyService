@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading;
 using System.Windows.Data;
 using Prism.Commands;
@@ -12,7 +11,6 @@ using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Authentication;
 using PrismWarrantyService.UI.Events.Clients;
-using PrismWarrantyService.UI.Events.Companies;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.User
@@ -37,12 +35,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             : base(regionManager, eventAggregator, repo)
         {
             // Clients properties init
-            ClientsSource = new ObservableCollection<Client>(repo
-                .Employees
-                .First(x => x.Login == Thread.CurrentPrincipal.Identity.Name)
-                .Orders
-                .Select(x => x.Client)
-                .Distinct());
+            ClientsSource = new ObservableCollection<Client>(repo.GetClientsForEmployee(Thread.CurrentPrincipal.Identity.Name));
             Clients = new ListCollectionView(ClientsSource);
 
             SelectedClient = Clients.CurrentItem as Client;
@@ -68,9 +61,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             ClientSelectionChangedCommand = new DelegateCommand(ClientSelectionChanged);
 
             // Events init
-            eventAggregator.GetEvent<CompanyListChangedEvent>().Subscribe(CompanyListChangedEventHandler, ThreadOption.UIThread);
             eventAggregator.GetEvent<AuthenticationEvent>().Subscribe(AuthenticationEventHandler, ThreadOption.UIThread);
-
             eventAggregator.GetEvent<ClientSelectionChangedEvent>().Publish(SelectedClient);
         }
 
@@ -164,8 +155,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.User
             if (!(obj is Client client)) return false;
             if (string.IsNullOrWhiteSpace(FilterText)) return true;
 
-            return client.Title.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1
-                || client.Company.Name.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
+            return client.Title.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) != -1;
         }
 
         #endregion

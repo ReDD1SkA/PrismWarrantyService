@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
@@ -27,17 +25,16 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
         public EmployeeDetailsViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRepository repo)
             : base(regionManager, eventAggregator, repo)
         {
-            // Properties init
-            OriginOfSelectedEmployee = repo.Employees.First();
+            OriginOfSelectedEmployee = repo.GetAllEmployees().First();
             SelectedEmployee = OriginOfSelectedEmployee.Clone();
 
-            Roles = new ObservableCollection<Role>(repo.Roles);
-
-            // Commands init
+            Positions = new ObservableCollection<Position>(repo.GetAllPositions().OrderBy(x => x.Name));
+            Roles = new ObservableCollection<Role>(repo.GetAllRoles().OrderBy(x => x.Name));
+            Rooms = new ObservableCollection<Room>(repo.GetAllRooms().OrderBy(x => x.Name));
+            
             UpdateEmployeeCommand = new DelegateCommand(UpdateEmployee);
             UndoEmployeeCommand = new DelegateCommand(UndoEmployee);
-
-            // Events init
+            
             eventAggregator.GetEvent<EmployeeSelectionChangedEvent>().Subscribe(EmployeeSelectionChangedEventHandler, ThreadOption.UIThread);
         }
 
@@ -45,7 +42,12 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
 
         #region Properties
 
-        // Order properties
+        public ObservableCollection<Position> Positions { get; set; }
+
+        public ObservableCollection<Role> Roles { get; set; }
+
+        public ObservableCollection<Room> Rooms { get; set; }
+
         public Employee OriginOfSelectedEmployee
         {
             get => _originOfSelectedEmployee;
@@ -57,8 +59,6 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             get => _selectedEmployee;
             set => SetProperty(ref _selectedEmployee, value);
         }
-
-        public ObservableCollection<Role> Roles { get; set; }
 
         #endregion
 
@@ -78,21 +78,19 @@ namespace PrismWarrantyService.UI.ViewModels.Employees.Admin
             if (SelectedEmployee.HasErrors)
                 return;
 
-            OriginOfSelectedEmployee.GetInfoFrom(SelectedEmployee);
-
-            await Task.Run(() => repo.UpdateEmployee(OriginOfSelectedEmployee));
+            OriginOfSelectedEmployee.GetInfoFrom(SelectedEmployee);            
+            await repo.UpdateEmployeeAsync(OriginOfSelectedEmployee);
         }
 
         private void UndoEmployee()
         {
             SelectedEmployee = OriginOfSelectedEmployee.Clone();
         }
-
-        // Event handlers
+        
         private void EmployeeSelectionChangedEventHandler(Employee parameter)
         {
             OriginOfSelectedEmployee = parameter;
-            SelectedEmployee = OriginOfSelectedEmployee?.Clone();
+            SelectedEmployee = OriginOfSelectedEmployee.Clone();
         }
 
         #endregion

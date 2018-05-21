@@ -66,8 +66,7 @@ namespace PrismWarrantyService.UI.ViewModels.Authentication
         {
             try
             {
-                Employee emp = null;
-                await Task.Run(() => emp = _authenticationService.AuthenticateEmployee(EmployeeLogin, passwordBox.Password));
+                Employee emp = await _authenticationService.AuthenticateEmployeeAsync(EmployeeLogin, passwordBox.Password);
 
                 if (!(Thread.CurrentPrincipal is CustomPrincipal customPrincipal))
                     throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");

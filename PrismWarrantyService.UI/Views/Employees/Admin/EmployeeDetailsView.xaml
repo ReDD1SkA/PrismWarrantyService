@@ -43,29 +43,63 @@
                         <RowDefinition Height="16" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
                     </Grid.RowDefinitions>
-
-                    <TextBox Text="{Binding SelectedEmployee.Surname}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Фамилия"
-                             Grid.Row="0"/>
-                    <TextBox Text="{Binding SelectedEmployee.FirstName}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Имя"
-                             Grid.Row="2" />
-                    <TextBox Text="{Binding SelectedEmployee.LastName}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Отчество"
-                             Grid.Row="4" />
-                    <TextBox Text="{Binding SelectedEmployee.Position}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Должность"
-                             Grid.Row="6"/>
-                    <ComboBox ItemsSource="{Binding Roles}"
-                              SelectedItem="{Binding SelectedEmployee.Role}"
-                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              materialDesign:HintAssist.Hint="Роль"
-                              Grid.Row="8" />
+                    <TextBox
+                        Text="{Binding SelectedEmployee.Login}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Логин"
+                        Grid.Row="0" />
+                    <TextBox
+                        Text="{Binding SelectedEmployee.Surname}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Фамилия"
+                        Grid.Row="2" />
+                    <TextBox
+                        Text="{Binding SelectedEmployee.FirstName}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Имя"
+                        Grid.Row="4" />
+                    <TextBox
+                        Text="{Binding SelectedEmployee.LastName}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Отчество"
+                        Grid.Row="6" />
+                    <TextBox
+                        Text="{Binding SelectedEmployee.Email}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Адрес электронной почты"
+                        Grid.Row="8" />
+                    <TextBox
+                        Text="{Binding SelectedEmployee.PhoneNumber}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Номер телефона"
+                        Grid.Row="10" />
+                    <ComboBox
+                        ItemsSource="{Binding Roles}"
+                        SelectedItem="{Binding SelectedEmployee.Role}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Роль в системе"
+                        Grid.Row="12" />
+                    <ComboBox
+                        ItemsSource="{Binding Positions}"
+                        SelectedItem="{Binding SelectedEmployee.Position}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Должность"
+                        Grid.Row="14" />
+                    <ComboBox
+                        ItemsSource="{Binding Rooms}"
+                        SelectedItem="{Binding SelectedEmployee.Room}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        materialDesign:HintAssist.Hint="Кабинет"
+                        Grid.Row="16" />
                 </Grid>
             </GroupBox>
         </ScrollViewer>

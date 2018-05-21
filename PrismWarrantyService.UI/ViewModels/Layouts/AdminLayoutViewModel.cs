@@ -30,8 +30,6 @@ namespace PrismWarrantyService.UI.ViewModels.Layouts
             // "details" regions
             regionManager.RegisterViewWithRegion("Admin.DetailsRegion", typeof(OrderDetailsView));
             regionManager.RegisterViewWithRegion("Admin.CreateOrder.SelectOrderClientRegion", typeof(CreateOrderSelectClientView));
-            regionManager.RegisterViewWithRegion("Admin.CreateOrder.SelectClientCompanyRegion", typeof(CreateOrderSelectCompanyView));
-            regionManager.RegisterViewWithRegion("Admin.CreateClient.SelectClientCompanyRegion", typeof(CreateOrderSelectCompanyView));
             regionManager.RegisterViewWithRegion("Admin.OrderDetails.Employees", typeof(OrderEmployeesView));
         }
 

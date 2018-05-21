@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
-using PrismWarrantyService.UI.Events.Lists;
 using PrismWarrantyService.UI.Events.Orders;
 using PrismWarrantyService.UI.Services.ViewModels;
 
@@ -33,12 +30,12 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         {
             // Properties init
             FreeEmployees = new ObservableCollection<Employee>(repo
-                .Employees
+                .GetAllEmployees()
                 .OrderBy(x => x.Surname));
             SelectedFreeEmployee = FreeEmployees.FirstOrDefault();
 
-            States = new ObservableCollection<State>(repo.States);
-            Priorities = new ObservableCollection<Priority>(repo.Priorities);
+            States = new ObservableCollection<State>(repo.GetAllStates());
+            Priorities = new ObservableCollection<Priority>(repo.GetAllPriorities());
 
             // Commands init
             UpdateOrderCommand = new DelegateCommand(UpdateOrder);
@@ -50,7 +47,6 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
 
             // Events init
             eventAggregator.GetEvent<OrderSelectionChangedEvent>().Subscribe(OrderSelectionChangedEventHandler, ThreadOption.UIThread);
-            eventAggregator.GetEvent<NeedRefreshListsEvent>().Subscribe(NeedRefreshListsEventHandler, ThreadOption.UIThread);  
         }
 
         #endregion
@@ -149,14 +145,14 @@ namespace PrismWarrantyService.UI.ViewModels.Orders.Admin.OrderDetails
         private void OrderSelectionChangedEventHandler(Order parameter)
         {
             OriginOfSelectedOrder = parameter;
-            SelectedOrder = OriginOfSelectedOrder?.Clone();
-            SelectedOrderEmployee = SelectedOrder?.Employees.FirstOrDefault();
+            SelectedOrder = OriginOfSelectedOrder.Clone();
+            SelectedOrderEmployee = SelectedOrder.Employees.FirstOrDefault();
         }
 
         private void NeedRefreshListsEventHandler()
         {
             FreeEmployees.Clear();
-            FreeEmployees.AddRange(repo.Employees);
+            FreeEmployees.AddRange(repo.GetAllEmployees());
         }
 
         #endregion

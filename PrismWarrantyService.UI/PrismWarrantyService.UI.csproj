@@ -49,9 +49,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.3\lib\net45\CommonServiceLocator.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -63,6 +60,9 @@
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.0.1044, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
@@ -107,8 +107,6 @@
     <Compile Include="Events\Authentication\AuthenticationEvent.cs" />
     <Compile Include="Events\Clients\ClientListChangedEvent.cs" />
     <Compile Include="Events\Clients\ClientSelectionChangedEvent.cs" />
-    <Compile Include="Events\Companies\CompanyListChangedEvent.cs" />
-    <Compile Include="Events\Companies\CompanySelectionChangedEvent.cs" />
     <Compile Include="Events\Employees\EmployeeListChangedEvent.cs" />
     <Compile Include="Events\Employees\EmployeeSelectionChangedEvent.cs" />
     <Compile Include="Events\Orders\OrderListChangedEvent.cs" />
@@ -176,14 +174,8 @@
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderNewClientView.xaml.cs">
       <DependentUpon>CreateOrderNewClientView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderNewCompanyView.xaml.cs">
-      <DependentUpon>CreateOrderNewCompanyView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderSelectClientView.xaml.cs">
       <DependentUpon>CreateOrderSelectClientView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderSelectCompanyView.xaml.cs">
-      <DependentUpon>CreateOrderSelectCompanyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders\Admin\CreateOrder\CreateOrderView.xaml.cs">
       <DependentUpon>CreateOrderView.xaml</DependentUpon>
@@ -274,15 +266,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Orders\Admin\CreateOrder\CreateOrderNewCompanyView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Orders\Admin\CreateOrder\CreateOrderSelectClientView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Orders\Admin\CreateOrder\CreateOrderSelectCompanyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

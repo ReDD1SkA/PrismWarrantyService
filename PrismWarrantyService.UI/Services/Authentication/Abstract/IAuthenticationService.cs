@@ -1,10 +1,11 @@
-﻿using PrismWarrantyService.Domain.Entities;
+﻿using System.Threading.Tasks;
+using PrismWarrantyService.Domain.Entities;
 
 namespace PrismWarrantyService.UI.Services.Authentification.Abstract
 {
     public interface IAuthenticationService
     {
-        Employee AuthenticateEmployee(string name, string clearTextpassword);
+        Task<Employee> AuthenticateEmployeeAsync(string name, string clearTextpassword);
         string CalculateHash(string clearTextPassword, string salt);
     }
 }

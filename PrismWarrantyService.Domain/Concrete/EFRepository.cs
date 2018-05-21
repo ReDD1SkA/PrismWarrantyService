@@ -44,6 +44,24 @@ namespace PrismWarrantyService.Domain.Concrete
             _context.SaveChanges();
         }
 
+        public async Task CreateClientAsync(Client client)
+        {
+            _context.Entry(client).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateClientAsync(Client client)
+        {
+            _context.Entry(client).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteClientAsync(Client client)
+        {
+            _context.Entry(client).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
+
         public IEnumerable<Client> GetAllClients()
         {
             return _context.Clients
@@ -59,12 +77,6 @@ namespace PrismWarrantyService.Domain.Concrete
         {
             return await _context.Clients
                 .ToListAsync();
-        }
- 
-        public async Task CreateClientAsync(Client client)
-        {
-            _context.Entry(client).State = EntityState.Added;
-            await _context.SaveChangesAsync();
         }
 
         public async Task<Client> ClientAlreadyExistAsync(string clientName)
@@ -107,22 +119,22 @@ namespace PrismWarrantyService.Domain.Concrete
 
         #region Employee methods
 
-        public void CreateEmployee(Employee employee)
+        public async Task CreateEmployeeAsync(Employee employee)
         {
             _context.Entry(employee).State = EntityState.Added;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateEmployee(Employee employee)
+        public async Task UpdateEmployeeAsync(Employee employee)
         {
             _context.Entry(employee).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteEmployee(Employee employee)
+        public async Task DeleteEmployeeAsync(Employee employee)
         {
             _context.Entry(employee).State = EntityState.Deleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Employee> GetAllEmployees()
@@ -132,6 +144,18 @@ namespace PrismWarrantyService.Domain.Concrete
                 .Include(x => x.Position)
                 .Include(x => x.Role)
                 .ToList();
+        }
+
+        public Employee GetEmployeeByLogin(string login)
+        {
+            return _context.Employees
+                .FirstOrDefault(x => x.Login == login);
+        }
+
+        public async Task<Employee> GetEmployeeByLoginAsync(string login)
+        {
+            return await _context.Employees
+                .FirstOrDefaultAsync(x => x.Login == login);
         }
 
         #endregion
@@ -176,6 +200,36 @@ namespace PrismWarrantyService.Domain.Concrete
                 .ToList();
         }
 
+        public IEnumerable<Order> GetOrdersByClientID(int clientID)
+        {
+            return _context.Orders
+                .Where(x => x.ClientID == clientID)
+                .ToList();
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersByClientIDAsync(int clientID)
+        {
+            return await _context.Orders
+                .Where(x => x.ClientID == clientID)
+                .ToListAsync();
+        }
+
+        #endregion
+
+        #region Position methods
+
+        public IEnumerable<Position> GetAllPositions()
+        {
+            return _context.Positions
+                .ToList();
+        }
+
+        public async Task<IEnumerable<Position>> GetAllPositionsAsync()
+        {
+            return await _context.Positions
+                .ToListAsync();
+        }
+
         #endregion
 
         #region Priority methods
@@ -189,6 +243,38 @@ namespace PrismWarrantyService.Domain.Concrete
         public async Task<IEnumerable<Priority>> GetAllPrioritiesAsync()
         {
             return await _context.Priorities
+                .ToListAsync();
+        }
+
+        #endregion
+
+        #region Role methods
+
+        public IEnumerable<Role> GetAllRoles()
+        {
+            return _context.Roles
+                .ToList();
+        }
+
+        public async Task<IEnumerable<Role>> GetAllRolesAsync()
+        {
+            return await _context.Roles
+                .ToListAsync();
+        }
+
+        #endregion
+
+        #region Room methods
+
+        public IEnumerable<Room> GetAllRooms()
+        {
+            return _context.Rooms
+                .ToList();
+        }
+
+        public async Task<IEnumerable<Room>> GetAllRoomsAsync()
+        {
+            return await _context.Rooms
                 .ToListAsync();
         }
 

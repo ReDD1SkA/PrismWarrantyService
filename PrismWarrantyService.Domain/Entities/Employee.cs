@@ -86,7 +86,6 @@ namespace PrismWarrantyService.Domain.Entities
         public int RoomID { get; set; }
 
         [Required(ErrorMessage = "Обязательное поле")]
-        [StringLength(4, ErrorMessage = "Максимальная длина - 16 символов")]
         public virtual Room Room
         {
             get { return _room; }

@@ -37,38 +37,38 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ToggleButton>
-                <TextBlock Text="{Binding State, StringFormat={}{0} заказ}"
-                               Grid.Row="0"
-                               Grid.Column="1"/>
-                <TextBlock Text="{Binding Priority, StringFormat={}{0} приоритет}"
-                               Grid.Row="1"
-                               Grid.Column="1"/>
-                <TextBlock Text="{Binding Accepted, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Принят: {0}}"
-                        TextAlignment="Right"
-                        Grid.Row="0"
-                        Grid.Column="2"/>
-                <TextBlock Text="{Binding Finished, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Завершен: {0}}"
-                        TextAlignment="Right"
-                        Grid.Row="1"
-                        Grid.Column="2"/>
-                <TextBlock Text="{Binding Summary}"
-                        FontSize="18"
-                        VerticalAlignment="Bottom"
-                        Margin="0,0,8,0"
-                        Grid.Row="3"
-                        Grid.Column="1"/>
-                <TextBlock TextAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        FontSize="14"
-                        Grid.Row="3"
-                        Grid.Column="2">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} ({1})">
-                            <Binding Path="Client.Name"/>
-                            <Binding Path="Client.Company.Name"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock
+                    Text="{Binding State, StringFormat={}{0} заказ}"
+                    Grid.Row="0"
+                    Grid.Column="1" />
+                <TextBlock
+                    Text="{Binding Priority, StringFormat={}{0} приоритет}"
+                    Grid.Row="1"
+                    Grid.Column="1" />
+                <TextBlock
+                    Text="{Binding Accepted, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Принят: {0}}"
+                    TextAlignment="Right"
+                    Grid.Row="0"
+                    Grid.Column="2" />
+                <TextBlock
+                    Text="{Binding Finished, Converter={StaticResource OrderDateTimeToDateConverter}, StringFormat={}Завершен: {0}}"
+                    TextAlignment="Right"
+                    Grid.Row="1"
+                    Grid.Column="2" />
+                <TextBlock
+                    Text="{Binding Summary}"
+                    FontSize="18"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,8,0"
+                    Grid.Row="3"
+                    Grid.Column="1" />
+                <TextBlock
+                    Text="{Binding Client.Title}"
+                    TextAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    FontSize="14"
+                    Grid.Row="3"
+                    Grid.Column="2" />
             </Grid>
         </Border>
     </ItemContainerTemplate>
@@ -99,16 +99,11 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ToggleButton>
-                <TextBlock FontSize="16"
-                               VerticalAlignment="Center"
-                               Grid.Column="1">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} ({1})">
-                            <Binding Path="Name" />
-                            <Binding Path="Company.Name" />
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock
+                    Text="{Binding Title}"
+                    FontSize="16"
+                    VerticalAlignment="Center"
+                    Grid.Column="1" />
             </Grid>
         </Border>
     </ItemContainerTemplate>

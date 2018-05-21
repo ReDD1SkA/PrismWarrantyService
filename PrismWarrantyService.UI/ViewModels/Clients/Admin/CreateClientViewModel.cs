@@ -1,13 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
 using PrismWarrantyService.Domain.Entities;
 using PrismWarrantyService.UI.Events.Clients;
-using PrismWarrantyService.UI.Events.Companies;
 using PrismWarrantyService.UI.Services.ViewModels;
 
 namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
@@ -17,7 +13,6 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         #region Fields
 
         private Client _newClient;
-        private Company _newCompany;
 
         #endregion
 
@@ -66,8 +61,6 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 return;
             
             await repo.CreateClientAsync(NewClient);
-
-            // TODO: update this list
 
             eventAggregator.GetEvent<ClientListChangedEvent>().Publish();
             regionManager.RequestNavigate("Admin.DetailsRegion", "ClientDetailsView");

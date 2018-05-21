@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Regions;
 using PrismWarrantyService.Domain.Abstract;
@@ -68,7 +67,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
                 return;
 
             OriginOfSelectedClient.GetInfoFrom(SelectedClient);
-            await Task.Run(() => repo.UpdateClient(OriginOfSelectedClient));
+            await repo.UpdateClientAsync(OriginOfSelectedClient);
         }
 
         private void UndoClient()
@@ -80,7 +79,7 @@ namespace PrismWarrantyService.UI.ViewModels.Clients.Admin
         private void ClientSelectionChangedEventHandler(Client parameter)
         {
             OriginOfSelectedClient = parameter;
-            SelectedClient = OriginOfSelectedClient?.Clone();
+            SelectedClient = OriginOfSelectedClient.Clone();
         }
 
         #endregion

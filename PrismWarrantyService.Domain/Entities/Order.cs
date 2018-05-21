@@ -61,7 +61,15 @@ namespace PrismWarrantyService.Domain.Entities
             get { return _finished; }
             set { ValidateProperty(value); SetProperty(ref _finished, value); }
         }
-        
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        [Range(0, int.MaxValue, ErrorMessage = "Число должно быть больше нуля")]
+        public decimal Cost
+        {
+            get { return _cost; }
+            set { ValidateProperty(value); SetProperty(ref _cost, value); }
+        }
+
         public int ClientID { get; set; }
         
         [Required(ErrorMessage = "Обязательное поле")]
@@ -114,6 +122,7 @@ namespace PrismWarrantyService.Domain.Entities
                 Accepted = Accepted,
                 Deadline = Deadline,
                 Finished = Finished,
+                Cost = Cost,
                 ClientID = ClientID,
                 Client = Client,
                 DeviceID = DeviceID,
@@ -134,6 +143,7 @@ namespace PrismWarrantyService.Domain.Entities
             Accepted = donator.Accepted;
             Deadline = donator.Deadline;
             Finished = donator.Finished;
+            Cost = donator.Cost;
             ClientID = donator.ClientID;
             Client = donator.Client;
             DeviceID = donator.DeviceID;

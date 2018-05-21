@@ -40,24 +40,55 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="16" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="16" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBox Text="{Binding SelectedClient.Name}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Клиент"
-                             Grid.Row="0" />
-                    <TextBox Text="{Binding SelectedClient.Company.Name}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Компания"
-                             IsReadOnly="True"
-                             Grid.Row="2" />
-                    <TextBox Text="{Binding SelectedClient.Email}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="E-mail"
-                             Grid.Row="4" />
-                    <TextBox Text="{Binding SelectedClient.PhoneNumber}"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Номер телефона"
-                             Grid.Row="6" />
+                    <TextBox
+                        Text="{Binding SelectedClient.Title}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Клиент"
+                        Grid.Row="0" />
+                    <TextBox
+                        Text="{Binding SelectedClient.LegalAddress}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Юридический адрес"
+                        Grid.Row="2" />
+                    <TextBox
+                        Text="{Binding SelectedClient.MailingAddress}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Почтовый адрес"
+                        Grid.Row="4" />
+                    <TextBox
+                        Text="{Binding SelectedClient.Swift}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="SWIFT"
+                        Grid.Row="6" />
+                    <TextBox
+                        Text="{Binding SelectedClient.CheckingAccount}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Расчетный счет"
+                        Grid.Row="8" />
+                    <TextBox
+                        Text="{Binding SelectedClient.TaxPayerNumber}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="УНП"
+                        Grid.Row="10" />
+                    <TextBox
+                        Text="{Binding SelectedClient.PhoneNumber}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="Номер телефона"
+                        Grid.Row="12" />
+                    <TextBox
+                        Text="{Binding SelectedClient.Email}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        materialDesign:HintAssist.Hint="E-mail"
+                        Grid.Row="14" />
                 </Grid>
             </GroupBox>
         </ScrollViewer>
